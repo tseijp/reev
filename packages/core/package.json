@@ -1,0 +1,35 @@
+{
+  "name": "reev",
+  "author": "tseijp",
+  "license": "MIT",
+  "version": "0.1.0",
+  "module": "index.js",
+  "types": "index.ts",
+  "main": "index.cjs.js",
+  "umd": "index.develop.js",
+  "private": false,
+  "sideEffect": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "reactive",
+    "event",
+    "global",
+    "state",
+    "store",
+    "hooks",
+    "solid",
+    "typescript"
+  ],
+  "files": [
+    "index.ts",
+    "index.js",
+    "index.d.ts",
+    "index.cjs.js",
+    "index.develop.js",
+    "index.product.js"
+  ]
+}
