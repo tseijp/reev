@@ -8,7 +8,6 @@
 examples
 packages/*
 !packages/core
-README.md
 yarn.lock
 TODO.md
 
