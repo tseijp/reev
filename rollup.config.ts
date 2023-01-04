@@ -24,7 +24,7 @@ const _babelOptions = () => {
 
 module.exports = () => {
         const cwd = process.cwd();
-        const pkg = require(path.resolve(cwd,  './package.json'))
+        const pkg = require(path.resolve(cwd, './package.json'))
         const input = 'index.ts'
         const external = Object.keys({...pkg.dependencies, ...pkg.devDependencies})
         const _plugins = () => [ // @ts-ignore
@@ -34,8 +34,7 @@ module.exports = () => {
                 terser()
         ]
         const _config = (file = '', format = '', other = {}) => {
-                const ret = { input, output: { file, format }, ...other }
-                // @ts-ignore
+                const ret = { input, output: { file, format }, ...other } // @ts-ignore
                 if (format === "umd") ret.output.name = input
                 return ret
         }
