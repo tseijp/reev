@@ -1,10 +1,11 @@
-import type { Event, Fun, Durable, Nested } from '@reev/types'
+import type { Event, Fun, Durable, Nested } from './types'
+
+export * from './types'
 
 export default event
 
 export function event<T extends Fun>(init?: Record<any, Fun>) {
         const set = nested(() => new Set<T>());
-        const _on = nested<Fun>((key) => (...args) => self(key, ...args))
         const self = durable((key = "", ...args) => {
                 set(key).forEach((listener) => listener(self, ...args))
         }) as Event
@@ -13,17 +14,18 @@ export function event<T extends Fun>(init?: Record<any, Fun>) {
          */
         self.mount = durable((key, fun) => void set(key)?.add(fun as T), self)
         self.clean = durable((key, fun) => void set(key)?.delete(fun as T), self)
-        self.on = (key = "") => _on(key)
+        self.on = nested<Fun>((key) => (...args) => self(key, ...args))
         if (init) self.mount(init)
         return self
 }
 
 export function nested<T>(init: (key: string, ...args: unknown[]) => T) {
-        const target = new Map();
+        const map = new Map();
         const self = ((key, ...args) =>
-                target.get(key) ||
-                target.set(key, init(key, ...args)).get(key)) as Nested<T>
-        self.has = (key = "") => target.has(key)
+                map.has(key)
+                ? map.get(key)
+                : map.set(key, init(key, ...args)).get(key)) as Nested<T>
+        self.has = (key = "") => map.has(key)
         return self
 }
 
