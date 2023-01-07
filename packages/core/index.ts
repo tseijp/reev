@@ -14,7 +14,9 @@ export function event<T extends Fun>(init?: Record<any, Fun>) {
          */
         self.mount = durable((key, fun) => void set(key)?.add(fun as T), self)
         self.clean = durable((key, fun) => void set(key)?.delete(fun as T), self)
-        self.on = nested<Fun>((key) => (...args) => self(key, ...args))
+        self.on = nested((key, ...defaultArgs) => {
+                return (...args) => self(key, ...args, ...defaultArgs)
+        })
         if (init) self.mount(init)
         return self
 }
