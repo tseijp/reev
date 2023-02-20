@@ -28,6 +28,7 @@ export function nested<T>(init: (key: string, ...args: unknown[]) => T) {
                 ? map.get(key)
                 : map.set(key, init(key, ...args)).get(key)) as Nested<T>
         self.has = (key = "") => map.has(key)
+        self.map = map
         return self
 }
 

@@ -12,6 +12,7 @@ export interface Event {
 export interface Nested<T = unknown> {
         (key: string, ...args: unknown[]): T
         has(key: string): boolean
+        map: Map<string, T>
         mount: Durable
         clean: Durable
 }
