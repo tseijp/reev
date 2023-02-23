@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useCallback, useEffect, useState, useMemo, useRef } from "react";
 import { event, durable } from "reev";
 
 export const mutable = (...initArgs: [any, any]) => {
@@ -21,4 +21,16 @@ export const useEvent = (key: any, fun: any, target: any) => {
         useEffect(() => void self.mount(memo), [self, memo])
         useEffect(() => () => self.clean(memo), [self, memo])
         return self
+}
+
+export const useRefEvent = (events: any, target: any) => {
+        const cleanupRef = useRef<Function | undefined>(void 0)
+        const memo = useMutable(events, void 0)
+        const self = useMemo(() => target || event(), [target])
+        return useCallback((target: any) => {
+                if (cleanupRef.current) return void cleanupRef.current()
+                self.mount(memo)
+                self("mount", target)
+                cleanupRef.current = () => self("clean", target)
+        }, [self, memo])
 }
