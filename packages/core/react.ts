@@ -1,23 +1,24 @@
 import { useEffect, useState, useMemo } from "react";
 import { event, durable } from "reev";
 
-export const mutable = (...initArgs: [any]) => {
-        const ret = durable((key, fun) => (set[key] = fun));
-        const set = durable((key) => (ret[key] = (...args) => set[key](...args)));
-        set(...initArgs);
-        return ret;
+export const mutable = (...initArgs: [any, any]) => {
+        const memo = durable((key, fun) => (init[key] = fun))
+        const init = durable((key) => (memo[key] = (...args) => init[key](...args)))
+        init(...initArgs)
+        return memo
 };
 
-export const useMutable = (...args: [any]) => {
-        const [ret] = useState(() => mutable(...args));
-        ret(...args);
-        return ret;
+export const useMutable = (...args: [any, any]) => {
+        const [memo] = useState(() => mutable(...args))
+        memo(...args)
+        return memo
 }
 
-export const useEvent = (target, ...args: [any]) => {
-        const ref = useMutable(...args);
-        const ret = useMemo(() => target || event(), [target]);
-        useEffect(() => void ret.mount(ref), [ret, ref]);
-        useEffect(() => () => ret.clean(ref), [ret, ref]);
-        return ret;
+export const useEvent = (key: any, fun: any, target: any) => {
+        if (typeof fun !== "function") target = fun
+        const memo = useMutable(key, fun)
+        const self = useMemo(() => target || event(), [target])
+        useEffect(() => void self.mount(memo), [self, memo])
+        useEffect(() => () => self.clean(memo), [self, memo])
+        return self
 }
