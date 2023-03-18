@@ -1,5 +1,6 @@
 ### my created
 **/*.js
+!*.config.js
 **/*.cjs
 **/*.mjs
 **/*.esm.js
