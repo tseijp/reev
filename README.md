@@ -82,30 +82,3 @@ npm install reev
 ## PRs
 
 ###### welcome✨
-```
-<!-- 
-```ts
-import * as React from 'react'
-import { createRoot } from 'react-dom/client'
-import { reev } from 'reev' // create events
-import { gsap } from 'gsap' // animation lib
-
-const Event = reev
-    .init((e) => state.keydown = ({ key }) => state(key))
-    .mount((e) => addEventListener('keydown', state.keydown))
-    .unmount((e) => removeEventListener('keydown', state.keydown))
-
-const Space = () => {
-  const ref = React.useRef()
-  Event
-    .use(' ', (_e, x = 0, y = 0) => gsap.to(ref.current, { x, y }))
-    .use('a', (e) => e(' ', -1, 0))
-    .use('s', (e) => e(' ', 0, -1))
-    .use('d', (e) => e(' ', 1, 0))
-    .use('w', (e) => e(' ', 0, 1))
-
-  return <div ref={ref} />
-}
-
-createRoot(document.getElementById('root')).render(<Event><Space /></Event>);
-``` -->
