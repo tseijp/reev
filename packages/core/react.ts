@@ -26,18 +26,18 @@ export const useEvent = (key: any, fun: any, target: any) => {
 }
 
 export const useRefEvent = (events: any, target: any) => {
-        const cleanupRef = useRef<Function | undefined>(void 0)
+        const initRef = useRef(false);
         const memo = useMutable(events, void 0)
         const self = useMemo(() => target || event(), [target])
         const ref = useCallback((target: any) => {
-                if (cleanupRef.current) {
-                        cleanupRef.current()
-                        cleanupRef.current = void 0
-                } else {
-                        cleanupRef.current = () => self("clean", target)
-                        self.mount(memo) // @ts-ignore
+                if (initRef.current = !initRef.current) {
+                        self.mount(memo)
                         self("mount", ref.current = target)
+                } else {
+                        self.clean(memo)
+                        self("clean", ref.current = void 0)
                 }
-        }, [self, memo])
+        }, [self, memo]) as any // @TODO FIX
+
         return ref
 }

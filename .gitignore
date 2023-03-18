@@ -5,10 +5,11 @@
 **/*.esm.js
 **/*.develop.js
 **/*.product.js
+
+package-lock.json
 packages/*
 !packages/core
-yarn.lock
-package-lock.json
+
 TODO.md
 gesture.md
 

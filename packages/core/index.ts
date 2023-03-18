@@ -4,7 +4,7 @@ export * from './types'
 
 export default event
 
-export function event<T extends Fun>(init?: Record<any, Fun>) {
+export function event<T extends Fun>(...init: [any] | []) {
         const set = nested(() => new Set<T>());
         const self = durable((key = "", ...args) => {
                 set(key).forEach((listener) => listener(self, ...args))
@@ -17,7 +17,7 @@ export function event<T extends Fun>(init?: Record<any, Fun>) {
         self.on = nested((key, ...defaultArgs) => {
                 return (...args) => self(key, ...args, ...defaultArgs)
         })
-        if (init) self.mount(init)
+        if (init.length) self.mount(...init)
         return self
 }
 
