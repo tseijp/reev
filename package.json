@@ -12,7 +12,9 @@
     "watch": "cd packages/core && npx jest --watch --runInBand",
     "cov": "cd packages/core && npx jest --coverage",
     "ls": "cd packages/core && npm publish --dry-run",
+    "build": "cd examples/docs && yarn build",
     "start": "cd examples/docs && yarn start",
+    "serve": "cd examples/docs && yarn serve",
     "clean": "yarn && lerna clean -y",
     "bootstrap": "yarn && lerna bootstrap"
   },

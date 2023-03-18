@@ -1,49 +1,87 @@
-# reev 
+# ⛪️ reev
 
-[![npm](https://img.shields.io/npm/v/reev.svg)](https://www.npmjs.com/package/reev)
-[![npm](https://img.shields.io/npm/dm/reev.svg)](https://www.npmjs.com/package/reev)
-[![npm](https://img.shields.io/npm/l/reev.svg)](https://www.npmjs.com/package/reev)
+<p align="center">
 
-__event based global state manager__
+[![ npm version ](
+    <https://img.shields.io/npm/v/reev?style=flat&colorA=000&colorB=000>)](
+    <https://www.npmjs.com/package/reev>)
+[![ downloads ](
+    <https://img.shields.io/npm/dm/reev.svg?style=flat&colorA=000&colorB=000>)](
+    <https://www.npmtrends.com/reev>)
+[![ license MIT ](
+    <https://img.shields.io/npm/l/reev?style=flat&colorA=000&colorB=000>)](
+    <https://github.com/tseijp/reev>)
+[![ docs available ](
+    <https://img.shields.io/badge/docs-available-000.svg?style=flat&colorA=000>)](
+    <https://reev.tsei.jp/>)
+[![ bundle size ](
+    <https://img.shields.io/bundlephobia/minzip/reev?style=flat&colorA=000&colorB=000>)](
+    <https://bundlephobia.com/package/reev@latest>)
+
+⛪️ reactive event state manager on the web and native via TypeScript, React, Solid and more.
+
+</p>
+
+---
 
 ## Installation
 
 ```ruby
-npm i reev
+npm install reev
 ```
 
-or
+---
 
-```ruby
-yarn add reev
-```
+<table>
+<td width="1000px" valign="top">
 
-## Getting Started
+## Documentation
 
-```ts
-import { useState } from 'react'
-import { useEvent } from 'reev'
+###### [Docs][docs] : reev Introduction
 
-function App() {
-  const [text, set] = useState("");
-  const key = useEvent({
-    mount: () => window.addEventListener("keydown", (e) => key(e.key)),
-    clean: () => window.removeEventListener("keydown", (e) => key(e.key)),
-    Enter: () => set(""),
-    " ": (_key, _ = "_") => set((p) => p + _),
-    a: (key) => key(" ", "A"),
-    b: (key) => key(" ", "B") // to z
-  });
-  /**
-   * mount and clean to request event listener
-   */
-  useEffect(() => void key("mount"), [key]);
-  useEffect(() => () => key("clean"), [key]);
+###### [API][api] : reev API and feature
 
-  return text || `PRESS_KEYBOARD`;
-}
+###### [Guide][guide] : reev Getting Started
 
-createRoot(document.getElementById("root")).render(<App />);
+[docs]: https://reev.tsei.jp/docs
+[api]: https://reev.tsei.jp/api
+[guide]: https://reev.tsei.jp/guide
+
+</td>
+<td width="1000px" valign="top">
+
+## Ecosystem
+
+###### 🌇 [glre][glre]: GLSL Reactive Engine
+
+###### 🌃 [refr][refr]: request animation frame
+
+[glre]: https://github.com/tseijp/reev
+[refr]: https://github.com/tseijp/refr
+
+</td>
+<td width="1000px" valign="top">
+
+## Staying informed
+
+###### [github discussions][github] welcome✨
+
+###### [@tseijp][twitter] twitter
+
+###### [tsei.jp][articles] articles
+
+[github]: https://github.com/tseijp/reev/discussions
+[twitter]: https://twitter.com/tseijp
+[articles]: https://tsei.jp/articles
+
+</td>
+</table>
+
+---
+
+## PRs
+
+###### welcome✨
 ```
 <!-- 
 ```ts

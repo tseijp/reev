@@ -5,11 +5,16 @@
 **/*.esm.js
 **/*.develop.js
 **/*.product.js
-examples
 packages/*
 !packages/core
 yarn.lock
+package-lock.json
 TODO.md
+gesture.md
+
+tmp
+events
+gesture
 
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
@@ -22,7 +27,6 @@ node_modules
 
 # production
 build
-docs
 tmp
 
 # testing
