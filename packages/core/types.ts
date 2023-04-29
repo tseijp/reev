@@ -1,70 +1,86 @@
-export default EventState;
-
 export interface Nested<Ret = unknown, Args extends any[] = any[]> {
-        (key: string, ...args: Args): Ret;
-        has(key: string): boolean;
-        map: Map<string, Ret>;
+        (key: string, ...args: Args): Ret
+        has(key: string): boolean
+        map: Map<string, Ret>
 }
 
 export type ExtractArgs<T extends object> = T[keyof T] extends (
         ...args: infer A
 ) => any
         ? A
-        : any[];
+        : any[]
 
 export interface DurableState<
         T extends object,
         R = unknown,
-        Args extends any[] = ExtractArgs<T>
+        Args extends unknown[] = ExtractArgs<T>
 > {
-        <K = keyof T>(key: K, ...args: Args): R;
-        (target: T, ext?: T[keyof T], ...args: Args): R;
+        <K = keyof T>(key?: K, ...args: Args): R
+        (target?: T, ext?: T[keyof T], ...args: Args): R
 }
 
 export interface MutableState<
         T extends object,
-        Args extends any[] = ExtractArgs<T>
+        Args extends unknown[] = ExtractArgs<T>
 > {
-        <K extends keyof T>(key: K, fun: T[K]): MutableState<T, Args>;
-        (target: T): MutableState<T, Args>;
-        [key: string]: (...args: Args) => any;
+        <K extends keyof T>(key?: K, fun?: T[K]): MutableState<T, Args>
+        (target?: T, ext?: any): MutableState<T, Args>
+        [key: string]: (...args: Args) => any
 }
+
+export default EventState
 
 export interface EventState<
         T extends object,
-        Args extends any[] = ExtractArgs<T>
+        Args extends unknown[] = ExtractArgs<T>
 > {
-        <K = keyof T>(key: K, ...args: Args): EventState<T, Args>;
-        (target: T, ...args: Args): EventState<T, Args>;
-        mount: DurableState<{ [key in keyof T]: [EventFun<T>] }>;
-        clean: DurableState<{ [key in keyof T]: [EventFun<T>] }>;
-        on: Nested<Fun>;
+        [key: string]: T[keyof T] & any
+        <K = keyof T>(key?: K, ...args: Args): EventState<T, Args>
+        (target?: T, ...args: Args): EventState<T, Args>
+        mount: DurableState<{ [key in keyof T]?: Fun }>
+        clean: DurableState<{ [key in keyof T]?: Fun }>
+        set: Nested<Set<Fun>>
+        on: Nested<Fun>
 }
 
 export type NestedFun<Ret, Args extends any[] = any[]> = Fun<
         [key: string, ...args: Args],
         Ret
->;
+>
 
 export type DurableFun<
         T extends object,
-        // @TODO fix
-        Args extends any[] = ExtractArgs<T> & any
-> = Fun<[key: string, ...args: Args]>;
+        Args extends unknown[] = ExtractArgs<T> & any
+> = Fun<[key: string, ...args: Args]>
 
 export type EventFun<
         T extends object,
         Args extends any[] = ExtractArgs<T>
-> = Fun<[...args: Args], EventState<T>>;
+> = Fun<[...args: Args], EventState<T>>
 
-export type Fun<Args extends any[] = any[], Ret extends any = any> = (
-        ...args: Args
-) => Ret;
+export type Fun<
+        Args extends unknown[] = unknown[],
+        Ret extends unknown = unknown
+> = (...args: Args) => Ret
 
-export type DurableArgs<T extends object> = Parameters<DurableState<T>>;
+export type OverloadedArgs<T extends (...args: any[]) => unknown> = T extends {
+        (...args: infer A1): any
+        (...args: infer A2): any
+}
+        ? A1 | A2
+        : Parameters<T>
 
-export type MutableArgs<T extends object> = Parameters<MutableState<T>>;
+export type DurableArgs<T extends object> = OverloadedArgs<DurableState<T>>
 
-export type EventArgs<T extends object, Args extends any[] = ExtractArgs<T>> =
-        | [key: keyof T, ...args: Args]
-        | [target: Partial<T>, ...args: Args];
+export type MutableArgs<T extends object> = OverloadedArgs<MutableState<T>>
+
+export type EventArgs<T extends object> = OverloadedArgs<
+        DurableState<{
+                [key in keyof T]?: [EventFun<T>]
+        }>
+>
+
+export interface RefEvent<T extends object, Target = unknown> {
+        current?: MutableState<T>
+        (target: Target): void
+}
