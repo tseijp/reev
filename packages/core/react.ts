@@ -1,43 +1,40 @@
-import { useCallback, useEffect, useState, useMemo, useRef } from "react";
-import { event, durable } from "reev";
+import { useEffect, useState, useMemo, useRef } from 'react';
+import { event, mutable } from './index';
+import type { MutableState } from './types';
 
-export * from "reev";
+export * from './index';
 
-export const mutable = (...initArgs: [any, any]) => {
-        const memo = durable((key, fun) => (init[key] = fun))
-        const init = durable((key) => (memo[key] = (...args) => init[key](...args)))
-        init(...initArgs)
-        return memo
+export const useMutable = <T extends object>(
+        ...args: Parameters<MutableState<T>>
+) => {
+        const [memo] = useState(() => mutable<T>());
+        return memo(...args) as MutableState<T>;
 };
 
-export const useMutable = (...args: [any, any]) => {
-        const [memo] = useState(() => mutable(...args))
-        memo(...args)
-        return memo
-}
+export const useEvent = <T extends object>(
+        ...args: Parameters<MutableState<T>>
+) => {
+        const memo = useMutable<T>(...args);
+        const self = useState(() => event<T>(memo))[0];
+        useEffect(() => () => void self.clean(memo), [self, memo]);
+        return self;
+};
 
-export const useEvent = (key: any, fun: any, target: any) => {
-        if (typeof fun !== "function") target = fun
-        const memo = useMutable(key, fun)
-        const self = useMemo(() => target || event(), [target])
-        useEffect(() => void self.mount(memo), [self, memo])
-        useEffect(() => () => self.clean(memo), [self, memo])
-        return self
-}
-
-export const useRefEvent = (events: any, target: any) => {
+export const useRefEvent = <T extends object, Target = unknown>(
+        ...args: Parameters<MutableState<T>>
+) => {
         const initRef = useRef(false);
-        const memo = useMutable(events, void 0)
-        const self = useMemo(() => target || event(), [target])
-        const ref = useCallback((target: any) => {
-                if (initRef.current = !initRef.current) {
-                        self.mount(memo)
-                        self("mount", ref.current = target)
+        const memo = useMutable(...args);
+        const self = useMemo(() => event<T & { target: Target }>(), []);
+        memo('ref', (target: Target) => {
+                if ((initRef.current = !initRef.current)) {
+                        self.mount(memo);
+                        self('mount', (self.target = target));
                 } else {
-                        self.clean(memo)
-                        self("clean", ref.current = void 0)
+                        self.clean(memo);
+                        self('clean', (self.target = void 0));
                 }
-        }, [self, memo]) as any // @TODO FIX
-
-        return ref
-}
+        });
+        memo.ref.current = self;
+        return memo.ref;
+};
