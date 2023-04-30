@@ -27,8 +27,7 @@ describe('core', () => {
                         i: number
                         onMount: (_: Symbol) => void
                         onClean: (_: Symbol) => void
-                }>()
-                e.mount({
+                }>({
                         onMount(arg) {
                                 expect(arg).toBe(_)
                         },

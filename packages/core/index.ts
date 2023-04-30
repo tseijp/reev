@@ -6,6 +6,8 @@ import type {
         EventState,
         NestedFun,
         DurableFun,
+        MutableArgs,
+        EventArgs,
 } from './types'
 
 export * from './types'
@@ -13,13 +15,12 @@ export * from './types'
 export function nested<Ret, Args extends any[] = any[]>(
         init: NestedFun<Ret, Args>
 ) {
-        const map = new Map()
         const self = ((key, ...args) => {
-                if (!map.has(key)) map.set(key, init(key, ...args))
-                return map.get(key)
+                if (!self.map.has(key)) self.map.set(key, init(key, ...args))
+                return self.map.get(key)
         }) as Nested<Ret, Args>
-        self.has = (key = '') => map.has(key)
-        self.map = map
+        self.map = new Map()
+        self.has = (key = '') => self.map.has(key)
         return self
 }
 
@@ -35,19 +36,20 @@ export const durable = <T extends object, R = unknown>(
         return self as DurableState<T, R extends undefined ? typeof self : R>
 }
 
-export const mutable = <T extends object>() => {
+export const mutable = <T extends object>(...args: MutableArgs<T> | []) => {
         const map = new Map<string, Fun>()
         const memo = durable((key, fun) => {
                 if (!map.has(key))
                         memo[key] = (...args) => map.get(key)?.(...args)
                 map.set(key, fun as Fun)
         }) as unknown as MutableState<T>
+        if (args.length) memo(...(args as any))
         return memo
 }
 
 export default event
 
-export function event<T extends object>() {
+export function event<T extends object>(...args: EventArgs<T> | []) {
         const self = durable((key, ...args) => {
                 self.set(key).forEach((listener) => listener(...args))
         }) as unknown as EventState<T>
@@ -56,7 +58,8 @@ export function event<T extends object>() {
         self.set = nested(() => new Set<Fun>())
         self.on = nested((key: string, ...defaultArgs) => {
                 // @ts-ignore
-                return (...args) => self(key, ...args, ...defaultArgs)
+                return (...args) => void self(key, ...args, ...defaultArgs)
         })
+        if (args.length) self.mount(...(args as any))
         return self
 }

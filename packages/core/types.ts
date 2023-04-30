@@ -37,8 +37,8 @@ export interface EventState<
         [key: string]: T[keyof T] & any
         <K = keyof T>(key?: K, ...args: Args): EventState<T, Args>
         (target?: T, ...args: Args): EventState<T, Args>
-        mount: DurableState<{ [key in keyof T]?: Fun }>
-        clean: DurableState<{ [key in keyof T]?: Fun }>
+        mount: DurableState<{ [key in keyof T]?: Fun }, EventState<T, Args>>
+        clean: DurableState<{ [key in keyof T]?: Fun }, EventState<T, Args>>
         set: Nested<Set<Fun>>
         on: Nested<Fun>
 }
@@ -55,7 +55,7 @@ export type DurableFun<
 
 export type EventFun<
         T extends object,
-        Args extends any[] = ExtractArgs<T>
+        Args extends unknown[] = ExtractArgs<T>
 > = Fun<[...args: Args], EventState<T>>
 
 export type Fun<
@@ -80,7 +80,8 @@ export type EventArgs<T extends object> = OverloadedArgs<
         }>
 >
 
-export interface RefEvent<T extends object, Target = unknown> {
-        current?: MutableState<T>
-        (target: Target): void
+export interface RefEvent<T extends object, Target = unknown>
+        extends EventState<T> {
+        ref: (target: Target) => void
+        target: Target
 }
