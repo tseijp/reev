@@ -64,10 +64,10 @@ e("click", () => {}) // register new function
 <div onClick={e.click}>{i}</div>
 ```
 
-### useEventRef
+### useRefEvent
 
 ```tsx
-const e = useEventRef({
+const e = useRefEvent({
         mount() {}, // do something when component did mount
         clean() {}, // do something when component did unmount
         click() {}, // do something when component will be clicked

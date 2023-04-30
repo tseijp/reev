@@ -27,3 +27,5 @@ export const useRefEvent = <T extends object>(...args: MutableArgs<T>) => {
                 return self
         })[0]
 }
+
+export default useEvent

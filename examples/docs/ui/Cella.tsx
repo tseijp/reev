@@ -11,6 +11,19 @@ const sx = (_ = 0, l = 10) => 1 / l
 const sy = (i = 0, l = 10) => i / l
 const sz = (i = 0, l = 10) => (i + 1) / l
 
+export const Cella = (props) => {
+        const self = useRefEvent({
+                mount(target) {
+                        console.log(target)
+                },
+        })
+        return (
+                <RigidBody>
+                        <CellaImpl ref={self.ref} {...props} />
+                </RigidBody>
+        )
+}
+
 export interface CellaProps extends GroupProps {
         color: string
         index?: number
@@ -59,16 +72,3 @@ export const CellaImpl = React.forwardRef((props: CellaProps, ref: any) => {
                 </group>
         )
 })
-
-export const Cella = (props) => {
-        const self = useRefEvent({
-                mount(target) {
-                        console.log(target)
-                },
-        })
-        return (
-                <RigidBody>
-                        <CellaImpl ref={self.on('ref')} {...props} />
-                </RigidBody>
-        )
-}

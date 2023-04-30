@@ -77,6 +77,8 @@ export type EventArgs<T extends object> = OverloadedArgs<
 export type RefEvent<T extends object, Target = unknown> = EventState<
         T & {
                 ref: (target: Target) => void
+                mount: (target: Target) => void
+                clean: (target: Target) => void
                 target: Target
         }
 >
