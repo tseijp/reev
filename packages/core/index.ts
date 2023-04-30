@@ -39,8 +39,9 @@ export const durable = <T extends object, R = unknown>(
 export const mutable = <T extends object>(...args: MutableArgs<T> | []) => {
         const map = new Map<string, Fun>()
         const memo = durable((key, fun) => {
+                if (typeof fun !== 'function') return (memo[key] = fun)
                 if (!map.has(key))
-                        memo[key] = (...args) => map.get(key)?.(...args)
+                        memo[key] = (...args: any[]) => map.get(key)?.(...args)
                 map.set(key, fun as Fun)
         }) as unknown as MutableState<T>
         if (args.length) memo(...(args as any))
@@ -53,8 +54,8 @@ export function event<T extends object>(...args: EventArgs<T> | []) {
         const set = nested(() => new Set<Fun>())
         const self = durable((key, fun) => {
                 if (typeof fun !== 'function') return (self[key] = fun)
-                if (!set.map.has(key))
-                        self[key] = (...args) => {
+                if (!set.has(key))
+                        self[key] = (...args: any[]) => {
                                 set(key).forEach((fun) => fun(...args))
                         }
                 if (set(key).has(fun)) {

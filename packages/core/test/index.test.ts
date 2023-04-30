@@ -18,8 +18,8 @@ describe('core', () => {
                 memo({ _ })
         })
         it('mutable', () => {
-                const memo = mutable<{ _: (e: Symbol) => void }>()
-                memo('_', (arg) => expect(arg).toBe(_))
+                const memo = mutable<{ click: (e: Symbol) => void }>()
+                memo('click', (arg) => expect(arg).toBe(_))
                 memo.click(_)
         })
         it('event', () => {
@@ -42,7 +42,7 @@ describe('core', () => {
                         },
                 })
                 e.i = 1
-                e.onMount(_)
-                e.onClean(_)
+                e.mount(_)
+                e.clean(_)
         })
 })

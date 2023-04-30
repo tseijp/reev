@@ -9,24 +9,24 @@ import { useRefEvent } from 'reev/react'
 ## create your App
 
 ```tsx
-import { createRoot } from 'react-dom/client'
-import { useDrag } from './reev'
-import { gsap } from 'gsap'
-import './styles.css'
+import { createRoot } from "react-dom/client";
+import { useDrag } from "./hooks";
+import { gsap } from "gsap";
+import "./styles.css";
 
-function App({ children }: { children?: React.ReactNode }) {
-        const ref = useDrag((self) => {
-                const {
-                        active,
-                        offset: [x, y],
-                        target,
-                } = self
-                gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
-        })
-        return <span ref={ref}>{children}</span>
+function App() {
+  const ref = useDrag((self) => {
+    const {
+      active,
+      offset: [x, y],
+      target
+    } = self;
+    gsap.to(target, { x, y, scale: active ? 1.2 : 1 });
+  });
+  return <span ref={ref.ref} />;
 }
 
-createRoot(document.getElementById('root')!).render(<App />)
+createRoot(document.getElementById("root")!).render(<App />);
 ```
 
 ## crate useDrag
@@ -37,58 +37,52 @@ import { useRefEvent } from './hooks'
 const addV = (a, b) => [a[0] + b[0], a[1] + b[1]]
 const subV = (a, b) => [a[0] - b[0], a[1] - b[1]]
 
-export function useDrag(onDrag) {
-        const self = useRefEvent<DragState>({
-                onDrag,
-                move(e) {
-                        self._active = self.active
-                        self._value = self.value
-                        self.value = [e.clientX, e.clientY]
-                        if (self._active) {
-                                self.delta = subV(self.value, self._value)
-                                self.offset = addV(self.offset, self.delta)
-                                self.movement = addV(self.movement, self.delta)
-                        }
-                        self('onDrag', self)
-                },
-                down(e) {
-                        self.event = e
-                        self._active = false
-                        self.active = true
-                        self.target.setPointerCapture(e.pointerId)
-                        self('onDrag', self)
-                },
-                up(e) {
-                        self.event = e
-                        self._active = true
-                        self.active = false
-                        self.delta = [0, 0]
-                        self.movement = [0, 0]
-                        self.target.releasePointerCapture(e.pointerId)
-                        self('onDrag', self)
-                },
-                mount(target) {
-                        self.target = target
-                        self.active = false
-                        self._active = false
-                        self.value = [0, 0]
-                        self._value = [0, 0]
-                        self.delta = [0, 0]
-                        self.offset = [0, 0]
-                        self.movement = [0, 0]
-                        target.addEventListener('pointermove', self.on('move'))
-                        target.addEventListener('pointerdown', self.on('down'))
-                        target.addEventListener('pointerleave', self.on('up'))
-                        target.addEventListener('pointerup', self.on('up'))
-                },
-                clean(target) {
-                        target.removeEventListener('pointermove', self.on('move'))
-                        target.removeEventListener('pointerdown', self.on('down'))
-                        target.removeEventListener('pointerleave', self.on('up'))
-                        target.removeEventListener('pointerup', self.on('up'))
-                },
-        })
-
-        return self.on('ref')
+function useDrag(onDrag) {
+  const self = useRefEvent({
+    onDrag,
+    active: false,
+    _active: false,
+    value: [0, 0],
+    _value: [0, 0],
+    delta: [0, 0],
+    offset: [0, 0],
+    movement: [0, 0],
+    move(e) {
+      self.event = e;
+      self._active = self.active;
+      self._value = self.value;
+      self.value = [e.clientX, e.clientY];
+      if (self._active) {
+        self.delta = subV(self.value, self._value);
+        self.offset = addV(self.offset, self.delta);
+        self.movement = addV(self.movement, self.delta);
+      }
+      self.onDrag(self);
+    },
+    down(e) {
+      self.event = e;
+      self._active = false;
+      self.active = true;
+      self.target.setPointerCapture(e.pointerId);
+      self.onDrag(self);
+    },
+    up(e) {
+      self.event = e;
+      self._active = true;
+      self.active = false;
+      self.delta = [0, 0];
+      self.movement = [0, 0];
+      self.target.releasePointerCapture(e.pointerId);
+      self.onDrag(self);
+    },
+    mount(target) {
+      target.addEventListener("pointermove", self.move);
+      target.addEventListener("pointerdown", self.down);
+      target.addEventListener("pointerleave", self.up);
+      target.addEventListener("pointerup", self.up);
+    }
+  });
+  return self;
 }
+
 ```

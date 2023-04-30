@@ -30,13 +30,12 @@ const click = () => {} // do something
 const e = event({ click }) // register event
 // or e = event("click", click)
 
-window.addEventListener('click', e.on('click'))
+window.addEventListener('click', e.click)
 // or
-window.removeEventListener('click', e.on('click'))
+window.removeEventListener('click', e.click)
 
-// register and unregister event
-e.mount({ click: () => {} })
-e.clean({ click })
+// register new event
+e({ click: () => {} })
 ```
 
 ## React
@@ -47,9 +46,9 @@ e.clean({ click })
 import { useMutable } from 'reev/react'
 
 const [i, set] = useState(0)
-const memo = useMutable({ click: () => set(i++) })
+const { click } = useMutable({ click: () => set(i++) })
 
-<div onClick={memo.click}>{i}</div>
+<div onClick={click}>{i}</div>
 ```
 
 ### useEvent
@@ -57,13 +56,12 @@ const memo = useMutable({ click: () => set(i++) })
 ```tsx
 import { useEvent } from 'reev/react'
 
-const e = useEvent({
-        mount() {}, // do something when component did mount
-        clean() {}, // do something when component did unmount
-        click() {}, // do something when component will be clicked
-})
+const [i, set] = useState(0)
+const e = useEvent({ click: () => set(i++) })
 
-<div onClick={e.on('click')} />
+e("click", () => {}) // register new function
+
+<div onClick={e.click}>{i}</div>
 ```
 
 ### useEventRef
@@ -75,5 +73,5 @@ const e = useEventRef({
         click() {}, // do something when component will be clicked
 })
 
-<div onClick={e.on('click')} ref={e.on('ref')} />
+<div ref={e.ref} onClick={e.click)} />
 ```

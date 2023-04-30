@@ -19,22 +19,20 @@ export interface DurableState<
         (target?: T, ext?: T[keyof T], ...args: Args): R
 }
 
-export interface MutableState<
+export type MutableState<
         T extends object,
         Args extends unknown[] = ExtractArgs<T>
-> {
+> = T & {
         <K extends keyof T>(key?: K, fun?: T[K]): MutableState<T, Args>
         (target?: T, ext?: any): MutableState<T, Args>
-        [key: string]: (...args: Args) => any
 }
 
 export default EventState
 
-export interface EventState<
+export type EventState<
         T extends object,
         Args extends unknown[] = ExtractArgs<T>
-> {
-        [key: string]: T[keyof T] & any
+> = T & {
         (key?: keyof T, fun?: T[keyof T]): EventState<T, Args>
         (target?: Partial<T>): EventState<T, Args>
 }
