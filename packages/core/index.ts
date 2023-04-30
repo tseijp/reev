@@ -50,16 +50,17 @@ export const mutable = <T extends object>(...args: MutableArgs<T> | []) => {
 export default event
 
 export function event<T extends object>(...args: EventArgs<T> | []) {
-        const self = durable((key, ...args) => {
-                self.set(key).forEach((listener) => listener(...args))
+        const set = nested(() => new Set<Fun>())
+        const self = durable((key, fun) => {
+                if (typeof fun !== 'function') return (self[key] = fun)
+                if (!set.map.has(key))
+                        self[key] = (...args) => {
+                                set(key).forEach((fun) => fun(...args))
+                        }
+                if (set(key).has(fun)) {
+                        set(key).delete(fun)
+                } else set(key).add(fun)
         }) as unknown as EventState<T>
-        self.mount = durable((key, fun) => self.set(key)?.add(fun), self)
-        self.clean = durable((key, fun) => self.set(key)?.delete(fun), self)
-        self.set = nested(() => new Set<Fun>())
-        self.on = nested((key: string, ...defaultArgs) => {
-                // @ts-ignore
-                return (...args) => void self(key, ...args, ...defaultArgs)
-        })
-        if (args.length) self.mount(...(args as any))
+        if (args.length) self(...(args as any))
         return self
 }

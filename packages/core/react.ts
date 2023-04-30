@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { event, mutable } from 'reev'
-import type { MutableArgs, MutableState, EventState, RefEvent } from './types'
+import type { MutableArgs, MutableState } from './types'
 
 export * from './index'
 
@@ -11,27 +11,23 @@ export const useMutable = <T extends object>(...args: MutableArgs<T>) => {
 
 export const useEvent = <T extends object>(...args: MutableArgs<T>) => {
         const memo = useMutable<T>(...args)
-        const self = useState(() => event<T>())[0] as any
-        useEffect(() => void self.mount(memo)('mount'), [self, memo])
-        useEffect(() => () => self.clean(memo)('clean'), [self, memo])
-        return self as EventState<T>
+        const self = useState(() => event<T>())[0]
+        useEffect(() => {
+                self(memo as T).mount?.()
+                return () => void self(memo as T).clean?.()
+        }, [memo, self])
+        return self
 }
 
 export const useRefEvent = <T extends object, Target = unknown>(
         ...args: MutableArgs<T>
 ) => {
         const memo = useMutable<T>(...args)
-        const self = useState(
+        const self = useState(() =>
                 event('ref', (target: Target) => {
-                        if (self.target) {
-                                self.clean(memo)
-                                self('clean', (self.target = void 0))
-                        } else {
-                                self.mount(memo)
-                                self('mount', (self.target = target))
-                        }
+                        const type = target ? 'mount' : 'clean'
+                        self(memo as T)[type]?.((self.target = target))
                 })
-        )[0] as any
-        self.ref = self.on('ref')
-        return self as RefEvent<T, Target>
+        )[0]
+        return self
 }

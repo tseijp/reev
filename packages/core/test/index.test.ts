@@ -25,18 +25,24 @@ describe('core', () => {
         it('event', () => {
                 const e = event<{
                         i: number
-                        onMount: (_: Symbol) => void
-                        onClean: (_: Symbol) => void
+                        mount: (_: Symbol) => void
+                        clean: (_: Symbol) => void
+                        click: (_: Symbol) => void
                 }>({
-                        onMount(arg) {
+                        mount(arg) {
                                 expect(arg).toBe(_)
                         },
                 })
-                e.mount('onClean', (arg) => {
+                e('clean', (arg) => {
                         expect(arg).toEqual(_)
                 })
+                e({
+                        click: (arg) => {
+                                expect(arg).toEqual(_)
+                        },
+                })
                 e.i = 1
-                e('onMount', _)
-                e('onClean', _)
+                e.onMount(_)
+                e.onClean(_)
         })
 })

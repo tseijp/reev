@@ -35,12 +35,8 @@ export interface EventState<
         Args extends unknown[] = ExtractArgs<T>
 > {
         [key: string]: T[keyof T] & any
-        <K = keyof T>(key?: K, ...args: Args): EventState<T, Args>
-        (target?: T, ...args: Args): EventState<T, Args>
-        mount: DurableState<{ [key in keyof T]?: Fun }, EventState<T, Args>>
-        clean: DurableState<{ [key in keyof T]?: Fun }, EventState<T, Args>>
-        set: Nested<Set<Fun>>
-        on: Nested<Fun>
+        (key?: keyof T, fun?: T[keyof T]): EventState<T, Args>
+        (target?: Partial<T>): EventState<T, Args>
 }
 
 export type NestedFun<Ret, Args extends any[] = any[]> = Fun<
