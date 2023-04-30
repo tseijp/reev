@@ -33,5 +33,5 @@ export const useRefEvent = <T extends object, Target = unknown>(
                 })
         )[0] as any
         self.ref = self.on('ref')
-        return self as RefEvent<T>
+        return self as RefEvent<T, Target>
 }

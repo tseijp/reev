@@ -80,8 +80,9 @@ export type EventArgs<T extends object> = OverloadedArgs<
         }>
 >
 
-export interface RefEvent<T extends object, Target = unknown>
-        extends EventState<T> {
-        ref: (target: Target) => void
-        target: Target
-}
+export type RefEvent<T extends object, Target = unknown> = EventState<
+        T & {
+                ref: (target: Target) => void
+                target: Target
+        }
+>
