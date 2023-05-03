@@ -1,0 +1,157 @@
+# How to create wheel event
+
+## create your app
+
+```js
+import { gsap } from 'gsap'
+
+export const App = () => {
+        const { ref } = useWheel(({ active, target, movement: [x, y] }) => {
+                gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
+        })
+        return <span ref={ref} style={style} />
+}
+```
+
+import { gsap } from 'gsap'
+
+export const App = () => {
+        const { ref } = useWheel(({ active, target, movement: [x, y] }) => {
+                gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
+        })
+        return <span ref={ref} style={style} />
+}
+
+<App />
+
+## create useWheel
+
+```js
+import { useRefEvent } from 'reev/react'
+
+export const addV = (a, b) => [a[0] + b[0], a[1] + b[1]]
+export const subV = (a, b) => [a[0] - b[0], a[1] - b[1]]
+export const LINE_HEIGHT = 40
+export const PAGE_HEIGHT = 800
+
+export const wheelValues = (event) => {
+        let { deltaX, deltaY, deltaMode } = event
+        if (deltaMode === 1) {
+                deltaX *= LINE_HEIGHT
+                deltaY *= LINE_HEIGHT
+        } else if (deltaMode === 2) {
+                deltaX *= PAGE_HEIGHT
+                deltaY *= PAGE_HEIGHT
+        }
+        return [-deltaX, -deltaY]
+}
+
+export const useWheel = (onWheel) => {
+        const self = useRefEvent({
+                onWheel,
+                wheel(e) {
+                        self._active = self.active
+                        self._value = self.value
+                        self.active = true
+                        self.delta = wheelValues(e)
+                        if (self._active) {
+                                self.offset = addV(self.offset, self.delta)
+                                self.movement = addV(self.movement, self.delta)
+                        }
+                        const id = setTimeout(self.end, 1000)
+                        const scroll = () => {
+                                self({ scroll })
+                                clearTimeout(id)
+                        }
+                        self({ scroll })
+                        self.onWheel(self)
+                },
+                end() {
+                        self._active = !(self.active = false)
+                        self.delta = self.movement = [0, 0]
+                        self.onWheel(self)
+                },
+                mount() {
+                        self.active = self._active = false
+                        self.value = self._value = [0, 0]
+                        self.delta = self.offset = self.movement = [0, 0]
+                        window.addEventListener('wheel', self.wheel)
+                },
+                clean() {
+                        window.removeEventListener('wheel', self.wheel)
+                },
+        })
+        return self
+}
+```
+
+import { useRefEvent } from 'reev/react'
+
+export const addV = (a, b) => [a[0] + b[0], a[1] + b[1]]
+export const subV = (a, b) => [a[0] - b[0], a[1] - b[1]]
+export const LINE_HEIGHT = 40
+export const PAGE_HEIGHT = 800
+
+export function wheelValues(event) {
+        let { deltaX, deltaY, deltaMode } = event
+        if (deltaMode === 1) {
+                deltaX *= LINE_HEIGHT
+                deltaY *= LINE_HEIGHT
+        } else if (deltaMode === 2) {
+                deltaX *= PAGE_HEIGHT
+                deltaY *= PAGE_HEIGHT
+        }
+        return [-deltaX, -deltaY]
+}
+
+export const useWheel = (onWheel) => {
+        const self = useRefEvent({
+                onWheel,
+                wheel(e) {
+                        self._active = self.active
+                        self._value = self.value
+                        self.active = true
+                        self.delta = wheelValues(e)
+                        if (self._active) {
+                                self.offset = addV(self.offset, self.delta)
+                                self.movement = addV(self.movement, self.delta)
+                        }
+                        const id = setTimeout(self.end, 1000)
+                        const scroll = () => {
+                                self({ scroll })
+                                clearTimeout(id)
+                        }
+                        self({ scroll })
+                        self.onWheel(self)
+                },
+                end() {
+                        self._active = !(self.active = false)
+                        self.delta = self.movement = [0, 0]
+                        self.onWheel(self)
+                },
+                mount() {
+                        self.active = self._active = false
+                        self.value = self._value = [0, 0]
+                        self.delta = self.offset = self.movement = [0, 0]
+                        window.addEventListener('wheel', self.wheel)
+                },
+                clean() {
+                        window.removeEventListener('wheel', self.wheel)
+                },
+        })
+        return self
+}
+
+export const style = {
+        width: '80px',
+        height: '80px',
+        cursor: 'all-scroll',
+        userSelect: 'none',
+        touchAction: 'none',
+        margin: '80px auto',
+        display: 'flex',
+        borderRadius: '8px',
+        transform: 'translate(-50%, -50%)',
+        background: 'linear-gradient(145deg, #e65fa2, #ff70c1)',
+        boxShadow: '5px 5px 20px #b1b2ad -5px -5px 20px #fff',
+}

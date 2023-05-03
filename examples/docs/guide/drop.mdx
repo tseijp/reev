@@ -1,0 +1,233 @@
+# How to create drop gesture
+
+## create your app
+
+```js
+import { gsap } from 'gsap'
+import { useState } from 'react'
+
+export function App() {
+        const [result, set] = useState('')
+        const file = useFile(({ blob }) => drop.onDrop({ blob }))
+        const drop = useDrop(({ blob, target, active }) => {
+                if (target) gsap.to(target, { scale: active ? 1.2 : 1 })
+                if (blob) {
+                        const reader = new FileReader()
+                        reader.readAsDataURL(blob)
+                        reader.onload = () => set(reader.result)
+                }
+        })
+        return result ? (
+                <img src={result} onClick={() => set('')} />
+        ) : (
+                <label ref={drop.ref} style={style}>
+                        <input
+                                ref={file.ref}
+                                type="file"
+                                style={{ display: 'none' }}
+                        />
+                </label>
+        )
+}
+```
+
+import { gsap } from 'gsap'
+import { useState } from 'react'
+
+export function App() {
+        const [result, set] = useState('')
+        const file = useFile(({ blob }) => drop.onDrop({ blob }))
+        const drop = useDrop(({ blob, target, active }) => {
+                if (target) gsap.to(target, { scale: active ? 1.2 : 1 })
+                if (blob) {
+                        const reader = new FileReader()
+                        reader.readAsDataURL(blob)
+                        reader.onload = () => set(reader.result)
+                }
+        })
+        return result ? (
+                <img src={result} onClick={() => set('')} />
+        ) : (
+                <label ref={drop.ref} style={style}>
+                        <input
+                                ref={file.ref}
+                                type="file"
+                                style={{ display: 'none' }}
+                        />
+                </label>
+        )
+}
+
+<App />
+
+## create useFile
+
+```js
+import { useRefEvent } from 'reev/react'
+
+export function useFile(onChange) {
+        const self = useRefEvent({
+                onChange,
+                change(e) {
+                        e.preventDefault()
+                        if (e.target instanceof HTMLInputElement)
+                                self.onChange(...Array.from(e.target.files))
+                },
+                mount(target) {
+                        target.addEventListener('change', self.change)
+                },
+        })
+        return self
+}
+```
+
+import { useRefEvent } from 'reev/react'
+
+export function useFile(onChange) {
+        const self = useRefEvent({
+                onChange,
+                change(e) {
+                        e.preventDefault()
+                        if (!e.target instanceof HTMLInputElement) return
+                        self.blob = e.target.files[0]
+                        self.onChange(self)
+                },
+                mount(target) {
+                        target.addEventListener('change', self.change)
+                },
+        })
+        return self
+}
+
+## create useDrop
+
+```js
+export function useDrop(onDrop) {
+        const self = useRefEvent({
+                onDrop,
+                reset() {
+                        self.count = 0
+                        self.blob = void 0
+                        self.active = false
+                        self.onDrop(self)
+                },
+                drop(e) {
+                        e.preventDefault()
+                        self.blob = e.dataTransfer.files[0]
+                        self.onDrop(self)
+                },
+                paste(e) {
+                        e.preventDefault()
+                        self.blob = e.clipboardData.files[0]
+                        self.onDrop(self)
+                },
+                dragenter(e) {
+                        if (++self.count <= 1) {
+                                self.active = true
+                                self.onDrop(self)
+                        }
+                },
+                dragleave(e) {
+                        if (--self.count === 0) self.reset()
+                },
+                dragend(e) {
+                        self.reset()
+                },
+                dragover(e) {
+                        e.preventDefault()
+                },
+                mount(target) {
+                        self.count = 0
+                        window.addEventListener('drop', self.drop)
+                        window.addEventListener('paste', self.paste)
+                        window.addEventListener('dragend', self.dragend)
+                        window.addEventListener('dragover', self.dragover)
+                        window.addEventListener('dragenter', self.dragenter)
+                        window.addEventListener('dragleave', self.dragleave)
+                },
+                clean(target) {
+                        self.reset()
+                        window.removeEventListener('drop', self.drop)
+                        window.removeEventListener('paste', self.paste)
+                        window.removeEventListener('dragend', self.dragend)
+                        window.removeEventListener('dragover', self.dragover)
+                        window.removeEventListener('dragenter', self.dragenter)
+                        window.removeEventListener('dragleave', self.dragleave)
+                },
+        })
+        return self
+}
+```
+
+export function useDrop(onDrop) {
+        const self = useRefEvent({
+                onDrop,
+                reset() {
+                        self.count = 0
+                        self.blob = void 0
+                        self.active = false
+                        self.onDrop(self)
+                },
+                drop(e) {
+                        e.preventDefault()
+                        self.blob = e.dataTransfer.files[0]
+                        self.onDrop(self)
+                },
+                paste(e) {
+                        e.preventDefault()
+                        self.blob = e.clipboardData.files[0]
+                        self.onDrop(self)
+                },
+                dragenter(e) {
+                        if (++self.count <= 1) {
+                                self.active = true
+                                self.onDrop(self)
+                        }
+                },
+                dragleave(e) {
+                        if (--self.count === 0) self.reset()
+                },
+                dragend(e) {
+                        self.reset()
+                },
+                dragover(e) {
+                        e.preventDefault()
+                },
+                mount(target) {
+                        self.count = 0
+                        window.addEventListener('drop', self.drop)
+                        window.addEventListener('paste', self.paste)
+                        window.addEventListener('dragend', self.dragend)
+                        window.addEventListener('dragover', self.dragover)
+                        window.addEventListener('dragenter', self.dragenter)
+                        window.addEventListener('dragleave', self.dragleave)
+                },
+                clean(target) {
+                        self.reset()
+                        window.removeEventListener('drop', self.drop)
+                        window.removeEventListener('paste', self.paste)
+                        window.removeEventListener('dragend', self.dragend)
+                        window.removeEventListener('dragover', self.dragover)
+                        window.removeEventListener('dragenter', self.dragenter)
+                        window.removeEventListener('dragleave', self.dragleave)
+                },
+        })
+        return self
+}
+
+export const style = {
+        width: '80px',
+        height: '80px',
+        cursor: 'pointer',
+        color: 'white',
+        userSelect: 'none',
+        touchAction: 'none',
+        margin: '80px auto',
+        display: 'flex',
+        borderRadius: '8px',
+        alignItems: 'center',
+        justifyContent: 'center',
+        transform: 'translate(-50%, -50%)',
+        background: 'linear-gradient(145deg, #e65fa2, #ff70c1)',
+        boxShadow: '5px 5px 20px #b1b2ad -5px -5px 20px #fff',
+}

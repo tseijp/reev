@@ -43,10 +43,11 @@ e({ click: () => {} })
 ### useMutable
 
 ```tsx
+import React from 'react'
 import { useMutable } from 'reev/react'
 
-const [i, set] = useState(0)
-const { click } = useMutable({ click: () => set(i++) })
+const [i, set] = React.useState(0)
+const { click } = useMutable({ click: () => set(i + 1) })
 
 <div onClick={click}>{i}</div>
 ```
@@ -54,10 +55,11 @@ const { click } = useMutable({ click: () => set(i++) })
 ### useEvent
 
 ```tsx
+import React from 'react'
 import { useEvent } from 'reev/react'
 
-const [i, set] = useState(0)
-const e = useEvent({ click: () => set(i++) })
+const [i, set] = React.useState(0)
+const e = useEvent({ click: () => set(i + 1) })
 
 e("click", () => {}) // register new function
 
