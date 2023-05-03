@@ -1,17 +1,17 @@
 import { useState } from 'react'
 import { event, mutable } from './index'
-import type { MutableArgs, MutableState, EventState, RefEvent } from './types'
+import type { MutableArgs, RefEvent } from './types'
 
 export * from './index'
 
 export const useMutable = <T extends object>(...args: MutableArgs<T>) => {
         const [memo] = useState(() => mutable<T>())
-        return memo(...args) as MutableState<T>
+        return memo(...args)
 }
 
 export const useEvent = <T extends object>(...args: MutableArgs<T>) => {
         const memo = useMutable(...args) as T
-        return useState(() => event(memo))[0] as EventState<T>
+        return useState(() => event(memo))[0]
 }
 
 export const useRefEvent = <T extends object>(...args: MutableArgs<T>) => {

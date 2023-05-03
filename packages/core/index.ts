@@ -46,7 +46,7 @@ export const mutable = <T extends object>(...args: MutableArgs<T> | []) => {
                 if (!map.has(key))
                         memo[key] = (...args: any[]) => map.get(key)?.(...args)
                 map.set(key, fun as Fun)
-        }) as unknown as MutableState<T>
+        }) as MutableState<T>
         if (args.length) memo(...(args as any))
         return memo
 }
@@ -62,7 +62,7 @@ export function event<T extends object>(...args: EventArgs<T> | []) {
                 if (set(key).has(fun)) {
                         set(key).delete(fun)
                 } else set(key).add(fun)
-        }) as unknown as EventState<T>
+        }) as EventState<T>
         if (args.length) self(...(args as any))
         return self
 }
