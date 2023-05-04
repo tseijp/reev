@@ -1,0 +1,32 @@
+# How to use online state
+
+## create your app
+
+export const App = () => {
+        const online = useOnline()
+        console.log(online)
+        return online
+}
+
+<App />
+
+## create useOnline
+
+import { useSyncEvent } from "reev/react"
+import { useSyncExternalStore } from "react"
+
+export const useOnline = () => {
+  const getSnapShot = () => navigator.onLine
+  const self = useSyncEvent({
+    mount(callback) {
+      window.addEventListener('online', callback);
+      window.addEventListener('offline', callback);
+    },
+    clean(callback) {
+      window.removeEventListener('online', callback);
+      window.removeEventListener('offline', callback);
+    }
+  })
+  return useSyncExternalStore(self.sync, getSnapShot, () => void 0)
+
+}

@@ -1,0 +1,20 @@
+import { useSyncEvent } from 'reev/react'
+import { useSyncExternalStore } from 'react'
+
+export const useBattery = () => {
+        const getSnapShot = async () => await navigator.getBattery()
+        const self = useSyncEvent({
+                mount(callback) {
+                        navigator.getBattery().then((e) => {
+                                self.e = e
+                                e.addEventListener('levelchange', callback)
+                                e.addEventListener('chargingchange', callback)
+                        })
+                },
+                clean() {
+                        self.e.removeEventListener('levelchange', callback)
+                        self.e.removeEventListener('chargingchange', callback)
+                },
+        })
+        return useSyncExternalStore(self.sync, getSnapShot)
+}

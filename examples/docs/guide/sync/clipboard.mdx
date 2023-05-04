@@ -1,0 +1,26 @@
+import { useSyncEvent } from 'reev/react'
+import { useSyncExternalStore } from 'react'
+
+export const getSnapShot = async () => {
+        try {
+                return await navigator.clipboard.readText()
+        } catch {
+                return ''
+        }
+}
+
+export const useClipboard = () => {
+        const self = useSyncEvent({
+                mount(callback) {
+                        document.addEventListener('copy', callback)
+                        document.addEventListener('cut', callback)
+                        document.addEventListener('paste', callback)
+                },
+                clean(callback) {
+                        document.removeEventListener('copy', callback)
+                        document.removeEventListener('cut', callback)
+                        document.removeEventListener('paste', callback)
+                },
+        })
+        return useSyncExternalStore(self.sync, getSnapShot)
+}

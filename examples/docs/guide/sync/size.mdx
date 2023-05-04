@@ -1,0 +1,23 @@
+# How to use window size
+
+import { useSyncEvent } from 'reev/react'
+import { useSyncExternalStore } from 'react'
+
+export const getWidth = () => window.innerWidth
+export const getHeight = () => window.innerHeight
+
+export const App = () => {
+        const self = useSyncEvent({
+                mount() {
+                        window.addEventListener('resize', self.callback)
+                },
+                clean() {
+                        window.removeEventListener('resize', self.callback)
+                },
+        })
+        const width = useSyncExternalStore(self.sync, getWidth)
+        const height = useSyncExternalStore(self.sync, getHeight)
+        return `${width} / ${height}`
+}
+
+<App />

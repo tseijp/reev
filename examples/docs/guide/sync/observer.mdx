@@ -1,0 +1,20 @@
+import { useSyncEvent } from 'reev/react'
+import { useSyncExternalStore } from 'react'
+
+export const getIntersectionState = (element) => {
+        const observer = new IntersectionObserver(
+                ([entry]) => entry.isIntersecting
+        )
+        observer.observe(element)
+        return observer
+}
+
+export const subscribeIntersectionState = (element, callback) => {
+        const observer = new IntersectionObserver(([entry]) =>
+                callback(entry.isIntersecting)
+        )
+        observer.observe(element)
+        return () => observer.disconnect()
+}
+
+const useIntersectionState = (element) => useSyncExternalStore(() => subscribeIntersectionState(element), () => getIntersectionState(element));
