@@ -17,4 +17,21 @@ export const useMedia = (query) => {
         return useSyncExternalStore(self.sync, getSnapShot)
 }
 
-<App />
+```ts
+import { useSyncEvent } from 'reev/react'
+import { useSyncExternalStore } from 'react'
+
+export const useMedia = (query) => {
+        const mql = useMemo(() => window.matchMedia(query), [query])
+        const getSnapShot = () => mql.matches
+        const self = useSyncEvent({
+                mount(callback) {
+                        mql.addEventListener('change', callback)
+                },
+                clean(callback) {
+                        mql.removeEventListener('change', callback)
+                },
+        })
+        return useSyncExternalStore(self.sync, getSnapShot)
+}
+```

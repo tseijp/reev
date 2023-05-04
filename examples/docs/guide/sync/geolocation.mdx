@@ -14,3 +14,22 @@ export const useGeolocation = () => {
         })
         return useSyncExternalStore(self.sync, getSnapShot)
 }
+
+```ts
+import { useSyncEvent } from 'reev/react'
+import { useSyncExternalStore } from 'react'
+
+const getSnapShot = async () => await navigator.geolocation.getCurrentPosition()
+
+export const useGeolocation = () => {
+        const self = useSyncEvent({
+                mount(cb) {
+                        self.watchId = navigator.geolocation.watchPosition(cb)
+                },
+                clean(callback) {
+                        navigator.geolocation.clearWatch(self.watchId)
+                },
+        })
+        return useSyncExternalStore(self.sync, getSnapShot)
+}
+```

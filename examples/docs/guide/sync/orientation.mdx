@@ -15,3 +15,23 @@ export const useOrientation = () => {
         })
         return useSyncExternalStore(self.sync)
 }
+
+```ts
+import { useSyncEvent } from 'reev/react'
+import { useSyncExternalStore } from 'react'
+
+export const useOrientation = () => {
+        const self = useSyncEvent({
+                mount(callback) {
+                        window.addEventListener('deviceorientation', callback)
+                },
+                clean() {
+                        window.removeEventListener(
+                                'deviceorientation',
+                                callback
+                        )
+                },
+        })
+        return useSyncExternalStore(self.sync)
+}
+```

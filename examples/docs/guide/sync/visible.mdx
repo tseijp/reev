@@ -15,3 +15,23 @@ export const useVisible = () => {
         })
         return useSyncExternalStore(self.sync, getSnapShot)
 }
+
+```ts
+import { useSyncEvent } from 'reev/react'
+import { useSyncExternalStore } from 'react'
+
+const useDocumentVisibility = () => useSyncExternalStore(subscribe, getSnapshot)
+
+export const useVisible = () => {
+        const getSnapshot = () => document.visibilityState === 'visible'
+        const self = useSyncEvent({
+                mount(cb) {
+                        document.addEventListener('visibilitychange', cb)
+                },
+                clean(cb) {
+                        document.removeEventListener('visibilitychange', cb)
+                },
+        })
+        return useSyncExternalStore(self.sync, getSnapShot)
+}
+```
