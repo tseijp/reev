@@ -6,20 +6,18 @@
 import { gsap } from 'gsap'
 import { useState } from 'react'
 
-export function App() {
+export const App = () => {
         const [result, set] = useState('')
-        const file = useFile(({ blob }) => drop.onDrop({ blob }))
+        const file = useFile(({ blob }) => drop.on({ blob }))
         const drop = useDrop(({ blob, target, active }) => {
                 if (target) gsap.to(target, { scale: active ? 1.2 : 1 })
-                if (blob) {
-                        const reader = new FileReader()
-                        reader.readAsDataURL(blob)
-                        reader.onload = () => set(reader.result)
-                }
+                if (!blob) return
+                const reader = new FileReader()
+                reader.readAsDataURL(blob)
+                reader.onload = () => set(reader.result)
         })
-        return result ? (
-                <img src={result} onClick={() => set('')} />
-        ) : (
+        if (result) return <img src={result} onClick={() => set('')} />
+        return (
                 <label ref={drop.ref} style={style}>
                         <input
                                 ref={file.ref}
@@ -34,20 +32,18 @@ export function App() {
 import { gsap } from 'gsap'
 import { useState } from 'react'
 
-export function App() {
+export const App = () => {
         const [result, set] = useState('')
-        const file = useFile(({ blob }) => drop.onDrop({ blob }))
+        const file = useFile(({ blob }) => drop.on({ blob }))
         const drop = useDrop(({ blob, target, active }) => {
                 if (target) gsap.to(target, { scale: active ? 1.2 : 1 })
-                if (blob) {
-                        const reader = new FileReader()
-                        reader.readAsDataURL(blob)
-                        reader.onload = () => set(reader.result)
-                }
+                if (!blob) return
+                const reader = new FileReader()
+                reader.readAsDataURL(blob)
+                reader.onload = () => set(reader.result)
         })
-        return result ? (
-                <img src={result} onClick={() => set('')} />
-        ) : (
+        if (result) return <img src={result} onClick={() => set('')} />
+        return (
                 <label ref={drop.ref} style={style}>
                         <input
                                 ref={file.ref}
@@ -65,16 +61,21 @@ export function App() {
 ```js
 import { useRefEvent } from 'reev/react'
 
-export function useFile(onChange) {
+export const useFile = (on) => {
         const self = useRefEvent({
-                onChange,
+                on,
                 change(e) {
                         e.preventDefault()
-                        if (e.target instanceof HTMLInputElement)
-                                self.onChange(...Array.from(e.target.files))
+                        if (e.target instanceof HTMLInputElement) {
+                                self.blob = e.target.files[0]
+                                self.on(self)
+                        }
                 },
                 mount(target) {
                         target.addEventListener('change', self.change)
+                },
+                clean() {
+                        self.blob = void 0
                 },
         })
         return self
@@ -83,17 +84,21 @@ export function useFile(onChange) {
 
 import { useRefEvent } from 'reev/react'
 
-export function useFile(onChange) {
+export const useFile = (on) => {
         const self = useRefEvent({
-                onChange,
+                on,
                 change(e) {
                         e.preventDefault()
-                        if (!e.target instanceof HTMLInputElement) return
-                        self.blob = e.target.files[0]
-                        self.onChange(self)
+                        if (e.target instanceof HTMLInputElement) {
+                                self.blob = e.target.files[0]
+                                self.on(self)
+                        }
                 },
                 mount(target) {
                         target.addEventListener('change', self.change)
+                },
+                clean() {
+                        self.blob = void 0
                 },
         })
         return self
@@ -102,29 +107,29 @@ export function useFile(onChange) {
 ## create useDrop
 
 ```js
-export function useDrop(onDrop) {
+export const useDrop = (on) => {
         const self = useRefEvent({
-                onDrop,
+                on,
                 reset() {
                         self.count = 0
                         self.blob = void 0
                         self.active = false
-                        self.onDrop(self)
+                        self.on(self)
                 },
                 drop(e) {
                         e.preventDefault()
                         self.blob = e.dataTransfer.files[0]
-                        self.onDrop(self)
+                        self.on(self)
                 },
                 paste(e) {
                         e.preventDefault()
                         self.blob = e.clipboardData.files[0]
-                        self.onDrop(self)
+                        self.on(self)
                 },
                 dragenter(e) {
                         if (++self.count <= 1) {
                                 self.active = true
-                                self.onDrop(self)
+                                self.on(self)
                         }
                 },
                 dragleave(e) {
@@ -159,29 +164,29 @@ export function useDrop(onDrop) {
 }
 ```
 
-export function useDrop(onDrop) {
+export const useDrop = (on) => {
         const self = useRefEvent({
-                onDrop,
+                on,
                 reset() {
                         self.count = 0
                         self.blob = void 0
                         self.active = false
-                        self.onDrop(self)
+                        self.on(self)
                 },
                 drop(e) {
                         e.preventDefault()
                         self.blob = e.dataTransfer.files[0]
-                        self.onDrop(self)
+                        self.on(self)
                 },
                 paste(e) {
                         e.preventDefault()
                         self.blob = e.clipboardData.files[0]
-                        self.onDrop(self)
+                        self.on(self)
                 },
                 dragenter(e) {
                         if (++self.count <= 1) {
                                 self.active = true
-                                self.onDrop(self)
+                                self.on(self)
                         }
                 },
                 dragleave(e) {

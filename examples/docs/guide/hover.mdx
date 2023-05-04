@@ -1,4 +1,4 @@
-# How to create scroll gesture
+# How to create hover gesture
 
 ## create your app
 
@@ -6,8 +6,8 @@
 import { gsap } from 'gsap'
 
 export const App = () => {
-        const { ref } = useScroll(({ active, target, offset: [x, y] }) => {
-                gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
+        const { ref } = useHover(({ active, target, movement: [x, y] }) => {
+                gsap.to(target, { scale: active ? 1.2 : 1, x, y })
         })
         return <span ref={ref} style={style} />
 }
@@ -16,15 +16,50 @@ export const App = () => {
 import { gsap } from 'gsap'
 
 export const App = () => {
-        const { ref } = useScroll(({ active, target, offset: [x, y] }) => {
-                gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
+        const { ref } = useHover(({ active, target, movement: [x, y] }) => {
+                gsap.to(target, { scale: active ? 1.2 : 1, x, y })
         })
         return <span ref={ref} style={style} />
 }
 
 <App />
 
-## create useScroll
+## create useHover
+
+import { useRefEvent } from 'reev/react'
+
+export const addV = (a, b) => [a[0] + b[0], a[1] + b[1]]
+export const subV = (a, b) => [a[0] - b[0], a[1] - b[1]]
+
+export const useHover = (on) => {
+        const self = useRefEvent({
+                on,
+                enter(e) {
+                        self._active = self.active
+                        self._value = self.value
+                        self.value = [e.clientX, e.clientY]
+                        if (self._active) {
+                                self.delta = subV(self.value, self._value)
+                                self.offset = addV(self.offset, self.delta)
+                                self.movement = addV(self.movement, self.delta)
+                        }
+                        self.on(self)
+                },
+                leave(e) {
+                        self._active = !(self.active = true)
+                        self.delta = self.movement = [0, 0]
+                        self.on(self)
+                },
+                mount(target) {
+                        self.active = self._active = false
+                        self.value = self._value = [0, 0]
+                        self.delta = self.offset = self.movement = [0, 0]
+                        target.addEventListener('pointerenter', self.enter)
+                        target.addEventListener('pointerleave', self.leave)
+                },
+        })
+        return self
+}
 
 ```js
 import { useRefEvent } from 'reev/react'
@@ -32,31 +67,22 @@ import { useRefEvent } from 'reev/react'
 export const addV = (a, b) => [a[0] + b[0], a[1] + b[1]]
 export const subV = (a, b) => [a[0] - b[0], a[1] - b[1]]
 
-export const useScroll = (on) => {
+export const useHover = (on) => {
         const self = useRefEvent({
                 on,
-                scroll(e) {
-                        const { scrollX: x, scrollLeft: xx } = e.currentTarget
-                        const { scrollY: y, scrollTop: yy } = e.currentTarget
+                enter(e) {
                         self._active = self.active
                         self._value = self.value
-                        self.active = true
-                        self.value = [x ?? xx ?? 0, y ?? yy ?? 0]
+                        self.value = [e.clientX, e.clientY]
                         if (self._active) {
                                 self.delta = subV(self.value, self._value)
                                 self.offset = addV(self.offset, self.delta)
                                 self.movement = addV(self.movement, self.delta)
                         }
-                        const id = setTimeout(self.end, 1000)
-                        const scroll = () => {
-                                self({ scroll })
-                                clearTimeout(id)
-                        }
-                        self({ scroll })
                         self.on(self)
                 },
-                end() {
-                        self._active = !(self.active = false)
+                leave(e) {
+                        self._active = !(self.active = true)
                         self.delta = self.movement = [0, 0]
                         self.on(self)
                 },
@@ -64,61 +90,13 @@ export const useScroll = (on) => {
                         self.active = self._active = false
                         self.value = self._value = [0, 0]
                         self.delta = self.offset = self.movement = [0, 0]
-                        window.addEventListener('scroll', self.scroll)
-                },
-                clean(target) {
-                        window.removeEventListener('scroll', self.scroll)
+                        target.addEventListener('pointerenter', self.enter)
+                        target.addEventListener('pointerleave', self.leave)
                 },
         })
         return self
 }
 ```
-
-import { useRefEvent } from 'reev/react'
-
-export const addV = (a, b) => [a[0] + b[0], a[1] + b[1]]
-export const subV = (a, b) => [a[0] - b[0], a[1] - b[1]]
-
-export const useScroll = (on) => {
-        const self = useRefEvent({
-                on,
-                scroll(e) {
-                        const { scrollX: x, scrollLeft: xx } = e.currentTarget
-                        const { scrollY: y, scrollTop: yy } = e.currentTarget
-                        self._active = self.active
-                        self._value = self.value
-                        self.active = true
-                        self.value = [x ?? xx ?? 0, y ?? yy ?? 0]
-                        if (self._active) {
-                                self.delta = subV(self.value, self._value)
-                                self.offset = addV(self.offset, self.delta)
-                                self.movement = addV(self.movement, self.delta)
-                        }
-                        const id = setTimeout(self.end, 1000)
-                        const scroll = () => {
-                                self({ scroll })
-                                clearTimeout(id)
-                        }
-                        self({ scroll })
-                        self.on(self)
-                },
-                end() {
-                        self._active = !(self.active = false)
-                        self.delta = self.movement = [0, 0]
-                        self.on(self)
-                },
-                mount(target) {
-                        self.active = self._active = false
-                        self.value = self._value = [0, 0]
-                        self.delta = self.offset = self.movement = [0, 0]
-                        window.addEventListener('scroll', self.scroll)
-                },
-                clean(target) {
-                        window.removeEventListener('scroll', self.scroll)
-                },
-        })
-        return self
-}
 
 export const style = {
         width: '80px',

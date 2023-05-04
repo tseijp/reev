@@ -8,7 +8,7 @@ and returns to its initial position on release.
 ```tsx
 import { gsap } from 'gsap'
 
-export function App() {
+export const App = () => {
         const { ref } = useDrag(({ active, target, movement: [x, y] }) => {
                 gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
         })
@@ -18,7 +18,7 @@ export function App() {
 
 import { gsap } from 'gsap'
 
-export function App() {
+export const App = () => {
         const { ref } = useDrag(({ active, target, movement: [x, y] }) => {
                 gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
         })
@@ -30,7 +30,7 @@ export function App() {
 You can use offset instead of movement
 
 ```jsx
-export function App2() {
+export const App2 = () => {
         const { ref } = useDrag(({ active, target, offset: [x, y] }) => {
                 gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
         })
@@ -38,7 +38,7 @@ export function App2() {
 }
 ```
 
-export function App2() {
+export const App2 = () => {
         const { ref } = useDrag(({ active, target, offset: [x, y] }) => {
                 gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
         })
@@ -55,9 +55,9 @@ import { useRefEvent } from 'reev/react'
 export const addV = (a, b) => [a[0] + b[0], a[1] + b[1]]
 export const subV = (a, b) => [a[0] - b[0], a[1] - b[1]]
 
-export function useDrag(onDrag) {
+export const useDrag = (on) => {
         const self = useRefEvent({
-                onDrag,
+                on,
                 move(e) {
                         self._active = self.active
                         self._value = self.value
@@ -67,18 +67,18 @@ export function useDrag(onDrag) {
                                 self.offset = addV(self.offset, self.delta)
                                 self.movement = addV(self.movement, self.delta)
                         }
-                        self.onDrag(self)
+                        self.on(self)
                 },
                 down(e) {
                         self._active = !(self.active = true)
                         self.target.setPointerCapture(e.pointerId)
-                        self.onDrag(self)
+                        self.on(self)
                 },
                 up(e) {
                         self._active = !(self.active = false)
                         self.delta = self.movement = [0, 0]
                         self.target.releasePointerCapture(e.pointerId)
-                        self.onDrag(self)
+                        self.on(self)
                 },
                 mount(target) {
                         self.active = self._active = false
@@ -99,9 +99,9 @@ import { useRefEvent } from 'reev/react'
 export const addV = (a, b) => [a[0] + b[0], a[1] + b[1]]
 export const subV = (a, b) => [a[0] - b[0], a[1] - b[1]]
 
-export function useDrag(onDrag) {
+export const useDrag = (on) => {
         const self = useRefEvent({
-                onDrag,
+                on,
                 move(e) {
                         self._active = self.active
                         self._value = self.value
@@ -111,18 +111,18 @@ export function useDrag(onDrag) {
                                 self.offset = addV(self.offset, self.delta)
                                 self.movement = addV(self.movement, self.delta)
                         }
-                        self.onDrag(self)
+                        self.on(self)
                 },
                 down(e) {
                         self._active = !(self.active = true)
                         self.target.setPointerCapture(e.pointerId)
-                        self.onDrag(self)
+                        self.on(self)
                 },
                 up(e) {
                         self._active = !(self.active = false)
                         self.delta = self.movement = [0, 0]
                         self.target.releasePointerCapture(e.pointerId)
-                        self.onDrag(self)
+                        self.on(self)
                 },
                 mount(target) {
                         self.active = self._active = false

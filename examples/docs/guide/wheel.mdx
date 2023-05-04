@@ -1,4 +1,4 @@
-# How to create wheel event
+# How to create wheel gesture
 
 ## create your app
 
@@ -43,12 +43,12 @@ export const wheelValues = (event) => {
                 deltaX *= PAGE_HEIGHT
                 deltaY *= PAGE_HEIGHT
         }
-        return [-deltaX, -deltaY]
+        return [deltaX, deltaY]
 }
 
-export const useWheel = (onWheel) => {
+export const useWheel = (on) => {
         const self = useRefEvent({
-                onWheel,
+                on,
                 wheel(e) {
                         self._active = self.active
                         self._value = self.value
@@ -64,12 +64,12 @@ export const useWheel = (onWheel) => {
                                 clearTimeout(id)
                         }
                         self({ scroll })
-                        self.onWheel(self)
+                        self.on(self)
                 },
                 end() {
                         self._active = !(self.active = false)
                         self.delta = self.movement = [0, 0]
-                        self.onWheel(self)
+                        self.on(self)
                 },
                 mount() {
                         self.active = self._active = false
@@ -101,12 +101,12 @@ export function wheelValues(event) {
                 deltaX *= PAGE_HEIGHT
                 deltaY *= PAGE_HEIGHT
         }
-        return [-deltaX, -deltaY]
+        return [deltaX, deltaY]
 }
 
-export const useWheel = (onWheel) => {
+export const useWheel = (on) => {
         const self = useRefEvent({
-                onWheel,
+                on,
                 wheel(e) {
                         self._active = self.active
                         self._value = self.value
@@ -122,12 +122,12 @@ export const useWheel = (onWheel) => {
                                 clearTimeout(id)
                         }
                         self({ scroll })
-                        self.onWheel(self)
+                        self.on(self)
                 },
                 end() {
                         self._active = !(self.active = false)
                         self.delta = self.movement = [0, 0]
-                        self.onWheel(self)
+                        self.on(self)
                 },
                 mount() {
                         self.active = self._active = false
