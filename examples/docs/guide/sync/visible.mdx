@@ -1,37 +1,67 @@
-import { useSyncEvent } from 'reev/react'
-import { useSyncExternalStore } from 'react'
+# How to use visible
 
-const useDocumentVisibility = () => useSyncExternalStore(subscribe, getSnapshot);
-
-export const useVisible = () => {
-        const getSnapshot = () => document.visibilityState === 'visible'
-        const self = useSyncEvent({
-                mount(cb) {
-                        document.addEventListener('visibilitychange', cb)
-                },
-                clean(cb) {
-                        document.removeEventListener('visibilitychange', cb)
-                },
-        })
-        return useSyncExternalStore(self.sync, getSnapShot)
-}
+## create your app
 
 ```ts
-import { useSyncEvent } from 'reev/react'
-import { useSyncExternalStore } from 'react'
-
-const useDocumentVisibility = () => useSyncExternalStore(subscribe, getSnapshot)
-
-export const useVisible = () => {
-        const getSnapshot = () => document.visibilityState === 'visible'
-        const self = useSyncEvent({
-                mount(cb) {
-                        document.addEventListener('visibilitychange', cb)
-                },
-                clean(cb) {
-                        document.removeEventListener('visibilitychange', cb)
-                },
-        })
-        return useSyncExternalStore(self.sync, getSnapShot)
+export const App = () => {
+        const visible = useVisible()
+        return <span>{visible ? '👀' : '❌'}</span>
 }
 ```
+
+export const App = () => {
+        const visible = useVisible()
+        return <span>{visible ? '👀' : '❌'}</span>
+}
+
+<App />
+
+## create useVisible
+
+```ts
+import { event } from 'reev'
+import { useSyncExternalStore } from 'react'
+
+export const self = event({
+        mount(callback) {
+                document.addEventListener('visibilitychange', callback)
+        },
+        clean(callback) {
+                document.removeEventListener('visibilitychange', callback)
+        },
+})
+
+export const subscribe = (callback) => {
+        self.mount(callback)
+        return () => self.clean()
+}
+export const getSnapshot = () => document.visibilityState === 'visible'
+export const getServerSnapshot = () => false
+
+export const useVisible = () => {
+        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+}
+```
+
+import { event } from 'reev'
+import { useSyncExternalStore } from 'react'
+
+export const self = event({
+        mount(callback) {
+                document.addEventListener('visibilitychange', callback)
+        },
+        clean(callback) {
+                document.removeEventListener('visibilitychange', callback)
+        },
+})
+
+export const subscribe = (callback) => {
+        self.mount(callback)
+        return () => self.clean()
+}
+export const getSnapshot = () => document.visibilityState === 'visible'
+export const getServerSnapshot = () => false
+
+export const useVisible = () => {
+        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+}

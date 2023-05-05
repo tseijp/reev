@@ -1,47 +1,81 @@
-import { useSyncEvent } from 'reev/react'
-import { useSyncExternalStore } from 'react'
+# How to use observer
 
-export const getIntersectionState = (element) => {
-        const observer = new IntersectionObserver(
-                ([entry]) => entry.isIntersecting
-        )
-        observer.observe(element)
-        return observer
-}
-
-export const subscribeIntersectionState = (element, callback) => {
-        const observer = new IntersectionObserver(([entry]) =>
-                callback(entry.isIntersecting)
-        )
-        observer.observe(element)
-        return () => observer.disconnect()
-}
-
-const useIntersectionState = (element) => useSyncExternalStore(() => subscribeIntersectionState(element), () => getIntersectionState(element));
+## create your app
 
 ```ts
-import { useSyncEvent } from 'reev/react'
-import { useSyncExternalStore } from 'react'
-
-export const getIntersectionState = (element) => {
-        const observer = new IntersectionObserver(
-                ([entry]) => entry.isIntersecting
+export const App = () => {
+        const [entry, ref] = useObserver()
+        console.log(entry)
+        return (
+                <div ref={ref}>
+                        <div>{entry?.isIntersecting ? '👀' : '😑'}</div>
+                </div>
         )
-        observer.observe(element)
-        return observer
 }
-
-export const subscribeIntersectionState = (element, callback) => {
-        const observer = new IntersectionObserver(([entry]) =>
-                callback(entry.isIntersecting)
-        )
-        observer.observe(element)
-        return () => observer.disconnect()
-}
-
-const useIntersectionState = (element) =>
-        useSyncExternalStore(
-                () => subscribeIntersectionState(element),
-                () => getIntersectionState(element)
-        )
 ```
+
+export const App = () => {
+        const [entry, ref] = useObserver()
+        console.log(entry)
+        return (
+                <div ref={ref}>
+                        <div>{entry?.isIntersecting ? '👀' : '😑'}</div>
+                </div>
+        )
+}
+
+<App />
+
+## create useObserver
+
+```ts
+import { useRefEvent } from 'reev/react'
+import { useSyncExternalStore, useCallback } from 'react'
+
+export const useObserver = () => {
+        const self = useRefEvent({
+                mount(target) {
+                        self.observer = new IntersectionObserver(self.callback)
+                        self.observer.observe(target)
+                },
+                clean(target) {
+                        delete self.observer
+                },
+                callback(entries) {
+                        self.entry = entries.find(
+                                (entry) => entry.target === self.target
+                        )
+                },
+        })
+        const subscribe = useCallback(
+                (callback) => void self({ callback }),
+                [self]
+        )
+        return [useSyncExternalStore(subscribe, () => self.entry), self.ref]
+}
+```
+
+import { useRefEvent } from 'reev/react'
+import { useSyncExternalStore, useCallback } from 'react'
+
+export const useObserver = () => {
+        const self = useRefEvent({
+                mount(target) {
+                        self.observer = new IntersectionObserver(self.callback)
+                        self.observer.observe(target)
+                },
+                clean(target) {
+                        delete self.observer
+                },
+                callback(entries) {
+                        self.entry = entries.find(
+                                (entry) => entry.target === self.target
+                        )
+                },
+        })
+        const subscribe = useCallback(
+                (callback) => void self({ callback }),
+                [self]
+        )
+        return [useSyncExternalStore(subscribe, () => self.entry), self.ref]
+}

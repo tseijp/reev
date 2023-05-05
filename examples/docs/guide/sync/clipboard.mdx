@@ -1,55 +1,89 @@
-import { useSyncEvent } from 'reev/react'
-import { useSyncExternalStore } from 'react'
+# How to use clipboard
 
-export const getSnapShot = async () => {
-        try {
-                return await navigator.clipboard.readText()
-        } catch {
-                return ''
-        }
-}
-
-export const useClipboard = () => {
-        const self = useSyncEvent({
-                mount(callback) {
-                        document.addEventListener('copy', callback)
-                        document.addEventListener('cut', callback)
-                        document.addEventListener('paste', callback)
-                },
-                clean(callback) {
-                        document.removeEventListener('copy', callback)
-                        document.removeEventListener('cut', callback)
-                        document.removeEventListener('paste', callback)
-                },
-        })
-        return useSyncExternalStore(self.sync, getSnapShot)
-}
+## create your app
 
 ```ts
-import { useSyncEvent } from 'reev/react'
-import { useSyncExternalStore } from 'react'
+import CodeBlock from '@theme/CodeBlock'
 
-export const getSnapShot = async () => {
-        try {
-                return await navigator.clipboard.readText()
-        } catch {
-                return ''
-        }
-}
-
-export const useClipboard = () => {
-        const self = useSyncEvent({
-                mount(callback) {
-                        document.addEventListener('copy', callback)
-                        document.addEventListener('cut', callback)
-                        document.addEventListener('paste', callback)
-                },
-                clean(callback) {
-                        document.removeEventListener('copy', callback)
-                        document.removeEventListener('cut', callback)
-                        document.removeEventListener('paste', callback)
-                },
-        })
-        return useSyncExternalStore(self.sync, getSnapShot)
+export const App = () => {
+        const clipboard = useClipboard()
+        return <CodeBlock>{clipboard || 'PLEASE COPY'}</CodeBlock>
 }
 ```
+
+import CodeBlock from '@theme/CodeBlock'
+
+export const App = () => {
+        const clipboard = useClipboard()
+        return <CodeBlock>{clipboard || 'PLEASE COPY'}</CodeBlock>
+}
+
+<App />
+
+## create useClipboard
+
+```ts
+import { event } from 'reev'
+import { useSyncExternalStore } from 'react'
+
+export const self = event({
+        mount(callback) {
+                window.addEventListener('copy', self.callback)
+                window.addEventListener('cut', self.callback)
+                window.addEventListener('paste', self.callback)
+        },
+        clean(callback) {
+                window.removeEventListener('copy', self.callback)
+                window.removeEventListener('cut', self.callback)
+                window.removeEventListener('paste', self.callback)
+        },
+})
+
+export const getSnapShot = () => self.clipText
+
+export const subscribe = (callback) => {
+        self('callback', () => {
+                navigator.clipboard.readText().then((clipText) => {
+                        self.clipText = clipText
+                        callback()
+                })
+        })
+        self.callback()
+        self.mount()
+        return () => self.clean()
+}
+
+export const useClipboard = () => useSyncExternalStore(subscribe, getSnapShot)
+```
+
+import { event } from 'reev'
+import { useSyncExternalStore } from 'react'
+
+export const self = event({
+        mount(callback) {
+                window.addEventListener('copy', self.callback)
+                window.addEventListener('cut', self.callback)
+                window.addEventListener('paste', self.callback)
+        },
+        clean(callback) {
+                window.removeEventListener('copy', self.callback)
+                window.removeEventListener('cut', self.callback)
+                window.removeEventListener('paste', self.callback)
+        },
+})
+
+export const getSnapShot = () => self.clipText
+
+export const subscribe = (callback) => {
+        self('callback', () => {
+                navigator.clipboard.readText().then((clipText) => {
+                        self.clipText = clipText
+                        callback()
+                })
+        })
+        self.callback()
+        self.mount()
+        return () => self.clean()
+}
+
+export const useClipboard = () => useSyncExternalStore(subscribe, getSnapShot)

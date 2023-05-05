@@ -2,50 +2,70 @@
 
 ## create your app
 
+```ts
 export const App = () => {
         const online = useOnline()
-        console.log(online)
-        return online
+        return <span>{online ? '📶' : '❌'}</span>
+}
+```
+
+export const App = () => {
+        const online = useOnline()
+        return <span>{online ? '📶' : '❌'}</span>
 }
 
 <App />
 
 ## create useOnline
 
-import { useSyncEvent } from 'reev/react'
+```ts
+import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
-export const useOnline = () => {
-        const getSnapShot = () => navigator.onLine
-        const self = useSyncEvent({
-                mount(callback) {
-                        window.addEventListener('online', callback)
-                        window.addEventListener('offline', callback)
-                },
-                clean(callback) {
-                        window.removeEventListener('online', callback)
-                        window.removeEventListener('offline', callback)
-                },
-        })
-        return useSyncExternalStore(self.sync, getSnapShot, () => void 0)
+export const self = event({
+        mount(callback) {
+                window.addEventListener('online', callback)
+                window.addEventListener('offline', callback)
+        },
+        clean(callback) {
+                window.removeEventListener('online', callback)
+                window.removeEventListener('offline', callback)
+        },
+})
+
+export const getSnapShot = () => navigator.onLine
+export const getServerSnapshot = () => false
+export const subscribe = (callback) => {
+        self.mount(callback)
+        return () => self.clean(callback)
 }
 
-```ts
-import { useSyncEvent } from 'reev/react'
-import { useSyncExternalStore } from 'react'
-
 export const useOnline = () => {
-        const getSnapShot = () => navigator.onLine
-        const self = useSyncEvent({
-                mount(callback) {
-                        window.addEventListener('online', callback)
-                        window.addEventListener('offline', callback)
-                },
-                clean(callback) {
-                        window.removeEventListener('online', callback)
-                        window.removeEventListener('offline', callback)
-                },
-        })
-        return useSyncExternalStore(self.sync, getSnapShot, () => void 0)
+        return useSyncExternalStore(subscribe, getSnapShot, getServerSnapshot)
 }
 ```
+
+import { event } from 'reev'
+import { useSyncExternalStore } from 'react'
+
+export const self = event({
+        mount(callback) {
+                window.addEventListener('online', callback)
+                window.addEventListener('offline', callback)
+        },
+        clean(callback) {
+                window.removeEventListener('online', callback)
+                window.removeEventListener('offline', callback)
+        },
+})
+
+export const getSnapShot = () => navigator.onLine
+export const getServerSnapshot = () => false
+export const subscribe = (callback) => {
+        self.mount(callback)
+        return () => self.clean(callback)
+}
+
+export const useOnline = () => {
+        return useSyncExternalStore(subscribe, getSnapShot, getServerSnapshot)
+}

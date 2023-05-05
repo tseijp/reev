@@ -1,37 +1,83 @@
-import { useSyncEvent } from 'reev/react'
-import { useSyncExternalStore } from 'react'
+# How to use useOrientation
 
-export const useOrientation = () => {
-        const self = useSyncEvent({
-                mount(callback) {
-                        window.addEventListener('deviceorientation', callback)
-                },
-                clean() {
-                        window.removeEventListener(
-                                'deviceorientation',
-                                callback
-                        )
-                },
-        })
-        return useSyncExternalStore(self.sync)
-}
+## create your app
 
 ```ts
-import { useSyncEvent } from 'reev/react'
-import { useSyncExternalStore } from 'react'
-
-export const useOrientation = () => {
-        const self = useSyncEvent({
-                mount(callback) {
-                        window.addEventListener('deviceorientation', callback)
-                },
-                clean() {
-                        window.removeEventListener(
-                                'deviceorientation',
-                                callback
-                        )
-                },
-        })
-        return useSyncExternalStore(self.sync)
+export const App = () => {
+        const e = useOrientation()
+        return (
+                <span>
+                        alpha: {e?.alpha} beta: {e?.beta} gamma: {e?.gamma}
+                </span>
+        )
 }
 ```
+
+export const App = () => {
+        const e = useOrientation()
+        return (
+                <span>
+                        alpha: {e?.alpha} beta: {e?.beta} gamma: {e?.gamma}
+                </span>
+        )
+}
+
+<App />
+
+## create orientation
+
+```ts
+import { event } from 'reev'
+import { useSyncExternalStore } from 'react'
+
+export const self = event({
+        mount(callback) {
+                window.addEventListener('deviceorientation', self.callback)
+        },
+        clean() {
+                window.removeEventListener('deviceorientation', self.callback)
+        },
+        callback(e) {
+                self.event = e
+        },
+})
+
+export const getSnapshot = () => self.event
+export const getServerSnapshot = () => undefined
+export const subscribe = (callback) => {
+        self({ callback })
+        self.mount()
+        return () => self.clean()
+}
+
+export const useOrientation = () => {
+        return useSyncExternalStore()
+}
+```
+
+import { event } from 'reev'
+import { useSyncExternalStore } from 'react'
+
+export const self = event({
+        mount(callback) {
+                window.addEventListener('deviceorientation', self.callback)
+        },
+        clean() {
+                window.removeEventListener('deviceorientation', self.callback)
+        },
+        callback(e) {
+                self.event = e
+        },
+})
+
+export const getSnapshot = () => self.event
+export const getServerSnapshot = () => undefined
+export const subscribe = (callback) => {
+        self({ callback })
+        self.mount()
+        return () => self.clean()
+}
+
+export const useOrientation = () => {
+        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+}

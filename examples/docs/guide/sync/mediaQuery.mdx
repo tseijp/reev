@@ -1,0 +1,69 @@
+# How to use media query
+
+## create your app
+
+```ts
+export const App = () => {
+        const matches = useMediaQuery()
+        return <span>{matches ? '👀' : '❌'}</span>
+}
+```
+
+export const App = () => {
+        const matches = useMediaQuery()
+        return <span>{matches}</span>
+}
+
+<App />
+
+## create useMediaQUery
+
+```ts
+import { useEvent } from 'reev/react'
+import { useSyncExternalStore, useCallback } from 'react'
+
+export function useMediaQuery(query = '') {
+        const self = useEvent({
+                mount(callback) {
+                        self.mql.addEventListener('change', callback)
+                },
+                clean(callback) {
+                        self.mql.removeEventListener('change', callback)
+                },
+        })
+        const subscribe = useCallback(
+                (callback) => {
+                        self.mql = window.matchMedia(query)
+                        self.mount(callback)
+                        return () => self.clean(callback)
+                },
+                [query]
+        )
+        return useSyncExternalStore(subscribe, (self) => self.mql?.matches)
+}
+```
+
+import { useEvent } from 'reev/react'
+import { useSyncExternalStore, useCallback } from 'react'
+
+export function useMediaQuery(query = '') {
+        const self = useEvent({
+                mql: {},
+                mount(callback) {
+                        self.mql.addEventListener('change', callback)
+                },
+                clean(callback) {
+                        self.mql.removeEventListener('change', callback)
+                },
+        })
+        const subscribe = useCallback(
+                (callback) => {
+                        self.mql = window.matchMedia(query)
+                        console.log(window.matchMedia(query))
+                        self.mount(callback)
+                        return () => self.clean(callback)
+                },
+                [query]
+        )
+        return useSyncExternalStore(subscribe, () => self.mql?.matches)
+}

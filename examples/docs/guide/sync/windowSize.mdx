@@ -1,0 +1,83 @@
+# How to use window size
+
+## create your app
+
+```ts
+export const App = () => {
+        const [width, height] = useWindowSize()
+        return `${width} / ${height}`
+}
+```
+
+export const App = () => {
+        const [width, height] = useWindowSize()
+        return `${width} / ${height}`
+}
+
+<App />
+
+## create useWindowSize
+
+```ts
+import { event } from 'reev'
+import { useSyncExternalStore } from 'react'
+
+export const self = event({
+        size: [0, 0],
+        mount() {
+                window.addEventListener('resize', self.callback)
+        },
+        clean() {
+                window.removeEventListener('resize', self.callback)
+        },
+        callback() {
+                self.size = [window.innerWidth, window.innerHeight]
+        },
+})
+
+export const getSnapshot = () => self.size
+
+export const getServerSnapshot = () => [0, 0]
+
+export const subscribe = (callback) => {
+        self({ callback })
+        self.callback()
+        self.mount()
+        return () => self.clean()
+}
+
+export const useWindowSize = () => {
+        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+}
+```
+
+import { event } from 'reev'
+import { useSyncExternalStore } from 'react'
+
+export const self = event({
+        size: [0, 0],
+        mount() {
+                window.addEventListener('resize', self.callback)
+        },
+        clean() {
+                window.removeEventListener('resize', self.callback)
+        },
+        callback() {
+                self.size = [window.innerWidth, window.innerHeight]
+        },
+})
+
+export const getSnapshot = () => self.size
+
+export const getServerSnapshot = () => [0, 0]
+
+export const subscribe = (callback) => {
+        self({ callback })
+        self.callback()
+        self.mount()
+        return () => self.clean()
+}
+
+export const useWindowSize = () => {
+        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+}

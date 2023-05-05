@@ -1,35 +1,99 @@
-import { useSyncEvent } from 'reev/react'
-import { useSyncExternalStore } from 'react'
+# How to use geolocation
 
-const getSnapShot = async () => await navigator.geolocation.getCurrentPosition()
-
-export const useGeolocation = () => {
-        const self = useSyncEvent({
-                mount(cb) {
-                        self.watchId = navigator.geolocation.watchPosition(cb)
-                },
-                clean(callback) {
-                        navigator.geolocation.clearWatch(self.watchId)
-                },
-        })
-        return useSyncExternalStore(self.sync, getSnapShot)
-}
+## create your app
 
 ```ts
-import { useSyncEvent } from 'reev/react'
-import { useSyncExternalStore } from 'react'
-
-const getSnapShot = async () => await navigator.geolocation.getCurrentPosition()
-
-export const useGeolocation = () => {
-        const self = useSyncEvent({
-                mount(cb) {
-                        self.watchId = navigator.geolocation.watchPosition(cb)
-                },
-                clean(callback) {
-                        navigator.geolocation.clearWatch(self.watchId)
-                },
-        })
-        return useSyncExternalStore(self.sync, getSnapShot)
+export const App = () => {
+        const { coords = {} } = useGeolocation()
+        return (
+                <div>
+                        <div>latitude: {coords.longitude}</div>
+                        <div>longitude: {coords.longitude}</div>
+                        <div>accuracy: {coords.accuracy}</div>
+                </div>
+        )
 }
 ```
+
+export const App = () => {
+        const { coords = {} } = useGeolocation()
+        return (
+                <div>
+                        <div>latitude: {coords.longitude}</div>
+                        <div>longitude: {coords.longitude}</div>
+                        <div>accuracy: {coords.accuracy}</div>
+                </div>
+        )
+}
+
+<App />
+
+## create useGeolocation
+
+```ts
+import { event } from 'reev'
+import { useSyncExternalStore } from 'react'
+
+export const self = event({
+        geo: {},
+        mount(cb) {
+                self.callback()
+                self.watchId = navigator.geolocation.watchPosition(
+                        self.callback
+                )
+        },
+        clean(callback) {
+                navigator.geolocation.clearWatch(self.watchId)
+        },
+})
+
+export const getSnapShot = () => self.geo
+export const getServerSnapShot = () => void 0
+
+export const subscribe = (callback) => {
+        self('callback', () => {
+                navigator.geolocation.getCurrentPosition((geo) => {
+                        self.geo = geo
+                        callback()
+                })
+        }).mount()
+        return () => self.clean()
+}
+
+export const useGeolocation = () =>
+        useSyncExternalStore(subscribe, getSnapShot, getServerSnapShot)
+```
+
+import { event } from 'reev'
+import { useSyncExternalStore } from 'react'
+
+export const self = event({
+        geo: {},
+        mount(cb) {
+                self.callback()
+                self.watchId = navigator.geolocation.watchPosition(
+                        self.callback
+                )
+        },
+        clean(callback) {
+                navigator.geolocation.clearWatch(self.watchId)
+        },
+})
+
+export const getSnapShot = () => self.geo
+
+export const getServerSnapshot = () => void 0
+
+export const subscribe = (callback) => {
+        self('callback', () => {
+                navigator.geolocation.getCurrentPosition((geo) => {
+                        self.geo = geo
+                        callback()
+                })
+        }).mount()
+        return () => self.clean()
+}
+
+export const useGeolocation = () => {
+        return useSyncExternalStore(subscribe, getSnapShot, getServerSnapshot)
+}
