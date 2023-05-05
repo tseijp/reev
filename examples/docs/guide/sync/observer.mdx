@@ -5,7 +5,6 @@
 ```ts
 export const App = () => {
         const [entry, ref] = useObserver()
-        console.log(entry)
         return (
                 <div ref={ref}>
                         <div>{entry?.isIntersecting ? '👀' : '😑'}</div>
@@ -16,7 +15,6 @@ export const App = () => {
 
 export const App = () => {
         const [entry, ref] = useObserver()
-        console.log(entry)
         return (
                 <div ref={ref}>
                         <div>{entry?.isIntersecting ? '👀' : '😑'}</div>
@@ -26,13 +24,13 @@ export const App = () => {
 
 <App />
 
-## create useObserver
+## create observer event
 
 ```ts
 import { useRefEvent } from 'reev/react'
 import { useSyncExternalStore, useCallback } from 'react'
 
-export const useObserver = () => {
+export const useObserverEvent = () => {
         const self = useRefEvent({
                 mount(target) {
                         self.observer = new IntersectionObserver(self.callback)
@@ -42,23 +40,19 @@ export const useObserver = () => {
                         delete self.observer
                 },
                 callback(entries) {
-                        self.entry = entries.find(
-                                (entry) => entry.target === self.target
-                        )
+                        self.snapshot = entries.find((entry) => {
+                                return entry.target === self.target
+                        })
                 },
         })
-        const subscribe = useCallback(
-                (callback) => void self({ callback }),
-                [self]
-        )
-        return [useSyncExternalStore(subscribe, () => self.entry), self.ref]
+        return self
 }
 ```
 
 import { useRefEvent } from 'reev/react'
 import { useSyncExternalStore, useCallback } from 'react'
 
-export const useObserver = () => {
+export const useObserverEvent = () => {
         const self = useRefEvent({
                 mount(target) {
                         self.observer = new IntersectionObserver(self.callback)
@@ -68,14 +62,34 @@ export const useObserver = () => {
                         delete self.observer
                 },
                 callback(entries) {
-                        self.entry = entries.find(
-                                (entry) => entry.target === self.target
-                        )
+                        self.snapshot = entries.find((entry) => {
+                                return entry.target === self.target
+                        })
                 },
         })
-        const subscribe = useCallback(
-                (callback) => void self({ callback }),
-                [self]
+        return self
+}
+
+## create useObserver hook
+
+```ts
+export const useObserver = () => {
+        const self = useObserverEvent()
+        const store = useSyncExternalStore(
+                useCallback((callback) => void self({ callback }), [self]),
+                () => self.snapshot,
+                () => void 0
         )
-        return [useSyncExternalStore(subscribe, () => self.entry), self.ref]
+        return [store, self.ref]
+}
+```
+
+export const useObserver = () => {
+        const self = useObserverEvent()
+        const store = useSyncExternalStore(
+                useCallback((callback) => void self({ callback }), [self]),
+                () => self.snapshot,
+                () => void 0
+        )
+        return [store, self.ref]
 }

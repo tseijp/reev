@@ -28,72 +28,78 @@ export const App = () => {
 
 <App />
 
-## create useGeolocation
+## create geolocation event
 
 ```ts
 import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
-        geo: {},
-        mount(cb) {
-                self.callback()
-                self.watchId = navigator.geolocation.watchPosition(
-                        self.callback
-                )
+        snapshot: {},
+        callback() {
+                navigator.geolocation.getCurrentPosition((position) => {
+                        self.snapshot = position
+                        self._callback()
+                })
         },
-        clean(callback) {
-                navigator.geolocation.clearWatch(self.watchId)
+        mount() {
+                self.callback()
+                self.id = navigator.geolocation.watchPosition(self.callback)
+        },
+        clean() {
+                if (self.id) navigator.geolocation.clearWatch(self.id)
         },
 })
-
-export const getSnapShot = () => self.geo
-export const getServerSnapShot = () => void 0
-
-export const subscribe = (callback) => {
-        self('callback', () => {
-                navigator.geolocation.getCurrentPosition((geo) => {
-                        self.geo = geo
-                        callback()
-                })
-        }).mount()
-        return () => self.clean()
-}
-
-export const useGeolocation = () =>
-        useSyncExternalStore(subscribe, getSnapShot, getServerSnapShot)
 ```
 
 import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
-        geo: {},
-        mount(cb) {
-                self.callback()
-                self.watchId = navigator.geolocation.watchPosition(
-                        self.callback
-                )
+        snapshot: {},
+        callback() {
+                navigator.geolocation.getCurrentPosition((position) => {
+                        self.snapshot = position
+                        self._callback()
+                })
         },
-        clean(callback) {
-                navigator.geolocation.clearWatch(self.watchId)
+        mount() {
+                self.callback()
+                self.id = navigator.geolocation.watchPosition(self.callback)
+        },
+        clean() {
+                if (self.id) navigator.geolocation.clearWatch(self.id)
         },
 })
 
-export const getSnapShot = () => self.geo
+## create useGeolocation hook
 
-export const getServerSnapshot = () => void 0
-
+```ts
 export const subscribe = (callback) => {
-        self('callback', () => {
-                navigator.geolocation.getCurrentPosition((geo) => {
-                        self.geo = geo
-                        callback()
-                })
-        }).mount()
+        self._callback = callback
+        self.mount()
         return () => self.clean()
 }
 
+export const getSnapshot = () => self.snapshot
+
+export const getServerSnapshot = () => ({})
+
 export const useGeolocation = () => {
-        return useSyncExternalStore(subscribe, getSnapShot, getServerSnapshot)
+        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+}
+```
+
+export const subscribe = (callback) => {
+        self._callback = callback
+        self.mount()
+        return () => self.clean()
+}
+
+export const getSnapshot = () => self.snapshot
+
+export const getServerSnapshot = () => ({})
+
+export const useGeolocation = () => {
+        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 }

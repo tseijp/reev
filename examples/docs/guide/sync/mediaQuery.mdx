@@ -4,25 +4,25 @@
 
 ```ts
 export const App = () => {
-        const matches = useMediaQuery()
+        const matches = useMediaQuery('(min-width: 400px)')
         return <span>{matches ? '👀' : '❌'}</span>
 }
 ```
 
 export const App = () => {
-        const matches = useMediaQuery()
+        const matches = useMediaQuery('(min-width: 400px)')
         return <span>{matches}</span>
 }
 
 <App />
 
-## create useMediaQUery
+## create media query event
 
 ```ts
 import { useEvent } from 'reev/react'
 import { useSyncExternalStore, useCallback } from 'react'
 
-export function useMediaQuery(query = '') {
+export const useMediaQueryEvent = () => {
         const self = useEvent({
                 mount(callback) {
                         self.mql.addEventListener('change', callback)
@@ -31,24 +31,15 @@ export function useMediaQuery(query = '') {
                         self.mql.removeEventListener('change', callback)
                 },
         })
-        const subscribe = useCallback(
-                (callback) => {
-                        self.mql = window.matchMedia(query)
-                        self.mount(callback)
-                        return () => self.clean(callback)
-                },
-                [query]
-        )
-        return useSyncExternalStore(subscribe, (self) => self.mql?.matches)
+        return self
 }
 ```
 
 import { useEvent } from 'reev/react'
 import { useSyncExternalStore, useCallback } from 'react'
 
-export function useMediaQuery(query = '') {
+export const useMediaQueryEvent = () => {
         const self = useEvent({
-                mql: {},
                 mount(callback) {
                         self.mql.addEventListener('change', callback)
                 },
@@ -56,14 +47,42 @@ export function useMediaQuery(query = '') {
                         self.mql.removeEventListener('change', callback)
                 },
         })
-        const subscribe = useCallback(
-                (callback) => {
-                        self.mql = window.matchMedia(query)
-                        console.log(window.matchMedia(query))
-                        self.mount(callback)
-                        return () => self.clean(callback)
-                },
-                [query]
+        return self
+}
+
+## create useMediaQuery hook
+
+```ts
+export const useMediaQuery = (query = '') => {
+        const self = useMediaQueryEvent()
+        return useSyncExternalStore(
+                useCallback(
+                        (callback) => {
+                                self.mql = window.matchMedia(query)
+                                self.mount(callback)
+                                return () => self.clean(callback)
+                        },
+                        [query]
+                ),
+                () => self.mql?.matches,
+                () => void 0
         )
-        return useSyncExternalStore(subscribe, () => self.mql?.matches)
+}
+```
+
+export const useMediaQuery = (query = '') => {
+        const self = useMediaQueryEvent()
+        return useSyncExternalStore(
+                useCallback(
+                        (callback) => {
+                                self.mql = window.matchMedia(query)
+                                self.mount(callback)
+                                return () => self.clean(callback)
+                        },
+                        [query]
+                ),
+                () => self.mql?.matches,
+                () => void 0
+        )
+
 }

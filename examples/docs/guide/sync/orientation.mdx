@@ -24,7 +24,7 @@ export const App = () => {
 
 <App />
 
-## create orientation
+## create orientation event
 
 ```ts
 import { event } from 'reev'
@@ -38,21 +38,9 @@ export const self = event({
                 window.removeEventListener('deviceorientation', self.callback)
         },
         callback(e) {
-                self.event = e
+                self.snapshot = e
         },
 })
-
-export const getSnapshot = () => self.event
-export const getServerSnapshot = () => undefined
-export const subscribe = (callback) => {
-        self({ callback })
-        self.mount()
-        return () => self.clean()
-}
-
-export const useOrientation = () => {
-        return useSyncExternalStore()
-}
 ```
 
 import { event } from 'reev'
@@ -66,17 +54,37 @@ export const self = event({
                 window.removeEventListener('deviceorientation', self.callback)
         },
         callback(e) {
-                self.event = e
+                self.snapshot = e
         },
 })
 
-export const getSnapshot = () => self.event
-export const getServerSnapshot = () => undefined
+## create useOrientation hook
+
+```ts
 export const subscribe = (callback) => {
         self({ callback })
         self.mount()
         return () => self.clean()
 }
+
+export const getSnapshot = () => self.snapshot
+
+export const getServerSnapshot = () => void 0
+
+export const useOrientation = () => {
+        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+}
+```
+
+export const subscribe = (callback) => {
+        self({ callback })
+        self.mount()
+        return () => self.clean()
+}
+
+export const getSnapshot = () => self.snapshot
+
+export const getServerSnapshot = () => void 0
 
 export const useOrientation = () => {
         return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)

@@ -16,14 +16,14 @@ export const App = () => {
 
 <App />
 
-## create useWindowSize
+## create window size event
 
 ```ts
 import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
-        size: [0, 0],
+        snapshot: [0, 0],
         mount() {
                 window.addEventListener('resize', self.callback)
         },
@@ -31,31 +31,16 @@ export const self = event({
                 window.removeEventListener('resize', self.callback)
         },
         callback() {
-                self.size = [window.innerWidth, window.innerHeight]
+                self.snapshot = [window.innerWidth, window.innerHeight]
         },
 })
-
-export const getSnapshot = () => self.size
-
-export const getServerSnapshot = () => [0, 0]
-
-export const subscribe = (callback) => {
-        self({ callback })
-        self.callback()
-        self.mount()
-        return () => self.clean()
-}
-
-export const useWindowSize = () => {
-        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
-}
 ```
 
 import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
-        size: [0, 0],
+        snapshot: [0, 0],
         mount() {
                 window.addEventListener('resize', self.callback)
         },
@@ -63,13 +48,28 @@ export const self = event({
                 window.removeEventListener('resize', self.callback)
         },
         callback() {
-                self.size = [window.innerWidth, window.innerHeight]
+                self.snapshot = [window.innerWidth, window.innerHeight]
         },
 })
 
-export const getSnapshot = () => self.size
+## create useWindowSize hook
+
+```ts
+export const subscribe = (callback) => {
+        self({ callback })
+        self.callback()
+        self.mount()
+        return () => self.clean()
+}
+
+export const getSnapshot = () => self.snapshot
 
 export const getServerSnapshot = () => [0, 0]
+
+export const useWindowSize = () => {
+        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+}
+```
 
 export const subscribe = (callback) => {
         self({ callback })
@@ -77,6 +77,10 @@ export const subscribe = (callback) => {
         self.mount()
         return () => self.clean()
 }
+
+export const getSnapshot = () => self.snapshot
+
+export const getServerSnapshot = () => [0, 0]
 
 export const useWindowSize = () => {
         return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)

@@ -33,7 +33,7 @@ export const self = event({
         },
 })
 
-export const getSnapShot = () => navigator.onLine
+export const getSnapshot = () => navigator.onLine
 export const getServerSnapshot = () => false
 export const subscribe = (callback) => {
         self.mount(callback)
@@ -41,7 +41,7 @@ export const subscribe = (callback) => {
 }
 
 export const useOnline = () => {
-        return useSyncExternalStore(subscribe, getSnapShot, getServerSnapshot)
+        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 }
 ```
 
@@ -49,23 +49,25 @@ import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
-        mount(callback) {
-                window.addEventListener('online', callback)
-                window.addEventListener('offline', callback)
+        mount() {
+                window.addEventListener('online', self.callback)
+                window.addEventListener('offline', self.callback)
         },
-        clean(callback) {
-                window.removeEventListener('online', callback)
-                window.removeEventListener('offline', callback)
+        clean() {
+                window.removeEventListener('online', self.callback)
+                window.removeEventListener('offline', self.callback)
         },
 })
 
-export const getSnapShot = () => navigator.onLine
-export const getServerSnapshot = () => false
 export const subscribe = (callback) => {
-        self.mount(callback)
-        return () => self.clean(callback)
+        self({ callback }).mount()
+        return () => self.clean()
 }
 
+export const getSnapshot = () => navigator.onLine
+
+export const getServerSnapshot = () => false
+
 export const useOnline = () => {
-        return useSyncExternalStore(subscribe, getSnapShot, getServerSnapshot)
+        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 }

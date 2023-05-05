@@ -16,14 +16,20 @@ export const App = () => {
 
 <App />
 
-## create useBattery
+## create battery event
 
 ```ts
 import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
+        async callback() {
+                const snapshot = await navigator.getBattery()
+                self.snapshot = snapshot
+                self._callback()
+        },
         mount() {
+                self.callback()
                 navigator.getBattery().then((target) => {
                         self.target = target
                         target.addEventListener('levelchange', self.callback)
@@ -35,28 +41,19 @@ export const self = event({
                 self.target.removeEventListener('chargingchange', self.callback)
         },
 })
-
-export const getSnapShot = () => self.battery
-
-export const subscribe = (callback) => {
-        self('callback', async () => {
-                const battery = await navigator.getBattery()
-                self.battery = battery
-                callback()
-        })
-        self.callback()
-        self.mount()
-        return () => self.clean()
-}
-
-export const useBattery = () => useSyncExternalStore(subscribe, getSnapShot)
 ```
 
 import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
+        async callback() {
+                const snapshot = await navigator.getBattery()
+                self.snapshot = snapshot
+                self._callback()
+        },
         mount() {
+                self.callback()
                 navigator.getBattery().then((target) => {
                         self.target = target
                         target.addEventListener('levelchange', self.callback)
@@ -69,17 +66,34 @@ export const self = event({
         },
 })
 
-export const getSnapShot = () => self.battery
+## create useBattery hook
 
+```ts
 export const subscribe = (callback) => {
-        self('callback', async () => {
-                const battery = await navigator.getBattery()
-                self.battery = battery
-                callback()
-        })
-        self.callback()
+        self._callback = callback
         self.mount()
         return () => self.clean()
 }
 
-export const useBattery = () => useSyncExternalStore(subscribe, getSnapShot)
+export const getSnapshot = () => self.snapshot
+
+export const getServerSnapshot = () => void 0
+
+export const useBattery = () => {
+        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+}
+```
+
+export const subscribe = (callback) => {
+        self._callback = callback
+        self.mount()
+        return () => self.clean()
+}
+
+export const getSnapshot = () => self.snapshot
+
+export const getServerSnapshot = () => void 0
+
+export const useBattery = () => {
+        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+}

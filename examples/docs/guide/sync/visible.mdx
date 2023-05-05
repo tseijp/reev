@@ -16,7 +16,7 @@ export const App = () => {
 
 <App />
 
-## create useVisible
+## create visible event
 
 ```ts
 import { event } from 'reev'
@@ -30,12 +30,30 @@ export const self = event({
                 document.removeEventListener('visibilitychange', callback)
         },
 })
+```
 
+import { event } from 'reev'
+import { useSyncExternalStore } from 'react'
+
+export const self = event({
+        mount() {
+                document.addEventListener('visibilitychange', self.callback)
+        },
+        clean() {
+                document.removeEventListener('visibilitychange', self.callback)
+        },
+})
+
+## create useVisible hook
+
+```ts
 export const subscribe = (callback) => {
-        self.mount(callback)
+        self({ callback }).mount()
         return () => self.clean()
 }
+
 export const getSnapshot = () => document.visibilityState === 'visible'
+
 export const getServerSnapshot = () => false
 
 export const useVisible = () => {
@@ -43,23 +61,13 @@ export const useVisible = () => {
 }
 ```
 
-import { event } from 'reev'
-import { useSyncExternalStore } from 'react'
-
-export const self = event({
-        mount(callback) {
-                document.addEventListener('visibilitychange', callback)
-        },
-        clean(callback) {
-                document.removeEventListener('visibilitychange', callback)
-        },
-})
-
 export const subscribe = (callback) => {
-        self.mount(callback)
+        self({ callback }).mount()
         return () => self.clean()
 }
+
 export const getSnapshot = () => document.visibilityState === 'visible'
+
 export const getServerSnapshot = () => false
 
 export const useVisible = () => {
