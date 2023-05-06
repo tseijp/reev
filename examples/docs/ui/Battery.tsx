@@ -54,6 +54,7 @@ export const Model = (props: BatteryProps) => {
                                         opacity={0.5}
                                         metalness={0.7}
                                         roughness={0.2}
+                                        side={THREE.BackSide}
                                 />
                         </Cylinder>
                         {/* Battery outer shell */}
@@ -124,7 +125,7 @@ export const Battery = (props: BatteryProps) => {
                         }}
                 >
                         <ambientLight />
-                        <pointLight position={[10, 10, 10]} />
+                        <pointLight position={[0, 10, 10]} />
                         <PresentationControls
                                 snap
                                 config={{ mass: 4, tension: 500 }}
