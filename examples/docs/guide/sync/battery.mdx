@@ -3,15 +3,20 @@
 ## create your app
 
 ```ts
-export const App = () => {
-        const battery = useBattery()
-        return <span>{battery?.level}</span>
-}
-```
+import { Battery } from ''
 
 export const App = () => {
         const battery = useBattery()
-        return <span>{battery?.level}</span>
+        return <Battery level={battery?.level} charging={battery?.charging} />
+}
+```
+
+import { Battery } from '@site/ui/Battery'
+import { useState } from 'react'
+export const App = () => {
+        const battery = useBattery()
+        return <Battery level={battery?.level} charging={battery?.charging} />
+
 }
 
 <App />
@@ -19,28 +24,7 @@ export const App = () => {
 ## create battery event
 
 ```ts
-import { event } from 'reev'
-import { useSyncExternalStore } from 'react'
 
-export const self = event({
-        async change() {
-                const snapshot = await navigator.getBattery()
-                self.snapshot = snapshot
-                self.callback()
-        },
-        mount() {
-                self.change()
-                navigator.getBattery().then((target) => {
-                        self.target = target
-                        target.addEventListener('levelchange', self.change)
-                        target.addEventListener('chargingchange', self.change)
-                })
-        },
-        clean() {
-                self.target.removeEventListener('levelchange', self.change)
-                self.target.removeEventListener('chargingchange', self.change)
-        },
-})
 ```
 
 import { event } from 'reev'
@@ -48,8 +32,13 @@ import { useSyncExternalStore } from 'react'
 
 export const self = event({
         async change() {
-                const snapshot = await navigator.getBattery()
-                self.snapshot = snapshot
+                const battery = await navigator.getBattery()
+                self.snapshot = {
+                        level: battery.level,
+                        charging: battery.charging,
+                        chargingTime: battery.chargingTime,
+                        dischargingTime: battery.dischargingTime,
+                }
                 self.callback()
         },
         mount() {
