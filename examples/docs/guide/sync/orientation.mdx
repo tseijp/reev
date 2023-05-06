@@ -6,9 +6,11 @@
 export const App = () => {
         const e = useOrientation()
         return (
-                <span>
-                        alpha: {e?.alpha} beta: {e?.beta} gamma: {e?.gamma}
-                </span>
+                <div>
+                        <div>alpha: {e?.alpha}</div>
+                        <div>beta: {e?.beta}</div>
+                        <div>gamma: {e?.gamma}</div>
+                </div>
         )
 }
 ```
@@ -16,9 +18,11 @@ export const App = () => {
 export const App = () => {
         const e = useOrientation()
         return (
-                <span>
-                        alpha: {e?.alpha} beta: {e?.beta} gamma: {e?.gamma}
-                </span>
+                <div>
+                        <div>alpha: {e?.alpha}</div>
+                        <div>beta: {e?.beta}</div>
+                        <div>gamma: {e?.gamma}</div>
+                </div>
         )
 }
 
@@ -31,7 +35,7 @@ import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
-        mount(callback) {
+        mount() {
                 window.addEventListener('deviceorientation', self.callback)
         },
         clean() {
@@ -47,7 +51,7 @@ import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
-        mount(callback) {
+        mount() {
                 window.addEventListener('deviceorientation', self.callback)
         },
         clean() {
@@ -62,14 +66,13 @@ export const self = event({
 
 ```ts
 export const subscribe = (callback) => {
-        self({ callback })
-        self.mount()
+        self({ callback }).mount()
         return () => self.clean()
 }
 
 export const getSnapshot = () => self.snapshot
 
-export const getServerSnapshot = () => void 0
+export const getServerSnapshot = () => ({})
 
 export const useOrientation = () => {
         return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
@@ -77,14 +80,13 @@ export const useOrientation = () => {
 ```
 
 export const subscribe = (callback) => {
-        self({ callback })
-        self.mount()
+        self({ callback }).mount()
         return () => self.clean()
 }
 
 export const getSnapshot = () => self.snapshot
 
-export const getServerSnapshot = () => void 0
+export const getServerSnapshot = () => ({})
 
 export const useOrientation = () => {
         return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)

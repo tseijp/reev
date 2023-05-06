@@ -23,8 +23,8 @@ import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
-        snapshot: [0, 0],
         mount() {
+                self.callback()
                 window.addEventListener('resize', self.callback)
         },
         clean() {
@@ -40,8 +40,8 @@ import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
-        snapshot: [0, 0],
         mount() {
+                self.callback()
                 window.addEventListener('resize', self.callback)
         },
         clean() {
@@ -56,13 +56,11 @@ export const self = event({
 
 ```ts
 export const subscribe = (callback) => {
-        self({ callback })
-        self.callback()
-        self.mount()
+        self({ callback }).mount()
         return () => self.clean()
 }
 
-export const getSnapshot = () => self.snapshot
+export const getSnapshot = () => self.snapshot || [0, 0]
 
 export const getServerSnapshot = () => [0, 0]
 
@@ -72,13 +70,11 @@ export const useWindowSize = () => {
 ```
 
 export const subscribe = (callback) => {
-        self({ callback })
-        self.callback()
-        self.mount()
+        self({ callback }).mount()
         return () => self.clean()
 }
 
-export const getSnapshot = () => self.snapshot
+export const getSnapshot = () => self.snapshot || [0, 0]
 
 export const getServerSnapshot = () => [0, 0]
 

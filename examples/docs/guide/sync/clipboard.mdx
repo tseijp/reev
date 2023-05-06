@@ -29,23 +29,22 @@ import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
-        snapshot: '',
-        callback() {
+        change() {
                 navigator.clipboard.readText().then((clipText) => {
                         self.snapshot = clipText
-                        self._callback()
+                        self.callback()
                 })
         },
         mount() {
-                self.callback()
-                window.addEventListener('copy', self.callback)
-                window.addEventListener('cut', self.callback)
-                window.addEventListener('paste', self.callback)
+                self.change()
+                window.addEventListener('copy', self.change)
+                window.addEventListener('cut', self.change)
+                window.addEventListener('paste', self.change)
         },
         clean() {
-                window.removeEventListener('copy', self.callback)
-                window.removeEventListener('cut', self.callback)
-                window.removeEventListener('paste', self.callback)
+                window.removeEventListener('copy', self.change)
+                window.removeEventListener('cut', self.change)
+                window.removeEventListener('paste', self.change)
         },
 })
 ```
@@ -54,23 +53,22 @@ import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
-        snapshot: '',
-        callback() {
+        change() {
                 navigator.clipboard.readText().then((clipText) => {
                         self.snapshot = clipText
-                        self._callback()
+                        self.callback()
                 })
         },
         mount() {
-                self.callback()
-                window.addEventListener('copy', self.callback)
-                window.addEventListener('cut', self.callback)
-                window.addEventListener('paste', self.callback)
+                self.change()
+                window.addEventListener('copy', self.change)
+                window.addEventListener('cut', self.change)
+                window.addEventListener('paste', self.change)
         },
         clean() {
-                window.removeEventListener('copy', self.callback)
-                window.removeEventListener('cut', self.callback)
-                window.removeEventListener('paste', self.callback)
+                window.removeEventListener('copy', self.change)
+                window.removeEventListener('cut', self.change)
+                window.removeEventListener('paste', self.change)
         },
 })
 
@@ -78,8 +76,7 @@ export const self = event({
 
 ```ts
 export const subscribe = (callback) => {
-        self._callback = callback
-        self.mount()
+        self({ callback }).mount()
         return () => self.clean()
 }
 
@@ -93,8 +90,7 @@ export const useClipboard = () => {
 ```
 
 export const subscribe = (callback) => {
-        self._callback = callback
-        self.mount()
+        self({ callback }).mount()
         return () => self.clean()
 }
 

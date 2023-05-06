@@ -23,22 +23,22 @@ import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
-        async callback() {
+        async change() {
                 const snapshot = await navigator.getBattery()
                 self.snapshot = snapshot
-                self._callback()
+                self.callback()
         },
         mount() {
-                self.callback()
+                self.change()
                 navigator.getBattery().then((target) => {
                         self.target = target
-                        target.addEventListener('levelchange', self.callback)
-                        target.addEventListener('chargingchange', self.callback)
+                        target.addEventListener('levelchange', self.change)
+                        target.addEventListener('chargingchange', self.change)
                 })
         },
         clean() {
-                self.target.removeEventListener('levelchange', self.callback)
-                self.target.removeEventListener('chargingchange', self.callback)
+                self.target.removeEventListener('levelchange', self.change)
+                self.target.removeEventListener('chargingchange', self.change)
         },
 })
 ```
@@ -47,22 +47,22 @@ import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
-        async callback() {
+        async change() {
                 const snapshot = await navigator.getBattery()
                 self.snapshot = snapshot
-                self._callback()
+                self.callback()
         },
         mount() {
-                self.callback()
+                self.change()
                 navigator.getBattery().then((target) => {
                         self.target = target
-                        target.addEventListener('levelchange', self.callback)
-                        target.addEventListener('chargingchange', self.callback)
+                        target.addEventListener('levelchange', self.change)
+                        target.addEventListener('chargingchange', self.change)
                 })
         },
         clean() {
-                self.target.removeEventListener('levelchange', self.callback)
-                self.target.removeEventListener('chargingchange', self.callback)
+                self.target.removeEventListener('levelchange', self.change)
+                self.target.removeEventListener('chargingchange', self.change)
         },
 })
 
@@ -70,8 +70,7 @@ export const self = event({
 
 ```ts
 export const subscribe = (callback) => {
-        self._callback = callback
-        self.mount()
+        self({ callback }).mount()
         return () => self.clean()
 }
 
@@ -85,8 +84,7 @@ export const useBattery = () => {
 ```
 
 export const subscribe = (callback) => {
-        self._callback = callback
-        self.mount()
+        self({ callback }).mount()
         return () => self.clean()
 }
 

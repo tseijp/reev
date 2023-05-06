@@ -7,7 +7,7 @@ export const App = () => {
         const { coords = {} } = useGeolocation()
         return (
                 <div>
-                        <div>latitude: {coords.longitude}</div>
+                        <div>latitude: {coords.latitude}</div>
                         <div>longitude: {coords.longitude}</div>
                         <div>accuracy: {coords.accuracy}</div>
                 </div>
@@ -19,7 +19,7 @@ export const App = () => {
         const { coords = {} } = useGeolocation()
         return (
                 <div>
-                        <div>latitude: {coords.longitude}</div>
+                        <div>latitude: {coords.latitude}</div>
                         <div>longitude: {coords.longitude}</div>
                         <div>accuracy: {coords.accuracy}</div>
                 </div>
@@ -35,16 +35,15 @@ import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
-        snapshot: {},
-        callback() {
+        change() {
                 navigator.geolocation.getCurrentPosition((position) => {
                         self.snapshot = position
-                        self._callback()
+                        self.callback()
                 })
         },
         mount() {
-                self.callback()
-                self.id = navigator.geolocation.watchPosition(self.callback)
+                self.change()
+                self.id = navigator.geolocation.watchPosition(self.change)
         },
         clean() {
                 if (self.id) navigator.geolocation.clearWatch(self.id)
@@ -56,16 +55,15 @@ import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
-        snapshot: {},
-        callback() {
+        change() {
                 navigator.geolocation.getCurrentPosition((position) => {
                         self.snapshot = position
-                        self._callback()
+                        self.callback()
                 })
         },
         mount() {
-                self.callback()
-                self.id = navigator.geolocation.watchPosition(self.callback)
+                self.change()
+                self.id = navigator.geolocation.watchPosition(self.change)
         },
         clean() {
                 if (self.id) navigator.geolocation.clearWatch(self.id)
@@ -76,12 +74,11 @@ export const self = event({
 
 ```ts
 export const subscribe = (callback) => {
-        self._callback = callback
-        self.mount()
+        self({ callback }).mount()
         return () => self.clean()
 }
 
-export const getSnapshot = () => self.snapshot
+export const getSnapshot = () => self.snapshot || {}
 
 export const getServerSnapshot = () => ({})
 
@@ -91,12 +88,11 @@ export const useGeolocation = () => {
 ```
 
 export const subscribe = (callback) => {
-        self._callback = callback
-        self.mount()
+        self({ callback }).mount()
         return () => self.clean()
 }
 
-export const getSnapshot = () => self.snapshot
+export const getSnapshot = () => self.snapshot || {}
 
 export const getServerSnapshot = () => ({})
 

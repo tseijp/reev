@@ -16,33 +16,22 @@ export const App = () => {
 
 <App />
 
-## create useOnline
+## create online event
 
 ```ts
 import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
-        mount(callback) {
-                window.addEventListener('online', callback)
-                window.addEventListener('offline', callback)
+        mount() {
+                window.addEventListener('online', self.callback)
+                window.addEventListener('offline', self.callback)
         },
-        clean(callback) {
-                window.removeEventListener('online', callback)
-                window.removeEventListener('offline', callback)
+        clean() {
+                window.removeEventListener('online', self.callback)
+                window.removeEventListener('offline', self.callback)
         },
 })
-
-export const getSnapshot = () => navigator.onLine
-export const getServerSnapshot = () => false
-export const subscribe = (callback) => {
-        self.mount(callback)
-        return () => self.clean(callback)
-}
-
-export const useOnline = () => {
-        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
-}
 ```
 
 import { event } from 'reev'
@@ -59,6 +48,9 @@ export const self = event({
         },
 })
 
+## create useOnline hook
+
+```ts
 export const subscribe = (callback) => {
         self({ callback }).mount()
         return () => self.clean()
@@ -66,7 +58,21 @@ export const subscribe = (callback) => {
 
 export const getSnapshot = () => navigator.onLine
 
-export const getServerSnapshot = () => false
+export const getServerSnapshot = () => true
+
+export const useOnline = () => {
+        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+}
+```
+
+export const subscribe = (callback) => {
+        self({ callback }).mount()
+        return () => self.clean()
+}
+
+export const getSnapshot = () => navigator.onLine
+
+export const getServerSnapshot = () => true
 
 export const useOnline = () => {
         return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)

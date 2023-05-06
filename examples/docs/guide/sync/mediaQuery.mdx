@@ -24,11 +24,11 @@ import { useSyncExternalStore, useCallback } from 'react'
 
 export const useMediaQueryEvent = () => {
         const self = useEvent({
-                mount(callback) {
-                        self.mql.addEventListener('change', callback)
+                mount() {
+                        self.mql.addEventListener('change', self.callback)
                 },
-                clean(callback) {
-                        self.mql.removeEventListener('change', callback)
+                clean() {
+                        self.mql.removeEventListener('change', self.callback)
                 },
         })
         return self
@@ -40,11 +40,11 @@ import { useSyncExternalStore, useCallback } from 'react'
 
 export const useMediaQueryEvent = () => {
         const self = useEvent({
-                mount(callback) {
-                        self.mql.addEventListener('change', callback)
+                mount() {
+                        self.mql.addEventListener('change', self.callback)
                 },
-                clean(callback) {
-                        self.mql.removeEventListener('change', callback)
+                clean() {
+                        self.mql.removeEventListener('change', self.callback)
                 },
         })
         return self
@@ -59,8 +59,8 @@ export const useMediaQuery = (query = '') => {
                 useCallback(
                         (callback) => {
                                 self.mql = window.matchMedia(query)
-                                self.mount(callback)
-                                return () => self.clean(callback)
+                                self({ callback }).mount()
+                                return () => self.clean()
                         },
                         [query]
                 ),
@@ -76,13 +76,12 @@ export const useMediaQuery = (query = '') => {
                 useCallback(
                         (callback) => {
                                 self.mql = window.matchMedia(query)
-                                self.mount(callback)
-                                return () => self.clean(callback)
+                                self({ callback }).mount()
+                                return () => self.clean()
                         },
                         [query]
                 ),
                 () => self.mql?.matches,
                 () => void 0
         )
-
 }
