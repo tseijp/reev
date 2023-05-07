@@ -1,29 +1,25 @@
-# How to use useOrientation
+# How to use orientation
 
 ## create your app
 
 ```ts
 export const App = () => {
-        const e = useOrientation()
+        const orientation = useOrientation()
         return (
                 <div>
-                        <div>alpha: {e?.alpha}</div>
-                        <div>beta: {e?.beta}</div>
-                        <div>gamma: {e?.gamma}</div>
+                        <div>alpha: {orientation?.alpha}</div>
+                        <div>beta: {orientation?.beta}</div>
+                        <div>gamma: {orientation?.gamma}</div>
                 </div>
         )
 }
 ```
 
+import { Mobile } from '@site/ui/Mobile'
+
 export const App = () => {
-        const e = useOrientation()
-        return (
-                <div>
-                        <div>alpha: {e?.alpha}</div>
-                        <div>beta: {e?.beta}</div>
-                        <div>gamma: {e?.gamma}</div>
-                </div>
-        )
+        const { alpha, beta, gamma } = useOrientation()
+        return <Mobile alpha={alpha} beta={beta} gamma={gamma} />
 }
 
 <App />
@@ -35,6 +31,7 @@ import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
+        snapshot: {},
         mount() {
                 window.addEventListener('deviceorientation', self.callback)
         },
@@ -51,6 +48,7 @@ import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
 export const self = event({
+        snapshot: {},
         mount() {
                 window.addEventListener('deviceorientation', self.callback)
         },
@@ -72,7 +70,7 @@ export const subscribe = (callback) => {
 
 export const getSnapshot = () => self.snapshot
 
-export const getServerSnapshot = () => ({})
+export const getServerSnapshot = () => self.snapshot
 
 export const useOrientation = () => {
         return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
@@ -86,7 +84,7 @@ export const subscribe = (callback) => {
 
 export const getSnapshot = () => self.snapshot
 
-export const getServerSnapshot = () => ({})
+export const getServerSnapshot = () => self.snapshot
 
 export const useOrientation = () => {
         return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
