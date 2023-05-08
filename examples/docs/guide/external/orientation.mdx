@@ -3,22 +3,18 @@
 ## create your app
 
 ```ts
+import { Mobile } from '@site/ui/Mobile'
+
 export const App = () => {
-        const orientation = useOrientation()
-        return (
-                <div>
-                        <div>alpha: {orientation?.alpha}</div>
-                        <div>beta: {orientation?.beta}</div>
-                        <div>gamma: {orientation?.gamma}</div>
-                </div>
-        )
+        const [alpha, beta, gamma] = useOrientation()
+        return <Mobile alpha={alpha} beta={beta} gamma={gamma} />
 }
 ```
 
 import { Mobile } from '@site/ui/Mobile'
 
 export const App = () => {
-        const { alpha, beta, gamma } = useOrientation()
+        const [alpha, beta, gamma] = useOrientation()
         return <Mobile alpha={alpha} beta={beta} gamma={gamma} />
 }
 
@@ -30,16 +26,34 @@ export const App = () => {
 import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
+export const addV = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]]
+export const subV = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]]
+
 export const self = event({
-        snapshot: {},
+        snapshot: [0, 0, 0],
+        reset() {
+                self.active = self._active = false
+                self.value = self._value = [0, 0, 0]
+                self.delta = self.offset = [0, 0, 0]
+        },
         mount() {
+                self.reset()
+                self.active = true
                 window.addEventListener('deviceorientation', self.callback)
         },
         clean() {
+                self.reset()
                 window.removeEventListener('deviceorientation', self.callback)
         },
         callback(e) {
-                self.snapshot = e
+                self._active = self.active
+                self._value = self.value
+                self.value = [90 - (e.alpha ?? 90), e.beta ?? 0, e.gamma ?? 0]
+                if (self._active) {
+                        self.delta = subV(self.value, self._value)
+                        self.offset = addV(self.offset, self.delta)
+                }
+                self.snapshot = self.offset
         },
 })
 ```
@@ -47,16 +61,34 @@ export const self = event({
 import { event } from 'reev'
 import { useSyncExternalStore } from 'react'
 
+export const addV = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]]
+export const subV = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]]
+
 export const self = event({
-        snapshot: {},
+        snapshot: [0, 0, 0],
+        reset() {
+                self.active = self._active = false
+                self.value = self._value = [0, 0, 0]
+                self.delta = self.offset = [0, 0, 0]
+        },
         mount() {
+                self.reset()
+                self.active = true
                 window.addEventListener('deviceorientation', self.callback)
         },
         clean() {
+                self.reset()
                 window.removeEventListener('deviceorientation', self.callback)
         },
         callback(e) {
-                self.snapshot = e
+                self._active = self.active
+                self._value = self.value
+                self.value = [90 - (e.alpha ?? 90), e.beta ?? 0, e.gamma ?? 0]
+                if (self._active) {
+                        self.delta = subV(self.value, self._value)
+                        self.offset = addV(self.offset, self.delta)
+                }
+                self.snapshot = self.offset
         },
 })
 

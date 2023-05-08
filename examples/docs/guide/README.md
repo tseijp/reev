@@ -1,5 +1,5 @@
 # Guide
 
-## [external store](./external)
+## [external store](./external/)
 
-## [gesture event](./gesture)
+## [gesture event](./gesture/)
