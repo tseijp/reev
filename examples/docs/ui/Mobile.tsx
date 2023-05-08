@@ -16,7 +16,7 @@ export const Model = ({ alpha = 0, beta = 0, gamma = 0 }: Props) => {
                         rotation={[
                                 THREE.MathUtils.degToRad(beta),
                                 THREE.MathUtils.degToRad(gamma),
-                                THREE.MathUtils.degToRad(-alpha),
+                                THREE.MathUtils.degToRad(alpha),
                         ]}
                 >
                         {/* CameraModuleGlass */}
