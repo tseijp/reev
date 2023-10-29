@@ -3,11 +3,15 @@
 ## create your app
 
 ```ts
+import { useWindowSize } from 'reev/react'
+
 export const App = () => {
         const [width, height] = useWindowSize()
         return `${width} / ${height}`
 }
 ```
+
+import { useWindowSize } from 'reev/react'
 
 export const App = () => {
         const [width, height] = useWindowSize()
@@ -15,69 +19,3 @@ export const App = () => {
 }
 
 <App />
-
-## create window size event
-
-```ts
-import { event } from 'reev'
-import { useSyncExternalStore } from 'react'
-
-export const self = event({
-        mount() {
-                self.callback()
-                window.addEventListener('resize', self.callback)
-        },
-        clean() {
-                window.removeEventListener('resize', self.callback)
-        },
-        callback() {
-                self.snapshot = [window.innerWidth, window.innerHeight]
-        },
-})
-```
-
-import { event } from 'reev'
-import { useSyncExternalStore } from 'react'
-
-export const self = event({
-        mount() {
-                self.callback()
-                window.addEventListener('resize', self.callback)
-        },
-        clean() {
-                window.removeEventListener('resize', self.callback)
-        },
-        callback() {
-                self.snapshot = [window.innerWidth, window.innerHeight]
-        },
-})
-
-## create useWindowSize hook
-
-```ts
-export const subscribe = (callback) => {
-        self({ callback }).mount()
-        return () => self.clean()
-}
-
-export const getSnapshot = () => self.snapshot || [0, 0]
-
-export const getServerSnapshot = () => [0, 0]
-
-export const useWindowSize = () => {
-        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
-}
-```
-
-export const subscribe = (callback) => {
-        self({ callback }).mount()
-        return () => self.clean()
-}
-
-export const getSnapshot = () => self.snapshot || [0, 0]
-
-export const getServerSnapshot = () => [0, 0]
-
-export const useWindowSize = () => {
-        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
-}

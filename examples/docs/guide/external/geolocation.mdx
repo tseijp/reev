@@ -3,6 +3,8 @@
 ## create your app
 
 ```ts
+import { useGeolocation } from 'reev/react'
+
 export const App = () => {
         const { coords = {} } = useGeolocation()
         return (
@@ -14,6 +16,8 @@ export const App = () => {
         )
 }
 ```
+
+import { useGeolocation } from 'reev/react'
 
 export const App = () => {
         const { coords = {} } = useGeolocation()
@@ -27,75 +31,3 @@ export const App = () => {
 }
 
 <App />
-
-## create geolocation event
-
-```ts
-import { event } from 'reev'
-import { useSyncExternalStore } from 'react'
-
-export const self = event({
-        change() {
-                navigator.geolocation.getCurrentPosition((position) => {
-                        self.snapshot = position
-                        self.callback()
-                })
-        },
-        mount() {
-                self.change()
-                self.id = navigator.geolocation.watchPosition(self.change)
-        },
-        clean() {
-                if (self.id) navigator.geolocation.clearWatch(self.id)
-        },
-})
-```
-
-import { event } from 'reev'
-import { useSyncExternalStore } from 'react'
-
-export const self = event({
-        change() {
-                navigator.geolocation.getCurrentPosition((position) => {
-                        self.snapshot = position
-                        self.callback()
-                })
-        },
-        mount() {
-                self.change()
-                self.id = navigator.geolocation.watchPosition(self.change)
-        },
-        clean() {
-                if (self.id) navigator.geolocation.clearWatch(self.id)
-        },
-})
-
-## create useGeolocation hook
-
-```ts
-export const subscribe = (callback) => {
-        self({ callback }).mount()
-        return () => self.clean()
-}
-
-export const getSnapshot = () => self.snapshot || {}
-
-export const getServerSnapshot = () => ({})
-
-export const useGeolocation = () => {
-        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
-}
-```
-
-export const subscribe = (callback) => {
-        self({ callback }).mount()
-        return () => self.clean()
-}
-
-export const getSnapshot = () => self.snapshot || {}
-
-export const getServerSnapshot = () => ({})
-
-export const useGeolocation = () => {
-        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
-}

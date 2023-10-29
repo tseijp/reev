@@ -7,6 +7,7 @@ and returns to its initial position on release.
 
 ```tsx
 import { gsap } from 'gsap'
+import { useDrag } from 'reev/react'
 
 export const App = () => {
         const { ref } = useDrag(({ active, target, movement: [x, y] }) => {
@@ -17,6 +18,7 @@ export const App = () => {
 ```
 
 import { gsap } from 'gsap'
+import { useDrag } from 'reev/react'
 
 export const App = () => {
         const { ref } = useDrag(({ active, target, movement: [x, y] }) => {
@@ -27,9 +29,14 @@ export const App = () => {
 
 <App />
 
+## with offset
+
 You can use offset instead of movement
 
 ```jsx
+import { gsap } from 'gsap'
+import { useDrag } from 'reev/react'
+
 export const App2 = () => {
         const { ref } = useDrag(({ active, target, offset: [x, y] }) => {
                 gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
@@ -47,95 +54,42 @@ export const App2 = () => {
 
 <App2 />
 
-## create useDrag
+### with Drag component
 
-```ts
-import { useRefEvent } from 'reev/react'
+You can use shorthands Drag component
 
-export const addV = (a, b) => [a[0] + b[0], a[1] + b[1]]
-export const subV = (a, b) => [a[0] - b[0], a[1] - b[1]]
+```jsx
+import { gsap } from 'gsap'
+import { Drag } from 'reev/react'
 
-export const useDrag = (on) => {
-        const self = useRefEvent({
-                on,
-                move(e) {
-                        self._active = self.active
-                        self._value = self.value
-                        self.value = [e.clientX, e.clientY]
-                        if (self._active) {
-                                self.delta = subV(self.value, self._value)
-                                self.offset = addV(self.offset, self.delta)
-                                self.movement = addV(self.movement, self.delta)
-                        }
-                        self.on(self)
-                },
-                down(e) {
-                        self._active = !(self.active = true)
-                        self.target.setPointerCapture(e.pointerId)
-                        self.on(self)
-                },
-                up(e) {
-                        self._active = !(self.active = false)
-                        self.delta = self.movement = [0, 0]
-                        self.target.releasePointerCapture(e.pointerId)
-                        self.on(self)
-                },
-                mount(target) {
-                        self.active = self._active = false
-                        self.value = self._value = [0, 0]
-                        self.delta = self.offset = self.movement = [0, 0]
-                        target.addEventListener('pointermove', self.move)
-                        target.addEventListener('pointerdown', self.down)
-                        target.addEventListener('pointerleave', self.up)
-                        target.addEventListener('pointerup', self.up)
-                },
-        })
-        return self
+export const onDrag = ({ active, target, movement: [x, y] }) => {
+        gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
+}
+
+export const App3 = () => {
+        return (
+                <Drag onDrag={onDrag}>
+                        {({ ref }) => <span ref={ref} style={style} />}
+                </Drag>
+        )
 }
 ```
 
-import { useRefEvent } from 'reev/react'
+import { Drag } from 'reev/react'
 
-export const addV = (a, b) => [a[0] + b[0], a[1] + b[1]]
-export const subV = (a, b) => [a[0] - b[0], a[1] - b[1]]
-
-export const useDrag = (on) => {
-        const self = useRefEvent({
-                on,
-                move(e) {
-                        self._active = self.active
-                        self._value = self.value
-                        self.value = [e.clientX, e.clientY]
-                        if (self._active) {
-                                self.delta = subV(self.value, self._value)
-                                self.offset = addV(self.offset, self.delta)
-                                self.movement = addV(self.movement, self.delta)
-                        }
-                        self.on(self)
-                },
-                down(e) {
-                        self._active = !(self.active = true)
-                        self.target.setPointerCapture(e.pointerId)
-                        self.on(self)
-                },
-                up(e) {
-                        self._active = !(self.active = false)
-                        self.delta = self.movement = [0, 0]
-                        self.target.releasePointerCapture(e.pointerId)
-                        self.on(self)
-                },
-                mount(target) {
-                        self.active = self._active = false
-                        self.value = self._value = [0, 0]
-                        self.delta = self.offset = self.movement = [0, 0]
-                        target.addEventListener('pointermove', self.move)
-                        target.addEventListener('pointerdown', self.down)
-                        target.addEventListener('pointerleave', self.up)
-                        target.addEventListener('pointerup', self.up)
-                },
-        })
-        return self
+export const onDrag = ({ active, target, movement: [x, y] }) => {
+        gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
 }
+
+export const App3 = () => {
+        return (
+                <Drag onDrag={onDrag}>
+                        {({ ref }) => <span ref={ref} style={style} />}
+                </Drag>
+        )
+}
+
+<App3 />
 
 export const style = {
         width: '80px',

@@ -5,6 +5,7 @@
 ```js
 import { gsap } from 'gsap'
 import { useState } from 'react'
+import { useDrop } from 'reev/react'
 
 export const App = () => {
         const [result, set] = useState('')
@@ -31,6 +32,7 @@ export const App = () => {
 
 import { gsap } from 'gsap'
 import { useState } from 'react'
+import { useDrop } from 'reev/react'
 
 export const App = () => {
         const [result, set] = useState('')
@@ -55,170 +57,6 @@ export const App = () => {
 }
 
 <App />
-
-## create useFile
-
-```js
-import { useRefEvent } from 'reev/react'
-
-export const useFile = (on) => {
-        const self = useRefEvent({
-                on,
-                change(e) {
-                        e.preventDefault()
-                        if (e.target instanceof HTMLInputElement) {
-                                self.blob = e.target.files[0]
-                                self.on(self)
-                        }
-                },
-                mount(target) {
-                        target.addEventListener('change', self.change)
-                },
-                clean() {
-                        self.blob = void 0
-                },
-        })
-        return self
-}
-```
-
-import { useRefEvent } from 'reev/react'
-
-export const useFile = (on) => {
-        const self = useRefEvent({
-                on,
-                change(e) {
-                        e.preventDefault()
-                        if (e.target instanceof HTMLInputElement) {
-                                self.blob = e.target.files[0]
-                                self.on(self)
-                        }
-                },
-                mount(target) {
-                        target.addEventListener('change', self.change)
-                },
-                clean() {
-                        self.blob = void 0
-                },
-        })
-        return self
-}
-
-## create useDrop
-
-```js
-export const useDrop = (on) => {
-        const self = useRefEvent({
-                on,
-                reset() {
-                        self.count = 0
-                        self.blob = void 0
-                        self.active = false
-                        self.on(self)
-                },
-                drop(e) {
-                        e.preventDefault()
-                        self.blob = e.dataTransfer.files[0]
-                        self.on(self)
-                },
-                paste(e) {
-                        e.preventDefault()
-                        self.blob = e.clipboardData.files[0]
-                        self.on(self)
-                },
-                dragenter(e) {
-                        if (++self.count <= 1) {
-                                self.active = true
-                                self.on(self)
-                        }
-                },
-                dragleave(e) {
-                        if (--self.count === 0) self.reset()
-                },
-                dragend(e) {
-                        self.reset()
-                },
-                dragover(e) {
-                        e.preventDefault()
-                },
-                mount(target) {
-                        self.count = 0
-                        window.addEventListener('drop', self.drop)
-                        window.addEventListener('paste', self.paste)
-                        window.addEventListener('dragend', self.dragend)
-                        window.addEventListener('dragover', self.dragover)
-                        window.addEventListener('dragenter', self.dragenter)
-                        window.addEventListener('dragleave', self.dragleave)
-                },
-                clean(target) {
-                        self.reset()
-                        window.removeEventListener('drop', self.drop)
-                        window.removeEventListener('paste', self.paste)
-                        window.removeEventListener('dragend', self.dragend)
-                        window.removeEventListener('dragover', self.dragover)
-                        window.removeEventListener('dragenter', self.dragenter)
-                        window.removeEventListener('dragleave', self.dragleave)
-                },
-        })
-        return self
-}
-```
-
-export const useDrop = (on) => {
-        const self = useRefEvent({
-                on,
-                reset() {
-                        self.count = 0
-                        self.blob = void 0
-                        self.active = false
-                        self.on(self)
-                },
-                drop(e) {
-                        e.preventDefault()
-                        self.blob = e.dataTransfer.files[0]
-                        self.on(self)
-                },
-                paste(e) {
-                        e.preventDefault()
-                        self.blob = e.clipboardData.files[0]
-                        self.on(self)
-                },
-                dragenter(e) {
-                        if (++self.count <= 1) {
-                                self.active = true
-                                self.on(self)
-                        }
-                },
-                dragleave(e) {
-                        if (--self.count === 0) self.reset()
-                },
-                dragend(e) {
-                        self.reset()
-                },
-                dragover(e) {
-                        e.preventDefault()
-                },
-                mount(target) {
-                        self.count = 0
-                        window.addEventListener('drop', self.drop)
-                        window.addEventListener('paste', self.paste)
-                        window.addEventListener('dragend', self.dragend)
-                        window.addEventListener('dragover', self.dragover)
-                        window.addEventListener('dragenter', self.dragenter)
-                        window.addEventListener('dragleave', self.dragleave)
-                },
-                clean(target) {
-                        self.reset()
-                        window.removeEventListener('drop', self.drop)
-                        window.removeEventListener('paste', self.paste)
-                        window.removeEventListener('dragend', self.dragend)
-                        window.removeEventListener('dragover', self.dragover)
-                        window.removeEventListener('dragenter', self.dragenter)
-                        window.removeEventListener('dragleave', self.dragleave)
-                },
-        })
-        return self
-}
 
 export const style = {
         width: '80px',

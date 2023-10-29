@@ -1,8 +1,8 @@
 ---
 marp: true
 hide_table_of_contents: true
-title: "Introduction"
-description: "Introduction"
+title: 'Introduction'
+description: 'Introduction'
 image: https://github.com/tseijp.png
 keywords: [event, hooks, react, reactjs, reactive, solid, solidjs, typescript]
 date: 2023-01-01
@@ -12,21 +12,11 @@ date: 2023-01-01
 
 <p align="center">
 
-[![ npm version ](
-    https://img.shields.io/npm/v/reev?style=flat&colorA=000&colorB=000)](
-    https://www.npmjs.com/package/reev)
-[![ downloads ](
-    https://img.shields.io/npm/dm/reev.svg?style=flat&colorA=000&colorB=000)](
-    https://www.npmtrends.com/reev)
-[![ license MIT ](
-    <https://img.shields.io/npm/l/reev?style=flat&colorA=000&colorB=000>)](
-    https://github.com/tseijp/reev)
-[![ docs available ](
-    https://img.shields.io/badge/docs-available-000.svg?style=flat&colorA=000)](
-    https://reev.tsei.jp/)
-[![ bundle size ](
-    https://img.shields.io/bundlephobia/minzip/reev?style=flat&colorA=000&colorB=000)](
-    https://bundlephobia.com/package/reev@latest)
+[![ npm version ](https://img.shields.io/npm/v/reev?style=flat&colorA=000&colorB=000)](https://www.npmjs.com/package/reev)
+[![ downloads ](https://img.shields.io/npm/dm/reev.svg?style=flat&colorA=000&colorB=000)](https://www.npmtrends.com/reev)
+[![ license MIT ](https://img.shields.io/npm/l/reev?style=flat&colorA=000&colorB=000)](https://github.com/tseijp/reev)
+[![ docs available ](https://img.shields.io/badge/docs-available-000.svg?style=flat&colorA=000)](https://reev.tsei.jp/)
+[![ bundle size ](https://img.shields.io/bundlephobia/minzip/reev?style=flat&colorA=000&colorB=000)](https://bundlephobia.com/package/reev@latest)
 
 ⛪️ reactive event state manager on the web and native via TypeScript, React, Solid and more.
 

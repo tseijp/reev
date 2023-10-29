@@ -1,3 +1,5 @@
+## once
+
 ### my created
 **/*.js
 !*.config.js
@@ -10,13 +12,14 @@
 package-lock.json
 packages/*
 !packages/core
+!packages/gesture
+!packages/reev
 
 TODO.md
 gesture.md
 
 tmp
 events
-gesture
 
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 

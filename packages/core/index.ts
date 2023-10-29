@@ -29,7 +29,7 @@ export const durable = <T extends object, Ret = unknown>(
         ret?: Ret
 ) => {
         const self = (arg: T, ...args: unknown[]) => {
-                if (typeof arg === 'string') fun(arg, ...args)
+                if (arg !== Object(arg)) fun(arg as any, ...args)
                 else for (const key in arg) fun(key, arg[key], ...args)
                 return ret ?? self
         }

@@ -3,6 +3,8 @@
 ## create your app
 
 ```ts
+import { useObserver } from 'reev/react'
+
 export const App = () => {
         const [entry, ref] = useObserver()
         return (
@@ -12,6 +14,8 @@ export const App = () => {
         )
 }
 ```
+
+import { useObserver } from 'reev/react'
 
 export const App = () => {
         const [entry, ref] = useObserver()
@@ -23,73 +27,3 @@ export const App = () => {
 }
 
 <App />
-
-## create observer event
-
-```ts
-import { useRefEvent } from 'reev/react'
-import { useSyncExternalStore, useCallback } from 'react'
-
-export const useObserverEvent = () => {
-        const self = useRefEvent({
-                mount(target) {
-                        self.observer = new IntersectionObserver(self.callback)
-                        self.observer.observe(target)
-                },
-                clean(target) {
-                        delete self.observer
-                },
-                callback(entries) {
-                        self.snapshot = entries.find((entry) => {
-                                return entry.target === self.target
-                        })
-                },
-        })
-        return self
-}
-```
-
-import { useRefEvent } from 'reev/react'
-import { useSyncExternalStore, useCallback } from 'react'
-
-export const useObserverEvent = () => {
-        const self = useRefEvent({
-                mount(target) {
-                        self.observer = new IntersectionObserver(self.callback)
-                        self.observer.observe(target)
-                },
-                clean(target) {
-                        delete self.observer
-                },
-                callback(entries) {
-                        self.snapshot = entries.find((entry) => {
-                                return entry.target === self.target
-                        })
-                },
-        })
-        return self
-}
-
-## create useObserver hook
-
-```ts
-export const useObserver = () => {
-        const self = useObserverEvent()
-        const store = useSyncExternalStore(
-                useCallback((callback) => void self({ callback }), [self]),
-                () => self.snapshot,
-                () => void 0
-        )
-        return [store, self.ref]
-}
-```
-
-export const useObserver = () => {
-        const self = useObserverEvent()
-        const store = useSyncExternalStore(
-                useCallback((callback) => void self({ callback }), [self]),
-                () => self.snapshot,
-                () => void 0
-        )
-        return [store, self.ref]
-}
