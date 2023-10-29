@@ -1,62 +1,62 @@
-# How to create wheel gesture
+# How to create pinch gesture
 
 ## create your app
 
 ```js
 import { gsap } from 'gsap'
-import { useWheel } from 'reev/react'
+import { usePinch } from 'reev/react'
 
 export const App = () => {
-        const { ref } = useWheel(({ active, target, movement: [x, y] }) => {
-                gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
+        const { ref } = usePinch(({ active, target, movement: [x, y] }) => {
+                gsap.to(target, { scale: active ? 1.2 : 1, x, y })
         })
         return <span ref={ref} style={style} />
 }
 ```
 
 import { gsap } from 'gsap'
-import { useWheel } from 'reev/react'
+import { usePinch } from 'reev/react'
 
 export const App = () => {
-        const { ref } = useWheel(({ active, target, movement: [x, y] }) => {
-                gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
+        const { ref } = usePinch(({ active, target, movement: [x, y] }) => {
+                gsap.to(target, { scale: active ? 1.2 : 1, x, y })
         })
         return <span ref={ref} style={style} />
 }
 
 <App />
 
-### with Wheel component
+### with Pinch component
 
-You can use shorthands Wheel component
+You can use shorthands Pinch component
 
 ```jsx
-import { Wheel } from 'reev/react'
+import { Pinch } from 'reev/react'
 
-export const onWheel = ({ active, target, movement: [x, y] }) => {
+export const onPinch = ({ active, target, movement: [x, y] }) => {
         gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
 }
 
 export const App2 = () => {
         return (
-                <Wheel onWheel={onWheel}>
+                <Pinch onPinch={onPinch}>
                         {({ ref }) => <span ref={ref} style={style} />}
-                </Wheel>
+                </Pinch>
         )
 }
 ```
 
-import { Wheel } from 'reev/react'
+import { Pinch } from 'reev/react'
 
-export const onWheel = ({ active, target, movement: [x, y] }) => {
+export const onPinch = ({ active, target, movement: [x, y] }) => {
         gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
 }
 
 export const App2 = () => {
         return (
-                <Wheel onWheel={onWheel}>
+                <Pinch onPinch={onPinch}>
                         {({ ref }) => <span ref={ref} style={style} />}
-                </Wheel>
+                </Pinch>
         )
 }
 

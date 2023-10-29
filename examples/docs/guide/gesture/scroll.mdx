@@ -26,6 +26,42 @@ export const App = () => {
 
 <App />
 
+### with Scroll component
+
+You can use shorthands Scroll component
+
+```jsx
+import { Scroll } from 'reev/react'
+
+export const onScroll = ({ active, target, movement: [x, y] }) => {
+        gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
+}
+
+export const App2 = () => {
+        return (
+                <Scroll onScroll={onScroll}>
+                        {({ ref }) => <span ref={ref} style={style} />}
+                </Scroll>
+        )
+}
+```
+
+import { Scroll } from 'reev/react'
+
+export const onScroll = ({ active, target, movement: [x, y] }) => {
+        gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
+}
+
+export const App2 = () => {
+        return (
+                <Scroll onScroll={onScroll}>
+                        {({ ref }) => <span ref={ref} style={style} />}
+                </Scroll>
+        )
+}
+
+<App2 />
+
 export const style = {
         width: '80px',
         height: '80px',

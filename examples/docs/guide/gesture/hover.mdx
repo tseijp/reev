@@ -26,6 +26,42 @@ export const App = () => {
 
 <App />
 
+### with Hover component
+
+You can use shorthands Hover component
+
+```jsx
+import { Hover } from 'reev/react'
+
+export const onHover = ({ active, target, movement: [x, y] }) => {
+        gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
+}
+
+export const App2 = () => {
+        return (
+                <Hover onHover={onHover}>
+                        {({ ref }) => <span ref={ref} style={style} />}
+                </Hover>
+        )
+}
+```
+
+import { Hover } from 'reev/react'
+
+export const onHover = ({ active, target, movement: [x, y] }) => {
+        gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
+}
+
+export const App2 = () => {
+        return (
+                <Hover onHover={onHover}>
+                        {({ ref }) => <span ref={ref} style={style} />}
+                </Hover>
+        )
+}
+
+<App2 />
+
 export const style = {
         width: '80px',
         height: '80px',

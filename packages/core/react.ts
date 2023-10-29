@@ -28,8 +28,8 @@ export const useRefEvent = <T extends object>(...args: MutableArgs<T>) => {
                         ...memo,
                         ref: (el: Element) => {
                                 if (el) {
-                                        self.mount((self.target = el))
-                                } else self.clean(null)
+                                        self.mount?.((self.target = el))
+                                } else self.clean?.(null)
                         },
                 }) as RefEvent<T>
                 return self

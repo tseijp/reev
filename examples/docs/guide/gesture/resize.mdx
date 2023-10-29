@@ -1,0 +1,58 @@
+# How to create resize event
+
+## create your app
+
+```tsx
+
+```
+
+import { gsap } from 'gsap'
+import { useDrag } from 'reev/react'
+
+export const App = () => {
+        return ''
+}
+
+<App />
+
+### with Resize component
+
+You can use shorthands Resize component
+
+```jsx
+import { Resize } from 'reev/react'
+
+export const App2 = () => {
+        return (
+                <Resize onKey={console.log}>
+                        {({ ref }) => <span ref={ref} style={style} />}
+                </Resize>
+        )
+}
+```
+
+import { Resize } from 'reev/react'
+
+export const App2 = () => {
+        return (
+                <Resize onKey={console.log}>
+                        {({ ref }) => <span ref={ref} style={style} />}
+                </Resize>
+        )
+}
+
+<App2 />
+
+export const style = {
+        width: '80px',
+        height: '80px',
+        cursor: 'grab',
+        userSelect: 'none',
+        touchAction: 'none',
+        margin: '80px auto',
+        display: 'flex',
+        borderRadius: '8px',
+        transform: 'translate(-50%, -50%)',
+        background: 'linear-gradient(145deg, #e65fa2, #ff70c1)',
+        boxShadow: '5px 5px 20px #b1b2ad -5px -5px 20px #fff',
+}

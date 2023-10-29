@@ -1,7 +1,6 @@
 import * as React from 'react'
 // @ts-ignore
 import { RigidBody } from '@react-three/rapier'
-import { useRefEvent } from 'reev/react'
 import type { GroupProps } from '@react-three/fiber'
 
 const px = (i = 0, l = 10) => -i / l - 1 / 2 / l + 1 / 2
@@ -12,14 +11,9 @@ const sy = (i = 0, l = 10) => i / l
 const sz = (i = 0, l = 10) => (i + 1) / l
 
 export const Cella = (props) => {
-        const self = useRefEvent({
-                mount(target) {
-                        console.log(target)
-                },
-        })
         return (
                 <RigidBody>
-                        <CellaImpl ref={self.ref} {...props} />
+                        <CellaImpl {...props} />
                 </RigidBody>
         )
 }

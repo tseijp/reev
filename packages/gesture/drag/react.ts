@@ -11,11 +11,12 @@ export const useDrag = <El extends Element = Element>(arg: DragArg<El>) => {
 
 export default useDrag
 
-export interface DragProps extends DragState {
-        children(self: DragState): JSX.Element
+export interface DragProps<El extends Element = Element>
+        extends Partial<DragState<El>> {
+        children(self: DragState<El>): JSX.Element
 }
 
-export const Drag = (props: DragProps) => {
+export const Drag = <El extends Element = Element>(props: DragProps<El>) => {
         const { children, ...other } = props
         return children(useDrag(other))
 }

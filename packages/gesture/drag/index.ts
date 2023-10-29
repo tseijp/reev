@@ -72,7 +72,6 @@ export const dragEvent = <El extends Element = Element>(
 
         const onMount = (target: El) => {
                 self.target = target
-                initValues()
                 const { start, move, end, up } = EVENT_FOR_DRAG[self.device]
                 target.addEventListener(start, self.onDragStart)
                 target.addEventListener(move, self.onDragging)
