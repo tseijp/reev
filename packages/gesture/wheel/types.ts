@@ -24,4 +24,6 @@ export interface WheelState<El extends Element = Element> {
         tick?: () => void
 }
 
-export type WheelConfig = Partial<WheelState> | WheelState['onWheel']
+export type WheelConfig<El extends Element = Element> =
+        | Partial<WheelState<El>>
+        | WheelState<El>['onWheel']
