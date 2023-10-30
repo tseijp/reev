@@ -1,22 +1,23 @@
-# How to use orientation
+# How to use Orient
 
 ## create your app
 
 ```ts
 import { Mobile } from '@site/ui/Mobile'
-import { useOrientation } from 'reev/react'
+import { useOrient } from 'reev/react'
 
 export const App = () => {
-        const [alpha, beta, gamma] = useOrientation()
+        const { alpha, beta, gamma } = useOrient()
         return <Mobile alpha={alpha} beta={beta} gamma={gamma} />
 }
 ```
 
 import { Mobile } from '@site/ui/Mobile'
-import { useOrientation } from 'reev/react'
+import { useOrient } from 'reev/react'
 
 export const App = () => {
-        const [alpha, beta, gamma] = useOrientation()
+        const { offset } = useOrient()
+        const [alpha, beta, gamma] = offset
         return <Mobile alpha={alpha} beta={beta} gamma={gamma} />
 }
 

@@ -6,7 +6,7 @@
 import { useWindowSize } from 'reev/react'
 
 export const App = () => {
-        const [width, height] = useWindowSize()
+        const { width, height } = useWindowSize()
         return `${width} / ${height}`
 }
 ```
@@ -14,7 +14,7 @@ export const App = () => {
 import { useWindowSize } from 'reev/react'
 
 export const App = () => {
-        const [width, height] = useWindowSize()
+        const { width, height } = useWindowSize()
         return `${width} / ${height}`
 }
 

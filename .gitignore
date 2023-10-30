@@ -12,6 +12,7 @@
 package-lock.json
 packages/*
 !packages/core
+!packages/external
 !packages/gesture
 !packages/reev
 

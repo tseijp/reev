@@ -1,12 +1,12 @@
-# How to use online state
+# How to use online
 
 ## create your app
 
 ```ts
-import { online } from 'reev/react'
+import { useOnline } from 'reev/react'
 
 export const App = () => {
-        const online = useOnline()
+        const { online } = useOnline()
         return <span>{online ? '📶' : '❌'}</span>
 }
 ```
@@ -14,7 +14,7 @@ export const App = () => {
 import { useOnline } from 'reev/react'
 
 export const App = () => {
-        const online = useOnline()
+        const { online } = useOnline()
         return <span>{online ? '📶' : '❌'}</span>
 }
 

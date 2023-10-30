@@ -6,7 +6,7 @@
 import { useGeolocation } from 'reev/react'
 
 export const App = () => {
-        const { coords = {} } = useGeolocation()
+        const { geolocation: coords = {} } = useGeolocation()
         return (
                 <div>
                         <div>latitude: {coords.latitude}</div>

@@ -7,8 +7,8 @@ import { Battery } from '@site/ui/Battery'
 import { useBattery } from 'reev/react'
 
 export const App = () => {
-        const battery = useBattery()
-        return <Battery level={battery?.level} charging={battery?.charging} />
+        const { level, charging } = useBattery()
+        return <Battery level={level} charging={charging} />
 }
 ```
 
@@ -16,8 +16,8 @@ import { Battery } from '@site/ui/Battery'
 import { useBattery } from 'reev/react'
 
 export const App = () => {
-        const battery = useBattery()
-        return <Battery level={battery?.level} charging={battery?.charging} />
+        const { level, charging } = useBattery()
+        return <Battery level={level} charging={charging} />
 }
 
 <App />
