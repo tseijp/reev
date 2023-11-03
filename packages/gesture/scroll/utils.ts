@@ -1,17 +1,7 @@
 import { vec2, Vec2 } from '../utils'
 
-const LINE_HEIGHT = 40
-
-const PAGE_HEIGHT = 800
-
-export const scrollValues = (event: any, out: Vec2): Vec2 => {
-        let { deltaX, deltaY, deltaMode } = event
-        if (deltaMode === 1) {
-                deltaX *= LINE_HEIGHT
-                deltaY *= LINE_HEIGHT
-        } else if (deltaMode === 2) {
-                deltaX *= PAGE_HEIGHT
-                deltaY *= PAGE_HEIGHT
-        }
-        return vec2(deltaX, deltaY, out)
+export const scrollValues = (e: any, out = vec2()): Vec2 => {
+        const { scrollX: x, scrollLeft: xx } = e.currentTarget
+        const { scrollY: y, scrollTop: yy } = e.currentTarget
+        return vec2(x ?? xx ?? 0, y ?? yy ?? 0, out)
 }

@@ -4,7 +4,6 @@ import { ClipboardState } from './types'
 export const clipboardEvent = () => {
         const onChange = () => {
                 navigator.clipboard.readText().then((clipboard) => {
-                        console.log(clipboard)
                         self.clipboard = clipboard
                         self.snapshot = [self]
                         self.callback()

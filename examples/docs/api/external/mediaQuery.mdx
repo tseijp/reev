@@ -1,0 +1,26 @@
+# MediaQuery store
+
+## MediaQuery values
+
+| Property | default | Description |
+| :------- | :------ | :---------- |
+
+## MediaQuery events
+
+| Event name | Argument        | Description                               |
+| :--------- | :-------------- | :---------------------------------------- |
+| onChange   | MediaQueryState | Called when the media query state changes |
+| onMount    | Element         | Called when the component is mounted      |
+| onClean    | null            | Called when the component is removed      |
+
+## MediaQuery state
+
+```ts
+export interface MediaQueryState {
+        snapshot: [MediaQueryState]
+        callback(): void
+        onChange(): void
+        onMount(): void
+        onClean(): void
+}
+```

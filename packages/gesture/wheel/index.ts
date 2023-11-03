@@ -1,4 +1,4 @@
-import { vec2, addV, subV, cpV, getDevice, getClientVec2 } from '../utils'
+import { vec2, addV, cpV } from '../utils'
 import { wheelValues } from './utils'
 import { EventState, event } from '@reev/core'
 import { WheelState } from './types'
@@ -6,27 +6,30 @@ import { WheelState } from './types'
 export const wheelEvent = <El extends Element = Element>(
         config?: WheelState
 ) => {
+        const initValues = () => {
+                vec2(0, 0, self.value)
+                vec2(0, 0, self._value)
+                vec2(0, 0, self.delta)
+                vec2(0, 0, self.movement)
+        }
+
         const onWheel = () => {
                 self.isWheelStart = self.active && !self._active
                 self.isWheeling = self.active && self._active
                 self.isWheelEnd = !self.active && self._active
         }
         const onWheelStart = (e: WheelEvent) => {
+                self.event = e
                 self.active = true
                 wheelValues(e, self.delta)
                 self.onWheel(self)
         }
 
-        const onWheeling = (e: WheelEvent) => {
+        const onWheeling = (e: Event) => {
                 // register onWheelEnd
-                const id = setTimeout(self.onWheelEnd, 1000)
-                const tick = () => {
-                        self({ tick })
-                        clearTimeout(id)
-                }
-                self({ tick })
-
-                e.preventDefault()
+                const id = setTimeout(() => self.onWheelEnd(e), self.timeout)
+                self.clearTimeout()
+                self.clearTimeout = () => clearTimeout(id)
                 self.event = e
                 if (!self.active) {
                         self.onWheelStart(e)
@@ -41,22 +44,21 @@ export const wheelEvent = <El extends Element = Element>(
                 self.onWheel(self)
         }
 
-        const onWheelEnd = (_e: WheelEvent) => {
+        const onWheelEnd = (e: Event) => {
+                self.event = e
                 self.active = false
-                self.delta = self.movement = [0, 0]
+                initValues()
                 self.onWheel(self)
         }
 
         const onMount = (target: El) => {
                 self.target = target
-                // @ts-ignore
                 target.addEventListener('wheel', self.onWheeling)
         }
 
         const onClean = () => {
                 const target = self.target
                 if (!target) return
-                // @ts-ignore
                 target.removeEventListener('wheel', self.onWheeling)
         }
 
@@ -77,6 +79,8 @@ export const wheelEvent = <El extends Element = Element>(
                 movement: vec2(0, 0),
                 target: null,
                 event: null,
+                timeout: 100,
+                clearTimeout: () => {},
                 memo: {},
                 isWheelStart: false,
                 isWheeling: false,

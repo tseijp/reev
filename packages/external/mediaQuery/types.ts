@@ -1,5 +1,3 @@
-export type Vec2 = [x: number, y: number]
-
 export interface MediaQueryState {
         snapshot: [MediaQueryState]
         callback(): void

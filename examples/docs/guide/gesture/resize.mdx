@@ -3,14 +3,25 @@
 ## create your app
 
 ```tsx
+import { gsap } from 'gsap'
+import { useDrag } from 'reev/react'
+//              or from '@reev/gesture/react'
 
+export const App = () => {
+        const { ref } = useResize(console.log)
+        return <span ref={ref} style={style} />
+}
 ```
+
+import { useResize } from 'reev/react'
+//                or from '@reev/gesture/react'
 
 import { gsap } from 'gsap'
 import { useDrag } from 'reev/react'
 
 export const App = () => {
-        return ''
+        const { ref } = useResize(console.log)
+        return <span ref={ref} style={style} />
 }
 
 <App />

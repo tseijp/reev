@@ -1,4 +1,4 @@
-export type Vec2 = [x: number, y: number]
+import { Vec2 } from '../utils'
 
 export interface ScrollState<El extends Element = Element> {
         _active: boolean
@@ -14,6 +14,8 @@ export interface ScrollState<El extends Element = Element> {
         isScrollStart: boolean
         isScrolling: boolean
         isScrollEnd: boolean
+        timeout: number
+        clearTimeout(): void
         onScroll(self: ScrollState<El>): void
         onScrollStart(e: Event): void
         onScrolling(e: Event): void

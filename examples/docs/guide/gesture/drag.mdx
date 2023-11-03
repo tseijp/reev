@@ -1,4 +1,4 @@
-# How to create drag gesture
+# How to use drag gesture
 
 ## create your app
 
@@ -8,6 +8,7 @@ and returns to its initial position on release.
 ```tsx
 import { gsap } from 'gsap'
 import { useDrag } from 'reev/react'
+//              or from '@reev/gesture/react'
 
 export const App = () => {
         const { ref } = useDrag(({ active, target, movement: [x, y] }) => {
@@ -19,6 +20,7 @@ export const App = () => {
 
 import { gsap } from 'gsap'
 import { useDrag } from 'reev/react'
+//              or from '@reev/gesture/react'
 
 export const App = () => {
         const { ref } = useDrag(({ active, target, movement: [x, y] }) => {

@@ -1,5 +1,4 @@
-export type Vec2 = [x: number, y: number]
-
+import { Vec2 } from '../utils'
 export interface HoverState<El extends Element = Element> {
         _active: boolean
         active: boolean

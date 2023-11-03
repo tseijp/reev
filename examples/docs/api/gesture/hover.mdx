@@ -1,4 +1,6 @@
-# Hover state
+# Hover event
+
+## Hover values
 
 | Property | default | Description             |
 | :------- | :------ | :---------------------- |
@@ -12,7 +14,7 @@
 | movement | [0, 0]  | Movement of position    |
 | target   | null    | Target element          |
 
-# Hover events
+## Hover events
 
 | Event name   | Argument   | Description                                         |
 | :----------- | :--------- | :-------------------------------------------------- |
@@ -23,9 +25,9 @@
 | onMount      | Element    | Called when the component is mounted                |
 | onClean      | null       | Called when the component is removed                |
 
-```ts
-export type Vec2 = [x: number, y: number]
+## Hover state
 
+```ts
 export interface HoverState<El extends Element = Element> {
         _active: boolean
         active: boolean

@@ -3,17 +3,21 @@
 ## create your app
 
 ```tsx
-import { gsap } from 'gsap'
-import { useDrag } from 'reev/react'
-
-export const App = () => {}
-```
-
-import { gsap } from 'gsap'
-import { useDrag } from 'reev/react'
+import { useKey } from 'reev/react'
+//             or from '@reev/gesture/react'
 
 export const App = () => {
-        return ''
+        const { ref } = useKey(console.log)
+        return <span ref={ref} style={style} />
+}
+```
+
+import { useKey } from 'reev/react'
+//             or from '@reev/gesture/react'
+
+export const App = () => {
+        const { ref } = useKey(console.log)
+        return <span ref={ref} style={style} />
 }
 
 <App />

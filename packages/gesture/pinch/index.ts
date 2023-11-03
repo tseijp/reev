@@ -1,6 +1,8 @@
+import { EventState } from '@reev/core'
+import { pinchDevice } from './utils'
 import { PinchState } from './types'
-import { EventState, event } from '@reev/core'
-import { vec2, addV, subV, getDevice, getClientVec2, cpV } from '../utils'
+import { vec2, addV, subV, getClientVec2, cpV } from '../utils'
+import { wheelEvent } from '../wheel'
 
 export const EVENT_FOR_PINCH = {
         touch: {
@@ -26,6 +28,8 @@ export const EVENT_FOR_PINCH = {
 export const pinchEvent = <El extends Element = Element>(
         state: Partial<PinchState<El>> = {}
 ) => {
+        const self = wheelEvent() as unknown as EventState<PinchState<El>>
+
         const initValues = () => {
                 vec2(0, 0, self.value)
                 vec2(0, 0, self._value)
@@ -67,8 +71,21 @@ export const pinchEvent = <El extends Element = Element>(
                 self.onPinch(self)
         }
 
+        const onWheelStart = () => {
+                self.onPinch(self)
+        }
+
+        const onWheeling = () => {
+                self.onPinch(self)
+        }
+
+        const onWheelEnd = () => {
+                self.onPinch(self)
+        }
+
         const onMount = (target: El) => {
                 self.target = target
+                if (self.device === 'wheel') return
                 const { start, move, end, up } = EVENT_FOR_PINCH[self.device]
                 target.addEventListener(start, self.onPinchStart)
                 target.addEventListener(move, self.onPinching)
@@ -76,8 +93,9 @@ export const pinchEvent = <El extends Element = Element>(
                 target.addEventListener(up, self.onPinchEnd)
         }
 
-        const onClean = (target: El) => {
-                if (!target) return
+        const onClean = () => {
+                const target = self.target
+                if (!target || self.device === 'wheel') return
                 const { start, move, end, up } = EVENT_FOR_PINCH[self.device]
                 target.removeEventListener(start, self.onPinchStart)
                 target.removeEventListener(move, self.onPinching)
@@ -85,28 +103,34 @@ export const pinchEvent = <El extends Element = Element>(
                 target.removeEventListener(up, self.onPinchEnd)
         }
 
-        const ref = (target: El | null) => {
+        const ref = () => {
                 self(state as PinchState<El>)
-                if (target) {
-                        self.onMount(target)
-                } else self.onClean()
         }
 
-        const self = event({
+        self({
                 _active: false,
                 active: false,
-                device: getDevice(),
-                _value: vec2(0, 0),
-                value: vec2(0, 0),
-                delta: vec2(0, 0),
-                offset: vec2(0, 0),
-                movement: vec2(0, 0),
-                target: null,
-                event: null,
+                device: pinchDevice(),
+                _rotate: 0,
+                rotate: 0,
+                _size: 1,
+                size: 1,
+                _scale: vec2(1, 1),
+                scale: vec2(1, 1),
+                _value: vec2(),
+                value: vec2(),
+                delta: vec2(),
+                offset: vec2(),
+                movement: vec2(),
+                target: null as unknown as El,
+                event: null as unknown as any,
                 memo: {},
                 isPinchStart: false,
                 isPinching: false,
                 isPinchEnd: false,
+                onWheelStart,
+                onWheeling,
+                onWheelEnd,
                 onPinch,
                 onPinchStart,
                 onPinching,
@@ -114,7 +138,7 @@ export const pinchEvent = <El extends Element = Element>(
                 onMount,
                 onClean,
                 ref,
-        }) as EventState<PinchState<El>>
+        })
 
         return self
 }

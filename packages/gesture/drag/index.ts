@@ -81,8 +81,8 @@ export const dragEvent = <El extends Element = Element>(
 
         const onClean = () => {
                 const target = self.target
-                const { start, move, end, up } = EVENT_FOR_DRAG[self.device]
                 if (!target) return
+                const { start, move, end, up } = EVENT_FOR_DRAG[self.device]
                 target.removeEventListener(start, self.onDragStart)
                 target.removeEventListener(move, self.onDragging)
                 target.removeEventListener(end, self.onDragEnd)

@@ -4,7 +4,9 @@ const LINE_HEIGHT = 40
 
 const PAGE_HEIGHT = 800
 
-export const wheelValues = (event: WheelEvent, out: Vec2): Vec2 => {
+export const wheelValues = (event: Event, out: Vec2): Vec2 => {
+        if (!(event instanceof WheelEvent)) return vec2(0, 0, out)
+
         let { deltaX, deltaY, deltaMode } = event
         if (deltaMode === 1) {
                 deltaX *= LINE_HEIGHT

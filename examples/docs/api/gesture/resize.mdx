@@ -1,4 +1,6 @@
-# Resize state
+# Resize events
+
+## Resize values
 
 | Property | default | Description |
 | :------- | :------ | :---------- |
@@ -11,13 +13,15 @@
 | x        | 0       |             |
 | y        | 0       |             |
 
-# Resize event
+## Resize events
 
 | Event name | Argument    | Description                                          |
 | :--------- | :---------- | :--------------------------------------------------- |
 | onResize   | ResizeState | Called on all resize events. Mainly events specified |
 | onMount    | Element     | Called when the component is mounted                 |
 | onClean    | null        | Called when the component is removed                 |
+
+## Resize state
 
 ```ts
 export interface ResizeState<El extends Element = Element> {

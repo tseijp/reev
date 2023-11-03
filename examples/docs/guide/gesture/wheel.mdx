@@ -5,22 +5,34 @@
 ```js
 import { gsap } from 'gsap'
 import { useWheel } from 'reev/react'
+//               or from '@reev/gesture/react'
 
 export const App = () => {
-        const { ref } = useWheel(({ active, target, movement: [x, y] }) => {
-                gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
-        })
+        const { ref } = useWheel(
+                ({ active, event, target, movement: [x, y] }) => {
+                        event.preventDefault()
+                        x = Math.abs(x) / 100 + 1
+                        y = Math.abs(y) / 100 + 1
+                        gsap.to(target, { scaleX: x, scaleY: y })
+                }
+        )
         return <span ref={ref} style={style} />
 }
 ```
 
 import { gsap } from 'gsap'
 import { useWheel } from 'reev/react'
+//               or from '@reev/gesture/react'
 
 export const App = () => {
-        const { ref } = useWheel(({ active, target, movement: [x, y] }) => {
-                gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
-        })
+        const { ref } = useWheel(
+                ({ active, event, target, movement: [x, y] }) => {
+                        event.preventDefault()
+                        x = Math.abs(x) / 50 + 1
+                        y = Math.abs(y) / 50 + 1
+                        gsap.to(target, { scaleX: x, scaleY: y })
+                }
+        )
         return <span ref={ref} style={style} />
 }
 
@@ -33,8 +45,11 @@ You can use shorthands Wheel component
 ```jsx
 import { Wheel } from 'reev/react'
 
-export const onWheel = ({ active, target, movement: [x, y] }) => {
-        gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
+export const onWheel = ({ active, event, target, movement: [x, y] }) => {
+        event.preventDefault()
+        x = Math.abs(x) / 100 + 1
+        y = Math.abs(y) / 100 + 1
+        gsap.to(target, { scaleX: x, scaleY: y })
 }
 
 export const App2 = () => {
@@ -48,8 +63,11 @@ export const App2 = () => {
 
 import { Wheel } from 'reev/react'
 
-export const onWheel = ({ active, target, movement: [x, y] }) => {
-        gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
+export const onWheel = ({ active, event, target, movement: [x, y] }) => {
+        event.preventDefault()
+        x = Math.abs(x) / 100 + 1
+        y = Math.abs(y) / 100 + 1
+        gsap.to(target, { scaleX: x, scaleY: y })
 }
 
 export const App2 = () => {

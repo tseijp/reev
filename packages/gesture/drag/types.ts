@@ -1,9 +1,11 @@
-export type Vec2 = [x: number, y: number]
+import { Vec2 } from '../utils'
+
+export type DragDevice = 'mouse' | 'touch' | 'pointer'
 
 export interface DragState<El extends Element = Element> {
         _active: boolean
         active: boolean
-        device: 'mouse' | 'touch' | 'pointer'
+        device: DragDevice
         _value: Vec2
         value: Vec2
         delta: Vec2

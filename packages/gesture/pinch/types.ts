@@ -1,26 +1,27 @@
-export type Vec2 = [x: number, y: number]
+import { Vec2 } from '../utils'
+import { WheelState } from '../wheel/types'
 
-export interface PinchState<El extends Element = Element> {
-        _active: boolean
-        active: boolean
-        device: 'mouse' | 'pointer' | 'touch'
-        _value: Vec2
-        value: Vec2
-        delta: Vec2
-        offset: Vec2
-        movement: Vec2
-        event: Event
-        target: El
+export type PinchDevice = 'mouse' | 'pointer' | 'touch' | 'wheel' | 'gesture'
+
+export interface PinchState<El extends Element = Element>
+        extends WheelState<El> {
+        device: PinchDevice
+        _rotate: number
+        rotate: number
+        _size: number
+        size: number
+        _scale: Vec2
+        scale: Vec2
+
         isPinchStart: boolean
         isPinching: boolean
         isPinchEnd: boolean
+
+        // for SP
         onPinch: (self: PinchState) => void
         onPinchStart(e: Event): void
         onPinching(e: Event): void
         onPinchEnd(e: Event): void
-        onMount(target: El): void
-        onClean(target?: El): void
-        ref(target: El | null): void
 }
 
 export type PinchArg<El extends Element = Element> =

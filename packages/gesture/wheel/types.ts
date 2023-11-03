@@ -1,4 +1,4 @@
-export type Vec2 = [x: number, y: number]
+import { Vec2 } from '../utils'
 
 export interface WheelState<El extends Element = Element> {
         _active: boolean
@@ -9,18 +9,20 @@ export interface WheelState<El extends Element = Element> {
         offset: Vec2
         movement: Vec2
         target: El
-        event: WheelEvent
+        event: Event
+        timeout: number
+        clearTimeout(): void
         memo: any
         isWheelStart: boolean
         isWheeling: boolean
         isWheelEnd: boolean
         onWheel(self: WheelState<El>): void
-        onWheelStart(e: WheelEvent): void
-        onWheeling(e: WheelEvent): void
-        onWheelEnd(e: WheelEvent): void
+        onWheelStart(e: Event): void
+        onWheeling(e: Event): void
+        onWheelEnd(e: Event): void
         onMount(target: Element): void
         onClean(target: null): void
-        ref(traget: Element): void
+        ref(traget: Element | null): void
         tick?: () => void
 }
 

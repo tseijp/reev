@@ -4,9 +4,9 @@
  */
 export const isF = (f: unknown): f is Function => typeof f === 'function'
 
-export const Vec = typeof Float32Array !== 'undefined' ? Float32Array : Array
+const Vec = typeof Float32Array !== 'undefined' ? Float32Array : Array
 
-export const vec2 = (x = 0, y = 0, out = new Vec(2)) => {
+export const vec2 = (x = 0, y = 0, out = new Vec(2)): Vec2 => {
         out[0] = x
         out[1] = y
         return out as Vec2
@@ -20,13 +20,13 @@ export const addV = (a: Vec2, b: Vec2, out = vec2()): Vec2 => {
         return out
 }
 
-export const subV = (a: Vec2, b: Vec2, out = vec2()) => {
+export const subV = (a: Vec2, b: Vec2, out = vec2()): Vec2 => {
         out[0] = a[0] - b[0]
         out[1] = a[1] - b[1]
         return out
 }
 
-export const cpV = (a: Vec2, out = vec2()) => {
+export const cpV = (a: Vec2, out = vec2()): Vec2 => {
         out[0] = a[0]
         out[1] = a[1]
         return out
@@ -61,25 +61,43 @@ const supportsGestureEvents = () => {
 }
 
 // prettier-ignore
-export const SUPPORT = {                       // Mac
+export const SUPPORT: Record<string, boolean> = {                       // Mac
         isBrowser, // true
         get gesture() {
-                return supportsGestureEvents() // false
+                return (
+                        SUPPORT._gesture ??
+                        (SUPPORT._gesture = supportsGestureEvents())
+                )
         },
         get touch() {
-                return supportsTouchEvents()   // false
+                return (
+                        SUPPORT._touch ??
+                        (SUPPORT._touch = supportsTouchEvents())
+                )
         },
         get touchscreen() {
-                return isTouchScreen()         // false
+                return (
+                        SUPPORT._touchscreen ??
+                        (SUPPORT._touchscreen = isTouchScreen())
+                )
         },
         get pointer() {
-                return supportsPointerEvents() // true
+                return (
+                        SUPPORT._pointer ??
+                        (SUPPORT._pointer = supportsPointerEvents())
+                )
         },
         get pointerLock() {
-                return supportsPointerLock()   // true
+                return (
+                        SUPPORT._pointerLock ??
+                        (SUPPORT._pointerLock = supportsPointerLock())
+                )
         },
 }
 
+/**
+ * https://github.com/pmndrs/use-gesture/blob/main/packages/core/src/config/dragConfigResolver.ts
+ */
 export const getDevice = (lock = false) => {
         const pointerLock = lock && SUPPORT.pointerLock
         if (pointerLock) return 'mouse'

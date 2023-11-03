@@ -76,7 +76,8 @@ export const hoverEvent = <El extends Element = Element>(
                 target.addEventListener(up, self.onHoverEnd)
         }
 
-        const onClean = (target: El) => {
+        const onClean = () => {
+                const target = self.target
                 if (!target) return
                 const { start, move, end, up } = EVENT_FOR_HOVER[self.device]
                 target.removeEventListener(start, self.onHoverStart)

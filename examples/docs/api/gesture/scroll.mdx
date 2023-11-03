@@ -1,4 +1,6 @@
-# Scroll state
+# Scroll event
+
+## Scroll values
 
 | Property | default | Description             |
 | :------- | :------ | :---------------------- |
@@ -12,7 +14,7 @@
 | movement | [0, 0]  | Movement of position    |
 | target   | null    | Target element          |
 
-# Scroll event
+## Scroll events
 
 | Event name    | Argument    | Description                                          |
 | :------------ | :---------- | :--------------------------------------------------- |
@@ -22,6 +24,8 @@
 | onScrollEnd   | Event       | Called only once when the scroll ends                |
 | onMount       | Element     | Called when the component is mounted                 |
 | onClean       | null        | Called when the component is removed                 |
+
+## Scroll state
 
 ```ts
 export type Vec2 = [x: number, y: number]

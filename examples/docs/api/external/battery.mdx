@@ -1,0 +1,37 @@
+# Battery store
+
+## Battery values
+
+| Property        | default | Description              |
+| :-------------- | :------ | :----------------------- |
+| level           | 0       | Battery level            |
+| charging        | false   | Battery charging status  |
+| chargingTime    | 0       | Battery charging time    |
+| dischargingTime | 0       | Battery discharging time |
+
+## Battery actions
+
+## Battery events
+
+| Event name | Argument | Description                          |
+| :--------- | :------- | :----------------------------------- |
+| onChange   | Element  | Called when the battery state change |
+| onMount    | Element  | Called when the component is mounted |
+| onClean    | null     | Called when the component is removed |
+
+## Battery state
+
+```ts
+export interface BatteryState {
+        snapshot: [BatteryState]
+        target: any
+        level: number // 0 ~ 1
+        charging: boolean
+        chargingTime: number // 3180
+        dischargingTime: number // Infinity
+        callback(): void
+        onChange(): void
+        onMount(): void
+        onClean(): void
+}
+```

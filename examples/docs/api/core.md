@@ -1,6 +1,6 @@
 # Core API for React
 
-### useMutable
+## useMutable
 
 ```tsx
 import React from 'react'
@@ -12,7 +12,7 @@ const { click } = useMutable({ click: () => set(i + 1) })
 <div onClick={click}>{i}</div>
 ```
 
-### useEvent
+## useEvent
 
 ```tsx
 import React from 'react'
@@ -26,7 +26,7 @@ e("click", () => {}) // register new function
 <div onClick={e.click}>{i}</div>
 ```
 
-### useRefEvent
+## useRefEvent
 
 ```tsx
 const e = useRefEvent({
