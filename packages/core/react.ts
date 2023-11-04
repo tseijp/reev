@@ -6,8 +6,6 @@ export * from './index'
 
 export const useOnce = <T>(fun: () => T) => {
         const memo = useRef(void 0 as T)
-        // if (!memo.current) memo.current = fun()
-        // return memo.current
         return memo.current ?? (memo.current = fun())
 }
 
