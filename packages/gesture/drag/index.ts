@@ -44,7 +44,8 @@ export const dragEvent = <El extends Element = Element>(
                 self.active = true
                 getClientVec2(e, self.device, self.value)
                 if (self.target.setPointerCapture && 'pointerId' in e)
-                        self.target.setPointerCapture(e.pointerId as 1)
+                        // @ts-ignore
+                        self.target.setPointerCapture(e.pointerId)
                 self.onDrag(self)
         }
 
@@ -66,7 +67,8 @@ export const dragEvent = <El extends Element = Element>(
                 self.active = false
                 initValues()
                 if (self.target.releasePointerCapture && 'pointerId' in e)
-                        self.target.releasePointerCapture(e.pointerId as 1)
+                        // @ts-ignore
+                        self.target.releasePointerCapture(e.pointerId)
                 self.onDrag(self)
         }
 

@@ -1,24 +1,7 @@
-## once
-
 ### my created
-**/*.js
-!*.config.js
-**/*.cjs
-**/*.mjs
-**/*.esm.js
-**/*.develop.js
-**/*.product.js
-
-package-lock.json
-packages/*
-!packages/core
-!packages/external
-!packages/gesture
-!packages/reev
-
+dist
 TODO.md
 gesture.md
-
 tmp
 events
 
