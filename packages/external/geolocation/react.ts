@@ -1,4 +1,4 @@
-import { EventState } from '@reev/core'
+import { EventState } from 'reev'
 import { useSyncExternalStore } from 'react'
 import { GeolocationState } from './types'
 import { geolocationEvent } from '.'

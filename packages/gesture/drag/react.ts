@@ -1,4 +1,4 @@
-import { useOnce, useMutable } from '@reev/core/react'
+import { useOnce, useMutable } from 'reev/react'
 import { DragArg, DragState } from './types'
 import { dragEvent } from './index'
 import { isF } from '../utils'

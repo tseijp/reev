@@ -1,4 +1,4 @@
-import { useOnce, useMutable } from '@reev/core/react'
+import { useOnce, useMutable } from 'reev/react'
 import { hoverEvent } from '.'
 import { HoverArg, HoverState } from './types'
 import { isF } from '../utils'

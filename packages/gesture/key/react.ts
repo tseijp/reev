@@ -1,4 +1,4 @@
-import { useMutable, useOnce } from '@reev/core/react'
+import { useMutable, useOnce } from 'reev/react'
 import { keyEvent } from '.'
 import { KeyArg, KeyState } from './types'
 import { isF } from '../utils'

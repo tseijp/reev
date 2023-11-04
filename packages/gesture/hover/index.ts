@@ -1,5 +1,5 @@
 import { HoverState } from './types'
-import { EventState, event } from '@reev/core'
+import { EventState, event } from 'reev'
 import { vec2, addV, subV, getDevice, getClientVec2, cpV } from '../utils'
 
 export const EVENT_FOR_HOVER = {

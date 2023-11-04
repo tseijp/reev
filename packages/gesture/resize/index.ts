@@ -1,4 +1,4 @@
-import { EventState, event } from '@reev/core'
+import { EventState, event } from 'reev'
 import { ResizeState } from './types'
 
 const DELAY = 100

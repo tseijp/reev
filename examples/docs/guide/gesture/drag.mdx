@@ -7,8 +7,7 @@ and returns to its initial position on release.
 
 ```tsx
 import { gsap } from 'gsap'
-import { useDrag } from 'reev/react'
-//              or from '@reev/gesture/react'
+import { useDrag } from 'rege/react'
 
 export const App = () => {
         const { ref } = useDrag(({ active, target, movement: [x, y] }) => {
@@ -19,8 +18,7 @@ export const App = () => {
 ```
 
 import { gsap } from 'gsap'
-import { useDrag } from 'reev/react'
-//              or from '@reev/gesture/react'
+import { useDrag } from 'rege/react'
 
 export const App = () => {
         const { ref } = useDrag(({ active, target, movement: [x, y] }) => {
@@ -37,7 +35,7 @@ You can use offset instead of movement
 
 ```jsx
 import { gsap } from 'gsap'
-import { useDrag } from 'reev/react'
+import { useDrag } from 'rege/react'
 
 export const App2 = () => {
         const { ref } = useDrag(({ active, target, offset: [x, y] }) => {
@@ -62,7 +60,7 @@ You can use shorthands Drag component
 
 ```jsx
 import { gsap } from 'gsap'
-import { Drag } from 'reev/react'
+import { Drag } from 'rege/react'
 
 export const onDrag = ({ active, target, movement: [x, y] }) => {
         gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
@@ -77,7 +75,7 @@ export const App3 = () => {
 }
 ```
 
-import { Drag } from 'reev/react'
+import { Drag } from 'rege/react'
 
 export const onDrag = ({ active, target, movement: [x, y] }) => {
         gsap.to(target, { x, y, scale: active ? 1.2 : 1 })

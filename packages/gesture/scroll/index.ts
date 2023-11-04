@@ -1,6 +1,6 @@
 import { vec2, addV, cpV, subV } from '../utils'
 import { scrollValues } from './utils'
-import { EventState, event } from '@reev/core'
+import { EventState, event } from 'reev'
 import { ScrollState } from './types'
 
 export const scrollEvent = <El extends Element = Element>(

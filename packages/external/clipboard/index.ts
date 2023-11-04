@@ -1,4 +1,4 @@
-import { EventState, event } from '@reev/core'
+import { EventState, event } from 'reev'
 import { ClipboardState } from './types'
 
 export const clipboardEvent = () => {

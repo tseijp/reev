@@ -1,4 +1,4 @@
-import { EventState } from '@reev/core'
+import { EventState } from 'reev'
 import { pinchDevice } from './utils'
 import { PinchState } from './types'
 import { vec2, addV, subV, getClientVec2, cpV } from '../utils'

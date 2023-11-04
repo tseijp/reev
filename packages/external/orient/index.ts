@@ -1,4 +1,4 @@
-import { EventState, event } from '@reev/core'
+import { EventState, event } from 'reev'
 import { OrientState } from './types'
 import { addVec3, subVec3, vec3 } from './utils'
 

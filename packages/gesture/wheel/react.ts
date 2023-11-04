@@ -1,4 +1,4 @@
-import { useOnce, useMutable } from '@reev/core/react'
+import { useOnce, useMutable } from 'reev/react'
 import { WheelConfig, WheelState } from './types'
 import { wheelEvent } from './index'
 import { isF } from '../utils'

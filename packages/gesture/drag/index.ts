@@ -1,4 +1,4 @@
-import { EventState, event } from '@reev/core'
+import { EventState, event } from 'reev'
 import { DragState } from './types'
 import { vec2, addV, subV, cpV, getDevice, getClientVec2 } from '../utils'
 

@@ -48,10 +48,9 @@ export const defaultConfig = (override: Options, options: Options) => {
                                 'react-dom',
                                 'react-native',
                                 'solid-js',
-                                '@reev/core',
-                                '@reev/gesture',
-                                '@reev/external',
                                 'reev',
+                                'rege',
+                                'rexr',
                         ],
                         moduleResolution: 'NodeNext',
                 }

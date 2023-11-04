@@ -1,3 +1,3 @@
-import { event } from '@reev/core'
+import { event } from 'reev'
 
 export const mediaQueryEvent = () => {}

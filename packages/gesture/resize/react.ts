@@ -1,5 +1,5 @@
 import { resizeEvent } from '.'
-import { useMutable, useOnce } from '@reev/core/react'
+import { useMutable, useOnce } from 'reev/react'
 import { ResizeArg, ResizeState } from './types'
 import { isF } from '../utils'
 

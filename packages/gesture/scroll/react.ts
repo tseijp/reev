@@ -1,4 +1,4 @@
-import { useOnce, useMutable } from '@reev/core/react'
+import { useOnce, useMutable } from 'reev/react'
 import { ScrollConfig, ScrollState } from './types'
 import { scrollEvent } from './index'
 import { isF } from '../utils'

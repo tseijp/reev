@@ -1,5 +1,5 @@
 import { OnlineState } from './types'
-import { EventState, event } from '@reev/core'
+import { EventState, event } from 'reev'
 
 export const onlineEvent = () => {
         const onChange = () => {

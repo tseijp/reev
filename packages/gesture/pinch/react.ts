@@ -1,4 +1,4 @@
-import { useOnce, useMutable } from '@reev/core/react'
+import { useOnce, useMutable } from 'reev/react'
 import { pinchEvent } from '.'
 import { PinchArg, PinchState } from './types'
 import { isF } from '../utils'

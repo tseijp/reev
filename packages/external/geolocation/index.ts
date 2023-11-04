@@ -1,4 +1,4 @@
-import { EventState, event } from '@reev/core'
+import { EventState, event } from 'reev'
 import { GeolocationState } from './types'
 
 export const geolocationEvent = () => {

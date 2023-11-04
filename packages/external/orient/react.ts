@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from 'react'
 import { orientEvent } from '.'
 import { OrientState } from './types'
-import { EventState } from '@reev/core'
+import { EventState } from 'reev'
 
 let self: EventState<OrientState>
 

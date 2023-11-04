@@ -1,8 +1,8 @@
 {
-        "name": "@reev/gesture",
+        "name": "rege",
         "author": "tseijp",
         "license": "MIT",
-        "version": "0.11.0",
+        "version": "0.1.0",
         "private": false,
         "sideEffect": false,
         "publishConfig": {
@@ -91,6 +91,6 @@
                 }
         },
         "devDependencies": {
-                "@reev/core": "*"
+                "reev": "*"
         }
 }

@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from 'react'
 import { clipboardEvent } from '.'
-import { EventState } from '@reev/core'
+import { EventState } from 'reev'
 import { ClipboardState } from './types'
 
 let self: EventState<ClipboardState>

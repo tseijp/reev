@@ -4,7 +4,6 @@
 
 ```ts
 import { durable } from 'reev'
-//              or from '@reev/core'
 
 const click = () => {} // do something when window will be clicked
 const memo = mutable({ click }) // register click event
@@ -18,7 +17,6 @@ memo({ click: () => {} }) // update click function without re-register
 
 ```ts
 import { event } from 'reev'
-//            or from '@reev/core'
 
 const click = () => {} // do something when window will be clicked
 const e = event({ click }) // register click event

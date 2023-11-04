@@ -1,6 +1,6 @@
 import { vec2, addV, cpV } from '../utils'
 import { wheelValues } from './utils'
-import { EventState, event } from '@reev/core'
+import { EventState, event } from 'reev'
 import { WheelState } from './types'
 
 export const wheelEvent = <El extends Element = Element>(
