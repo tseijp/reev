@@ -17,7 +17,9 @@
                 "tsup:gesture": "cd packages/gesture && yarn tsup",
                 "tsup:external": "cd packages/external && yarn tsup",
                 "tsup:reev": "cd packages/reev && yarn tsup",
-                "tsup": "yarn tsup:core && yarn tsup:gesture && yarn tsup:external && yarn tsup:reev"
+                "tsup": "yarn tsup:core && yarn tsup:gesture && yarn tsup:external && yarn tsup:reev",
+                "release": "yarn tsup && yarn changeset publish",
+                "vers": "yarn changeset version"
         },
         "devDependencies": {
                 "@changesets/cli": "2.26.2",
