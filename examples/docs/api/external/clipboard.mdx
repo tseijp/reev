@@ -1,0 +1,28 @@
+# Clipboard store
+
+## Clipboard values
+
+| Property  | default | Description     |
+| :-------- | :------ | :-------------- |
+| clipboard | ""      | Clipboard value |
+
+## Clipboard events
+
+| Event name | Argument | Description                          |
+| :--------- | :------- | :----------------------------------- |
+| onChange   | string   | Called when the clipboard is changed |
+| onMount    | Element  | Called when the component is mounted |
+| onClean    | null     | Called when the component is removed |
+
+## Clipboard state
+
+```ts
+export interface ClipboardState {
+        snapshot: [ClipboardState]
+        clipboard: string
+        callback(): void
+        onChange(): void
+        onMount(): void
+        onClean(): void
+}
+```

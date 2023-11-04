@@ -1,8 +1,8 @@
 ---
 marp: true
 hide_table_of_contents: true
-title: "Playground"
-description: "Playground"
+title: 'Playground'
+description: 'Playground'
 image: https://github.com/tseijp.png
 keywords: [event, hooks, react, reactjs, reactive, solid, solidjs, typescript]
 date: 2023-01-01

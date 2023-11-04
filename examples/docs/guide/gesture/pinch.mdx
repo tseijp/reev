@@ -1,0 +1,95 @@
+# How to create pinch gesture
+
+## create your app
+
+```js
+import { gsap } from 'gsap'
+import { usePinch } from 'reev/react'
+//               or from '@reev/gesture/react'
+
+export const App = () => {
+        const { ref } = usePinch(
+                ({ active, event, target, movement: [x, y] }) => {
+                        event.preventDefault()
+                        x = Math.abs(x) / 100 + 1
+                        y = Math.abs(y) / 100 + 1
+                        gsap.to(target, { scaleX: x, scaleY: y })
+                }
+        )
+        return <span ref={ref} style={style} />
+}
+```
+
+import { gsap } from 'gsap'
+import { usePinch } from 'reev/react'
+//               or from '@reev/gesture/react'
+
+export const App = () => {
+        const { ref } = usePinch(
+                ({ active, event, target, movement: [x, y] }) => {
+                        event.preventDefault()
+                        x = Math.abs(x) / 50 + 1
+                        y = Math.abs(y) / 50 + 1
+                        gsap.to(target, { scaleX: x, scaleY: y })
+                }
+        )
+        return <span ref={ref} style={style} />
+}
+
+<App />
+
+### with Pinch component
+
+You can use shorthands Pinch component
+
+```jsx
+import { Pinch } from 'reev/react'
+
+export const onPinch = ({ active, event, target, movement: [x, y] }) => {
+        event.preventDefault()
+        x = Math.abs(x) / 100 + 1
+        y = Math.abs(y) / 100 + 1
+        gsap.to(target, { scaleX: x, scaleY: y })
+}
+
+export const App2 = () => {
+        return (
+                <Pinch onPinch={onPinch}>
+                        {({ ref }) => <span ref={ref} style={style} />}
+                </Pinch>
+        )
+}
+```
+
+import { Pinch } from 'reev/react'
+
+export const onPinch = ({ active, event, target, movement: [x, y] }) => {
+        event.preventDefault()
+        x = Math.abs(x) / 100 + 1
+        y = Math.abs(y) / 100 + 1
+        gsap.to(target, { scaleX: x, scaleY: y })
+}
+
+export const App2 = () => {
+        return (
+                <Pinch onPinch={onPinch}>
+                        {({ ref }) => <span ref={ref} style={style} />}
+                </Pinch>
+        )
+}
+
+<App2 />
+
+export const style = {
+        width: '80px',
+        height: '80px',
+        cursor: 'all-scroll',
+        userSelect: 'none',
+        touchAction: 'none',
+        margin: '80px auto',
+        display: 'flex',
+        borderRadius: '8px',
+        transform: 'translate(-50%, -50%)',
+        background: 'linear-gradient(145deg, #e65fa2, #ff70c1)',
+        boxShadow: '5px 5px 20px #b1b2ad -5px -5px 20px #fff',
+}

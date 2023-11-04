@@ -1,0 +1,56 @@
+# Drag event
+
+## Drag values
+
+| Property | default | Description             |
+| :------- | :------ | :---------------------- |
+| device   |         | Type of device          |
+| active   | false   | Whether drag is active. |
+| \_active | false   | Whether drag is active. |
+| value    | [0, 0]  | Current position        |
+| \_value  | [0, 0]  | Previous position       |
+| delta    | [0, 0]  | Delta of position       |
+| offset   | [0, 0]  | Offset of position      |
+| movement | [0, 0]  | Movement of position    |
+| target   | null    | Target element          |
+
+## Drag events
+
+| Event name  | Argument  | Description                                        |
+| :---------- | :-------- | :------------------------------------------------- |
+| onDrag      | DragState | Called on all drag events. Mainly events specified |
+| onDragStart | Event     | Called when dragging starts.                       |
+| onDragging  | Event     | Called while dragging.                             |
+| onDragEnd   | Event     | Called when dragging ends.                         |
+| onMount     | Element   | Called when the element is mounted.                |
+| onClean     | null      | Called when the element is unmounted.              |
+
+## Drag state
+
+```ts
+export type Vec2 = [x: number, y: number]
+
+export interface DragState<El extends Element = Element> {
+        _active: boolean
+        active: boolean
+        device: 'mouse' | 'touch' | 'pointer'
+        _value: Vec2
+        value: Vec2
+        delta: Vec2
+        offset: Vec2
+        movement: Vec2
+        target: El
+        event: Event
+        memo: any
+        isDragStart: boolean
+        isDragging: boolean
+        isDragEnd: boolean
+        onDrag(self: DragState<El>): void
+        onDragStart(e: Event): void
+        onDragging(e: Event): void
+        onDragEnd(e: Event): void
+        onMount(target: Element): void
+        onClean(): void
+        ref(traget: Element): void
+}
+```

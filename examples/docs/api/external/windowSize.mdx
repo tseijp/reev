@@ -1,0 +1,30 @@
+# WindowSize store
+
+## WindowSize values
+
+| Property | default | Description   |
+| :------- | :------ | :------------ |
+| width    | 1920    | Window width  |
+| height   | 1080    | Window height |
+
+## WindowSize events
+
+| Event name | Argument | Description                          |
+| :--------- | :------- | :----------------------------------- |
+| onChange   | -        | Called when the window size changes  |
+| onMount    | Element  | Called when the component is mounted |
+| onClean    | null     | Called when the component is removed |
+
+## WindowSize state
+
+```ts
+export interface WindowSizeState {
+        snapshot: [WindowSizeState]
+        width: number
+        height: number
+        callback(): void
+        onChange(): void
+        onMount(): void
+        onClean(): void
+}
+```

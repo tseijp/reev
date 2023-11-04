@@ -1,0 +1,35 @@
+# Orient store
+
+## Orient values
+
+| Property | default | Description |
+| :------- | :------ | :---------- |
+| active   | false   |             |
+
+## Orient events
+
+| Event name | Argument | Description                          |
+| :--------- | :------- | :----------------------------------- |
+| onChange   | Element  | Called when the value is changed     |
+| onMount    | Element  | Called when the component is mounted |
+| onClean    | null     | Called when the component is removed |
+
+## Orient state
+
+```ts
+export interface OrientState {
+        snapshot: [OrientState]
+        active: boolean
+        _active: boolean
+        _value: Vec3
+        value: Vec3
+        delta: Vec3
+        offset: Vec3
+        movement: Vec3
+        memo: any
+        callback(): void
+        onChange(): void
+        onMount(): void
+        onClean(): void
+}
+```

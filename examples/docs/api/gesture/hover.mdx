@@ -1,0 +1,53 @@
+# Hover event
+
+## Hover values
+
+| Property | default | Description             |
+| :------- | :------ | :---------------------- |
+| device   |         | Type of device          |
+| active   | false   | Whether drag is active. |
+| \_active | false   | Whether drag is active. |
+| value    | [0, 0]  | Current position        |
+| \_value  | [0, 0]  | Previous position       |
+| delta    | [0, 0]  | Delta of position       |
+| offset   | [0, 0]  | Offset of position      |
+| movement | [0, 0]  | Movement of position    |
+| target   | null    | Target element          |
+
+## Hover events
+
+| Event name   | Argument   | Description                                         |
+| :----------- | :--------- | :-------------------------------------------------- |
+| onHover      | HoverState | Called on all hover events. Mainly events specified |
+| onHoverStart | Event      | Called on hover start events                        |
+| onHovering   | Event      | Called on hover move events                         |
+| onHoverEnd   | Event      | Called on hover end events                          |
+| onMount      | Element    | Called when the component is mounted                |
+| onClean      | null       | Called when the component is removed                |
+
+## Hover state
+
+```ts
+export interface HoverState<El extends Element = Element> {
+        _active: boolean
+        active: boolean
+        device: 'mouse' | 'pointer' | 'touch'
+        _value: Vec2
+        value: Vec2
+        delta: Vec2
+        offset: Vec2
+        movement: Vec2
+        event: Event
+        target: El
+        isHoverStart: boolean
+        isHovering: boolean
+        isHoverEnd: boolean
+        onHover: (self: HoverState) => void
+        onHoverStart(e: Event): void
+        onHovering(e: Event): void
+        onHoverEnd(e: Event): void
+        onMount(target: El): void
+        onClean(target?: El): void
+        ref(target: El | null): void
+}
+```

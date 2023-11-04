@@ -1,0 +1,56 @@
+# Scroll event
+
+## Scroll values
+
+| Property | default | Description             |
+| :------- | :------ | :---------------------- |
+| device   |         | Type of device          |
+| active   | false   | Whether drag is active. |
+| \_active | false   | Whether drag is active. |
+| value    | [0, 0]  | Current position        |
+| \_value  | [0, 0]  | Previous position       |
+| delta    | [0, 0]  | Delta of position       |
+| offset   | [0, 0]  | Offset of position      |
+| movement | [0, 0]  | Movement of position    |
+| target   | null    | Target element          |
+
+## Scroll events
+
+| Event name    | Argument    | Description                                          |
+| :------------ | :---------- | :--------------------------------------------------- |
+| onScroll      | ScrollState | Called on all scroll events. Mainly events specified |
+| onScrollStart | Event       | Called only once when the scroll starts              |
+| onScrolling   | Event       | Called every time the scroll is moved                |
+| onScrollEnd   | Event       | Called only once when the scroll ends                |
+| onMount       | Element     | Called when the component is mounted                 |
+| onClean       | null        | Called when the component is removed                 |
+
+## Scroll state
+
+```ts
+export type Vec2 = [x: number, y: number]
+
+export interface ScrollState<El extends Element = Element> {
+        _active: boolean
+        active: boolean
+        _value: Vec2
+        value: Vec2
+        delta: Vec2
+        offset: Vec2
+        movement: Vec2
+        target: El
+        event: Event
+        memo: any
+        isScrollStart: boolean
+        isScrolling: boolean
+        isScrollEnd: boolean
+        onScroll(self: ScrollState<El>): void
+        onScrollStart(e: Event): void
+        onScrolling(e: Event): void
+        onScrollEnd(e: Event): void
+        onMount(target: Element): void
+        onClean(target: null): void
+        ref(traget: Element): void
+        tick?: () => void
+}
+```

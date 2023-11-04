@@ -4,143 +4,81 @@
 
 ```js
 import { gsap } from 'gsap'
+import { useWheel } from 'reev/react'
+//               or from '@reev/gesture/react'
 
 export const App = () => {
-        const { ref } = useWheel(({ active, target, movement: [x, y] }) => {
-                gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
-        })
+        const { ref } = useWheel(
+                ({ active, event, target, movement: [x, y] }) => {
+                        event.preventDefault()
+                        x = Math.abs(x) / 100 + 1
+                        y = Math.abs(y) / 100 + 1
+                        gsap.to(target, { scaleX: x, scaleY: y })
+                }
+        )
         return <span ref={ref} style={style} />
 }
 ```
 
 import { gsap } from 'gsap'
+import { useWheel } from 'reev/react'
+//               or from '@reev/gesture/react'
 
 export const App = () => {
-        const { ref } = useWheel(({ active, target, movement: [x, y] }) => {
-                gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
-        })
+        const { ref } = useWheel(
+                ({ active, event, target, movement: [x, y] }) => {
+                        event.preventDefault()
+                        x = Math.abs(x) / 50 + 1
+                        y = Math.abs(y) / 50 + 1
+                        gsap.to(target, { scaleX: x, scaleY: y })
+                }
+        )
         return <span ref={ref} style={style} />
 }
 
 <App />
 
-## create useWheel
+### with Wheel component
 
-```js
-import { useRefEvent } from 'reev/react'
+You can use shorthands Wheel component
 
-export const addV = (a, b) => [a[0] + b[0], a[1] + b[1]]
-export const subV = (a, b) => [a[0] - b[0], a[1] - b[1]]
-export const LINE_HEIGHT = 40
-export const PAGE_HEIGHT = 800
+```jsx
+import { Wheel } from 'reev/react'
 
-export const wheelValues = (event) => {
-        let { deltaX, deltaY, deltaMode } = event
-        if (deltaMode === 1) {
-                deltaX *= LINE_HEIGHT
-                deltaY *= LINE_HEIGHT
-        } else if (deltaMode === 2) {
-                deltaX *= PAGE_HEIGHT
-                deltaY *= PAGE_HEIGHT
-        }
-        return [deltaX, deltaY]
+export const onWheel = ({ active, event, target, movement: [x, y] }) => {
+        event.preventDefault()
+        x = Math.abs(x) / 100 + 1
+        y = Math.abs(y) / 100 + 1
+        gsap.to(target, { scaleX: x, scaleY: y })
 }
 
-export const useWheel = (on) => {
-        const self = useRefEvent({
-                on,
-                wheel(e) {
-                        self._active = self.active
-                        self._value = self.value
-                        self.active = true
-                        self.delta = wheelValues(e)
-                        if (self._active) {
-                                self.offset = addV(self.offset, self.delta)
-                                self.movement = addV(self.movement, self.delta)
-                        }
-                        const id = setTimeout(self.end, 1000)
-                        const scroll = () => {
-                                self({ scroll })
-                                clearTimeout(id)
-                        }
-                        self({ scroll })
-                        self.on(self)
-                },
-                end() {
-                        self._active = !(self.active = false)
-                        self.delta = self.movement = [0, 0]
-                        self.on(self)
-                },
-                mount() {
-                        self.active = self._active = false
-                        self.value = self._value = [0, 0]
-                        self.delta = self.offset = self.movement = [0, 0]
-                        window.addEventListener('wheel', self.wheel)
-                },
-                clean() {
-                        window.removeEventListener('wheel', self.wheel)
-                },
-        })
-        return self
+export const App2 = () => {
+        return (
+                <Wheel onWheel={onWheel}>
+                        {({ ref }) => <span ref={ref} style={style} />}
+                </Wheel>
+        )
 }
 ```
 
-import { useRefEvent } from 'reev/react'
+import { Wheel } from 'reev/react'
 
-export const addV = (a, b) => [a[0] + b[0], a[1] + b[1]]
-export const subV = (a, b) => [a[0] - b[0], a[1] - b[1]]
-export const LINE_HEIGHT = 40
-export const PAGE_HEIGHT = 800
-
-export function wheelValues(event) {
-        let { deltaX, deltaY, deltaMode } = event
-        if (deltaMode === 1) {
-                deltaX *= LINE_HEIGHT
-                deltaY *= LINE_HEIGHT
-        } else if (deltaMode === 2) {
-                deltaX *= PAGE_HEIGHT
-                deltaY *= PAGE_HEIGHT
-        }
-        return [deltaX, deltaY]
+export const onWheel = ({ active, event, target, movement: [x, y] }) => {
+        event.preventDefault()
+        x = Math.abs(x) / 100 + 1
+        y = Math.abs(y) / 100 + 1
+        gsap.to(target, { scaleX: x, scaleY: y })
 }
 
-export const useWheel = (on) => {
-        const self = useRefEvent({
-                on,
-                wheel(e) {
-                        self._active = self.active
-                        self._value = self.value
-                        self.active = true
-                        self.delta = wheelValues(e)
-                        if (self._active) {
-                                self.offset = addV(self.offset, self.delta)
-                                self.movement = addV(self.movement, self.delta)
-                        }
-                        const id = setTimeout(self.end, 1000)
-                        const scroll = () => {
-                                self({ scroll })
-                                clearTimeout(id)
-                        }
-                        self({ scroll })
-                        self.on(self)
-                },
-                end() {
-                        self._active = !(self.active = false)
-                        self.delta = self.movement = [0, 0]
-                        self.on(self)
-                },
-                mount() {
-                        self.active = self._active = false
-                        self.value = self._value = [0, 0]
-                        self.delta = self.offset = self.movement = [0, 0]
-                        window.addEventListener('wheel', self.wheel)
-                },
-                clean() {
-                        window.removeEventListener('wheel', self.wheel)
-                },
-        })
-        return self
+export const App2 = () => {
+        return (
+                <Wheel onWheel={onWheel}>
+                        {({ ref }) => <span ref={ref} style={style} />}
+                </Wheel>
+        )
 }
+
+<App2 />
 
 export const style = {
         width: '80px',

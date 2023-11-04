@@ -4,6 +4,8 @@
 
 ```js
 import { gsap } from 'gsap'
+import { useHover } from 'reev/react'
+//               or from '@reev/gesture/react'
 
 export const App = () => {
         const { ref } = useHover(({ active, target, movement: [x, y] }) => {
@@ -14,6 +16,8 @@ export const App = () => {
 ```
 
 import { gsap } from 'gsap'
+import { useHover } from 'reev/react'
+//               or from '@reev/gesture/react'
 
 export const App = () => {
         const { ref } = useHover(({ active, target, movement: [x, y] }) => {
@@ -24,79 +28,41 @@ export const App = () => {
 
 <App />
 
-## create useHover
+### with Hover component
 
-import { useRefEvent } from 'reev/react'
+You can use shorthands Hover component
 
-export const addV = (a, b) => [a[0] + b[0], a[1] + b[1]]
-export const subV = (a, b) => [a[0] - b[0], a[1] - b[1]]
+```jsx
+import { Hover } from 'reev/react'
 
-export const useHover = (on) => {
-        const self = useRefEvent({
-                on,
-                enter(e) {
-                        self._active = self.active
-                        self._value = self.value
-                        self.value = [e.clientX, e.clientY]
-                        if (self._active) {
-                                self.delta = subV(self.value, self._value)
-                                self.offset = addV(self.offset, self.delta)
-                                self.movement = addV(self.movement, self.delta)
-                        }
-                        self.on(self)
-                },
-                leave(e) {
-                        self._active = !(self.active = true)
-                        self.delta = self.movement = [0, 0]
-                        self.on(self)
-                },
-                mount(target) {
-                        self.active = self._active = false
-                        self.value = self._value = [0, 0]
-                        self.delta = self.offset = self.movement = [0, 0]
-                        target.addEventListener('pointerenter', self.enter)
-                        target.addEventListener('pointerleave', self.leave)
-                },
-        })
-        return self
+export const onHover = ({ active, target, movement: [x, y] }) => {
+        gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
 }
 
-```js
-import { useRefEvent } from 'reev/react'
-
-export const addV = (a, b) => [a[0] + b[0], a[1] + b[1]]
-export const subV = (a, b) => [a[0] - b[0], a[1] - b[1]]
-
-export const useHover = (on) => {
-        const self = useRefEvent({
-                on,
-                enter(e) {
-                        self._active = self.active
-                        self._value = self.value
-                        self.value = [e.clientX, e.clientY]
-                        if (self._active) {
-                                self.delta = subV(self.value, self._value)
-                                self.offset = addV(self.offset, self.delta)
-                                self.movement = addV(self.movement, self.delta)
-                        }
-                        self.on(self)
-                },
-                leave(e) {
-                        self._active = !(self.active = true)
-                        self.delta = self.movement = [0, 0]
-                        self.on(self)
-                },
-                mount(target) {
-                        self.active = self._active = false
-                        self.value = self._value = [0, 0]
-                        self.delta = self.offset = self.movement = [0, 0]
-                        target.addEventListener('pointerenter', self.enter)
-                        target.addEventListener('pointerleave', self.leave)
-                },
-        })
-        return self
+export const App2 = () => {
+        return (
+                <Hover onHover={onHover}>
+                        {({ ref }) => <span ref={ref} style={style} />}
+                </Hover>
+        )
 }
 ```
+
+import { Hover } from 'reev/react'
+
+export const onHover = ({ active, target, movement: [x, y] }) => {
+        gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
+}
+
+export const App2 = () => {
+        return (
+                <Hover onHover={onHover}>
+                        {({ ref }) => <span ref={ref} style={style} />}
+                </Hover>
+        )
+}
+
+<App2 />
 
 export const style = {
         width: '80px',

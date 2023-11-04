@@ -1,0 +1,32 @@
+# Key event
+
+## Key values
+
+| Property | default | Description |
+| :------- | :------ | :---------- |
+
+## Key events
+
+| Event name | Argument      | Description                                         |
+| :--------- | :------------ | :-------------------------------------------------- |
+| onKey      | KeyState      | Called on all hover events. Mainly events specified |
+| onKeydown  | KeyboardEvent | Called on all hover events. Mainly events specified |
+| onMount    | Element       | Called when the component is mounted                |
+| onClean    | void          | Called when the component is unmounted              |
+| ref        | Element       | Called when the component is mounted                |
+
+## Key state
+
+```ts
+export interface KeyState<El extends Element = Element> {
+        target: El | Window
+        key: string
+        code: string
+        event: KeyboardEvent
+        onKey(e: KeyState): void
+        onKeydown(e: KeyboardEvent): void
+        onMount(el: El): void
+        onClean(): void
+        ref(el: Element | null): void
+}
+```

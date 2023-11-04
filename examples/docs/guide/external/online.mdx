@@ -1,79 +1,23 @@
-# How to use online state
+# How to use online
 
 ## create your app
 
 ```ts
+import { useOnline } from 'reev/react'
+//                or from '@reev/external/react'
+
 export const App = () => {
-        const online = useOnline()
+        const { online } = useOnline()
         return <span>{online ? '📶' : '❌'}</span>
 }
 ```
 
+import { useOnline } from 'reev/react'
+//                or from '@reev/external/react'
+
 export const App = () => {
-        const online = useOnline()
+        const { online } = useOnline()
         return <span>{online ? '📶' : '❌'}</span>
 }
 
 <App />
-
-## create online event
-
-```ts
-import { event } from 'reev'
-import { useSyncExternalStore } from 'react'
-
-export const self = event({
-        mount() {
-                window.addEventListener('online', self.callback)
-                window.addEventListener('offline', self.callback)
-        },
-        clean() {
-                window.removeEventListener('online', self.callback)
-                window.removeEventListener('offline', self.callback)
-        },
-})
-```
-
-import { event } from 'reev'
-import { useSyncExternalStore } from 'react'
-
-export const self = event({
-        mount() {
-                window.addEventListener('online', self.callback)
-                window.addEventListener('offline', self.callback)
-        },
-        clean() {
-                window.removeEventListener('online', self.callback)
-                window.removeEventListener('offline', self.callback)
-        },
-})
-
-## create useOnline hook
-
-```ts
-export const subscribe = (callback) => {
-        self({ callback }).mount()
-        return () => self.clean()
-}
-
-export const getSnapshot = () => navigator.onLine
-
-export const getServerSnapshot = () => true
-
-export const useOnline = () => {
-        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
-}
-```
-
-export const subscribe = (callback) => {
-        self({ callback }).mount()
-        return () => self.clean()
-}
-
-export const getSnapshot = () => navigator.onLine
-
-export const getServerSnapshot = () => true
-
-export const useOnline = () => {
-        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
-}

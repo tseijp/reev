@@ -1,0 +1,29 @@
+# Geolocation store
+
+## Geolocation values
+
+| Property    | default | Description        |
+| :---------- | :------ | :----------------- |
+| geolocation | null    | Geolocation object |
+
+## Geolocation events
+
+| Event name | Argument         | Description                               |
+| :--------- | :--------------- | :---------------------------------------- |
+| onChange   | GeolocationState | Called when the geolocation state changes |
+| onMount    | Element          | Called when the component is mounted      |
+| onClean    | null             | Called when the component is removed      |
+
+## Geolocation state
+
+```ts
+export interface GeolocationState {
+        snapshot: [GeolocationState]
+        geolocation: any
+        id: number
+        callback(): void
+        onChange(): void
+        onMount(): void
+        onClean(): void
+}
+```

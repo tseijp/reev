@@ -1,7 +1,7 @@
 {
         "name": "@reev/root",
         "author": "tseijp",
-        "version": "0.1.0",
+        "version": "1.0.0",
         "license": "MIT",
         "private": true,
         "sideEffects": false,
@@ -19,7 +19,7 @@
                 "bootstrap": "yarn && lerna bootstrap"
         },
         "dependencies": {
-                "lerna": "5.5.4"
+                "lerna": "7.1.1"
         },
         "devDependencies": {
                 "@babel/core": "*",

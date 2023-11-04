@@ -4,100 +4,24 @@
 
 ```ts
 import CodeBlock from '@theme/CodeBlock'
+import { useClipboard } from 'reev/react'
+//                   or from '@reev/external/react'
 
 export const App = () => {
-        const clipboard = useClipboard()
+        const { clipboard } = useClipboard()
         return <CodeBlock>{clipboard || 'PLEASE COPY'}</CodeBlock>
 }
 ```
 
 import CodeBlock from '@theme/CodeBlock'
+import { useClipboard } from 'reev/react'
+//                   or from '@reev/external/react'
 
 export const App = () => {
-        const clipboard = useClipboard()
+        const { clipboard } = useClipboard()
         return <CodeBlock>{clipboard || 'PLEASE COPY'}</CodeBlock>
 }
 
 clipboard result
 
 <App />
-
-## create clipboard event
-
-```ts
-import { event } from 'reev'
-import { useSyncExternalStore } from 'react'
-
-export const self = event({
-        change() {
-                navigator.clipboard.readText().then((clipText) => {
-                        self.snapshot = clipText
-                        self.callback()
-                })
-        },
-        mount() {
-                self.change()
-                window.addEventListener('copy', self.change)
-                window.addEventListener('cut', self.change)
-                window.addEventListener('paste', self.change)
-        },
-        clean() {
-                window.removeEventListener('copy', self.change)
-                window.removeEventListener('cut', self.change)
-                window.removeEventListener('paste', self.change)
-        },
-})
-```
-
-import { event } from 'reev'
-import { useSyncExternalStore } from 'react'
-
-export const self = event({
-        change() {
-                navigator.clipboard.readText().then((clipText) => {
-                        self.snapshot = clipText
-                        self.callback()
-                })
-        },
-        mount() {
-                self.change()
-                window.addEventListener('copy', self.change)
-                window.addEventListener('cut', self.change)
-                window.addEventListener('paste', self.change)
-        },
-        clean() {
-                window.removeEventListener('copy', self.change)
-                window.removeEventListener('cut', self.change)
-                window.removeEventListener('paste', self.change)
-        },
-})
-
-## create useClipboard hook
-
-```ts
-export const subscribe = (callback) => {
-        self({ callback }).mount()
-        return () => self.clean()
-}
-
-export const getSnapshot = () => self.snapshot
-
-export const getServerSnapshot = () => ''
-
-export const useClipboard = () => {
-        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
-}
-```
-
-export const subscribe = (callback) => {
-        self({ callback }).mount()
-        return () => self.clean()
-}
-
-export const getSnapshot = () => self.snapshot
-
-export const getServerSnapshot = () => ''
-
-export const useClipboard = () => {
-        return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
-}

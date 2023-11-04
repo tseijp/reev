@@ -1,7 +1,7 @@
 {
         "name": "@reev/docs",
         "version": "0.0.0",
-        "private": false,
+        "private": true,
         "scripts": {
                 "docusaurus": "docusaurus",
                 "start": "docusaurus start",

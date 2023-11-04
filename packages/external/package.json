@@ -1,0 +1,42 @@
+{
+        "name": "@reev/external",
+        "author": "tseijp",
+        "license": "MIT",
+        "version": "0.11.0",
+        "module": "index.js",
+        "types": "index.ts",
+        "main": "index.cjs.js",
+        "umd": "index.develop.js",
+        "private": false,
+        "sideEffect": false,
+        "dependencies": {
+                "@reev/core": "*"
+        },
+        "publishConfig": {
+                "access": "public"
+        },
+        "keywords": [
+                "react",
+                "reactjs",
+                "reactive",
+                "event",
+                "global",
+                "state",
+                "store",
+                "hooks",
+                "solid",
+                "solidjs",
+                "tiny",
+                "typescript"
+        ],
+        "files": [
+                "index.ts",
+                "index.js",
+                "index.d.ts",
+                "index.cjs.js",
+                "index.develop.js",
+                "index.product.js",
+                "react.ts",
+                "types.ts"
+        ]
+}
