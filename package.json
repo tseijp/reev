@@ -6,19 +6,19 @@
         "private": true,
         "sideEffects": false,
         "scripts": {
-                "watch": "cd packages/core && npx jest --watch --runInBand",
-                "cov": "cd packages/core && npx jest --coverage",
-                "ls": "cd packages/core && npm publish --dry-run",
                 "build": "cd examples/docs && yarn build",
                 "start": "cd examples/docs && yarn start",
                 "dev": "cd examples/docs && yarn start",
                 "serve": "cd examples/docs && yarn serve",
                 "tsup:core": "cd packages/core && yarn tsup",
+                "watch": "cd packages/core && npx jest --watch --runInBand",
+                "cov": "cd packages/core && npx jest --coverage",
+                "ls": "cd packages/core && npm publish --dry-run",
                 "tsup:gesture": "cd packages/gesture && yarn tsup",
                 "tsup:external": "cd packages/external && yarn tsup",
                 "tsup": "yarn tsup:core && yarn tsup:gesture && yarn tsup:external",
-                "release": "yarn tsup && yarn changeset publish",
-                "vers": "yarn changeset version"
+                "vers": "yarn changeset version",
+                "pub": "yarn tsup && yarn changeset publish"
         },
         "devDependencies": {
                 "@changesets/cli": "2.26.2",
