@@ -15,7 +15,8 @@ export const App = () => {
 ```
 
 import { gsap } from 'gsap'
-import { useScroll } from 'rege/react'
+import { Scroll } from '@site/../../packages/gesture/react'
+import { useScroll } from '@site/../../packages/gesture/react'
 
 export const App = () => {
         const { ref } = useScroll(({ active, target, offset: [x, y] }) => {
@@ -46,7 +47,6 @@ export const App2 = () => {
 }
 ```
 
-import { Scroll } from 'rege/react'
 
 export const onScroll = ({ active, target, movement: [x, y] }) => {
         gsap.to(target, { x, y, scale: active ? 1.2 : 1 })

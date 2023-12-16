@@ -20,7 +20,8 @@ export const App = () => {
 ```
 
 import { gsap } from 'gsap'
-import { usePinch } from 'rege/react'
+import { Pinch } from '@site/../../packages/gesture/react'
+import { usePinch } from '@site/../../packages/gesture/react'
 
 export const App = () => {
         const { ref } = usePinch(
@@ -43,7 +44,7 @@ You can use shorthands Pinch component
 ```jsx
 import { Pinch } from 'rege/react'
 
-export const onPinch = ({ active, event, target, movement: [x, y] }) => {
+export const onPinch = ({ event, target, movement: [x, y] }) => {
         event.preventDefault()
         x = Math.abs(x) / 100 + 1
         y = Math.abs(y) / 100 + 1
@@ -59,9 +60,8 @@ export const App2 = () => {
 }
 ```
 
-import { Pinch } from 'rege/react'
 
-export const onPinch = ({ active, event, target, movement: [x, y] }) => {
+export const onPinch = ({ event, target, movement: [x, y] }) => {
         event.preventDefault()
         x = Math.abs(x) / 100 + 1
         y = Math.abs(y) / 100 + 1

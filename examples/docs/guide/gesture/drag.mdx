@@ -18,7 +18,7 @@ export const App = () => {
 ```
 
 import { gsap } from 'gsap'
-import { useDrag } from 'rege/react'
+import { useDrag } from '@site/../../packages/gesture/react'
 
 export const App = () => {
         const { ref } = useDrag(({ active, target, movement: [x, y] }) => {
@@ -75,7 +75,7 @@ export const App3 = () => {
 }
 ```
 
-import { Drag } from 'rege/react'
+import { Drag } from '@site/../../packages/gesture/react'
 
 export const onDrag = ({ active, target, movement: [x, y] }) => {
         gsap.to(target, { x, y, scale: active ? 1.2 : 1 })

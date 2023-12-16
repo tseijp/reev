@@ -7,8 +7,7 @@ import { gsap } from 'gsap'
 import { useWheel } from 'rege/react'
 
 export const App = () => {
-        const { ref } = useWheel(
-                ({ active, event, target, movement: [x, y] }) => {
+        const { ref } = useWheel(({ event, target, movement: [x, y] }) => {
                         event.preventDefault()
                         x = Math.abs(x) / 100 + 1
                         y = Math.abs(y) / 100 + 1
@@ -20,11 +19,11 @@ export const App = () => {
 ```
 
 import { gsap } from 'gsap'
-import { useWheel } from 'rege/react'
+import { Wheel } from '@site/../../packages/gesture/react'
+import { useWheel } from '@site/../../packages/gesture/react'
 
 export const App = () => {
-        const { ref } = useWheel(
-                ({ active, event, target, movement: [x, y] }) => {
+        const { ref } = useWheel(({ event, target, movement: [x, y] }) => {
                         event.preventDefault()
                         x = Math.abs(x) / 50 + 1
                         y = Math.abs(y) / 50 + 1
@@ -43,7 +42,7 @@ You can use shorthands Wheel component
 ```jsx
 import { Wheel } from 'reev/react'
 
-export const onWheel = ({ active, event, target, movement: [x, y] }) => {
+export const onWheel = ({ event, target, movement: [x, y] }) => {
         event.preventDefault()
         x = Math.abs(x) / 100 + 1
         y = Math.abs(y) / 100 + 1
@@ -59,9 +58,7 @@ export const App2 = () => {
 }
 ```
 
-import { Wheel } from 'rege/react'
-
-export const onWheel = ({ active, event, target, movement: [x, y] }) => {
+export const onWheel = ({ event, target, movement: [x, y] }) => {
         event.preventDefault()
         x = Math.abs(x) / 100 + 1
         y = Math.abs(y) / 100 + 1
