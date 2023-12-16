@@ -1,7 +1,7 @@
 # ⛪️ reev
 
 <p align="center">
-<a href="https://reev.tsei.jp" target=”_blank” rel="noopener noreferrer">
+<a href="https://reev.tsei.jp">
   <img alt=" " src="https://reev.tsei.jp/img/REEV.gif"></img>
 </a>
 
