@@ -1,0 +1,30 @@
+.navbar, .navbar-sidebar, .menu_link {
+        font-size: 1.1rem;
+        box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px;
+        border: 1px rgba(255, 255, 255, 0.5) solid;
+        border-bottom: 1px rgba(40, 40, 40, 0.35) solid;
+        border-right: 1px rgba(40, 40, 40, 0.35) solid;
+}
+
+/* pc */
+@media screen and (min-width: 996px) {
+        .navbar {
+                backdrop-filter: blur(5px);
+        }
+}
+
+/* sp */
+@media screen and (max-width: 996px) {
+        .navbar-sidebar, .menu_link {
+                backdrop-filter: blur(5px);
+        }
+}
+
+/* dark mode*/
+[data-theme='dark'] .navbar { background-color: rgba(55, 183, 245, 0.25); }
+[data-theme='dark'] .navbar-sidebar {  background-color: rgba(55, 183, 245, 0.25); }
+
+/* light mode */
+[data-theme='light'] .navbar { background-color: rgba(240,88,66, 0.25); }
+[data-theme='light'] .navbar-sidebar { background-color: rgba(240,88,66, 0.25); }
+[data-theme='light'] { --ifm-menu-color: black; }

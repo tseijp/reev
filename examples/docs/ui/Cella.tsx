@@ -1,7 +1,7 @@
 import * as React from 'react'
 // @ts-ignore
 import { RigidBody } from '@react-three/rapier'
-import type { GroupProps } from '@react-three/fiber'
+import { useThree, type GroupProps } from '@react-three/fiber'
 
 const px = (i = 0, l = 10) => -i / l - 1 / 2 / l + 1 / 2
 const py = (i = 0, l = 10) => -i / 2 / l + 1 / 2
@@ -10,10 +10,18 @@ const sx = (_ = 0, l = 10) => 1 / l
 const sy = (i = 0, l = 10) => i / l
 const sz = (i = 0, l = 10) => (i + 1) / l
 
-export const Cella = (props) => {
+export const Cella = (props: CellaProps) => {
+        const ref = React.useRef<any>()
+        const camera = useThree((state) => state.camera)
+        const handleClick = (e: any) => {
+                const to = e.point.sub(camera.position).normalize()
+                ref.current.applyImpulse(to, true)
+                ref.current.applyTorqueImpulse(to, true)
+        }
+
         return (
-                <RigidBody>
-                        <CellaImpl {...props} />
+                <RigidBody ref={ref} mass={1}>
+                        <CellaImpl {...props} onPointerDown={handleClick} />
                 </RigidBody>
         )
 }

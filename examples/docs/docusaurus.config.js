@@ -32,13 +32,13 @@ const config = {
                         id: 'api',
                         path: 'api/',
                         routeBasePath: 'api',
-                        editUrl: 'https://github.com/tseijp/reev/tree/main/examples/docs/api',
+                        editUrl: 'https://github.com/tseijp/reev/tree/main/examples/docs',
                 }],
                 ['@docusaurus/plugin-content-docs', {
                         id: 'guide',
                         path: 'guide/',
                         routeBasePath: 'guide',
-                        editUrl: 'https://github.com/tseijp/reev/tree/main/examples/docs/guide',
+                        editUrl: 'https://github.com/tseijp/reev/tree/main/examples/docs',
                 }],
         ],
         themeConfig: {

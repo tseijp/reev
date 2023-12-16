@@ -89,5 +89,33 @@
                         "require": "./dist/react.js",
                         "default": "./dist/react.js"
                 }
+        },
+        "peerDependencies": {
+                "expo": "*",
+                "expo-gl": "*",
+                "react": ">=16.8",
+                "react-dom": ">=16.8",
+                "solid-js": "*",
+                "vue": "*"
+        },
+        "peerDependenciesMeta": {
+                "expo": {
+                        "optional": true
+                },
+                "expo-gl": {
+                        "optional": true
+                },
+                "react": {
+                        "optional": true
+                },
+                "react-dom": {
+                        "optional": true
+                },
+                "solid-js": {
+                        "optional": true
+                },
+                "vue": {
+                        "optional": true
+                }
         }
 }

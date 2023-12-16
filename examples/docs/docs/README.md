@@ -54,7 +54,7 @@ npm install reev
 
 ###### 🌇 [glre][glre]: GLSL Reactive Engine
 
-###### 🌃 [refr][refr]: request animation frame
+###### 🔮 [refr][refr]: request animation frame
 
 [glre]: https://github.com/tseijp/reev
 [refr]: https://github.com/tseijp/refr

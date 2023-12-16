@@ -1,17 +1,18 @@
 import React from 'react'
 
 export interface TitleProps {
+        isDark: boolean;
         children: React.ReactNode
 }
 
 export default function Title(props: TitleProps) {
-        const { children } = props
+        const { isDark, children } = props
         return (
                 <h2
                         style={{
-                                fontSize: '2rem',
+                                fontSize: 'calc(min(4.5vw, 2.5rem))', // vw is for sp, rem is for pc
                                 textAlign: 'center',
-                                color: '#123185',
+                                color: isDark ? '#123185' : '#843332',
                         }}
                 >
                         {children}
