@@ -39,10 +39,12 @@ export const CellaImpl = React.forwardRef((props: CellaProps, ref: any) => {
                 return (
                         <group ref={ref} {...other}>
                                 <mesh
+                                        castShadow
                                         position={[4 / l, 4 / l, 4 / l]}
                                         scale={[2 / l, 2 / l, 2 / l]}
                                 >
-                                        <meshPhongMaterial color={color} />
+                                        {/* @ts-ignore */}
+                                        <mat color={color} />
                                         <boxGeometry args={[1, 1, 1]} />
                                 </mesh>
                         </group>
@@ -51,24 +53,30 @@ export const CellaImpl = React.forwardRef((props: CellaProps, ref: any) => {
         return (
                 <group ref={ref} {...other}>
                         <mesh
+                                castShadow
                                 position={[px(i, l), py(i, l), pz(i, l)]}
                                 scale={[sx(i, l), sy(i, l), sz(i, l)]}
                         >
-                                <meshBasicMaterial color={color} />
+                                {/* @ts-ignore */}
+                                <mat color={color} />
                                 <boxGeometry args={[1, 1, 1]} />
                         </mesh>
                         <mesh
+                                castShadow
                                 position={[pz(i, l), px(i, l), py(i, l)]}
                                 scale={[sz(i, l), sx(i, l), sy(i, l)]}
                         >
-                                <meshPhongMaterial color={color} />
+                                {/* @ts-ignore */}
+                                <mat color={color} />
                                 <boxGeometry args={[1, 1, 1]} />
                         </mesh>
                         <mesh
+                                castShadow
                                 position={[py(i, l), pz(i, l), px(i, l)]}
                                 scale={[sy(i, l), sz(i, l), sx(i, l)]}
                         >
-                                <meshPhysicalMaterial color={color} />
+                                {/* @ts-ignore */}
+                                <mat color={color} />
                                 <boxGeometry args={[1, 1, 1]} />
                         </mesh>
                 </group>

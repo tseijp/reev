@@ -1,22 +1,30 @@
 import * as React from 'react'
+import * as THREE from 'three'
 import { Suspense } from 'react'
-import { Canvas } from '@react-three/fiber'
+import { Canvas, extend, useLoader } from '@react-three/fiber'
 import { Html, OrbitControls } from '@react-three/drei'
 import { useColorMode } from '@docusaurus/theme-common'
 // @ts-ignore
 import { Physics, RigidBody } from '@react-three/rapier'
 import { Cella } from './Cella'
 import Title from './Title'
+import { Mat } from './Mat'
+
+extend({ Mat })
 
 const { PI } = Math
 
 type Vec3 = [number, number, number]
+
+let isDebug = false
+// isDebug = process.env.NODE_ENV === 'development'
 
 export default function CanvasPage() {
         const isDark = useColorMode().colorMode === 'dark'
 
         return (
                 <Canvas
+                        shadows
                         camera={{ position: [0, 0.25, 1.5] as Vec3 }}
                         style={{ top: 0, left: 0, position: 'fixed' }}
                 >
@@ -38,11 +46,16 @@ export default function CanvasPage() {
                                 attach="background"
                                 args={[isDark ? '#132c7e' : '#f2c245']}
                         />
-                        <OrbitControls enableZoom={false} />
-                        <ambientLight />
-                        <pointLight position={[10, 10, 10]} />
+                        <OrbitControls enableZoom={isDebug} />
+                        <directionalLight
+                                position={[-5, 5, 1]}
+                                castShadow
+                                shadow-mapSize={1024}
+                        />
+                        <ambientLight intensity={2} />
+                        <pointLight castShadow position={[10, 10, 10]} />
                         <Suspense fallback={null}>
-                                <Physics>
+                                <Physics paused={isDebug}>
                                         {/* <Debug /> */}
                                         <Cella
                                                 color={
@@ -134,10 +147,12 @@ export default function CanvasPage() {
                                         />
                                         <RigidBody type="fixed">
                                                 <mesh
+                                                        receiveShadow
                                                         position-y={-1}
                                                         scale={[99, 1, 99]}
                                                 >
-                                                        <meshBasicMaterial color="#ececec" />
+                                                        {/* @ts-ignore */}
+                                                        <mat color="#ececec" />
                                                         <boxGeometry
                                                                 args={[1, 1, 1]}
                                                         />
