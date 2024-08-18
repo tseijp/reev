@@ -6,7 +6,8 @@
 import { useGeolocation } from 'rexr/react'
 
 export const App = () => {
-        const { geolocation: coords = {} } = useGeolocation()
+        const { geolocation = {} } = useGeolocation()
+        const { coords = {} } = geolocation
         return (
                 <div>
                         <div>latitude: {coords.latitude}</div>
@@ -20,7 +21,8 @@ export const App = () => {
 import { useGeolocation } from '@site/../../packages/external/react'
 
 export const App = () => {
-        const { coords = {} } = useGeolocation()
+        const { geolocation = {} } = useGeolocation()
+        const { coords = {} } = geolocation
         return (
                 <div>
                         <div>latitude: {coords.latitude}</div>

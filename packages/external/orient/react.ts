@@ -5,21 +5,15 @@ import { EventState } from 'reev'
 
 let self: EventState<OrientState>
 
-export const subscribe = (callback = () => {}) => {
+const subscribe = (callback = () => {}) => {
         self({ callback }).onMount()
         return () => self({ callback }).onClean()
 }
 
-export const getSnapshot = () => self.snapshot
-
-export const getServerSnapshot = () => self.snapshot
+const getSnapshot = () => self.snapshot
 
 export const useOrient = () => {
         if (!self) self = orientEvent()
-        const [ret] = useSyncExternalStore(
-                subscribe,
-                getSnapshot,
-                getServerSnapshot
-        )
+        const [ret] = useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
         return ret
 }

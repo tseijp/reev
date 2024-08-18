@@ -27,12 +27,12 @@ export const orientEvent = () => {
         const onMount = () => {
                 initValues()
                 self.active = true
-                window.addEventListener('deviceOrient', self.onChange)
+                window.addEventListener("deviceorientation", self.onChange);
         }
 
         const onClean = () => {
                 initValues()
-                window.removeEventListener('deviceOrient', self.onChange)
+                window.removeEventListener("deviceorientation", self.onChange);
         }
 
         const self = event({
