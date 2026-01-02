@@ -29,7 +29,7 @@ import { Key } from 'rege/react'
 
 export const App2 = () => {
         return (
-                <Key onKey={console.log}>
+                <Key key={console.log}>
                         {({ ref }) => <span ref={ref} style={style} />}
                 </Key>
         )
@@ -40,7 +40,7 @@ import { Key } from '@site/../../packages/gesture/react'
 
 export const App2 = () => {
         return (
-                <Key onKey={console.log}>
+                <Key key={console.log}>
                         {({ ref }) => <span ref={ref} style={style} />}
                 </Key>
         )

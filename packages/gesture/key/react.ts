@@ -4,7 +4,7 @@ import { KeyArg, KeyState } from './types'
 import { isF } from '../utils'
 
 export const useKey = <El extends Element = Element>(arg: KeyArg<El>) => {
-        if (isF(arg)) arg = { onKey: arg }
+        if (isF(arg)) arg = { key: arg }
         const memo = useMutable(arg)
         return useOnce(() => keyEvent<El>(memo as any))
 }

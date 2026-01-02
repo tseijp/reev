@@ -9,7 +9,7 @@
 
 | Event name | Argument      | Description                                         |
 | :--------- | :------------ | :-------------------------------------------------- |
-| onKey      | KeyState      | Called on all hover events. Mainly events specified |
+| key      | KeyState      | Called on all hover events. Mainly events specified |
 | keydown  | KeyboardEvent | Called on all hover events. Mainly events specified |
 | mount    | Element       | Called when the component is mounted                |
 | clean    | void          | Called when the component is unmounted              |
@@ -20,10 +20,10 @@
 ```ts
 export interface KeyState<El extends Element = Element> {
         target: El | Window
-        key: string
+        pressedKey: string
         code: string
         event: KeyboardEvent
-        onKey(e: KeyState): void
+        key(e: KeyState): void
         keydown(e: KeyboardEvent): void
         mount(el: El): void
         clean(): void

@@ -6,9 +6,9 @@ export const keyEvent = <El extends Element = Element>(
 ) => {
         const keydown = (e: KeyboardEvent) => {
                 self.event = e
-                self.key = e.key
+                self.pressedKey = e.key
                 self.code = e.code
-                self.onKey?.(self)
+                self.key?.(self)
         }
 
         const mount = (el: El | Window) => {
