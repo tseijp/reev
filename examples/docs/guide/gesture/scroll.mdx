@@ -39,25 +39,16 @@ export const scroll = ({ active, target, movement: [x, y] }) => {
 }
 
 export const App2 = () => {
-        return (
-                <Scroll scroll={scroll}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Scroll>
-        )
+        return <Scroll scroll={scroll}>{({ ref }) => <span ref={ref} style={style} />}</Scroll>
 }
 ```
-
 
 export const scroll = ({ active, target, movement: [x, y] }) => {
         gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
 }
 
 export const App2 = () => {
-        return (
-                <Scroll scroll={scroll}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Scroll>
-        )
+        return <Scroll scroll={scroll}>{({ ref }) => <span ref={ref} style={style} />}</Scroll>
 }
 
 <App2 />

@@ -1,10 +1,8 @@
 import * as React from 'react'
-import * as THREE from 'three'
 import { Suspense } from 'react'
-import { Canvas, extend, useLoader } from '@react-three/fiber'
+import { Canvas, extend } from '@react-three/fiber'
 import { Html, OrbitControls } from '@react-three/drei'
 import { useColorMode } from '@docusaurus/theme-common'
-// @ts-ignore
 import { Physics, RigidBody } from '@react-three/rapier'
 import { Cella } from './Cella'
 import Title from './Title'

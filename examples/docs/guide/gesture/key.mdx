@@ -28,22 +28,14 @@ You can use shorthands Key component
 import { Key } from 'rege/react'
 
 export const App2 = () => {
-        return (
-                <Key key={console.log}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Key>
-        )
+        return <Key key={console.log}>{({ ref }) => <span ref={ref} style={style} />}</Key>
 }
 ```
 
 import { Key } from '@site/../../packages/gesture/react'
 
 export const App2 = () => {
-        return (
-                <Key key={console.log}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Key>
-        )
+        return <Key key={console.log}>{({ ref }) => <span ref={ref} style={style} />}</Key>
 }
 
 <App2 />

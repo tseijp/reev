@@ -8,12 +8,11 @@ import { useWheel } from 'rege/react'
 
 export const App = () => {
         const { ref } = useWheel(({ event, target, movement: [x, y] }) => {
-                        event.preventDefault()
-                        x = Math.abs(x) / 100 + 1
-                        y = Math.abs(y) / 100 + 1
-                        gsap.to(target, { scaleX: x, scaleY: y })
-                }
-        )
+                event.preventDefault()
+                x = Math.abs(x) / 100 + 1
+                y = Math.abs(y) / 100 + 1
+                gsap.to(target, { scaleX: x, scaleY: y })
+        })
         return <span ref={ref} style={style} />
 }
 ```
@@ -24,12 +23,11 @@ import { useWheel } from '@site/../../packages/gesture/react'
 
 export const App = () => {
         const { ref } = useWheel(({ event, target, movement: [x, y] }) => {
-                        event.preventDefault()
-                        x = Math.abs(x) / 50 + 1
-                        y = Math.abs(y) / 50 + 1
-                        gsap.to(target, { scaleX: x, scaleY: y })
-                }
-        )
+                event.preventDefault()
+                x = Math.abs(x) / 50 + 1
+                y = Math.abs(y) / 50 + 1
+                gsap.to(target, { scaleX: x, scaleY: y })
+        })
         return <span ref={ref} style={style} />
 }
 
@@ -50,11 +48,7 @@ export const wheel = ({ event, target, movement: [x, y] }) => {
 }
 
 export const App2 = () => {
-        return (
-                <Wheel wheel={wheel}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Wheel>
-        )
+        return <Wheel wheel={wheel}>{({ ref }) => <span ref={ref} style={style} />}</Wheel>
 }
 ```
 
@@ -66,11 +60,7 @@ export const wheel = ({ event, target, movement: [x, y] }) => {
 }
 
 export const App2 = () => {
-        return (
-                <Wheel wheel={wheel}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Wheel>
-        )
+        return <Wheel wheel={wheel}>{({ ref }) => <span ref={ref} style={style} />}</Wheel>
 }
 
 <App2 />

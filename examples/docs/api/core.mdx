@@ -20,10 +20,7 @@ export const App = () => {
         const [i, set] = useState(0)
         const { click } = useMutable({ click: () => set(i + 1) })
         return (
-                <button
-                        onClick={click}
-                        className="clean-btn button button--secondary margin-left--md"
-                >
+                <button onClick={click} className="clean-btn button button--secondary margin-left--md">
                         {i}
                 </button>
         )
@@ -52,10 +49,7 @@ export const App2 = () => {
         const event = useEvent({ click() {} }) // do something when component will be clicked
         event('click', () => set((p) => p + 1)) // register new function
         return (
-                <button
-                        onClick={event.click}
-                        className="clean-btn button button--secondary margin-left--md"
-                >
+                <button onClick={event.click} className="clean-btn button button--secondary margin-left--md">
                         {i}
                 </button>
         )
@@ -95,11 +89,7 @@ export const App3 = () => {
         })
         event('click', () => set((p) => p + 1)) // register new function
         return (
-                <button
-                        ref={event.ref}
-                        onClick={event.click}
-                        className="clean-btn button button--secondary margin-left--md"
-                >
+                <button ref={event.ref} onClick={event.click} className="clean-btn button button--secondary margin-left--md">
                         {i}
                 </button>
         )

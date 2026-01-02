@@ -67,11 +67,7 @@ export const drag = ({ active, target, movement: [x, y] }) => {
 }
 
 export const App3 = () => {
-        return (
-                <Drag drag={drag}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Drag>
-        )
+        return <Drag drag={drag}>{({ ref }) => <span ref={ref} style={style} />}</Drag>
 }
 ```
 
@@ -82,11 +78,7 @@ export const drag = ({ active, target, movement: [x, y] }) => {
 }
 
 export const App3 = () => {
-        return (
-                <Drag drag={drag}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Drag>
-        )
+        return <Drag drag={drag}>{({ ref }) => <span ref={ref} style={style} />}</Drag>
 }
 
 <App3 />

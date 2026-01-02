@@ -38,11 +38,7 @@ export const hover = ({ active, target, movement: [x, y] }) => {
 }
 
 export const App2 = () => {
-        return (
-                <Hover hover={hover}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Hover>
-        )
+        return <Hover hover={hover}>{({ ref }) => <span ref={ref} style={style} />}</Hover>
 }
 ```
 
@@ -53,11 +49,7 @@ export const hover = ({ active, target, movement: [x, y] }) => {
 }
 
 export const App2 = () => {
-        return (
-                <Hover hover={hover}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Hover>
-        )
+        return <Hover hover={hover}>{({ ref }) => <span ref={ref} style={style} />}</Hover>
 }
 
 <App2 />

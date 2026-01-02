@@ -30,20 +30,12 @@ You can use shorthands Resize component
 import { Resize } from 'rege/react'
 
 export const App2 = () => {
-        return (
-                <Resize key={console.log}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Resize>
-        )
+        return <Resize key={console.log}>{({ ref }) => <span ref={ref} style={style} />}</Resize>
 }
 ```
 
 export const App2 = () => {
-        return (
-                <Resize key={console.log}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Resize>
-        )
+        return <Resize key={console.log}>{({ ref }) => <span ref={ref} style={style} />}</Resize>
 }
 
 <App2 />
