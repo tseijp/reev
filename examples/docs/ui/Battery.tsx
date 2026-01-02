@@ -20,7 +20,7 @@ export const Model = (props: BatteryProps) => {
         const batteryHeight = 3.8
         const outerShellThickness = outerShellDiameter / 2 - electrodeDiameter
         const liquidLevel = batteryHeight * level
-        const liquidRef = useRef<Mesh>()
+        const liquidRef = useRef<Mesh>(null!)
 
         const liquidColor = useMemo(() => {
                 const color = new THREE.Color()
@@ -33,78 +33,16 @@ export const Model = (props: BatteryProps) => {
         return (
                 <group rotation={[Math.PI / 2, 0, -Math.PI / 2]}>
                         {/* Positive electrode */}
-                        <Cylinder
-                                args={[
-                                        electrodeDiameter / 2,
-                                        electrodeDiameter / 2,
-                                        electrodeHeight,
-                                        32,
-                                ]}
-                                position={[
-                                        0,
-                                        batteryHeight / 2 +
-                                                electrodeHeight / 2 +
-                                                outerShellThickness,
-                                        0,
-                                ]}
-                        >
-                                <meshPhysicalMaterial
-                                        color={'white'}
-                                        transparent={true}
-                                        opacity={0.5}
-                                        metalness={0.7}
-                                        roughness={0.2}
-                                        side={THREE.BackSide}
-                                />
+                        <Cylinder args={[electrodeDiameter / 2, electrodeDiameter / 2, electrodeHeight, 32]} position={[0, batteryHeight / 2 + electrodeHeight / 2 + outerShellThickness, 0]}>
+                                <meshPhysicalMaterial color={'white'} transparent={true} opacity={0.5} metalness={0.7} roughness={0.2} side={THREE.BackSide} />
                         </Cylinder>
                         {/* Battery outer shell */}
-                        <Cylinder
-                                args={[
-                                        outerShellDiameter / 2,
-                                        outerShellDiameter / 2,
-                                        batteryHeight + outerShellThickness * 2,
-                                        32,
-                                        1,
-                                        false,
-                                        0,
-                                        Math.PI * 2,
-                                ]}
-                        >
-                                <meshPhysicalMaterial
-                                        color={'white'}
-                                        transparent={true}
-                                        opacity={0.5}
-                                        metalness={0.7}
-                                        roughness={0.2}
-                                        side={THREE.BackSide}
-                                />
+                        <Cylinder args={[outerShellDiameter / 2, outerShellDiameter / 2, batteryHeight + outerShellThickness * 2, 32, 1, false, 0, Math.PI * 2]}>
+                                <meshPhysicalMaterial color={'white'} transparent={true} opacity={0.5} metalness={0.7} roughness={0.2} side={THREE.BackSide} />
                         </Cylinder>
                         {/* Battery liquid */}
-                        <Cylinder
-                                ref={liquidRef}
-                                args={[
-                                        outerShellDiameter / 2 -
-                                                outerShellThickness,
-                                        outerShellDiameter / 2 -
-                                                outerShellThickness,
-                                        liquidLevel,
-                                        32,
-                                        1,
-                                        false,
-                                        0,
-                                        Math.PI * 2,
-                                ]}
-                                position={[
-                                        0,
-                                        (liquidLevel - batteryHeight) / 2,
-                                        0,
-                                ]}
-                        >
-                                <meshPhysicalMaterial
-                                        color={liquidColor}
-                                        emissive={liquidColor}
-                                        emissiveIntensity={0.5}
-                                />
+                        <Cylinder ref={liquidRef} args={[outerShellDiameter / 2 - outerShellThickness, outerShellDiameter / 2 - outerShellThickness, liquidLevel, 32, 1, false, 0, Math.PI * 2]} position={[0, (liquidLevel - batteryHeight) / 2, 0]}>
+                                <meshPhysicalMaterial color={liquidColor} emissive={liquidColor} emissiveIntensity={0.5} />
                         </Cylinder>
                 </group>
         )
@@ -126,10 +64,7 @@ export const Battery = (props: BatteryProps) => {
                 >
                         <ambientLight />
                         <pointLight position={[0, 10, 10]} />
-                        <PresentationControls
-                                snap
-                                config={{ mass: 4, tension: 500 }}
-                        >
+                        <PresentationControls snap config={{ mass: 4, tension: 500 }}>
                                 <Model level={level} />
                                 <Html
                                         center
@@ -149,9 +84,7 @@ export const Battery = (props: BatteryProps) => {
                                                 style={{
                                                         left: '-2rem',
                                                         position: 'absolute',
-                                                        display: charging
-                                                                ? 'block'
-                                                                : 'none',
+                                                        display: charging ? 'block' : 'none',
                                                 }}
                                         />
                                         {(level * 100) << 0}%

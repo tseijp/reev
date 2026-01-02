@@ -1,9 +1,7 @@
 import { event } from 'reev'
 import { KeyState } from './types'
 
-export const keyEvent = <El extends Element = Element>(
-        state: Partial<KeyState<El>> = {}
-) => {
+export const keyEvent = <El extends Element = Element>(state: Partial<KeyState<El>> = {}) => {
         const keydown = (e: KeyboardEvent) => {
                 self.event = e
                 self.pressedKey = e.key

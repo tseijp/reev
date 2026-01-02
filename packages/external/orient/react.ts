@@ -14,6 +14,6 @@ const getSnapshot = () => self.snapshot
 
 export const useOrient = () => {
         if (!self) self = orientEvent()
-        const [ret] = useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
+        const [ret] = useSyncExternalStore(subscribe, getSnapshot, getSnapshot)
         return ret
 }

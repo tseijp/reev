@@ -3,9 +3,7 @@ import { wheelValues } from './utils'
 import { EventState, event } from 'reev'
 import { WheelState } from './types'
 
-export const wheelEvent = <El extends Element = Element>(
-        config?: WheelState
-) => {
+export const wheelEvent = <El extends Element = Element>(config?: WheelState) => {
         const initValues = () => {
                 vec2(0, 0, self.value)
                 vec2(0, 0, self._value)

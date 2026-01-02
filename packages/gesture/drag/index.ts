@@ -23,9 +23,7 @@ export const EVENT_FOR_DRAG = {
         },
 }
 
-export const dragEvent = <El extends Element = Element>(
-        state: Partial<DragState<El>> = {}
-) => {
+export const dragEvent = <El extends Element = Element>(state: Partial<DragState<El>> = {}) => {
         const initValues = () => {
                 vec2(0, 0, self.value)
                 vec2(0, 0, self._value)

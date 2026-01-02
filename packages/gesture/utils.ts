@@ -35,21 +35,15 @@ export const cpV = (a: Vec2, out = vec2()): Vec2 => {
 /**
  * SUPPORT
  */
-const isBrowser =
-        typeof window !== 'undefined' &&
-        !!window.document &&
-        !!window.document.createElement
+const isBrowser = typeof window !== 'undefined' && !!window.document && !!window.document.createElement
 
 const supportsTouchEvents = () => isBrowser && 'ontouchstart' in window
 
-const isTouchScreen = () =>
-        supportsTouchEvents() ||
-        (isBrowser && window.navigator.maxTouchPoints > 1)
+const isTouchScreen = () => supportsTouchEvents() || (isBrowser && window.navigator.maxTouchPoints > 1)
 
 const supportsPointerEvents = () => isBrowser && 'onpointerdown' in window
 
-const supportsPointerLock = () =>
-        isBrowser && 'exitPointerLock' in window.document
+const supportsPointerLock = () => isBrowser && 'exitPointerLock' in window.document
 
 const supportsGestureEvents = () => {
         try {

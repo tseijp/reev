@@ -11,8 +11,7 @@ export const useDrag = <El extends Element = Element>(arg: DragArg<El>) => {
 
 export default useDrag
 
-export interface DragProps<El extends Element = Element>
-        extends Partial<DragState<El>> {
+export interface DragProps<El extends Element = Element> extends Partial<DragState<El>> {
         children(self: DragState<El>): JSX.Element
 }
 

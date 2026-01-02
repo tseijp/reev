@@ -8,6 +8,4 @@ export interface GeolocationState {
         clean(): void
 }
 
-export type GeolocationArg =
-        | Partial<GeolocationState>
-        | GeolocationState['change']
+export type GeolocationArg = Partial<GeolocationState> | GeolocationState['change']

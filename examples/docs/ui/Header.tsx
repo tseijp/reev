@@ -7,13 +7,9 @@ export default function Header() {
         return (
                 <Head>
                         <title>
-                                {siteConfig.title} {siteConfig.titleDelimiter}{' '}
-                                {siteConfig.tagline}
+                                {siteConfig.title} {siteConfig.titleDelimiter} {siteConfig.tagline}
                         </title>
-                        <style>
-                                @import
-                                url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-                        </style>
+                        <style>@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');</style>
                 </Head>
         )
 }

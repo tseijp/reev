@@ -26,6 +26,4 @@ export interface DragState<El extends Element = Element> {
         ref(traget: Element): void
 }
 
-export type DragArg<El extends Element> =
-        | Partial<DragState<El>>
-        | DragState<El>['drag']
+export type DragArg<El extends Element> = Partial<DragState<El>> | DragState<El>['drag']

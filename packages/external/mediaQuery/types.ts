@@ -6,6 +6,4 @@ export interface MediaQueryState {
         clean(): void
 }
 
-export type MediaQueryArg =
-        | Partial<MediaQueryState>
-        | MediaQueryState['change']
+export type MediaQueryArg = Partial<MediaQueryState> | MediaQueryState['change']

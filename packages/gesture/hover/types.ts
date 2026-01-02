@@ -22,6 +22,4 @@ export interface HoverState<El extends Element = Element> {
         ref(target: El | null): void
 }
 
-export type HoverArg<El extends Element = Element> =
-        | Partial<HoverState<El>>
-        | HoverState<El>['hover']
+export type HoverArg<El extends Element = Element> = Partial<HoverState<El>> | HoverState<El>['hover']

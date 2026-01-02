@@ -9,8 +9,7 @@ export const useKey = <El extends Element = Element>(arg: KeyArg<El>) => {
         return useOnce(() => keyEvent<El>(memo as any))
 }
 
-export interface KeyProps<El extends Element = Element>
-        extends Partial<KeyState<El>> {
+export interface KeyProps<El extends Element = Element> extends Partial<KeyState<El>> {
         children: (state: KeyState<El>) => JSX.Element
 }
 

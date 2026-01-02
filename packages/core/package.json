@@ -29,6 +29,7 @@
         ],
         "files": [
                 "dist/**/*.{js,ts,mjs,mts,map}",
+                "src/**/*.{js,ts,mjs,mts,map}",
                 "packages.json",
                 "README.md"
         ],

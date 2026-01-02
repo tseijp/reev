@@ -9,6 +9,4 @@ export interface KeyState<El extends Element = Element> {
         clean(): void
         ref(el: Element | null): void
 }
-export type KeyArg<El extends Element = Element> =
-        | Partial<KeyState<El>>
-        | KeyState<El>['key']
+export type KeyArg<El extends Element = Element> = Partial<KeyState<El>> | KeyState<El>['key']

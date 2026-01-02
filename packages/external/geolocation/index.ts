@@ -16,8 +16,7 @@ export const geolocationEvent = () => {
         }
 
         const clean = () => {
-                if (typeof self.id !== 'undefined')
-                        navigator.geolocation.clearWatch(self.id)
+                if (typeof self.id !== 'undefined') navigator.geolocation.clearWatch(self.id)
         }
 
         const self = event({

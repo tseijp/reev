@@ -5,9 +5,7 @@ const DELAY = 100
 
 type ResizeEventCallback = (entry: ResizeObserverEntry) => () => void
 
-export const resizeEvent = <El extends Element = Element>(
-        state: ResizeState
-) => {
+export const resizeEvent = <El extends Element = Element>(state: ResizeState) => {
         const on: ResizeEventCallback = (entry) => () => {
                 // ???
         }

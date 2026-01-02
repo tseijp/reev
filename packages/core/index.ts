@@ -1,20 +1,8 @@
-import type {
-        Fun,
-        Nested,
-        DurableState,
-        MutableState,
-        EventState,
-        NestedFun,
-        DurableFun,
-        MutableArgs,
-        EventArgs,
-} from './types'
+import type { Fun, Nested, DurableState, MutableState, EventState, NestedFun, DurableFun, MutableArgs, EventArgs } from './types'
 
 export * from './types'
 
-export function nested<T, Args extends any[] = any[]>(
-        init: NestedFun<T, Args>
-) {
+export function nested<T, Args extends any[] = any[]>(init: NestedFun<T, Args>) {
         const self = ((key, ...args) => {
                 if (!self.map.has(key)) self.map.set(key, init(key, ...args))
                 return self.map.get(key)
@@ -24,27 +12,20 @@ export function nested<T, Args extends any[] = any[]>(
         return self
 }
 
-export const durable = <T extends object, Ret = unknown>(
-        fun: DurableFun<T>,
-        ret?: Ret
-) => {
+export const durable = <T extends object, Ret = unknown>(fun: DurableFun<T>, ret?: Ret) => {
         const self = (arg: T, ...args: unknown[]) => {
                 if (arg !== Object(arg)) fun(arg as any, ...args)
                 else for (const key in arg) fun(key, arg[key], ...args)
                 return ret ?? self
         }
-        return self as DurableState<
-                T,
-                Ret extends undefined ? typeof self : Ret
-        >
+        return self as DurableState<T, Ret extends undefined ? typeof self : Ret>
 }
 
 export const mutable = <T extends object>(...args: MutableArgs<T> | []) => {
         const map = new Map<string, Fun>()
         const memo = durable((key, fun) => {
                 if (typeof fun !== 'function') return (memo[key] = fun)
-                if (!map.has(key))
-                        memo[key] = (...args: any[]) => map.get(key)?.(...args)
+                if (!map.has(key)) memo[key] = (...args: any[]) => map.get(key)?.(...args)
                 map.set(key, fun as Fun)
         }) as MutableState<T>
         if (args.length) memo(...(args as any))

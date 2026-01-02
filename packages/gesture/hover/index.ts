@@ -23,9 +23,7 @@ export const EVENT_FOR_HOVER = {
         },
 }
 
-export const hoverEvent = <El extends Element = Element>(
-        state: Partial<HoverState<El>> = {}
-) => {
+export const hoverEvent = <El extends Element = Element>(state: Partial<HoverState<El>> = {}) => {
         const initValues = () => {
                 vec2(0, 0, self.value)
                 vec2(0, 0, self._value)

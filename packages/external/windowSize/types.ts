@@ -8,6 +8,4 @@ export interface WindowSizeState {
         clean(): void
 }
 
-export type WindowSizeArg =
-        | Partial<WindowSizeState>
-        | WindowSizeState['change']
+export type WindowSizeArg = Partial<WindowSizeState> | WindowSizeState['change']

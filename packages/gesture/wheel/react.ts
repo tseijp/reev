@@ -11,8 +11,7 @@ export const useWheel = <El extends Element = Element>(config: WheelConfig) => {
 
 export default useWheel
 
-export interface WheelProps<El extends Element = Element>
-        extends Partial<WheelState<El>> {
+export interface WheelProps<El extends Element = Element> extends Partial<WheelState<El>> {
         children: (state: WheelState<El>) => JSX.Element
 }
 

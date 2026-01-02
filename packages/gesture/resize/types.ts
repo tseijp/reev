@@ -7,6 +7,4 @@ export interface ResizeState<El extends Element = Element> {
         ref(target: El): void
 }
 
-export type ResizeArg<El extends Element = Element> =
-        | Partial<ResizeState<El>>
-        | ResizeState<El>['resize']
+export type ResizeArg<El extends Element = Element> = Partial<ResizeState<El>> | ResizeState<El>['resize']

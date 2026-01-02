@@ -11,8 +11,7 @@ export const useHover = <El extends Element = Element>(arg?: HoverArg) => {
 
 export default useHover
 
-export interface HoverProps<El extends Element = Element>
-        extends Partial<HoverState<El>> {
+export interface HoverProps<El extends Element = Element> extends Partial<HoverState<El>> {
         children: (state: HoverState<El>) => JSX.Element
 }
 

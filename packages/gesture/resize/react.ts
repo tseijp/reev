@@ -11,14 +11,11 @@ export const useResize = (arg: ResizeArg) => {
 
 export default useResize
 
-export interface ResizeProps<El extends Element = Element>
-        extends Partial<ResizeState<El>> {
+export interface ResizeProps<El extends Element = Element> extends Partial<ResizeState<El>> {
         children: (state: ResizeState<El>) => JSX.Element
 }
 
-export const Resize = <El extends Element = Element>(
-        props: ResizeProps<El>
-) => {
+export const Resize = <El extends Element = Element>(props: ResizeProps<El>) => {
         const { children, ...other } = props
         return children(useResize(other))
 }

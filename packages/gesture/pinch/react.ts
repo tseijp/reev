@@ -11,8 +11,7 @@ export const usePinch = <El extends Element = Element>(arg?: PinchArg) => {
 
 export default usePinch
 
-export interface PinchProps<El extends Element = Element>
-        extends Partial<PinchState<El>> {
+export interface PinchProps<El extends Element = Element> extends Partial<PinchState<El>> {
         children: (state: PinchState<El>) => JSX.Element
 }
 

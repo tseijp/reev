@@ -3,9 +3,7 @@ import { scrollValues } from './utils'
 import { EventState, event } from 'reev'
 import { ScrollState } from './types'
 
-export const scrollEvent = <El extends Element = Element>(
-        config?: ScrollState
-) => {
+export const scrollEvent = <El extends Element = Element>(config?: ScrollState) => {
         const initValues = () => {
                 vec2(0, 0, self.value)
                 vec2(0, 0, self._value)

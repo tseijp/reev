@@ -26,6 +26,4 @@ export interface ScrollState<El extends Element = Element> {
         tick?: () => void
 }
 
-export type ScrollConfig<El extends Element = Element> =
-        | Partial<ScrollState<El>>
-        | ScrollState<El>['scroll']
+export type ScrollConfig<El extends Element = Element> = Partial<ScrollState<El>> | ScrollState<El>['scroll']

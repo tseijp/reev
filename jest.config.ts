@@ -16,14 +16,7 @@ const config = {
         moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
         // coverage config
         coverageDirectory: '<rootDir>',
-        coverageReporters: [
-                'json',
-                'html',
-                'lcov',
-                'text',
-                'text-summary',
-                'clover',
-        ],
+        coverageReporters: ['json', 'html', 'lcov', 'text', 'text-summary', 'clover'],
         coverageThreshold: {
                 global: {
                         statements: 25,
