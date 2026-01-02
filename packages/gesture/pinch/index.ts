@@ -37,20 +37,20 @@ export const pinchEvent = <El extends Element = Element>(
                 vec2(0, 0, self.movement)
         }
 
-        const onPinch = () => {
+        const pinch = () => {
                 self.isPinchStart = !self._active && self.active
                 self.isPinching = self._active && self.active
                 self.isPinchEnd = self._active && !self.active
         }
 
-        const onPinchStart = (e: Event) => {
+        const pinchStart = (e: Event) => {
                 self.event = e
                 self.active = true
                 getClientVec2(e, self.device, self.value)
-                self.onPinch(self)
+                self.pinch(self)
         }
 
-        const onPinching = (e: Event) => {
+        const pinching = (e: Event) => {
                 self.event = e
                 self._active = self.active
                 cpV(self.value, self._value)
@@ -60,47 +60,47 @@ export const pinchEvent = <El extends Element = Element>(
                         addV(self.offset, self.delta, self.offset)
                         addV(self.movement, self.delta, self.movement)
                 }
-                self.onPinch(self)
+                self.pinch(self)
         }
 
-        const onPinchEnd = (e: Event) => {
+        const pinchEnd = (e: Event) => {
                 self.event = e
                 self._active = true
                 self.active = false
                 initValues()
-                self.onPinch(self)
+                self.pinch(self)
         }
 
-        const onWheelStart = () => {
-                self.onPinch(self)
+        const wheelStart = () => {
+                self.pinch(self)
         }
 
-        const onWheeling = () => {
-                self.onPinch(self)
+        const wheeling = () => {
+                self.pinch(self)
         }
 
-        const onWheelEnd = () => {
-                self.onPinch(self)
+        const wheelEnd = () => {
+                self.pinch(self)
         }
 
-        const onMount = (target: El) => {
+        const mount = (target: El) => {
                 self.target = target
                 if (self.device === 'wheel') return
                 const { start, move, end, up } = EVENT_FOR_PINCH[self.device]
-                target.addEventListener(start, self.onPinchStart)
-                target.addEventListener(move, self.onPinching)
-                target.addEventListener(end, self.onPinchEnd)
-                target.addEventListener(up, self.onPinchEnd)
+                target.addEventListener(start, self.pinchStart)
+                target.addEventListener(move, self.pinching)
+                target.addEventListener(end, self.pinchEnd)
+                target.addEventListener(up, self.pinchEnd)
         }
 
-        const onClean = () => {
+        const clean = () => {
                 const target = self.target
                 if (!target || self.device === 'wheel') return
                 const { start, move, end, up } = EVENT_FOR_PINCH[self.device]
-                target.removeEventListener(start, self.onPinchStart)
-                target.removeEventListener(move, self.onPinching)
-                target.removeEventListener(end, self.onPinchEnd)
-                target.removeEventListener(up, self.onPinchEnd)
+                target.removeEventListener(start, self.pinchStart)
+                target.removeEventListener(move, self.pinching)
+                target.removeEventListener(end, self.pinchEnd)
+                target.removeEventListener(up, self.pinchEnd)
         }
 
         const ref = () => {
@@ -128,15 +128,15 @@ export const pinchEvent = <El extends Element = Element>(
                 isPinchStart: false,
                 isPinching: false,
                 isPinchEnd: false,
-                onWheelStart,
-                onWheeling,
-                onWheelEnd,
-                onPinch,
-                onPinchStart,
-                onPinching,
-                onPinchEnd,
-                onMount,
-                onClean,
+                wheelStart,
+                wheeling,
+                wheelEnd,
+                pinch,
+                pinchStart,
+                pinching,
+                pinchEnd,
+                mount,
+                clean,
                 ref,
         })
 

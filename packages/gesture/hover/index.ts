@@ -33,20 +33,20 @@ export const hoverEvent = <El extends Element = Element>(
                 vec2(0, 0, self.movement)
         }
 
-        const onHover = () => {
+        const hover = () => {
                 self.isHoverStart = !self._active && self.active
                 self.isHovering = self._active && self.active
                 self.isHoverEnd = self._active && !self.active
         }
 
-        const onHoverStart = (e: Event) => {
+        const hoverStart = (e: Event) => {
                 self.event = e
                 self.active = true
                 getClientVec2(e, self.device, self.value)
-                self.onHover(self)
+                self.hover(self)
         }
 
-        const onHovering = (e: Event) => {
+        const hovering = (e: Event) => {
                 self.event = e
                 self._active = self.active
                 cpV(self.value, self._value)
@@ -56,41 +56,41 @@ export const hoverEvent = <El extends Element = Element>(
                         addV(self.offset, self.delta, self.offset)
                         addV(self.movement, self.delta, self.movement)
                 }
-                self.onHover(self)
+                self.hover(self)
         }
 
-        const onHoverEnd = (e: Event) => {
+        const hoverEnd = (e: Event) => {
                 self.event = e
                 self._active = true
                 self.active = false
                 initValues()
-                self.onHover(self)
+                self.hover(self)
         }
 
-        const onMount = (target: El) => {
+        const mount = (target: El) => {
                 self.target = target
                 const { start, move, end, up } = EVENT_FOR_HOVER[self.device]
-                target.addEventListener(start, self.onHoverStart)
-                target.addEventListener(move, self.onHovering)
-                target.addEventListener(end, self.onHoverEnd)
-                target.addEventListener(up, self.onHoverEnd)
+                target.addEventListener(start, self.hoverStart)
+                target.addEventListener(move, self.hovering)
+                target.addEventListener(end, self.hoverEnd)
+                target.addEventListener(up, self.hoverEnd)
         }
 
-        const onClean = () => {
+        const clean = () => {
                 const target = self.target
                 if (!target) return
                 const { start, move, end, up } = EVENT_FOR_HOVER[self.device]
-                target.removeEventListener(start, self.onHoverStart)
-                target.removeEventListener(move, self.onHovering)
-                target.removeEventListener(end, self.onHoverEnd)
-                target.removeEventListener(up, self.onHoverEnd)
+                target.removeEventListener(start, self.hoverStart)
+                target.removeEventListener(move, self.hovering)
+                target.removeEventListener(end, self.hoverEnd)
+                target.removeEventListener(up, self.hoverEnd)
         }
 
         const ref = (target: El | null) => {
                 self(state as HoverState<El>)
                 if (target) {
-                        self.onMount(target)
-                } else self.onClean()
+                        self.mount(target)
+                } else self.clean()
         }
 
         const self = event({
@@ -108,12 +108,12 @@ export const hoverEvent = <El extends Element = Element>(
                 isHoverStart: false,
                 isHovering: false,
                 isHoverEnd: false,
-                onHover,
-                onHoverStart,
-                onHovering,
-                onHoverEnd,
-                onMount,
-                onClean,
+                hover,
+                hoverStart,
+                hovering,
+                hoverEnd,
+                mount,
+                clean,
                 ref,
         }) as EventState<HoverState<El>>
 

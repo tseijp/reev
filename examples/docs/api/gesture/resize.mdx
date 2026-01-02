@@ -17,9 +17,9 @@
 
 | Event name | Argument    | Description                                          |
 | :--------- | :---------- | :--------------------------------------------------- |
-| onResize   | ResizeState | Called on all resize events. Mainly events specified |
-| onMount    | Element     | Called when the component is mounted                 |
-| onClean    | null        | Called when the component is removed                 |
+| resize   | ResizeState | Called on all resize events. Mainly events specified |
+| mount    | Element     | Called when the component is mounted                 |
+| clean    | null        | Called when the component is removed                 |
 
 ## Resize state
 
@@ -27,9 +27,9 @@
 export interface ResizeState<El extends Element = Element> {
         observer: ResizeObserver | null
         listener(): void
-        onMount(el: El): void
-        onClean(el: null): void
-        onResize(self: ResizeState<El>): void
+        mount(el: El): void
+        clean(el: null): void
+        resize(self: ResizeState<El>): void
         ref(target: El): void
 }
 ```

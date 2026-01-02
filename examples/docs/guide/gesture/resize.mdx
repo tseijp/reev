@@ -31,7 +31,7 @@ import { Resize } from 'rege/react'
 
 export const App2 = () => {
         return (
-                <Resize onKey={console.log}>
+                <Resize key={console.log}>
                         {({ ref }) => <span ref={ref} style={style} />}
                 </Resize>
         )
@@ -40,7 +40,7 @@ export const App2 = () => {
 
 export const App2 = () => {
         return (
-                <Resize onKey={console.log}>
+                <Resize key={console.log}>
                         {({ ref }) => <span ref={ref} style={style} />}
                 </Resize>
         )

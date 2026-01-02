@@ -44,7 +44,7 @@ You can use shorthands Pinch component
 ```jsx
 import { Pinch } from 'rege/react'
 
-export const onPinch = ({ event, target, movement: [x, y] }) => {
+export const pinch = ({ event, target, movement: [x, y] }) => {
         event.preventDefault()
         x = Math.abs(x) / 100 + 1
         y = Math.abs(y) / 100 + 1
@@ -53,7 +53,7 @@ export const onPinch = ({ event, target, movement: [x, y] }) => {
 
 export const App2 = () => {
         return (
-                <Pinch onPinch={onPinch}>
+                <Pinch pinch={pinch}>
                         {({ ref }) => <span ref={ref} style={style} />}
                 </Pinch>
         )
@@ -61,7 +61,7 @@ export const App2 = () => {
 ```
 
 
-export const onPinch = ({ event, target, movement: [x, y] }) => {
+export const pinch = ({ event, target, movement: [x, y] }) => {
         event.preventDefault()
         x = Math.abs(x) / 100 + 1
         y = Math.abs(y) / 100 + 1
@@ -70,7 +70,7 @@ export const onPinch = ({ event, target, movement: [x, y] }) => {
 
 export const App2 = () => {
         return (
-                <Pinch onPinch={onPinch}>
+                <Pinch pinch={pinch}>
                         {({ ref }) => <span ref={ref} style={style} />}
                 </Pinch>
         )

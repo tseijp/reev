@@ -11,7 +11,7 @@ export const orientEvent = () => {
                 vec3(0, 0, 0, self.movement)
         }
 
-        const onChange = (e: any) => {
+        const change = (e: any) => {
                 self._active = self.active
                 self._value = self.value
                 self.value = [90 - (e.alpha ?? 90), e.beta ?? 0, e.gamma ?? 0]
@@ -24,15 +24,15 @@ export const orientEvent = () => {
                 self.callback()
         }
 
-        const onMount = () => {
+        const mount = () => {
                 initValues()
                 self.active = true
-                window.addEventListener("deviceorientation", self.onChange);
+                window.addEventListener("deviceorientation", self.change);
         }
 
-        const onClean = () => {
+        const clean = () => {
                 initValues()
-                window.removeEventListener("deviceorientation", self.onChange);
+                window.removeEventListener("deviceorientation", self.change);
         }
 
         const self = event({
@@ -43,9 +43,9 @@ export const orientEvent = () => {
                 delta: vec3(),
                 offset: vec3(),
                 movement: vec3(),
-                onMount,
-                onClean,
-                onChange,
+                mount,
+                clean,
+                change,
         }) as EventState<OrientState>
 
         self.snapshot = [self]

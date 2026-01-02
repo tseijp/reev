@@ -18,12 +18,12 @@
 
 | Event name  | Argument  | Description                                        |
 | :---------- | :-------- | :------------------------------------------------- |
-| onDrag      | DragState | Called on all drag events. Mainly events specified |
-| onDragStart | Event     | Called when dragging starts.                       |
-| onDragging  | Event     | Called while dragging.                             |
-| onDragEnd   | Event     | Called when dragging ends.                         |
-| onMount     | Element   | Called when the element is mounted.                |
-| onClean     | null      | Called when the element is unmounted.              |
+| drag      | DragState | Called on all drag events. Mainly events specified |
+| dragStart | Event     | Called when dragging starts.                       |
+| dragging  | Event     | Called while dragging.                             |
+| dragEnd   | Event     | Called when dragging ends.                         |
+| mount     | Element   | Called when the element is mounted.                |
+| clean     | null      | Called when the element is unmounted.              |
 
 ## Drag state
 
@@ -45,12 +45,12 @@ export interface DragState<El extends Element = Element> {
         isDragStart: boolean
         isDragging: boolean
         isDragEnd: boolean
-        onDrag(self: DragState<El>): void
-        onDragStart(e: Event): void
-        onDragging(e: Event): void
-        onDragEnd(e: Event): void
-        onMount(target: Element): void
-        onClean(): void
+        drag(self: DragState<El>): void
+        dragStart(e: Event): void
+        dragging(e: Event): void
+        dragEnd(e: Event): void
+        mount(target: Element): void
+        clean(): void
         ref(traget: Element): void
 }
 ```

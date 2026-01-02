@@ -18,12 +18,12 @@
 
 | Event name    | Argument    | Description                                          |
 | :------------ | :---------- | :--------------------------------------------------- |
-| onScroll      | ScrollState | Called on all scroll events. Mainly events specified |
-| onScrollStart | Event       | Called only once when the scroll starts              |
-| onScrolling   | Event       | Called every time the scroll is moved                |
-| onScrollEnd   | Event       | Called only once when the scroll ends                |
-| onMount       | Element     | Called when the component is mounted                 |
-| onClean       | null        | Called when the component is removed                 |
+| scroll      | ScrollState | Called on all scroll events. Mainly events specified |
+| scrollStart | Event       | Called only once when the scroll starts              |
+| scrolling   | Event       | Called every time the scroll is moved                |
+| scrollEnd   | Event       | Called only once when the scroll ends                |
+| mount       | Element     | Called when the component is mounted                 |
+| clean       | null        | Called when the component is removed                 |
 
 ## Scroll state
 
@@ -44,12 +44,12 @@ export interface ScrollState<El extends Element = Element> {
         isScrollStart: boolean
         isScrolling: boolean
         isScrollEnd: boolean
-        onScroll(self: ScrollState<El>): void
-        onScrollStart(e: Event): void
-        onScrolling(e: Event): void
-        onScrollEnd(e: Event): void
-        onMount(target: Element): void
-        onClean(target: null): void
+        scroll(self: ScrollState<El>): void
+        scrollStart(e: Event): void
+        scrolling(e: Event): void
+        scrollEnd(e: Event): void
+        mount(target: Element): void
+        clean(target: null): void
         ref(traget: Element): void
         tick?: () => void
 }

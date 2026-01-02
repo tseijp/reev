@@ -2,7 +2,7 @@ import { EventState, event } from 'reev'
 import { ClipboardState } from './types'
 
 export const clipboardEvent = () => {
-        const onChange = () => {
+        const change = () => {
                 navigator.clipboard.readText().then((clipboard) => {
                         self.clipboard = clipboard
                         self.snapshot = [self]
@@ -10,23 +10,23 @@ export const clipboardEvent = () => {
                 })
         }
 
-        const onMount = () => {
-                window.addEventListener('copy', self.onChange)
-                window.addEventListener('cut', self.onChange)
-                window.addEventListener('paste', self.onChange)
+        const mount = () => {
+                window.addEventListener('copy', self.change)
+                window.addEventListener('cut', self.change)
+                window.addEventListener('paste', self.change)
         }
 
-        const onClean = () => {
-                window.removeEventListener('copy', self.onChange)
-                window.removeEventListener('cut', self.onChange)
-                window.removeEventListener('paste', self.onChange)
+        const clean = () => {
+                window.removeEventListener('copy', self.change)
+                window.removeEventListener('cut', self.change)
+                window.removeEventListener('paste', self.change)
         }
 
         const self = event({
                 clipboard: '',
-                onChange,
-                onMount,
-                onClean,
+                change,
+                mount,
+                clean,
         }) as EventState<ClipboardState>
 
         self.snapshot = [self]

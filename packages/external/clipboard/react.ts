@@ -6,8 +6,8 @@ import { ClipboardState } from './types'
 let self: EventState<ClipboardState>
 
 const subscribe = (callback = () => {}) => {
-        self({ callback }).onMount()
-        return () => self({ callback }).onClean()
+        self({ callback }).mount()
+        return () => self({ callback }).clean()
 }
 
 const getSnapshot = () => self.snapshot

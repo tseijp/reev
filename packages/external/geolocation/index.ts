@@ -2,7 +2,7 @@ import { EventState, event } from 'reev'
 import { GeolocationState } from './types'
 
 export const geolocationEvent = () => {
-        const onChange = () => {
+        const change = () => {
                 navigator.geolocation.getCurrentPosition((geolocation) => {
                         self.geolocation = geolocation
                         self.snapshot = [self]
@@ -10,20 +10,20 @@ export const geolocationEvent = () => {
                 })
         }
 
-        const onMount = () => {
-                self.onChange()
-                self.id = navigator.geolocation.watchPosition(self.onChange)
+        const mount = () => {
+                self.change()
+                self.id = navigator.geolocation.watchPosition(self.change)
         }
 
-        const onClean = () => {
+        const clean = () => {
                 if (typeof self.id !== 'undefined')
                         navigator.geolocation.clearWatch(self.id)
         }
 
         const self = event({
-                onChange,
-                onMount,
-                onClean,
+                change,
+                mount,
+                clean,
         }) as EventState<GeolocationState>
 
         self.snapshot = [self]

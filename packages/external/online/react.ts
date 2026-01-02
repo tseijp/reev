@@ -6,8 +6,8 @@ import { OnlineState } from './types'
 let self: EventState<OnlineState>
 
 const subscribe = (callback = () => {}) => {
-        self({ callback }).onMount()
-        return () => self({ callback }).onClean()
+        self({ callback }).mount()
+        return () => self({ callback }).clean()
 }
 
 const getSnapshot = () => self.snapshot

@@ -3,11 +3,11 @@ export interface WindowSizeState {
         width: number
         height: number
         callback(): void
-        onChange(): void
-        onMount(): void
-        onClean(): void
+        change(): void
+        mount(): void
+        clean(): void
 }
 
 export type WindowSizeArg =
         | Partial<WindowSizeState>
-        | WindowSizeState['onChange']
+        | WindowSizeState['change']

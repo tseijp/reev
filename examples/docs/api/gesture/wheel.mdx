@@ -18,12 +18,12 @@
 
 | Event name   | Argument   | Description                                         |
 | :----------- | :--------- | :-------------------------------------------------- |
-| onWheel      | WheelState | Called on all wheel events. Mainly events specified |
-| onWheelStart | WheelEvent | Called on all wheel events. Mainly events specified |
-| onWheelEnd   | WheelEvent | Called on all wheel events. Mainly events specified |
-| onWheeling   | WheelEvent | Called on all wheel events. Mainly events specified |
-| onMount      | Element    | Called when the component is mounted                |
-| onClean      | null       | Called when the component is removed                |
+| wheel      | WheelState | Called on all wheel events. Mainly events specified |
+| wheelStart | WheelEvent | Called on all wheel events. Mainly events specified |
+| wheelEnd   | WheelEvent | Called on all wheel events. Mainly events specified |
+| wheeling   | WheelEvent | Called on all wheel events. Mainly events specified |
+| mount      | Element    | Called when the component is mounted                |
+| clean      | null       | Called when the component is removed                |
 
 ## Wheel state
 
@@ -44,12 +44,12 @@ export interface WheelState<El extends Element = Element> {
         isWheelStart: boolean
         isWheeling: boolean
         isWheelEnd: boolean
-        onWheel(self: WheelState<El>): void
-        onWheelStart(e: WheelEvent): void
-        onWheeling(e: WheelEvent): void
-        onWheelEnd(e: WheelEvent): void
-        onMount(target: Element): void
-        onClean(target: null): void
+        wheel(self: WheelState<El>): void
+        wheelStart(e: WheelEvent): void
+        wheeling(e: WheelEvent): void
+        wheelEnd(e: WheelEvent): void
+        mount(target: Element): void
+        clean(target: null): void
         ref(traget: Element): void
         tick?: () => void
 }

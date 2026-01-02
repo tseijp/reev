@@ -4,7 +4,7 @@ import { dragEvent } from './index'
 import { isF } from '../utils'
 
 export const useDrag = <El extends Element = Element>(arg: DragArg<El>) => {
-        if (isF(arg)) arg = { onDrag: arg }
+        if (isF(arg)) arg = { drag: arg }
         const memo = useMutable(arg)
         return useOnce(() => dragEvent<El>(memo as any))
 }

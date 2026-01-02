@@ -4,34 +4,34 @@ import { KeyState } from './types'
 export const keyEvent = <El extends Element = Element>(
         state: Partial<KeyState<El>> = {}
 ) => {
-        const onKeydown = (e: KeyboardEvent) => {
+        const keydown = (e: KeyboardEvent) => {
                 self.event = e
-                self.key = e.key
+                self.pressedKey = e.key
                 self.code = e.code
-                self.onKey?.(self)
+                self.key?.(self)
         }
 
-        const onMount = (el: El | Window) => {
+        const mount = (el: El | Window) => {
                 if (!el) el = el || window
                 self.target = el
 
                 // @ts-ignore set tabindex to make element focusable
                 el.setAttribute('tabindex', '1') // @ts-ignore
-                el.addEventListener('keydown', self.onKeydown)
+                el.addEventListener('keydown', self.keydown)
         }
 
-        const onClean = () => {
+        const clean = () => {
                 const el = self.target
                 if (!el) return // @ts-ignore
-                el.removeEventListener('keydown', self.onKeydown)
+                el.removeEventListener('keydown', self.keydown)
         }
 
         const ref = (el: Element | null) => {
                 self(state)
-                if (el) self.onMount(el as El)
-                else self.onClean()
+                if (el) self.mount(el as El)
+                else self.clean()
         }
 
-        const self = event<KeyState<El>>({ onKeydown, onMount, onClean, ref })
+        const self = event<KeyState<El>>({ keydown, mount, clean, ref })
         return self
 }

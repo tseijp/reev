@@ -6,9 +6,9 @@ export interface BatteryState {
         chargingTime: number // 3180
         dischargingTime: number // Infinity
         callback(): void
-        onChange(): void
-        onMount(): void
-        onClean(): void
+        change(): void
+        mount(): void
+        clean(): void
 }
 
-export type BatteryArg = Partial<BatteryState> | BatteryState['onChange']
+export type BatteryArg = Partial<BatteryState> | BatteryState['change']

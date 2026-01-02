@@ -18,12 +18,12 @@
 
 | Event name   | Argument   | Description                                         |
 | :----------- | :--------- | :-------------------------------------------------- |
-| onPinch      | PinchState | Called on all pinch events. Mainly events specified |
-| onPinchStart | Evenrt     | Called on pinch start event.                        |
-| onPinching   | Event      | Called on every pinch event.                        |
-| onPinchEnd   | Event      | Called on pinch end event.                          |
-| onMount      | Element    | Called when the component is mounted                |
-| onClean      | null       | Called when the component is removed                |
+| pinch      | PinchState | Called on all pinch events. Mainly events specified |
+| pinchStart | Evenrt     | Called on pinch start event.                        |
+| pinching   | Event      | Called on every pinch event.                        |
+| pinchEnd   | Event      | Called on pinch end event.                          |
+| mount      | Element    | Called when the component is mounted                |
+| clean      | null       | Called when the component is removed                |
 
 ## Pinch state
 
@@ -44,12 +44,12 @@ export interface PinchState<El extends Element = Element> {
         isPinchStart: boolean
         isPinching: boolean
         isPinchEnd: boolean
-        onPinch: (self: PinchState) => void
-        onPinchStart(e: Event): void
-        onPinching(e: Event): void
-        onPinchEnd(e: Event): void
-        onMount(target: El): void
-        onClean(target?: El): void
+        pinch: (self: PinchState) => void
+        pinchStart(e: Event): void
+        pinching(e: Event): void
+        pinchEnd(e: Event): void
+        mount(target: El): void
+        clean(target?: El): void
         ref(target: El | null): void
 }
 ```

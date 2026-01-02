@@ -13,27 +13,27 @@ export const scrollEvent = <El extends Element = Element>(
                 vec2(0, 0, self.movement)
         }
 
-        const onScroll = () => {
+        const scroll = () => {
                 self.isScrollStart = self.active && !self._active
                 self.isScrolling = self.active && self._active
                 self.isScrollEnd = !self.active && self._active
         }
 
-        const onScrollStart = (e: Event) => {
+        const scrollStart = (e: Event) => {
                 self.event = e
                 self.active = true
                 scrollValues(e, self.value)
-                self.onScroll(self)
+                self.scroll(self)
         }
 
-        const onScrolling = (e: Event) => {
-                // register onWheelEnd
-                const id = setTimeout(() => self.onScrollEnd(e), self.timeout)
+        const scrolling = (e: Event) => {
+                // register wheelEnd
+                const id = setTimeout(() => self.scrollEnd(e), self.timeout)
                 self.clearTimeout()
                 self.clearTimeout = () => clearTimeout(id)
 
                 if (!self.active) {
-                        self.onScrollStart(e)
+                        self.scrollStart(e)
                         return
                 }
 
@@ -46,30 +46,30 @@ export const scrollEvent = <El extends Element = Element>(
                         addV(self.offset, self.delta, self.offset)
                         addV(self.movement, self.delta, self.movement)
                 }
-                self.onScroll(self)
+                self.scroll(self)
         }
 
-        const onScrollEnd = (e: Event) => {
+        const scrollEnd = (e: Event) => {
                 self.event = e
                 self.active = false
                 initValues()
-                self.onScroll(self)
+                self.scroll(self)
         }
 
-        const onMount = (target: El) => {
+        const mount = (target: El) => {
                 self.target = target // @TODO set event to target
-                window.addEventListener('scroll', self.onScrolling)
+                window.addEventListener('scroll', self.scrolling)
         }
 
-        const onClean = () => {
-                window.removeEventListener('scroll', self.onScrolling)
+        const clean = () => {
+                window.removeEventListener('scroll', self.scrolling)
         }
 
         const ref = (el: Element | null) => {
                 self(config as ScrollState<El>)
                 if (el) {
-                        self.onMount(el)
-                } else self.onClean(null)
+                        self.mount(el)
+                } else self.clean(null)
         }
 
         const self = event({
@@ -88,12 +88,12 @@ export const scrollEvent = <El extends Element = Element>(
                 isScrollStart: false,
                 isScrolling: false,
                 isScrollEnd: false,
-                onScroll,
-                onScrollStart,
-                onScrolling,
-                onScrollEnd,
-                onMount,
-                onClean,
+                scroll,
+                scrollStart,
+                scrolling,
+                scrollEnd,
+                mount,
+                clean,
                 ref,
         }) as EventState<ScrollState<El>>
 

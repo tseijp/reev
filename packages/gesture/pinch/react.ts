@@ -4,7 +4,7 @@ import { PinchArg, PinchState } from './types'
 import { isF } from '../utils'
 
 export const usePinch = <El extends Element = Element>(arg?: PinchArg) => {
-        if (isF(arg)) arg = { onPinch: arg }
+        if (isF(arg)) arg = { pinch: arg }
         const memo = useMutable(arg)
         return useOnce(() => pinchEvent<El>(memo as any))
 }

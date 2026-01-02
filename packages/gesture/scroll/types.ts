@@ -16,16 +16,16 @@ export interface ScrollState<El extends Element = Element> {
         isScrollEnd: boolean
         timeout: number
         clearTimeout(): void
-        onScroll(self: ScrollState<El>): void
-        onScrollStart(e: Event): void
-        onScrolling(e: Event): void
-        onScrollEnd(e: Event): void
-        onMount(target: Element): void
-        onClean(target: null): void
+        scroll(self: ScrollState<El>): void
+        scrollStart(e: Event): void
+        scrolling(e: Event): void
+        scrollEnd(e: Event): void
+        mount(target: Element): void
+        clean(target: null): void
         ref(traget: Element): void
         tick?: () => void
 }
 
 export type ScrollConfig<El extends Element = Element> =
         | Partial<ScrollState<El>>
-        | ScrollState<El>['onScroll']
+        | ScrollState<El>['scroll']

@@ -10,9 +10,9 @@
 
 | Event name | Argument | Description                          |
 | :--------- | :------- | :----------------------------------- |
-| onChange   | boolean  | Called when the online state changes |
-| onMount    | Element  | Called when the component is mounted |
-| onClean    | null     | Called when the component is removed |
+| change   | boolean  | Called when the online state changes |
+| mount    | Element  | Called when the component is mounted |
+| clean    | null     | Called when the component is removed |
 
 ## Online state
 
@@ -21,8 +21,8 @@ export interface OnlineState {
         snapshot: [OnlineState]
         online: boolean
         callback(): void
-        onChange(): void
-        onMount(): void
-        onClean(): void
+        change(): void
+        mount(): void
+        clean(): void
 }
 ```

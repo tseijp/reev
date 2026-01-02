@@ -2,7 +2,7 @@ import { EventState, event } from 'reev'
 import { BatteryState } from './types'
 
 export const batteryEvent = () => {
-        const onChange = async () => {
+        const change = async () => {
                 // @ts-ignore
                 const battery = await navigator.getBattery()
                 self.level = battery.level
@@ -13,27 +13,27 @@ export const batteryEvent = () => {
                 self.callback()
         }
 
-        const onMount = () => {
+        const mount = () => {
                 // @ts-ignore
                 navigator.getBattery().then((target: any) => {
                         self.target = target
-                        target.addEventListener('levelchange', self.onChange)
-                        target.addEventListener('chargingchange', self.onChange)
+                        target.addEventListener('levelchange', self.change)
+                        target.addEventListener('chargingchange', self.change)
                 })
-                self.onChange()
+                self.change()
         }
 
-        const onClean = () => {
+        const clean = () => {
                 const target = self.target
                 if (!target) return
-                target.removeEventListener('levelchange', self.onChange)
-                target.removeEventListener('chargingchange', self.onChange)
+                target.removeEventListener('levelchange', self.change)
+                target.removeEventListener('chargingchange', self.change)
         }
 
         const self = event({
-                onChange,
-                onMount,
-                onClean,
+                change,
+                mount,
+                clean,
         }) as EventState<BatteryState>
 
         self.snapshot = [self]
