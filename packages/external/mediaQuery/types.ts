@@ -1,11 +1,11 @@
 export interface MediaQueryState {
         snapshot: [MediaQueryState]
         callback(): void
-        onChange(): void
-        onMount(): void
-        onClean(): void
+        change(): void
+        mount(): void
+        clean(): void
 }
 
 export type MediaQueryArg =
         | Partial<MediaQueryState>
-        | MediaQueryState['onChange']
+        | MediaQueryState['change']

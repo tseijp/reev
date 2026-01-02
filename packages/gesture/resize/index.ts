@@ -12,7 +12,7 @@ export const resizeEvent = <El extends Element = Element>(
                 // ???
         }
 
-        const onMount = (target: El) => {
+        const mount = (target: El) => {
                 const register = (entry: ResizeObserverEntry) => {
                         if (entry.target !== target) return
                         const id = setTimeout(on(entry), DELAY)
@@ -27,21 +27,21 @@ export const resizeEvent = <El extends Element = Element>(
                 self.observer.observe(target)
         }
 
-        const onClean = () => {}
+        const clean = () => {}
 
         const ref = (el: El) => {
                 self(state)
                 if (el) {
-                        self.onMount(el)
-                } else self.onClean(null)
+                        self.mount(el)
+                } else self.clean(null)
         }
 
         const self = event({
                 observer: null,
                 listener: () => {},
-                onResize: () => {},
-                onMount,
-                onClean,
+                resize: () => {},
+                mount,
+                clean,
                 ref,
         }) as EventState<ResizeState<El>>
 

@@ -13,26 +13,26 @@ export const wheelEvent = <El extends Element = Element>(
                 vec2(0, 0, self.movement)
         }
 
-        const onWheel = () => {
+        const wheel = () => {
                 self.isWheelStart = self.active && !self._active
                 self.isWheeling = self.active && self._active
                 self.isWheelEnd = !self.active && self._active
         }
-        const onWheelStart = (e: WheelEvent) => {
+        const wheelStart = (e: WheelEvent) => {
                 self.event = e
                 self.active = true
                 wheelValues(e, self.delta)
-                self.onWheel(self)
+                self.wheel(self)
         }
 
-        const onWheeling = (e: Event) => {
-                // register onWheelEnd
-                const id = setTimeout(() => self.onWheelEnd(e), self.timeout)
+        const wheeling = (e: Event) => {
+                // register wheelEnd
+                const id = setTimeout(() => self.wheelEnd(e), self.timeout)
                 self.clearTimeout()
                 self.clearTimeout = () => clearTimeout(id)
                 self.event = e
                 if (!self.active) {
-                        self.onWheelStart(e)
+                        self.wheelStart(e)
                         return
                 }
 
@@ -41,32 +41,32 @@ export const wheelEvent = <El extends Element = Element>(
                 wheelValues(e, self.delta)
                 addV(self.offset, self.delta, self.offset)
                 addV(self.movement, self.delta, self.movement)
-                self.onWheel(self)
+                self.wheel(self)
         }
 
-        const onWheelEnd = (e: Event) => {
+        const wheelEnd = (e: Event) => {
                 self.event = e
                 self.active = false
                 initValues()
-                self.onWheel(self)
+                self.wheel(self)
         }
 
-        const onMount = (target: El) => {
+        const mount = (target: El) => {
                 self.target = target
-                target.addEventListener('wheel', self.onWheeling)
+                target.addEventListener('wheel', self.wheeling)
         }
 
-        const onClean = () => {
+        const clean = () => {
                 const target = self.target
                 if (!target) return
-                target.removeEventListener('wheel', self.onWheeling)
+                target.removeEventListener('wheel', self.wheeling)
         }
 
         const ref = (el: Element | null) => {
                 self(config as WheelState<El>)
                 if (el) {
-                        self.onMount(el)
-                } else self.onClean(null)
+                        self.mount(el)
+                } else self.clean(null)
         }
 
         const self = event({
@@ -85,12 +85,12 @@ export const wheelEvent = <El extends Element = Element>(
                 isWheelStart: false,
                 isWheeling: false,
                 isWheelEnd: false,
-                onWheel,
-                onWheelStart,
-                onWheeling,
-                onWheelEnd,
-                onMount,
-                onClean,
+                wheel,
+                wheelStart,
+                wheeling,
+                wheelEnd,
+                mount,
+                clean,
                 ref,
         }) as EventState<WheelState<El>>
 

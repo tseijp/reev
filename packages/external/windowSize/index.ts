@@ -2,16 +2,16 @@ import { EventState, event } from 'reev'
 import { WindowSizeState } from './types'
 
 export const windowSizeEvent = () => {
-        const onMount = () => {
-                self.onChange()
-                window.addEventListener('resize', self.onChange)
+        const mount = () => {
+                self.change()
+                window.addEventListener('resize', self.change)
         }
 
-        const onClean = () => {
-                window.removeEventListener('resize', self.onChange)
+        const clean = () => {
+                window.removeEventListener('resize', self.change)
         }
 
-        const onChange = () => {
+        const change = () => {
                 self.callback()
                 self.snapshot = [self]
                 self.width = window.innerWidth
@@ -21,9 +21,9 @@ export const windowSizeEvent = () => {
         const self = event({
                 width: 1920,
                 height: 1080,
-                onChange,
-                onMount,
-                onClean,
+                change,
+                mount,
+                clean,
         }) as EventState<WindowSizeState>
 
         self.snapshot = [self]

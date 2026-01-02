@@ -17,15 +17,15 @@ export interface DragState<El extends Element = Element> {
         isDragStart: boolean
         isDragging: boolean
         isDragEnd: boolean
-        onDrag(self: DragState<El>): void
-        onDragStart(e: Event): void
-        onDragging(e: Event): void
-        onDragEnd(e: Event): void
-        onMount(target: Element): void
-        onClean(): void
+        drag(self: DragState<El>): void
+        dragStart(e: Event): void
+        dragging(e: Event): void
+        dragEnd(e: Event): void
+        mount(target: Element): void
+        clean(): void
         ref(traget: Element): void
 }
 
 export type DragArg<El extends Element> =
         | Partial<DragState<El>>
-        | DragState<El>['onDrag']
+        | DragState<El>['drag']

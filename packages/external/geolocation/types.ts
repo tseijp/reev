@@ -3,11 +3,11 @@ export interface GeolocationState {
         geolocation: any
         id: number
         callback(): void
-        onChange(): void
-        onMount(): void
-        onClean(): void
+        change(): void
+        mount(): void
+        clean(): void
 }
 
 export type GeolocationArg =
         | Partial<GeolocationState>
-        | GeolocationState['onChange']
+        | GeolocationState['change']

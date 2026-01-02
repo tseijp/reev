@@ -13,15 +13,15 @@ export interface HoverState<El extends Element = Element> {
         isHoverStart: boolean
         isHovering: boolean
         isHoverEnd: boolean
-        onHover: (self: HoverState) => void
-        onHoverStart(e: Event): void
-        onHovering(e: Event): void
-        onHoverEnd(e: Event): void
-        onMount(target: El): void
-        onClean(target?: El): void
+        hover: (self: HoverState) => void
+        hoverStart(e: Event): void
+        hovering(e: Event): void
+        hoverEnd(e: Event): void
+        mount(target: El): void
+        clean(target?: El): void
         ref(target: El | null): void
 }
 
 export type HoverArg<El extends Element = Element> =
         | Partial<HoverState<El>>
-        | HoverState<El>['onHover']
+        | HoverState<El>['hover']

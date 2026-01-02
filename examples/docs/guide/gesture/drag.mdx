@@ -62,13 +62,13 @@ You can use shorthands Drag component
 import { gsap } from 'gsap'
 import { Drag } from 'rege/react'
 
-export const onDrag = ({ active, target, movement: [x, y] }) => {
+export const drag = ({ active, target, movement: [x, y] }) => {
         gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
 }
 
 export const App3 = () => {
         return (
-                <Drag onDrag={onDrag}>
+                <Drag drag={drag}>
                         {({ ref }) => <span ref={ref} style={style} />}
                 </Drag>
         )
@@ -77,13 +77,13 @@ export const App3 = () => {
 
 import { Drag } from '@site/../../packages/gesture/react'
 
-export const onDrag = ({ active, target, movement: [x, y] }) => {
+export const drag = ({ active, target, movement: [x, y] }) => {
         gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
 }
 
 export const App3 = () => {
         return (
-                <Drag onDrag={onDrag}>
+                <Drag drag={drag}>
                         {({ ref }) => <span ref={ref} style={style} />}
                 </Drag>
         )

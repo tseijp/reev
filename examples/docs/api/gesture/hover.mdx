@@ -18,12 +18,12 @@
 
 | Event name   | Argument   | Description                                         |
 | :----------- | :--------- | :-------------------------------------------------- |
-| onHover      | HoverState | Called on all hover events. Mainly events specified |
-| onHoverStart | Event      | Called on hover start events                        |
-| onHovering   | Event      | Called on hover move events                         |
-| onHoverEnd   | Event      | Called on hover end events                          |
-| onMount      | Element    | Called when the component is mounted                |
-| onClean      | null       | Called when the component is removed                |
+| hover      | HoverState | Called on all hover events. Mainly events specified |
+| hoverStart | Event      | Called on hover start events                        |
+| hovering   | Event      | Called on hover move events                         |
+| hoverEnd   | Event      | Called on hover end events                          |
+| mount      | Element    | Called when the component is mounted                |
+| clean      | null       | Called when the component is removed                |
 
 ## Hover state
 
@@ -42,12 +42,12 @@ export interface HoverState<El extends Element = Element> {
         isHoverStart: boolean
         isHovering: boolean
         isHoverEnd: boolean
-        onHover: (self: HoverState) => void
-        onHoverStart(e: Event): void
-        onHovering(e: Event): void
-        onHoverEnd(e: Event): void
-        onMount(target: El): void
-        onClean(target?: El): void
+        hover: (self: HoverState) => void
+        hoverStart(e: Event): void
+        hovering(e: Event): void
+        hoverEnd(e: Event): void
+        mount(target: El): void
+        clean(target?: El): void
         ref(target: El | null): void
 }
 ```

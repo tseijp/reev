@@ -34,13 +34,13 @@ You can use shorthands Scroll component
 ```jsx
 import { Scroll } from 'rege/react'
 
-export const onScroll = ({ active, target, movement: [x, y] }) => {
+export const scroll = ({ active, target, movement: [x, y] }) => {
         gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
 }
 
 export const App2 = () => {
         return (
-                <Scroll onScroll={onScroll}>
+                <Scroll scroll={scroll}>
                         {({ ref }) => <span ref={ref} style={style} />}
                 </Scroll>
         )
@@ -48,13 +48,13 @@ export const App2 = () => {
 ```
 
 
-export const onScroll = ({ active, target, movement: [x, y] }) => {
+export const scroll = ({ active, target, movement: [x, y] }) => {
         gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
 }
 
 export const App2 = () => {
         return (
-                <Scroll onScroll={onScroll}>
+                <Scroll scroll={scroll}>
                         {({ ref }) => <span ref={ref} style={style} />}
                 </Scroll>
         )

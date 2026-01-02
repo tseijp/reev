@@ -4,7 +4,7 @@ import { ResizeArg, ResizeState } from './types'
 import { isF } from '../utils'
 
 export const useResize = (arg: ResizeArg) => {
-        if (isF(arg)) arg = { onResize: arg }
+        if (isF(arg)) arg = { resize: arg }
         const memo = useMutable(arg)
         return useOnce(() => resizeEvent(memo as any))
 }

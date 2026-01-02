@@ -18,12 +18,12 @@ export interface PinchState<El extends Element = Element>
         isPinchEnd: boolean
 
         // for SP
-        onPinch: (self: PinchState) => void
-        onPinchStart(e: Event): void
-        onPinching(e: Event): void
-        onPinchEnd(e: Event): void
+        pinch: (self: PinchState) => void
+        pinchStart(e: Event): void
+        pinching(e: Event): void
+        pinchEnd(e: Event): void
 }
 
 export type PinchArg<El extends Element = Element> =
         | Partial<PinchState<El>>
-        | PinchState<El>['onPinch']
+        | PinchState<El>['pinch']

@@ -42,7 +42,7 @@ You can use shorthands Wheel component
 ```jsx
 import { Wheel } from 'reev/react'
 
-export const onWheel = ({ event, target, movement: [x, y] }) => {
+export const wheel = ({ event, target, movement: [x, y] }) => {
         event.preventDefault()
         x = Math.abs(x) / 100 + 1
         y = Math.abs(y) / 100 + 1
@@ -51,14 +51,14 @@ export const onWheel = ({ event, target, movement: [x, y] }) => {
 
 export const App2 = () => {
         return (
-                <Wheel onWheel={onWheel}>
+                <Wheel wheel={wheel}>
                         {({ ref }) => <span ref={ref} style={style} />}
                 </Wheel>
         )
 }
 ```
 
-export const onWheel = ({ event, target, movement: [x, y] }) => {
+export const wheel = ({ event, target, movement: [x, y] }) => {
         event.preventDefault()
         x = Math.abs(x) / 100 + 1
         y = Math.abs(y) / 100 + 1
@@ -67,7 +67,7 @@ export const onWheel = ({ event, target, movement: [x, y] }) => {
 
 export const App2 = () => {
         return (
-                <Wheel onWheel={onWheel}>
+                <Wheel wheel={wheel}>
                         {({ ref }) => <span ref={ref} style={style} />}
                 </Wheel>
         )

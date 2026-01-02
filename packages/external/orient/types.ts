@@ -11,9 +11,9 @@ export interface OrientState {
         movement: Vec3
         memo: any
         callback(): void
-        onChange(): void
-        onMount(): void
-        onClean(): void
+        change(): void
+        mount(): void
+        clean(): void
 }
 
-export type OrientArg = Partial<OrientState> | OrientState['onChange']
+export type OrientArg = Partial<OrientState> | OrientState['change']

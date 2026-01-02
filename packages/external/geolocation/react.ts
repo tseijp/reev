@@ -6,8 +6,8 @@ import { geolocationEvent } from '.'
 let self: EventState<GeolocationState>
 
 const subscribe = (callback = () => {}) => {
-        self({ callback }).onMount()
-        return () => self({ callback }).onClean()
+        self({ callback }).mount()
+        return () => self({ callback }).clean()
 }
 
 const getSnapshot = () => self.snapshot

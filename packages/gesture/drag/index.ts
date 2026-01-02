@@ -33,23 +33,23 @@ export const dragEvent = <El extends Element = Element>(
                 vec2(0, 0, self.movement)
         }
 
-        const onDrag = () => {
+        const drag = () => {
                 self.isDragStart = self.active && !self._active
                 self.isDragging = self.active && self._active
                 self.isDragEnd = !self.active && self._active
         }
 
-        const onDragStart = (e: Event) => {
+        const dragStart = (e: Event) => {
                 self.event = e
                 self.active = true
                 getClientVec2(e, self.device, self.value)
                 if (self.target.setPointerCapture && 'pointerId' in e)
                         // @ts-ignore
                         self.target.setPointerCapture(e.pointerId)
-                self.onDrag(self)
+                self.drag(self)
         }
 
-        const onDragging = (e: Event) => {
+        const dragging = (e: Event) => {
                 self.event = e
                 self._active = self.active
                 cpV(self.value, self._value)
@@ -59,43 +59,43 @@ export const dragEvent = <El extends Element = Element>(
                         addV(self.offset, self.delta, self.offset)
                         addV(self.movement, self.delta, self.movement)
                 }
-                self.onDrag(self)
+                self.drag(self)
         }
 
-        const onDragEnd = (e: Event) => {
+        const dragEnd = (e: Event) => {
                 self.event = e
                 self.active = false
                 initValues()
                 if (self.target.releasePointerCapture && 'pointerId' in e)
                         // @ts-ignore
                         self.target.releasePointerCapture(e.pointerId)
-                self.onDrag(self)
+                self.drag(self)
         }
 
-        const onMount = (target: El) => {
+        const mount = (target: El) => {
                 self.target = target
                 const { start, move, end, up } = EVENT_FOR_DRAG[self.device]
-                target.addEventListener(start, self.onDragStart)
-                target.addEventListener(move, self.onDragging)
-                target.addEventListener(end, self.onDragEnd)
-                target.addEventListener(up, self.onDragEnd)
+                target.addEventListener(start, self.dragStart)
+                target.addEventListener(move, self.dragging)
+                target.addEventListener(end, self.dragEnd)
+                target.addEventListener(up, self.dragEnd)
         }
 
-        const onClean = () => {
+        const clean = () => {
                 const target = self.target
                 if (!target) return
                 const { start, move, end, up } = EVENT_FOR_DRAG[self.device]
-                target.removeEventListener(start, self.onDragStart)
-                target.removeEventListener(move, self.onDragging)
-                target.removeEventListener(end, self.onDragEnd)
-                target.removeEventListener(up, self.onDragEnd)
+                target.removeEventListener(start, self.dragStart)
+                target.removeEventListener(move, self.dragging)
+                target.removeEventListener(end, self.dragEnd)
+                target.removeEventListener(up, self.dragEnd)
         }
 
         const ref = (el: El) => {
                 self(state as DragState<El>)
                 if (el) {
-                        self.onMount(el)
-                } else self.onClean()
+                        self.mount(el)
+                } else self.clean()
         }
 
         const self = event({
@@ -113,12 +113,12 @@ export const dragEvent = <El extends Element = Element>(
                 isDragStart: false,
                 isDragging: false,
                 isDragEnd: false,
-                onDrag,
-                onDragStart,
-                onDragging,
-                onDragEnd,
-                onMount,
-                onClean,
+                drag,
+                dragStart,
+                dragging,
+                dragEnd,
+                mount,
+                clean,
                 ref,
         }) as EventState<DragState<El>>
 

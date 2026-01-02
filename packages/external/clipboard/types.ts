@@ -2,9 +2,9 @@ export interface ClipboardState {
         snapshot: [ClipboardState]
         clipboard: string
         callback(): void
-        onChange(): void
-        onMount(): void
-        onClean(): void
+        change(): void
+        mount(): void
+        clean(): void
 }
 
-export type ClipboardArg = Partial<ClipboardState> | ClipboardState['onChange']
+export type ClipboardArg = Partial<ClipboardState> | ClipboardState['change']

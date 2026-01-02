@@ -6,7 +6,7 @@ import { isF } from '../utils'
 export const useScroll = <El extends Element = Element>(
         config: ScrollConfig
 ) => {
-        if (isF(config)) config = { onScroll: config }
+        if (isF(config)) config = { scroll: config }
         const memo = useMutable(config)
         return useOnce(() => scrollEvent<El>(memo as any))
 }

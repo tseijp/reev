@@ -16,16 +16,16 @@ export interface WheelState<El extends Element = Element> {
         isWheelStart: boolean
         isWheeling: boolean
         isWheelEnd: boolean
-        onWheel(self: WheelState<El>): void
-        onWheelStart(e: Event): void
-        onWheeling(e: Event): void
-        onWheelEnd(e: Event): void
-        onMount(target: Element): void
-        onClean(target: null): void
+        wheel(self: WheelState<El>): void
+        wheelStart(e: Event): void
+        wheeling(e: Event): void
+        wheelEnd(e: Event): void
+        mount(target: Element): void
+        clean(target: null): void
         ref(traget: Element | null): void
         tick?: () => void
 }
 
 export type WheelConfig<El extends Element = Element> =
         | Partial<WheelState<El>>
-        | WheelState<El>['onWheel']
+        | WheelState<El>['wheel']
