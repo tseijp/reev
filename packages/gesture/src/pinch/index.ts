@@ -1,7 +1,7 @@
-import { event } from 'reev/src'
+import { event } from 'reev'
 import { vec2, addV, subV, cpV } from '../utils'
 import { pinchDevice, touchDistanceAngle, pointerDistanceAngle, getCurrentTargetTouchIds, wheelPinchDelta } from './utils'
-import type { EventState } from 'reev/src'
+import type { EventState } from 'reev'
 import type { PinchState } from './types'
 import type { WebKitGestureEvent, DistanceAngle } from './utils'
 

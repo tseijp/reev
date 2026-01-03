@@ -1,4 +1,4 @@
-import { event } from 'reev/src'
+import { event } from 'reev'
 import type { KeyState } from './types'
 
 export * from './types'
@@ -26,10 +26,10 @@ export const keyEvent = <El extends Element = Element>(state: Partial<KeyState<E
                 el.removeEventListener('keydown', self.keydown)
         }
 
-        const ref = (el: Element | null) => {
+        const ref = (el: El | null) => {
                 self(state)
-                if (el) self.mount(el as El)
-                else self.clean()
+                if (el) self.mount(el)
+                else self.clean(null)
         }
 
         const self = event<KeyState<El>>({ keydown, mount, clean, ref })

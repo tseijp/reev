@@ -1,7 +1,7 @@
 import { vec2, addV, cpV } from '../utils'
 import { wheelValues } from './utils'
-import { event } from 'reev/src'
-import type { EventState } from 'reev/src'
+import { event } from 'reev'
+import type { EventState } from 'reev'
 import type { WheelState } from './types'
 
 export * from './types'
@@ -63,7 +63,7 @@ export const wheelEvent = <El extends Element = Element>(config?: WheelState) =>
                 target.removeEventListener('wheel', self.wheeling)
         }
 
-        const ref = (el: Element | null) => {
+        const ref = (el: El | null) => {
                 self(config as WheelState<El>)
                 if (el) {
                         self.mount(el)

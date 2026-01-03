@@ -1,4 +1,4 @@
-import { useOnce, useMutable } from 'reev/src/react'
+import { useOnce, useMutable } from 'reev/react'
 import { scrollEvent } from './index'
 import { isF } from '../utils'
 import type { ReactNode } from 'react'

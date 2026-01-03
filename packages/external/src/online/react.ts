@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from 'react'
 import { onlineEvent } from '.'
-import type { EventState } from 'reev/src'
+import type { EventState } from 'reev'
 import type { OnlineState } from './types'
 
 let self: EventState<OnlineState>

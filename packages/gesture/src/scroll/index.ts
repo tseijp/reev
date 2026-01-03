@@ -1,7 +1,7 @@
 import { vec2, addV, cpV, subV } from '../utils'
 import { scrollValues } from './utils'
-import { event } from 'reev/src'
-import type { EventState } from 'reev/src'
+import { event } from 'reev'
+import type { EventState } from 'reev'
 import type { ScrollState } from './types'
 
 export * from './types'
@@ -66,7 +66,7 @@ export const scrollEvent = <El extends Element = Element>(config?: ScrollState) 
                 window.removeEventListener('scroll', self.scrolling)
         }
 
-        const ref = (el: Element | null) => {
+        const ref = (el: El | null) => {
                 self(config as ScrollState<El>)
                 if (el) {
                         self.mount(el)

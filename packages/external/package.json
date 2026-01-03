@@ -2,7 +2,7 @@
         "name": "rexr",
         "author": "tseijp",
         "license": "MIT",
-        "version": "0.5.0",
+        "version": "0.7.0",
         "private": false,
         "sideEffect": false,
         "publishConfig": {

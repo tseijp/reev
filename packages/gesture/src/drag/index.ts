@@ -1,6 +1,6 @@
-import { event } from 'reev/src'
+import { event } from 'reev'
 import { vec2, addV, subV, cpV, getDevice, getClientVec2 } from '../utils'
-import type { EventState } from 'reev/src'
+import type { EventState } from 'reev'
 import type { DragState } from './types'
 
 export * from './types'
@@ -96,7 +96,7 @@ export const dragEvent = <El extends Element = Element>(state: Partial<DragState
                 self(state as DragState<El>)
                 if (el) {
                         self.mount(el)
-                } else self.clean()
+                } else self.clean(null)
         }
 
         const self = event({

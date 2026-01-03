@@ -1,5 +1,5 @@
-import { event } from 'reev/src'
-import type { EventState } from 'reev/src'
+import { event } from 'reev'
+import type { EventState } from 'reev'
 import type { ResizeState } from './types'
 
 export * from './types'
@@ -30,7 +30,7 @@ export const resizeEvent = <El extends Element = Element>(state: ResizeState) =>
 
         const clean = () => {}
 
-        const ref = (el: El) => {
+        const ref = (el: El | null) => {
                 self(state)
                 if (el) {
                         self.mount(el)
