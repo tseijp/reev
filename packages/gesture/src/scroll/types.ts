@@ -1,4 +1,4 @@
-import { Vec2 } from '../utils'
+import type { Vec2 } from '../utils'
 
 export interface ScrollState<El extends Element = Element> {
         _active: boolean
@@ -20,9 +20,9 @@ export interface ScrollState<El extends Element = Element> {
         scrollStart(e: Event): void
         scrolling(e: Event): void
         scrollEnd(e: Event): void
-        mount(target: Element): void
+        mount(target: El): void
         clean(target: null): void
-        ref(traget: Element): void
+        ref(traget: El | null): void
         tick?: () => void
 }
 

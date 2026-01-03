@@ -1,7 +1,8 @@
 import { vec2, addV, cpV, subV } from '../utils'
 import { scrollValues } from './utils'
-import { EventState, event } from 'reev/src'
-import { ScrollState } from './types'
+import { event } from 'reev/src'
+import type { EventState } from 'reev/src'
+import type { ScrollState } from './types'
 
 export * from './types'
 

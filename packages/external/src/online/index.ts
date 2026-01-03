@@ -1,5 +1,6 @@
-import { OnlineState } from './types'
-import { EventState, event } from 'reev/src'
+import { event } from 'reev/src'
+import type { EventState } from 'reev/src'
+import type { OnlineState } from './types'
 
 export * from './types'
 

@@ -1,4 +1,5 @@
-import { SUPPORT, Vec2, vec2 } from '../utils'
+import { SUPPORT, vec2 } from '../utils'
+import type { Vec2 } from '../utils'
 
 /**
  * ref:

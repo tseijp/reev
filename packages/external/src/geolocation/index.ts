@@ -1,5 +1,6 @@
-import { EventState, event } from 'reev/src'
-import { GeolocationState } from './types'
+import { event } from 'reev/src'
+import type { EventState } from 'reev/src'
+import type { GeolocationState } from './types'
 
 export * from './types'
 

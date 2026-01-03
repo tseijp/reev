@@ -1,4 +1,4 @@
-import { Vec2 } from '../utils'
+import type { Vec2 } from '../utils'
 
 export type PinchDevice = 'mouse' | 'pointer' | 'touch' | 'wheel' | 'gesture'
 

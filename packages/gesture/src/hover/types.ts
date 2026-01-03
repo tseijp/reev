@@ -1,4 +1,4 @@
-import { Vec2 } from '../utils'
+import type { Vec2 } from '../utils'
 export interface HoverState<El extends Element = Element> {
         _active: boolean
         active: boolean

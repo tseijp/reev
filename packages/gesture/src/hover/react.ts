@@ -1,8 +1,8 @@
 import { useOnce, useMutable } from 'reev/src/react'
 import { hoverEvent } from '.'
-import { HoverArg, HoverState } from './types'
 import { isF } from '../utils'
 import type { ReactNode } from 'react'
+import type { HoverArg, HoverState } from './types'
 
 export const useHover = <El extends Element = Element>(arg?: HoverArg) => {
         if (isF(arg)) arg = { hover: arg }

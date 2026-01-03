@@ -1,8 +1,8 @@
 import { useOnce, useMutable } from 'reev/src/react'
-import { DragArg, DragState } from './types'
 import { dragEvent } from './index'
 import { isF } from '../utils'
 import type { ReactNode } from 'react'
+import type { DragArg, DragState } from './types'
 
 export const useDrag = <El extends Element = Element>(arg: DragArg<El>) => {
         if (isF(arg)) arg = { drag: arg }

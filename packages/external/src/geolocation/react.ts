@@ -1,7 +1,7 @@
-import { EventState } from 'reev/src'
 import { useSyncExternalStore } from 'react'
-import { GeolocationState } from './types'
 import { geolocationEvent } from '.'
+import type { EventState } from 'reev/src'
+import type { GeolocationState } from './types'
 
 let self: EventState<GeolocationState>
 

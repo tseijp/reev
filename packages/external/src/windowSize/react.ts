@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from 'react'
 import { windowSizeEvent } from './index'
-import { WindowSizeState } from './types'
-import { EventState } from 'reev/src'
+import type { EventState } from 'reev/src'
+import type { WindowSizeState } from './types'
 
 let self: EventState<WindowSizeState>
 

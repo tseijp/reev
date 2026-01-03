@@ -1,4 +1,5 @@
-import { vec2, Vec2 } from '../utils'
+import { vec2 } from '../utils'
+import type { Vec2 } from '../utils'
 
 const LINE_HEIGHT = 40
 

@@ -1,8 +1,8 @@
 import { useOnce, useMutable } from 'reev/src/react'
 import { pinchEvent } from '.'
-import { PinchArg, PinchState } from './types'
 import { isF } from '../utils'
 import type { ReactNode } from 'react'
+import type { PinchArg, PinchState } from './types'
 
 export const usePinch = <El extends Element = Element>(arg?: PinchArg) => {
         if (isF(arg)) arg = { pinch: arg }

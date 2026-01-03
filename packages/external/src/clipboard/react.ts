@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from 'react'
 import { clipboardEvent } from '.'
-import { EventState } from 'reev/src'
-import { ClipboardState } from './types'
+import type { EventState } from 'reev/src'
+import type { ClipboardState } from './types'
 
 let self: EventState<ClipboardState>
 

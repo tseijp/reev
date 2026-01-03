@@ -1,4 +1,4 @@
-import { Vec2 } from '../utils'
+import type { Vec2 } from '../utils'
 
 export interface WheelState<El extends Element = Element> {
         _active: boolean
@@ -20,9 +20,9 @@ export interface WheelState<El extends Element = Element> {
         wheelStart(e: Event): void
         wheeling(e: Event): void
         wheelEnd(e: Event): void
-        mount(target: Element): void
+        mount(target: El): void
         clean(target: null): void
-        ref(traget: Element | null): void
+        ref(traget: El | null): void
         tick?: () => void
 }
 

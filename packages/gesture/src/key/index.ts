@@ -1,5 +1,5 @@
 import { event } from 'reev/src'
-import { KeyState } from './types'
+import type { KeyState } from './types'
 
 export * from './types'
 

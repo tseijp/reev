@@ -1,5 +1,6 @@
-import { EventState, event } from 'reev/src'
-import { WindowSizeState } from './types'
+import { event } from 'reev/src'
+import type { EventState } from 'reev/src'
+import type { WindowSizeState } from './types'
 
 export * from './types'
 

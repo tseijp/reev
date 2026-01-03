@@ -1,4 +1,4 @@
-import { Vec2 } from '../utils'
+import type { Vec2 } from '../utils'
 
 export type DragDevice = 'mouse' | 'touch' | 'pointer'
 
@@ -21,9 +21,9 @@ export interface DragState<El extends Element = Element> {
         dragStart(e: Event): void
         dragging(e: Event): void
         dragEnd(e: Event): void
-        mount(target: Element): void
-        clean(): void
-        ref(traget: Element): void
+        mount(target: El): void
+        clean(el: null): void
+        ref(traget: El | null): void
 }
 
 export type DragArg<El extends Element> = Partial<DragState<El>> | DragState<El>['drag']

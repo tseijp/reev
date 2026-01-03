@@ -1,4 +1,5 @@
-import { vec2, Vec2 } from '../utils'
+import { vec2 } from '../utils'
+import type { Vec2 } from '../utils'
 
 export const scrollValues = (e: any, out = vec2()): Vec2 => {
         const { scrollX: x, scrollLeft: xx } = e.currentTarget

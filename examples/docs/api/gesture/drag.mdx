@@ -49,8 +49,8 @@ export interface DragState<El extends Element = Element> {
         dragStart(e: Event): void
         dragging(e: Event): void
         dragEnd(e: Event): void
-        mount(target: Element): void
-        clean(): void
-        ref(traget: Element): void
+        mount(target: El): void
+        clean(target: null): void
+        ref(traget: El | null): void
 }
 ```

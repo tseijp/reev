@@ -1,6 +1,7 @@
-import { EventState, event } from 'reev/src'
-import { OrientState } from './types'
+import { event } from 'reev/src'
 import { addVec3, subVec3, vec3 } from './utils'
+import type { EventState } from 'reev/src'
+import type { OrientState } from './types'
 
 export * from './types'
 

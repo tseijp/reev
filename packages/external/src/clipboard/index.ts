@@ -1,5 +1,6 @@
-import { EventState, event } from 'reev/src'
-import { ClipboardState } from './types'
+import { event } from 'reev/src'
+import type { EventState } from 'reev/src'
+import type { ClipboardState } from './types'
 
 export * from './types'
 

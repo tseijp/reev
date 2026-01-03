@@ -1,8 +1,8 @@
 import { useOnce, useMutable } from 'reev/src/react'
-import { ScrollConfig, ScrollState } from './types'
 import { scrollEvent } from './index'
 import { isF } from '../utils'
 import type { ReactNode } from 'react'
+import type { ScrollConfig, ScrollState } from './types'
 
 export const useScroll = <El extends Element = Element>(config: ScrollConfig) => {
         if (isF(config)) config = { scroll: config }

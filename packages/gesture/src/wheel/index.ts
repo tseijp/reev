@@ -1,7 +1,8 @@
 import { vec2, addV, cpV } from '../utils'
 import { wheelValues } from './utils'
-import { EventState, event } from 'reev/src'
-import { WheelState } from './types'
+import { event } from 'reev/src'
+import type { EventState } from 'reev/src'
+import type { WheelState } from './types'
 
 export * from './types'
 

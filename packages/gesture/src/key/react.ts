@@ -1,8 +1,8 @@
 import { useMutable, useOnce } from 'reev/src/react'
 import { keyEvent } from '.'
-import { KeyArg, KeyState } from './types'
 import { isF } from '../utils'
 import type { ReactNode } from 'react'
+import type { KeyArg, KeyState } from './types'
 
 export const useKey = <El extends Element = Element>(arg: KeyArg<El>) => {
         if (isF(arg)) arg = { key: arg }

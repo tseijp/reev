@@ -48,9 +48,9 @@ export interface WheelState<El extends Element = Element> {
         wheelStart(e: WheelEvent): void
         wheeling(e: WheelEvent): void
         wheelEnd(e: WheelEvent): void
-        mount(target: Element): void
+        mount(target: El): void
         clean(target: null): void
-        ref(traget: Element): void
+        ref(traget: El | null): void
         tick?: () => void
 }
 ```

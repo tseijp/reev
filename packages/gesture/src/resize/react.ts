@@ -1,8 +1,8 @@
 import { resizeEvent } from '.'
 import { useMutable, useOnce } from 'reev/src/react'
-import { ResizeArg, ResizeState } from './types'
 import { isF } from '../utils'
 import type { ReactNode } from 'react'
+import type { ResizeArg, ResizeState } from './types'
 
 export const useResize = (arg: ResizeArg) => {
         if (isF(arg)) arg = { resize: arg }

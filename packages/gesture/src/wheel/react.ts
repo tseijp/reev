@@ -1,8 +1,8 @@
 import { useOnce, useMutable } from 'reev/src/react'
-import { WheelConfig, WheelState } from './types'
 import { wheelEvent } from './index'
 import { isF } from '../utils'
 import type { ReactNode } from 'react'
+import type { WheelConfig, WheelState } from './types'
 
 export const useWheel = <El extends Element = Element>(config: WheelConfig) => {
         if (isF(config)) config = { wheel: config }

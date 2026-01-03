@@ -6,7 +6,7 @@ export interface KeyState<El extends Element = Element> {
         key(e: KeyState): void
         keydown(e: KeyboardEvent): void
         mount(el: El): void
-        clean(): void
+        clean(el: null): void
         ref(el: Element | null): void
 }
 export type KeyArg<El extends Element = Element> = Partial<KeyState<El>> | KeyState<El>['key']

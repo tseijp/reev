@@ -1,4 +1,4 @@
-import { Vec3 } from './utils'
+import type { Vec3 } from './utils'
 
 export interface OrientState {
         snapshot: [OrientState]
