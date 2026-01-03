@@ -8,8 +8,8 @@
         "scripts": {
                 "build": "cd examples/docs && npm run build",
                 "start": "cd examples/docs && npm run start",
-                "dev": "cd examples/docs && npm run start",
                 "serve": "cd examples/docs && npm run serve",
+                "dev": "cd examples/docs && npm run start",
                 "watch": "cd packages/core && npx jest --watch --runInBand",
                 "cov": "cd packages/core && npx jest --coverage",
                 "ls": "cd packages/core && npm publish --dry-run",
@@ -18,7 +18,7 @@
                 "tsup:external": "cd packages/external && npx tsup",
                 "tsup": "npm run tsup:core && npm run tsup:gesture && npm run tsup:external",
                 "vers": "npm run changeset version",
-                "pub": "npm run tsup && npm run changeset publish"
+                "pub": "npm run tsup && npx changeset publish"
         },
         "devDependencies": {
                 "@changesets/cli": "*",
