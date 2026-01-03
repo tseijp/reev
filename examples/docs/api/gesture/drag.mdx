@@ -16,14 +16,14 @@
 
 ## Drag events
 
-| Event name  | Argument  | Description                                        |
-| :---------- | :-------- | :------------------------------------------------- |
-| drag      | DragState | Called on all drag events. Mainly events specified |
-| dragStart | Event     | Called when dragging starts.                       |
-| dragging  | Event     | Called while dragging.                             |
-| dragEnd   | Event     | Called when dragging ends.                         |
-| mount     | Element   | Called when the element is mounted.                |
-| clean     | null      | Called when the element is unmounted.              |
+| Event name | Argument  | Description                                        |
+| :--------- | :-------- | :------------------------------------------------- |
+| drag       | DragState | Called on all drag events. Mainly events specified |
+| dragStart  | Event     | Called when dragging starts.                       |
+| dragging   | Event     | Called while dragging.                             |
+| dragEnd    | Event     | Called when dragging ends.                         |
+| mount      | Element   | Called when the element is mounted.                |
+| clean      | null      | Called when the element is unmounted.              |
 
 ## Drag state
 
@@ -49,8 +49,8 @@ export interface DragState<El extends Element = Element> {
         dragStart(e: Event): void
         dragging(e: Event): void
         dragEnd(e: Event): void
-        mount(target: Element): void
-        clean(): void
-        ref(traget: Element): void
+        mount(target: El): void
+        clean(target: null): void
+        ref(traget: El | null): void
 }
 ```

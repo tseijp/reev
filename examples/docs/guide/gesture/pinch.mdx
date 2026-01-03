@@ -7,31 +7,27 @@ import { gsap } from 'gsap'
 import { usePinch } from 'rege/react'
 
 export const App = () => {
-        const { ref } = usePinch(
-                ({ active, event, target, movement: [x, y] }) => {
-                        event.preventDefault()
-                        x = Math.abs(x) / 100 + 1
-                        y = Math.abs(y) / 100 + 1
-                        gsap.to(target, { scaleX: x, scaleY: y })
-                }
-        )
+        const { ref } = usePinch(({ active, event, target, movement: [x, y] }) => {
+                event.preventDefault()
+                x = Math.abs(x) / 100 + 1
+                y = Math.abs(y) / 100 + 1
+                gsap.to(target, { scaleX: x, scaleY: y })
+        })
         return <span ref={ref} style={style} />
 }
 ```
 
 import { gsap } from 'gsap'
-import { Pinch } from '@site/../../packages/gesture/react'
-import { usePinch } from '@site/../../packages/gesture/react'
+import { Pinch } from 'rege/src/react'
+import { usePinch } from 'rege/src/react'
 
 export const App = () => {
-        const { ref } = usePinch(
-                ({ active, event, target, movement: [x, y] }) => {
-                        event.preventDefault()
-                        x = Math.abs(x) / 50 + 1
-                        y = Math.abs(y) / 50 + 1
-                        gsap.to(target, { scaleX: x, scaleY: y })
-                }
-        )
+        const { ref } = usePinch(({ active, event, target, movement: [x, y] }) => {
+                event.preventDefault()
+                x = Math.abs(x) / 50 + 1
+                y = Math.abs(y) / 50 + 1
+                gsap.to(target, { scaleX: x, scaleY: y })
+        })
         return <span ref={ref} style={style} />
 }
 
@@ -52,14 +48,9 @@ export const pinch = ({ event, target, movement: [x, y] }) => {
 }
 
 export const App2 = () => {
-        return (
-                <Pinch pinch={pinch}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Pinch>
-        )
+        return <Pinch pinch={pinch}>{({ ref }) => <span ref={ref} style={style} />}</Pinch>
 }
 ```
-
 
 export const pinch = ({ event, target, movement: [x, y] }) => {
         event.preventDefault()
@@ -69,11 +60,7 @@ export const pinch = ({ event, target, movement: [x, y] }) => {
 }
 
 export const App2 = () => {
-        return (
-                <Pinch pinch={pinch}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Pinch>
-        )
+        return <Pinch pinch={pinch}>{({ ref }) => <span ref={ref} style={style} />}</Pinch>
 }
 
 <App2 />

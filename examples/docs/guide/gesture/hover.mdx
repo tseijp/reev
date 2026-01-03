@@ -15,7 +15,7 @@ export const App = () => {
 ```
 
 import { gsap } from 'gsap'
-import { useHover } from '@site/../../packages/gesture/react'
+import { useHover } from 'rege/src/react'
 
 export const App = () => {
         const { ref } = useHover(({ active, target, movement: [x, y] }) => {
@@ -38,26 +38,18 @@ export const hover = ({ active, target, movement: [x, y] }) => {
 }
 
 export const App2 = () => {
-        return (
-                <Hover hover={hover}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Hover>
-        )
+        return <Hover hover={hover}>{({ ref }) => <span ref={ref} style={style} />}</Hover>
 }
 ```
 
-import { Hover } from '@site/../../packages/gesture/react'
+import { Hover } from 'rege/src/react'
 
 export const hover = ({ active, target, movement: [x, y] }) => {
         gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
 }
 
 export const App2 = () => {
-        return (
-                <Hover hover={hover}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Hover>
-        )
+        return <Hover hover={hover}>{({ ref }) => <span ref={ref} style={style} />}</Hover>
 }
 
 <App2 />

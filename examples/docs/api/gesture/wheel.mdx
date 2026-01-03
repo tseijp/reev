@@ -16,8 +16,8 @@
 
 ## Wheel events
 
-| Event name   | Argument   | Description                                         |
-| :----------- | :--------- | :-------------------------------------------------- |
+| Event name | Argument   | Description                                         |
+| :--------- | :--------- | :-------------------------------------------------- |
 | wheel      | WheelState | Called on all wheel events. Mainly events specified |
 | wheelStart | WheelEvent | Called on all wheel events. Mainly events specified |
 | wheelEnd   | WheelEvent | Called on all wheel events. Mainly events specified |
@@ -48,9 +48,9 @@ export interface WheelState<El extends Element = Element> {
         wheelStart(e: WheelEvent): void
         wheeling(e: WheelEvent): void
         wheelEnd(e: WheelEvent): void
-        mount(target: Element): void
+        mount(target: El): void
         clean(target: null): void
-        ref(traget: Element): void
+        ref(traget: El | null): void
         tick?: () => void
 }
 ```

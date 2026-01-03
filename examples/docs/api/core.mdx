@@ -4,7 +4,7 @@
 
 ```tsx
 import { useState } from 'react'
-import { useMutable } from 'reev/react'
+import { useMutable } from 'reev/src/react'
 
 export const App = () => {
         const [i, set] = useState(0)
@@ -14,16 +14,13 @@ export const App = () => {
 ```
 
 import { useState } from 'react'
-import { useMutable } from '../../../packages/core/react'
+import { useMutable } from 'reev/src/react'
 
 export const App = () => {
         const [i, set] = useState(0)
         const { click } = useMutable({ click: () => set(i + 1) })
         return (
-                <button
-                        onClick={click}
-                        className="clean-btn button button--secondary margin-left--md"
-                >
+                <button onClick={click} className="clean-btn button button--secondary margin-left--md">
                         {i}
                 </button>
         )
@@ -35,7 +32,7 @@ export const App = () => {
 
 ```tsx
 import { useState } from 'react'
-import { useEvent } from 'reev/react'
+import { useEvent } from 'reev/src/react'
 
 export const App2 = () => {
         const [i, set] = useState(0)
@@ -45,17 +42,14 @@ export const App2 = () => {
 }
 ```
 
-import { useEvent } from '../../../packages/core/react'
+import { useEvent } from 'reev/src/react'
 
 export const App2 = () => {
         const [i, set] = useState(0)
         const event = useEvent({ click() {} }) // do something when component will be clicked
         event('click', () => set((p) => p + 1)) // register new function
         return (
-                <button
-                        onClick={event.click}
-                        className="clean-btn button button--secondary margin-left--md"
-                >
+                <button onClick={event.click} className="clean-btn button button--secondary margin-left--md">
                         {i}
                 </button>
         )
@@ -66,7 +60,7 @@ export const App2 = () => {
 ## useRefEvent
 
 ```tsx
-import { useRefEvent } from 'reev/react'
+import { useRefEvent } from 'reev/src/react'
 
 export const App3 = () => {
         const [i, set] = useState(0)
@@ -84,7 +78,7 @@ export const App3 = () => {
 }
 ```
 
-import { useRefEvent } from '../../../packages/core/react'
+import { useRefEvent } from 'reev/src/react'
 
 export const App3 = () => {
         const [i, set] = useState(0)
@@ -95,11 +89,7 @@ export const App3 = () => {
         })
         event('click', () => set((p) => p + 1)) // register new function
         return (
-                <button
-                        ref={event.ref}
-                        onClick={event.click}
-                        className="clean-btn button button--secondary margin-left--md"
-                >
+                <button ref={event.ref} onClick={event.click} className="clean-btn button button--secondary margin-left--md">
                         {i}
                 </button>
         )

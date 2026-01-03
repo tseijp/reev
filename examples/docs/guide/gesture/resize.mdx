@@ -12,8 +12,8 @@ export const App = () => {
 }
 ```
 
-import { Resize } from '@site/../../packages/gesture/react'
-import { useResize } from '@site/../../packages/gesture/react'
+import { Resize } from 'rege/src/react'
+import { useResize } from 'rege/src/react'
 
 export const App = () => {
         const { ref } = useResize(console.log)
@@ -30,20 +30,12 @@ You can use shorthands Resize component
 import { Resize } from 'rege/react'
 
 export const App2 = () => {
-        return (
-                <Resize key={console.log}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Resize>
-        )
+        return <Resize key={console.log}>{({ ref }) => <span ref={ref} style={style} />}</Resize>
 }
 ```
 
 export const App2 = () => {
-        return (
-                <Resize key={console.log}>
-                        {({ ref }) => <span ref={ref} style={style} />}
-                </Resize>
-        )
+        return <Resize key={console.log}>{({ ref }) => <span ref={ref} style={style} />}</Resize>
 }
 
 <App2 />

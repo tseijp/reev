@@ -2,7 +2,7 @@ import * as React from 'react'
 import Layout from '@theme/Layout'
 import Canvas from '../../ui/Canvas'
 import Header from '../../ui/Header'
-import "./styles.css"
+import './styles.css'
 
 const Home = () => {
         return (

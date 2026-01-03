@@ -12,38 +12,14 @@ interface Props {
 
 export const Model = ({ alpha = 0, beta = 0, gamma = 0 }: Props) => {
         return (
-                <group
-                        rotation={[
-                                THREE.MathUtils.degToRad(beta),
-                                THREE.MathUtils.degToRad(gamma),
-                                THREE.MathUtils.degToRad(alpha),
-                        ]}
-                >
+                <group rotation={[THREE.MathUtils.degToRad(beta), THREE.MathUtils.degToRad(gamma), THREE.MathUtils.degToRad(alpha)]}>
                         {/* CameraModuleGlass */}
-                        <RoundedBox
-                                args={[0.32, 0.32, 0.02]}
-                                radius={0.02}
-                                smoothness={16}
-                                position={[-0.18, 0.6, 0.05]}
-                        >
-                                <meshPhongMaterial
-                                        color="#000"
-                                        transparent
-                                        opacity={0.5}
-                                        shininess={100}
-                                />
+                        <RoundedBox args={[0.32, 0.32, 0.02]} radius={0.02} smoothness={16} position={[-0.18, 0.6, 0.05]}>
+                                <meshPhongMaterial color="#000" transparent opacity={0.5} shininess={100} />
                         </RoundedBox>
                         {/* BackCover */}
-                        <RoundedBox
-                                args={[0.8, 1.6, 0.1]}
-                                radius={0.05}
-                                smoothness={16}
-                                position={[0, 0, 0.1]}
-                        >
-                                <meshPhongMaterial
-                                        color="#201D24"
-                                        shininess={80}
-                                />
+                        <RoundedBox args={[0.8, 1.6, 0.1]} radius={0.05} smoothness={16} position={[0, 0, 0.1]}>
+                                <meshPhongMaterial color="#201D24" shininess={80} />
                         </RoundedBox>
                 </group>
         )

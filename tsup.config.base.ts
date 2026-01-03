@@ -39,15 +39,7 @@ export const defaultConfig = (override: Options, options: Options) => {
                         clean: !options.watch,
                         minify: !options.watch,
                         target: 'es2020',
-                        external: [
-                                'react',
-                                'react-dom',
-                                'react-native',
-                                'solid-js',
-                                'reev',
-                                'rege',
-                                'rexr',
-                        ],
+                        external: ['react', 'react-dom', 'react-native', 'solid-js', 'reev', 'rege', 'rexr'],
                         moduleResolution: 'NodeNext',
                 }
         })

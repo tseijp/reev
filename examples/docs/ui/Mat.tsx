@@ -9,6 +9,7 @@ export class Mat extends THREE.MeshPhysicalMaterial {
                 super(parameters)
                 this.onBeforeCompile = this.onBeforeCompile.bind(this)
         }
+
         onBeforeCompile(shader: any) {
                 shader.uniforms = {
                         ...shader.uniforms,
