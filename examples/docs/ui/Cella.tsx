@@ -58,7 +58,7 @@ export const Cella = (props: CellaProps) => {
         const camera = useThree((state) => state.camera)
 
         const handleClick = (e: any) => {
-                const to = e.point.sub(camera.position).normalize()
+                const to = e.point.sub(camera.position).normalize().multiplyScalar(0.05)
                 ref.current.applyImpulse(to, true)
                 ref.current.applyTorqueImpulse(to, true)
         }
