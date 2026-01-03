@@ -6,7 +6,7 @@
         "private": true,
         "sideEffects": false,
         "scripts": {
-                "build": "yarn tsup && cd examples/docs && npm run build",
+                "build": "npm run tsup && cd examples/docs && npm run build",
                 "start": "cd examples/docs && npm run start",
                 "serve": "cd examples/docs && npm run serve",
                 "dev": "cd examples/docs && npm run start",
