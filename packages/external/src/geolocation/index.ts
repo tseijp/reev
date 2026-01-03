@@ -1,6 +1,8 @@
 import { EventState, event } from 'reev/src'
 import { GeolocationState } from './types'
 
+export * from './types'
+
 export const geolocationEvent = () => {
         const change = () => {
                 navigator.geolocation.getCurrentPosition((geolocation) => {

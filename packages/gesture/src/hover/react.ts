@@ -2,6 +2,7 @@ import { useOnce, useMutable } from 'reev/src/react'
 import { hoverEvent } from '.'
 import { HoverArg, HoverState } from './types'
 import { isF } from '../utils'
+import type { ReactNode } from 'react'
 
 export const useHover = <El extends Element = Element>(arg?: HoverArg) => {
         if (isF(arg)) arg = { hover: arg }
@@ -12,7 +13,7 @@ export const useHover = <El extends Element = Element>(arg?: HoverArg) => {
 export default useHover
 
 export interface HoverProps<El extends Element = Element> extends Partial<HoverState<El>> {
-        children: (state: HoverState<El>) => JSX.Element
+        children: (state: HoverState<El>) => ReactNode
 }
 
 export const Hover = (props: HoverProps) => {

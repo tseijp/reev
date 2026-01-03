@@ -1,6 +1,8 @@
 import { EventState, event } from 'reev/src'
 import { ResizeState } from './types'
 
+export * from './types'
+
 const DELAY = 100
 
 type ResizeEventCallback = (entry: ResizeObserverEntry) => () => void

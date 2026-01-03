@@ -2,6 +2,7 @@ import { resizeEvent } from '.'
 import { useMutable, useOnce } from 'reev/src/react'
 import { ResizeArg, ResizeState } from './types'
 import { isF } from '../utils'
+import type { ReactNode } from 'react'
 
 export const useResize = (arg: ResizeArg) => {
         if (isF(arg)) arg = { resize: arg }
@@ -12,7 +13,7 @@ export const useResize = (arg: ResizeArg) => {
 export default useResize
 
 export interface ResizeProps<El extends Element = Element> extends Partial<ResizeState<El>> {
-        children: (state: ResizeState<El>) => JSX.Element
+        children: (state: ResizeState<El>) => ReactNode
 }
 
 export const Resize = <El extends Element = Element>(props: ResizeProps<El>) => {

@@ -3,6 +3,8 @@ import { PinchState } from './types'
 import { vec2, addV, subV, cpV } from '../utils'
 import { pinchDevice, touchDistanceAngle, pointerDistanceAngle, getCurrentTargetTouchIds, wheelPinchDelta, WebKitGestureEvent, DistanceAngle } from './utils'
 
+export * from './types'
+
 export const EVENT_FOR_PINCH = {
         touch: {
                 start: 'touchstart',

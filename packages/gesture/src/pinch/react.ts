@@ -2,6 +2,7 @@ import { useOnce, useMutable } from 'reev/src/react'
 import { pinchEvent } from '.'
 import { PinchArg, PinchState } from './types'
 import { isF } from '../utils'
+import type { ReactNode } from 'react'
 
 export const usePinch = <El extends Element = Element>(arg?: PinchArg) => {
         if (isF(arg)) arg = { pinch: arg }
@@ -12,7 +13,7 @@ export const usePinch = <El extends Element = Element>(arg?: PinchArg) => {
 export default usePinch
 
 export interface PinchProps<El extends Element = Element> extends Partial<PinchState<El>> {
-        children: (state: PinchState<El>) => JSX.Element
+        children: (state: PinchState<El>) => ReactNode
 }
 
 export const Pinch = (props: PinchProps) => {

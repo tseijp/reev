@@ -2,6 +2,7 @@ import { useOnce, useMutable } from 'reev/src/react'
 import { DragArg, DragState } from './types'
 import { dragEvent } from './index'
 import { isF } from '../utils'
+import type { ReactNode } from 'react'
 
 export const useDrag = <El extends Element = Element>(arg: DragArg<El>) => {
         if (isF(arg)) arg = { drag: arg }
@@ -12,7 +13,7 @@ export const useDrag = <El extends Element = Element>(arg: DragArg<El>) => {
 export default useDrag
 
 export interface DragProps<El extends Element = Element> extends Partial<DragState<El>> {
-        children(self: DragState<El>): JSX.Element
+        children(self: DragState<El>): ReactNode
 }
 
 export const Drag = <El extends Element = Element>(props: DragProps<El>) => {

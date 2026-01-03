@@ -1,6 +1,8 @@
 import { OnlineState } from './types'
 import { EventState, event } from 'reev/src'
 
+export * from './types'
+
 export const onlineEvent = () => {
         const change = () => {
                 self.online = navigator.onLine

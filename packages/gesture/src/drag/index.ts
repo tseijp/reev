@@ -2,6 +2,8 @@ import { EventState, event } from 'reev/src'
 import { DragState } from './types'
 import { vec2, addV, subV, cpV, getDevice, getClientVec2 } from '../utils'
 
+export * from './types'
+
 export const EVENT_FOR_DRAG = {
         touch: {
                 start: 'touchstart',

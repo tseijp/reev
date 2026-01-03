@@ -1,6 +1,8 @@
 import { EventState, event } from 'reev/src'
 import { WindowSizeState } from './types'
 
+export * from './types'
+
 export const windowSizeEvent = () => {
         const mount = () => {
                 self.change()

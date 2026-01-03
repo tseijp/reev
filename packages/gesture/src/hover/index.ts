@@ -2,6 +2,8 @@ import { HoverState } from './types'
 import { EventState, event } from 'reev/src'
 import { vec2, addV, subV, getDevice, getClientVec2, cpV } from '../utils'
 
+export * from './types'
+
 export const EVENT_FOR_HOVER = {
         touch: {
                 start: 'touchstart',

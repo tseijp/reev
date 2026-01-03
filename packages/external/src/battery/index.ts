@@ -1,6 +1,8 @@
 import { EventState, event } from 'reev/src'
 import { BatteryState } from './types'
 
+export * from './types'
+
 export const batteryEvent = () => {
         const change = async () => {
                 // @ts-ignore

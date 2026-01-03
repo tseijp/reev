@@ -1,6 +1,8 @@
 import { EventState, event } from 'reev/src'
 import { ClipboardState } from './types'
 
+export * from './types'
+
 export const clipboardEvent = () => {
         const change = () => {
                 navigator.clipboard.readText().then((clipboard) => {

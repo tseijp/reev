@@ -2,6 +2,7 @@ import { useOnce, useMutable } from 'reev/src/react'
 import { ScrollConfig, ScrollState } from './types'
 import { scrollEvent } from './index'
 import { isF } from '../utils'
+import type { ReactNode } from 'react'
 
 export const useScroll = <El extends Element = Element>(config: ScrollConfig) => {
         if (isF(config)) config = { scroll: config }
@@ -12,7 +13,7 @@ export const useScroll = <El extends Element = Element>(config: ScrollConfig) =>
 export default useScroll
 
 export interface ScrollProps<El extends Element = Element> extends Partial<ScrollState<El>> {
-        children: (state: ScrollState<El>) => JSX.Element
+        children: (state: ScrollState<El>) => ReactNode
 }
 
 export const Scroll = <El extends Element = Element>(props: ScrollProps<El>) => {
