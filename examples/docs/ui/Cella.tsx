@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { RigidBody } from '@react-three/rapier'
-import { useThree, ThreeElements } from '@react-three/fiber'
+import { useThree } from '@react-three/fiber'
 
 const px = (i = 0, l = 10) => -i / l - 1 / 2 / l + 1 / 2
 const py = (i = 0, l = 10) => -i / 2 / l + 1 / 2
@@ -9,13 +9,16 @@ const sx = (_ = 0, l = 10) => 1 / l
 const sy = (i = 0, l = 10) => i / l
 const sz = (i = 0, l = 10) => (i + 1) / l
 
-export type CellaProps = ThreeElements['group'] & {
+type CellaProps = {
         color: string
         index?: number
         length?: number
+        position?: [x: number, y: number, z: number]
+        rotation?: [x: number, y: number, z: number]
+        onPointerDown?: (e: any) => void
 }
 
-export const CellaImpl = React.forwardRef((props: CellaProps, ref: any) => {
+const CellaImpl = React.forwardRef((props: CellaProps, ref: any) => {
         const { color, index: i, length: l, ...other } = props
 
         if (!i)
@@ -51,8 +54,9 @@ export const CellaImpl = React.forwardRef((props: CellaProps, ref: any) => {
 })
 
 export const Cella = (props: CellaProps) => {
-        const ref = React.useRef<any>(null!)
+        const ref = React.useRef(null!)
         const camera = useThree((state) => state.camera)
+
         const handleClick = (e: any) => {
                 const to = e.point.sub(camera.position).normalize()
                 ref.current.applyImpulse(to, true)
@@ -60,7 +64,7 @@ export const Cella = (props: CellaProps) => {
         }
 
         return (
-                <RigidBody ref={ref} mass={1}>
+                <RigidBody ref={ref}>
                         <CellaImpl {...props} onPointerDown={handleClick} />
                 </RigidBody>
         )

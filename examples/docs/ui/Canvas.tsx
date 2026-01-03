@@ -33,21 +33,11 @@ export default function CanvasPage() {
                         <pointLight castShadow position={[10, 10, 10]} />
                         <Suspense fallback={null}>
                                 <Physics paused={isDebug}>
-                                        {/* <Debug /> */}
-                                        <Cella color={isDark ? '#cce7f2' : '#f2c245'} length={10} index={0} position={[-0.2, -0.7, 0]} />
+                                        <Cella color={isDark ? '#cce7f2' : '#f2c245'} index={0} position={[-0.2, -0.7, 0]} length={10} />
                                         <Cella color={isDark ? '#86d4f8' : '#fd9344'} index={2} position={[0.3, 0.1, 0]} rotation-z={-PI / 2} />
                                         <Cella color={isDark ? '#8cd6fb' : '#fa903d'} index={3} position-x={0.1} rotation-z={PI} />
                                         <Cella color={isDark ? '#2db2f2' : '#f05741'} index={4} position={[-1, -0.5, 0]} />
-                                        <Cella
-                                                color={
-                                                        isDark
-                                                                ? '#37b7f5' // !!
-                                                                : '#f05842' // !!
-                                                }
-                                                index={5}
-                                                position-x={-0.5}
-                                                rotation-z={PI}
-                                        />
+                                        <Cella color={isDark ? '#37b7f5' : '#f05842'} index={5} position-x={-0.5} rotation-z={PI} />
                                         <Cella color={isDark ? '#0c7bd4' : '#c64041'} index={6} position={[-0.7, 0.26, 0]} rotation-z={(-PI * 3) / 4} />
                                         <Cella color={isDark ? '#1280d8' : '#c53c3d'} index={7} position={[0.6, 0.1, 0]} rotation-z={PI} />
                                         <Cella color={isDark ? '#123185' : '#8c3a39'} index={8} position={[0.4, -0.1, 0]} />

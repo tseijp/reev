@@ -18,8 +18,8 @@ export const App = () => {
 ```
 
 import { gsap } from 'gsap'
-import { Wheel } from '@site/../../packages/gesture/react'
-import { useWheel } from '@site/../../packages/gesture/react'
+import { Wheel } from 'rege/src/react'
+import { useWheel } from 'rege/src/react'
 
 export const App = () => {
         const { ref } = useWheel(({ event, target, movement: [x, y] }) => {
@@ -38,7 +38,7 @@ export const App = () => {
 You can use shorthands Wheel component
 
 ```jsx
-import { Wheel } from 'reev/react'
+import { Wheel } from 'reev/src/react'
 
 export const wheel = ({ event, target, movement: [x, y] }) => {
         event.preventDefault()
