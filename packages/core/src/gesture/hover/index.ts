@@ -1,6 +1,6 @@
-import { event } from '../..'
+import { event } from '../../index'
 import { vec2, addV, subV, getDevice, getClientVec2, cpV } from '../utils'
-import type { EventState } from '../..'
+import type { EventState } from '../../index'
 import type { HoverState } from './types'
 
 export * from './types'

@@ -1,8 +1,14 @@
 import { vec2, addV, cpV, subV } from '../utils'
-import { scrollValues } from './utils'
-import { event } from '../..'
-import type { EventState } from '../..'
+import { event } from '../../index'
+import type { EventState } from '../../index'
 import type { ScrollState } from './types'
+import type { Vec2 } from '../utils'
+
+const scrollValues = (e: any, out = vec2()): Vec2 => {
+        const { scrollX: x, scrollLeft: xx } = e.currentTarget
+        const { scrollY: y, scrollTop: yy } = e.currentTarget
+        return vec2(x ?? xx ?? 0, y ?? yy ?? 0, out)
+}
 
 export * from './types'
 

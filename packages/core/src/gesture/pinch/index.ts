@@ -1,9 +1,84 @@
-import { event } from '../..'
-import { vec2, addV, subV, cpV } from '../utils'
-import { pinchDevice, touchDistanceAngle, pointerDistanceAngle, getCurrentTargetTouchIds, wheelPinchDelta } from './utils'
-import type { EventState } from '../..'
+import { event } from '../../index'
+import { vec2, addV, subV, cpV, SUPPORT } from '../utils'
+import type { EventState } from '../../index'
 import type { PinchState } from './types'
-import type { WebKitGestureEvent, DistanceAngle } from './utils'
+import type { Vec2 } from '../utils'
+
+export const pinchDevice = (touch = false) => {
+        if (!SUPPORT.touch && SUPPORT.gesture) return 'gesture'
+        if (SUPPORT.touch && touch) return 'touch'
+        if (SUPPORT.touchscreen) {
+                if (SUPPORT.pointer) return 'pointer'
+                if (SUPPORT.touch) return 'touch'
+        }
+        return 'wheel'
+}
+
+const LINE_HEIGHT = 40
+const PAGE_HEIGHT = 800
+const PINCH_WHEEL_RATIO = 100
+
+export interface DistanceAngle {
+        distance: number
+        angle: number
+        origin: Vec2
+}
+
+const distanceAngle = (p1: Touch | PointerEvent, p2: Touch | PointerEvent): DistanceAngle | null => {
+        try {
+                const dx = p2.clientX - p1.clientX
+                const dy = p2.clientY - p1.clientY
+                const cx = (p2.clientX + p1.clientX) / 2
+                const cy = (p2.clientY + p1.clientY) / 2
+
+                const distance = Math.hypot(dx, dy)
+                // Convert to degrees, negative to match natural gesture direction
+                const angle = -(Math.atan2(dx, dy) * 180) / Math.PI
+                const origin = vec2(cx, cy)
+
+                return { distance, angle, origin }
+        } catch {
+                return null
+        }
+}
+
+const touchDistanceAngle = (event: TouchEvent, ids: number[]): DistanceAngle | null => {
+        const touches = Array.from(event.touches).filter((touch) => ids.includes(touch.identifier))
+        if (touches.length < 2) return null
+        return distanceAngle(touches[0], touches[1])
+}
+
+const pointerDistanceAngle = (pointerEvents: Map<number, PointerEvent>): DistanceAngle | null => {
+        const pointers = Array.from(pointerEvents.values())
+        if (pointers.length < 2) return null
+        return distanceAngle(pointers[0], pointers[1])
+}
+
+const getCurrentTargetTouchIds = (event: TouchEvent): number[] => {
+        return Array.from(event.touches)
+                .filter((touch) => touch.target === event.currentTarget || (event.currentTarget as Node)?.contains?.(touch.target as Node))
+                .map((touch) => touch.identifier)
+}
+
+const wheelPinchDelta = (event: WheelEvent, currentScale: number): number => {
+        let { deltaY, deltaMode } = event
+
+        // Normalize wheel values
+        if (deltaMode === 1) {
+                deltaY *= LINE_HEIGHT
+        } else if (deltaMode === 2) {
+                deltaY *= PAGE_HEIGHT
+        }
+
+        // Convert to scale delta (negative because wheel down = zoom out)
+        return (-deltaY / PINCH_WHEEL_RATIO) * currentScale
+}
+interface WebKitGestureEvent extends UIEvent {
+        scale: number
+        rotation: number
+        clientX: number
+        clientY: number
+}
 
 export * from './types'
 

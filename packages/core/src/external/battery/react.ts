@@ -1,7 +1,7 @@
 import { batteryEvent } from '.'
 import { useSyncExternalStore } from 'react'
 import type { BatteryState } from './types'
-import type { EventState } from '../..'
+import type { EventState } from '../../index'
 
 let self: EventState<BatteryState>
 

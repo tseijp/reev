@@ -1,5 +1,5 @@
-import { event } from '../..'
-import type { EventState } from '../..'
+import { event } from '../../index'
+import type { EventState } from '../../index'
 import type { WindowSizeState } from './types'
 
 export * from './types'

@@ -1,4 +1,4 @@
-import { event } from '../..'
+import { event } from '../../index'
 import type { KeyState } from './types'
 
 export * from './types'

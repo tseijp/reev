@@ -1,10 +1,28 @@
 import { vec2, addV, cpV } from '../utils'
-import { wheelValues } from './utils'
-import { event } from '../..'
-import type { EventState } from '../..'
+import { event } from '../../index'
+import type { EventState } from '../../index'
 import type { WheelState } from './types'
+import type { Vec2 } from '../utils'
 
 export * from './types'
+
+const LINE_HEIGHT = 40
+
+const PAGE_HEIGHT = 800
+
+const wheelValues = (event: Event, out: Vec2): Vec2 => {
+        if (!(event instanceof WheelEvent)) return vec2(0, 0, out)
+
+        let { deltaX, deltaY, deltaMode } = event
+        if (deltaMode === 1) {
+                deltaX *= LINE_HEIGHT
+                deltaY *= LINE_HEIGHT
+        } else if (deltaMode === 2) {
+                deltaX *= PAGE_HEIGHT
+                deltaY *= PAGE_HEIGHT
+        }
+        return vec2(deltaX, deltaY, out)
+}
 
 export const wheelEvent = <El extends Element = Element>(config?: WheelState) => {
         const initValues = () => {

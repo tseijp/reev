@@ -1,6 +1,6 @@
-import { event } from '../..'
-import { addVec3, subVec3, vec3 } from './utils'
-import type { EventState } from '../..'
+import { event } from '../../index'
+import { addVec3, subVec3, vec3 } from '../utils'
+import type { EventState } from '../../index'
 import type { OrientState } from './types'
 
 export * from './types'

@@ -1,4 +1,4 @@
-import { event } from '../..'
+import { event } from '../../index'
 
 export * from './types'
 
