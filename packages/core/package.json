@@ -1,119 +1,721 @@
 {
-        "name": "reev",
-        "version": "0.13.0",
-        "author": "tseijp",
-        "license": "MIT",
-        "private": false,
-        "sideEffect": false,
-        "publishConfig": {
-                "access": "public"
-        },
-        "bugs": {
-                "url": "https://github.com/tseijp/reev/issues"
-        },
-        "repository": "tseijp/reev",
-        "homepage": "https://reev.tsei.jp",
-        "keywords": [
-                "react",
-                "reactjs",
-                "reactive",
-                "event",
-                "global",
-                "state",
-                "store",
-                "hooks",
-                "solid",
-                "solidjs",
-                "tiny",
-                "typescript"
-        ],
-        "files": [
-                "dist/**/*.{js,ts,mjs,mts,map}",
-                "src/**/*.{js,ts,mjs,mts,map}",
-                "packages.json",
-                "README.md"
-        ],
-        "main": "./dist/index.js",
-        "types": "./dist/index.d.ts",
-        "module": "./dist/index.mjs",
-        "exports": {
-                "./packages.json": "./packages.json",
-                "./src": {
-                        "types": "./src/index.ts",
-                        "import": "./src/index.ts",
-                        "default": "./src/index.ts"
-                },
-                "./src/react": {
-                        "types": "./src/react.ts",
-                        "import": "./src/react.ts",
-                        "default": "./src/react.ts"
-                },
-                "./react": {
-                        "types": "./dist/react.d.ts",
-                        "import": {
-                                "types": "./dist/react.d.ts",
-                                "default": "./dist/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/react.d.ts",
-                                "default": "./dist/react.mjs"
-                        },
-                        "require": "./dist/react.js",
-                        "default": "./dist/react.js"
-                },
-                ".": {
-                        "types": "./dist/index.d.ts",
-                        "import": {
-                                "types": "./dist/index.d.ts",
-                                "default": "./dist/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/index.d.ts",
-                                "default": "./dist/index.mjs"
-                        },
-                        "require": "./dist/index.js",
-                        "default": "./dist/index.js"
-                },
-                "./*": {
-                        "types": "./dist/index.d.ts",
-                        "import": {
-                                "types": "./dist/index.d.ts",
-                                "default": "./dist/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/index.d.ts",
-                                "default": "./dist/index.mjs"
-                        },
-                        "require": "./dist/index.js",
-                        "default": "./dist/index.js"
-                }
-        },
-        "peerDependencies": {
-                "expo": "*",
-                "expo-gl": "*",
-                "react": ">=16.8",
-                "react-dom": ">=16.8",
-                "solid-js": "*",
-                "vue": "*"
-        },
-        "peerDependenciesMeta": {
-                "expo": {
-                        "optional": true
-                },
-                "expo-gl": {
-                        "optional": true
-                },
-                "react": {
-                        "optional": true
-                },
-                "react-dom": {
-                        "optional": true
-                },
-                "solid-js": {
-                        "optional": true
-                },
-                "vue": {
-                        "optional": true
-                }
-        }
+	"name": "reev",
+	"version": "0.13.0",
+	"author": "tseijp",
+	"license": "MIT",
+	"private": false,
+	"sideEffect": false,
+	"publishConfig": {
+		"access": "public"
+	},
+	"bugs": {
+		"url": "https://github.com/tseijp/reev/issues"
+	},
+	"repository": "tseijp/reev",
+	"homepage": "https://reev.tsei.jp",
+	"keywords": [
+		"react",
+		"reactjs",
+		"reactive",
+		"event",
+		"global",
+		"state",
+		"store",
+		"hooks",
+		"solid",
+		"solidjs",
+		"tiny",
+		"typescript",
+		"gesture",
+		"drag",
+		"external"
+	],
+	"files": [
+		"dist/**/*.{js,ts,mjs,mts,map,cjs,cts}",
+		"src/**/*.{js,ts,mjs,mts,map}",
+		"packages.json",
+		"README.md"
+	],
+	"main": "./dist/index.cjs",
+	"types": "./dist/index.d.ts",
+	"module": "./dist/index.mjs",
+	"exports": {
+		"./packages.json": "./packages.json",
+		"./src": {
+			"types": "./src/index.ts",
+			"import": "./src/index.ts",
+			"default": "./src/index.ts"
+		},
+		"./src/react": {
+			"types": "./src/react.ts",
+			"import": "./src/react.ts",
+			"default": "./src/react.ts"
+		},
+		"./src/gesture": {
+			"types": "./src/gesture/index.ts",
+			"import": "./src/gesture/index.ts",
+			"default": "./src/gesture/index.ts"
+		},
+		"./src/gesture/react": {
+			"types": "./src/gesture/react.ts",
+			"import": "./src/gesture/react.ts",
+			"default": "./src/gesture/react.ts"
+		},
+		"./src/gesture/utils": {
+			"types": "./src/gesture/utils.ts",
+			"import": "./src/gesture/utils.ts",
+			"default": "./src/gesture/utils.ts"
+		},
+		"./src/gesture/drag": {
+			"types": "./src/gesture/drag/index.ts",
+			"import": "./src/gesture/drag/index.ts",
+			"default": "./src/gesture/drag/index.ts"
+		},
+		"./src/gesture/drag/react": {
+			"types": "./src/gesture/drag/react.ts",
+			"import": "./src/gesture/drag/react.ts",
+			"default": "./src/gesture/drag/react.ts"
+		},
+		"./src/gesture/hover": {
+			"types": "./src/gesture/hover/index.ts",
+			"import": "./src/gesture/hover/index.ts",
+			"default": "./src/gesture/hover/index.ts"
+		},
+		"./src/gesture/hover/react": {
+			"types": "./src/gesture/hover/react.ts",
+			"import": "./src/gesture/hover/react.ts",
+			"default": "./src/gesture/hover/react.ts"
+		},
+		"./src/gesture/key": {
+			"types": "./src/gesture/key/index.ts",
+			"import": "./src/gesture/key/index.ts",
+			"default": "./src/gesture/key/index.ts"
+		},
+		"./src/gesture/key/react": {
+			"types": "./src/gesture/key/react.ts",
+			"import": "./src/gesture/key/react.ts",
+			"default": "./src/gesture/key/react.ts"
+		},
+		"./src/gesture/pinch": {
+			"types": "./src/gesture/pinch/index.ts",
+			"import": "./src/gesture/pinch/index.ts",
+			"default": "./src/gesture/pinch/index.ts"
+		},
+		"./src/gesture/pinch/react": {
+			"types": "./src/gesture/pinch/react.ts",
+			"import": "./src/gesture/pinch/react.ts",
+			"default": "./src/gesture/pinch/react.ts"
+		},
+		"./src/gesture/resize": {
+			"types": "./src/gesture/resize/index.ts",
+			"import": "./src/gesture/resize/index.ts",
+			"default": "./src/gesture/resize/index.ts"
+		},
+		"./src/gesture/resize/react": {
+			"types": "./src/gesture/resize/react.ts",
+			"import": "./src/gesture/resize/react.ts",
+			"default": "./src/gesture/resize/react.ts"
+		},
+		"./src/gesture/scroll": {
+			"types": "./src/gesture/scroll/index.ts",
+			"import": "./src/gesture/scroll/index.ts",
+			"default": "./src/gesture/scroll/index.ts"
+		},
+		"./src/gesture/scroll/react": {
+			"types": "./src/gesture/scroll/react.ts",
+			"import": "./src/gesture/scroll/react.ts",
+			"default": "./src/gesture/scroll/react.ts"
+		},
+		"./src/gesture/wheel": {
+			"types": "./src/gesture/wheel/index.ts",
+			"import": "./src/gesture/wheel/index.ts",
+			"default": "./src/gesture/wheel/index.ts"
+		},
+		"./src/gesture/wheel/react": {
+			"types": "./src/gesture/wheel/react.ts",
+			"import": "./src/gesture/wheel/react.ts",
+			"default": "./src/gesture/wheel/react.ts"
+		},
+		"./src/external": {
+			"types": "./src/external/index.ts",
+			"import": "./src/external/index.ts",
+			"default": "./src/external/index.ts"
+		},
+		"./src/external/react": {
+			"types": "./src/external/react.ts",
+			"import": "./src/external/react.ts",
+			"default": "./src/external/react.ts"
+		},
+		"./src/external/utils": {
+			"types": "./src/external/utils.ts",
+			"import": "./src/external/utils.ts",
+			"default": "./src/external/utils.ts"
+		},
+		"./src/external/battery": {
+			"types": "./src/external/battery/index.ts",
+			"import": "./src/external/battery/index.ts",
+			"default": "./src/external/battery/index.ts"
+		},
+		"./src/external/battery/react": {
+			"types": "./src/external/battery/react.ts",
+			"import": "./src/external/battery/react.ts",
+			"default": "./src/external/battery/react.ts"
+		},
+		"./src/external/clipboard": {
+			"types": "./src/external/clipboard/index.ts",
+			"import": "./src/external/clipboard/index.ts",
+			"default": "./src/external/clipboard/index.ts"
+		},
+		"./src/external/clipboard/react": {
+			"types": "./src/external/clipboard/react.ts",
+			"import": "./src/external/clipboard/react.ts",
+			"default": "./src/external/clipboard/react.ts"
+		},
+		"./src/external/geolocation": {
+			"types": "./src/external/geolocation/index.ts",
+			"import": "./src/external/geolocation/index.ts",
+			"default": "./src/external/geolocation/index.ts"
+		},
+		"./src/external/geolocation/react": {
+			"types": "./src/external/geolocation/react.ts",
+			"import": "./src/external/geolocation/react.ts",
+			"default": "./src/external/geolocation/react.ts"
+		},
+		"./src/external/mediaQuery": {
+			"types": "./src/external/mediaQuery/index.ts",
+			"import": "./src/external/mediaQuery/index.ts",
+			"default": "./src/external/mediaQuery/index.ts"
+		},
+		"./src/external/mediaQuery/react": {
+			"types": "./src/external/mediaQuery/react.ts",
+			"import": "./src/external/mediaQuery/react.ts",
+			"default": "./src/external/mediaQuery/react.ts"
+		},
+		"./src/external/online": {
+			"types": "./src/external/online/index.ts",
+			"import": "./src/external/online/index.ts",
+			"default": "./src/external/online/index.ts"
+		},
+		"./src/external/online/react": {
+			"types": "./src/external/online/react.ts",
+			"import": "./src/external/online/react.ts",
+			"default": "./src/external/online/react.ts"
+		},
+		"./src/external/orient": {
+			"types": "./src/external/orient/index.ts",
+			"import": "./src/external/orient/index.ts",
+			"default": "./src/external/orient/index.ts"
+		},
+		"./src/external/orient/react": {
+			"types": "./src/external/orient/react.ts",
+			"import": "./src/external/orient/react.ts",
+			"default": "./src/external/orient/react.ts"
+		},
+		"./src/external/windowSize": {
+			"types": "./src/external/windowSize/index.ts",
+			"import": "./src/external/windowSize/index.ts",
+			"default": "./src/external/windowSize/index.ts"
+		},
+		"./src/external/windowSize/react": {
+			"types": "./src/external/windowSize/react.ts",
+			"import": "./src/external/windowSize/react.ts",
+			"default": "./src/external/windowSize/react.ts"
+		},
+		"./react": {
+			"types": "./dist/react.d.ts",
+			"import": {
+				"types": "./dist/react.d.ts",
+				"default": "./dist/react.mjs"
+			},
+			"module": {
+				"types": "./dist/react.d.ts",
+				"default": "./dist/react.mjs"
+			},
+			"require": "./dist/react.cjs",
+			"default": "./dist/react.cjs"
+		},
+		"./gesture": {
+			"types": "./dist/gesture/index.d.ts",
+			"import": {
+				"types": "./dist/gesture/index.d.ts",
+				"default": "./dist/gesture/index.mjs"
+			},
+			"module": {
+				"types": "./dist/gesture/index.d.ts",
+				"default": "./dist/gesture/index.mjs"
+			},
+			"require": "./dist/gesture/index.cjs",
+			"default": "./dist/gesture/index.cjs"
+		},
+		"./gesture/react": {
+			"types": "./dist/gesture/react.d.ts",
+			"import": {
+				"types": "./dist/gesture/react.d.ts",
+				"default": "./dist/gesture/react.mjs"
+			},
+			"module": {
+				"types": "./dist/gesture/react.d.ts",
+				"default": "./dist/gesture/react.mjs"
+			},
+			"require": "./dist/gesture/react.cjs",
+			"default": "./dist/gesture/react.cjs"
+		},
+		"./gesture/utils": {
+			"types": "./dist/gesture/utils.d.ts",
+			"import": {
+				"types": "./dist/gesture/utils.d.ts",
+				"default": "./dist/gesture/utils.mjs"
+			},
+			"module": {
+				"types": "./dist/gesture/utils.d.ts",
+				"default": "./dist/gesture/utils.mjs"
+			},
+			"require": "./dist/gesture/utils.cjs",
+			"default": "./dist/gesture/utils.cjs"
+		},
+		"./gesture/drag": {
+			"types": "./dist/gesture/drag/index.d.ts",
+			"import": {
+				"types": "./dist/gesture/drag/index.d.ts",
+				"default": "./dist/gesture/drag/index.mjs"
+			},
+			"module": {
+				"types": "./dist/gesture/drag/index.d.ts",
+				"default": "./dist/gesture/drag/index.mjs"
+			},
+			"require": "./dist/gesture/drag/index.cjs",
+			"default": "./dist/gesture/drag/index.cjs"
+		},
+		"./gesture/drag/react": {
+			"types": "./dist/gesture/drag/react.d.ts",
+			"import": {
+				"types": "./dist/gesture/drag/react.d.ts",
+				"default": "./dist/gesture/drag/react.mjs"
+			},
+			"module": {
+				"types": "./dist/gesture/drag/react.d.ts",
+				"default": "./dist/gesture/drag/react.mjs"
+			},
+			"require": "./dist/gesture/drag/react.cjs",
+			"default": "./dist/gesture/drag/react.cjs"
+		},
+		"./gesture/hover": {
+			"types": "./dist/gesture/hover/index.d.ts",
+			"import": {
+				"types": "./dist/gesture/hover/index.d.ts",
+				"default": "./dist/gesture/hover/index.mjs"
+			},
+			"module": {
+				"types": "./dist/gesture/hover/index.d.ts",
+				"default": "./dist/gesture/hover/index.mjs"
+			},
+			"require": "./dist/gesture/hover/index.cjs",
+			"default": "./dist/gesture/hover/index.cjs"
+		},
+		"./gesture/hover/react": {
+			"types": "./dist/gesture/hover/react.d.ts",
+			"import": {
+				"types": "./dist/gesture/hover/react.d.ts",
+				"default": "./dist/gesture/hover/react.mjs"
+			},
+			"module": {
+				"types": "./dist/gesture/hover/react.d.ts",
+				"default": "./dist/gesture/hover/react.mjs"
+			},
+			"require": "./dist/gesture/hover/react.cjs",
+			"default": "./dist/gesture/hover/react.cjs"
+		},
+		"./gesture/key": {
+			"types": "./dist/gesture/key/index.d.ts",
+			"import": {
+				"types": "./dist/gesture/key/index.d.ts",
+				"default": "./dist/gesture/key/index.mjs"
+			},
+			"module": {
+				"types": "./dist/gesture/key/index.d.ts",
+				"default": "./dist/gesture/key/index.mjs"
+			},
+			"require": "./dist/gesture/key/index.cjs",
+			"default": "./dist/gesture/key/index.cjs"
+		},
+		"./gesture/key/react": {
+			"types": "./dist/gesture/key/react.d.ts",
+			"import": {
+				"types": "./dist/gesture/key/react.d.ts",
+				"default": "./dist/gesture/key/react.mjs"
+			},
+			"module": {
+				"types": "./dist/gesture/key/react.d.ts",
+				"default": "./dist/gesture/key/react.mjs"
+			},
+			"require": "./dist/gesture/key/react.cjs",
+			"default": "./dist/gesture/key/react.cjs"
+		},
+		"./gesture/pinch": {
+			"types": "./dist/gesture/pinch/index.d.ts",
+			"import": {
+				"types": "./dist/gesture/pinch/index.d.ts",
+				"default": "./dist/gesture/pinch/index.mjs"
+			},
+			"module": {
+				"types": "./dist/gesture/pinch/index.d.ts",
+				"default": "./dist/gesture/pinch/index.mjs"
+			},
+			"require": "./dist/gesture/pinch/index.cjs",
+			"default": "./dist/gesture/pinch/index.cjs"
+		},
+		"./gesture/pinch/react": {
+			"types": "./dist/gesture/pinch/react.d.ts",
+			"import": {
+				"types": "./dist/gesture/pinch/react.d.ts",
+				"default": "./dist/gesture/pinch/react.mjs"
+			},
+			"module": {
+				"types": "./dist/gesture/pinch/react.d.ts",
+				"default": "./dist/gesture/pinch/react.mjs"
+			},
+			"require": "./dist/gesture/pinch/react.cjs",
+			"default": "./dist/gesture/pinch/react.cjs"
+		},
+		"./gesture/resize": {
+			"types": "./dist/gesture/resize/index.d.ts",
+			"import": {
+				"types": "./dist/gesture/resize/index.d.ts",
+				"default": "./dist/gesture/resize/index.mjs"
+			},
+			"module": {
+				"types": "./dist/gesture/resize/index.d.ts",
+				"default": "./dist/gesture/resize/index.mjs"
+			},
+			"require": "./dist/gesture/resize/index.cjs",
+			"default": "./dist/gesture/resize/index.cjs"
+		},
+		"./gesture/resize/react": {
+			"types": "./dist/gesture/resize/react.d.ts",
+			"import": {
+				"types": "./dist/gesture/resize/react.d.ts",
+				"default": "./dist/gesture/resize/react.mjs"
+			},
+			"module": {
+				"types": "./dist/gesture/resize/react.d.ts",
+				"default": "./dist/gesture/resize/react.mjs"
+			},
+			"require": "./dist/gesture/resize/react.cjs",
+			"default": "./dist/gesture/resize/react.cjs"
+		},
+		"./gesture/scroll": {
+			"types": "./dist/gesture/scroll/index.d.ts",
+			"import": {
+				"types": "./dist/gesture/scroll/index.d.ts",
+				"default": "./dist/gesture/scroll/index.mjs"
+			},
+			"module": {
+				"types": "./dist/gesture/scroll/index.d.ts",
+				"default": "./dist/gesture/scroll/index.mjs"
+			},
+			"require": "./dist/gesture/scroll/index.cjs",
+			"default": "./dist/gesture/scroll/index.cjs"
+		},
+		"./gesture/scroll/react": {
+			"types": "./dist/gesture/scroll/react.d.ts",
+			"import": {
+				"types": "./dist/gesture/scroll/react.d.ts",
+				"default": "./dist/gesture/scroll/react.mjs"
+			},
+			"module": {
+				"types": "./dist/gesture/scroll/react.d.ts",
+				"default": "./dist/gesture/scroll/react.mjs"
+			},
+			"require": "./dist/gesture/scroll/react.cjs",
+			"default": "./dist/gesture/scroll/react.cjs"
+		},
+		"./gesture/wheel": {
+			"types": "./dist/gesture/wheel/index.d.ts",
+			"import": {
+				"types": "./dist/gesture/wheel/index.d.ts",
+				"default": "./dist/gesture/wheel/index.mjs"
+			},
+			"module": {
+				"types": "./dist/gesture/wheel/index.d.ts",
+				"default": "./dist/gesture/wheel/index.mjs"
+			},
+			"require": "./dist/gesture/wheel/index.cjs",
+			"default": "./dist/gesture/wheel/index.cjs"
+		},
+		"./gesture/wheel/react": {
+			"types": "./dist/gesture/wheel/react.d.ts",
+			"import": {
+				"types": "./dist/gesture/wheel/react.d.ts",
+				"default": "./dist/gesture/wheel/react.mjs"
+			},
+			"module": {
+				"types": "./dist/gesture/wheel/react.d.ts",
+				"default": "./dist/gesture/wheel/react.mjs"
+			},
+			"require": "./dist/gesture/wheel/react.cjs",
+			"default": "./dist/gesture/wheel/react.cjs"
+		},
+		"./external": {
+			"types": "./dist/external/index.d.ts",
+			"import": {
+				"types": "./dist/external/index.d.ts",
+				"default": "./dist/external/index.mjs"
+			},
+			"module": {
+				"types": "./dist/external/index.d.ts",
+				"default": "./dist/external/index.mjs"
+			},
+			"require": "./dist/external/index.cjs",
+			"default": "./dist/external/index.cjs"
+		},
+		"./external/react": {
+			"types": "./dist/external/react.d.ts",
+			"import": {
+				"types": "./dist/external/react.d.ts",
+				"default": "./dist/external/react.mjs"
+			},
+			"module": {
+				"types": "./dist/external/react.d.ts",
+				"default": "./dist/external/react.mjs"
+			},
+			"require": "./dist/external/react.cjs",
+			"default": "./dist/external/react.cjs"
+		},
+		"./external/utils": {
+			"types": "./dist/external/utils.d.ts",
+			"import": {
+				"types": "./dist/external/utils.d.ts",
+				"default": "./dist/external/utils.mjs"
+			},
+			"module": {
+				"types": "./dist/external/utils.d.ts",
+				"default": "./dist/external/utils.mjs"
+			},
+			"require": "./dist/external/utils.cjs",
+			"default": "./dist/external/utils.cjs"
+		},
+		"./external/battery": {
+			"types": "./dist/external/battery/index.d.ts",
+			"import": {
+				"types": "./dist/external/battery/index.d.ts",
+				"default": "./dist/external/battery/index.mjs"
+			},
+			"module": {
+				"types": "./dist/external/battery/index.d.ts",
+				"default": "./dist/external/battery/index.mjs"
+			},
+			"require": "./dist/external/battery/index.cjs",
+			"default": "./dist/external/battery/index.cjs"
+		},
+		"./external/battery/react": {
+			"types": "./dist/external/battery/react.d.ts",
+			"import": {
+				"types": "./dist/external/battery/react.d.ts",
+				"default": "./dist/external/battery/react.mjs"
+			},
+			"module": {
+				"types": "./dist/external/battery/react.d.ts",
+				"default": "./dist/external/battery/react.mjs"
+			},
+			"require": "./dist/external/battery/react.cjs",
+			"default": "./dist/external/battery/react.cjs"
+		},
+		"./external/clipboard": {
+			"types": "./dist/external/clipboard/index.d.ts",
+			"import": {
+				"types": "./dist/external/clipboard/index.d.ts",
+				"default": "./dist/external/clipboard/index.mjs"
+			},
+			"module": {
+				"types": "./dist/external/clipboard/index.d.ts",
+				"default": "./dist/external/clipboard/index.mjs"
+			},
+			"require": "./dist/external/clipboard/index.cjs",
+			"default": "./dist/external/clipboard/index.cjs"
+		},
+		"./external/clipboard/react": {
+			"types": "./dist/external/clipboard/react.d.ts",
+			"import": {
+				"types": "./dist/external/clipboard/react.d.ts",
+				"default": "./dist/external/clipboard/react.mjs"
+			},
+			"module": {
+				"types": "./dist/external/clipboard/react.d.ts",
+				"default": "./dist/external/clipboard/react.mjs"
+			},
+			"require": "./dist/external/clipboard/react.cjs",
+			"default": "./dist/external/clipboard/react.cjs"
+		},
+		"./external/geolocation": {
+			"types": "./dist/external/geolocation/index.d.ts",
+			"import": {
+				"types": "./dist/external/geolocation/index.d.ts",
+				"default": "./dist/external/geolocation/index.mjs"
+			},
+			"module": {
+				"types": "./dist/external/geolocation/index.d.ts",
+				"default": "./dist/external/geolocation/index.mjs"
+			},
+			"require": "./dist/external/geolocation/index.cjs",
+			"default": "./dist/external/geolocation/index.cjs"
+		},
+		"./external/geolocation/react": {
+			"types": "./dist/external/geolocation/react.d.ts",
+			"import": {
+				"types": "./dist/external/geolocation/react.d.ts",
+				"default": "./dist/external/geolocation/react.mjs"
+			},
+			"module": {
+				"types": "./dist/external/geolocation/react.d.ts",
+				"default": "./dist/external/geolocation/react.mjs"
+			},
+			"require": "./dist/external/geolocation/react.cjs",
+			"default": "./dist/external/geolocation/react.cjs"
+		},
+		"./external/mediaQuery": {
+			"types": "./dist/external/mediaQuery/index.d.ts",
+			"import": {
+				"types": "./dist/external/mediaQuery/index.d.ts",
+				"default": "./dist/external/mediaQuery/index.mjs"
+			},
+			"module": {
+				"types": "./dist/external/mediaQuery/index.d.ts",
+				"default": "./dist/external/mediaQuery/index.mjs"
+			},
+			"require": "./dist/external/mediaQuery/index.cjs",
+			"default": "./dist/external/mediaQuery/index.cjs"
+		},
+		"./external/mediaQuery/react": {
+			"types": "./dist/external/mediaQuery/react.d.ts",
+			"import": {
+				"types": "./dist/external/mediaQuery/react.d.ts",
+				"default": "./dist/external/mediaQuery/react.mjs"
+			},
+			"module": {
+				"types": "./dist/external/mediaQuery/react.d.ts",
+				"default": "./dist/external/mediaQuery/react.mjs"
+			},
+			"require": "./dist/external/mediaQuery/react.cjs",
+			"default": "./dist/external/mediaQuery/react.cjs"
+		},
+		"./external/online": {
+			"types": "./dist/external/online/index.d.ts",
+			"import": {
+				"types": "./dist/external/online/index.d.ts",
+				"default": "./dist/external/online/index.mjs"
+			},
+			"module": {
+				"types": "./dist/external/online/index.d.ts",
+				"default": "./dist/external/online/index.mjs"
+			},
+			"require": "./dist/external/online/index.cjs",
+			"default": "./dist/external/online/index.cjs"
+		},
+		"./external/online/react": {
+			"types": "./dist/external/online/react.d.ts",
+			"import": {
+				"types": "./dist/external/online/react.d.ts",
+				"default": "./dist/external/online/react.mjs"
+			},
+			"module": {
+				"types": "./dist/external/online/react.d.ts",
+				"default": "./dist/external/online/react.mjs"
+			},
+			"require": "./dist/external/online/react.cjs",
+			"default": "./dist/external/online/react.cjs"
+		},
+		"./external/orient": {
+			"types": "./dist/external/orient/index.d.ts",
+			"import": {
+				"types": "./dist/external/orient/index.d.ts",
+				"default": "./dist/external/orient/index.mjs"
+			},
+			"module": {
+				"types": "./dist/external/orient/index.d.ts",
+				"default": "./dist/external/orient/index.mjs"
+			},
+			"require": "./dist/external/orient/index.cjs",
+			"default": "./dist/external/orient/index.cjs"
+		},
+		"./external/orient/react": {
+			"types": "./dist/external/orient/react.d.ts",
+			"import": {
+				"types": "./dist/external/orient/react.d.ts",
+				"default": "./dist/external/orient/react.mjs"
+			},
+			"module": {
+				"types": "./dist/external/orient/react.d.ts",
+				"default": "./dist/external/orient/react.mjs"
+			},
+			"require": "./dist/external/orient/react.cjs",
+			"default": "./dist/external/orient/react.cjs"
+		},
+		"./external/windowSize": {
+			"types": "./dist/external/windowSize/index.d.ts",
+			"import": {
+				"types": "./dist/external/windowSize/index.d.ts",
+				"default": "./dist/external/windowSize/index.mjs"
+			},
+			"module": {
+				"types": "./dist/external/windowSize/index.d.ts",
+				"default": "./dist/external/windowSize/index.mjs"
+			},
+			"require": "./dist/external/windowSize/index.cjs",
+			"default": "./dist/external/windowSize/index.cjs"
+		},
+		"./external/windowSize/react": {
+			"types": "./dist/external/windowSize/react.d.ts",
+			"import": {
+				"types": "./dist/external/windowSize/react.d.ts",
+				"default": "./dist/external/windowSize/react.mjs"
+			},
+			"module": {
+				"types": "./dist/external/windowSize/react.d.ts",
+				"default": "./dist/external/windowSize/react.mjs"
+			},
+			"require": "./dist/external/windowSize/react.cjs",
+			"default": "./dist/external/windowSize/react.cjs"
+		},
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.mjs"
+			},
+			"module": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.mjs"
+			},
+			"require": "./dist/index.cjs",
+			"default": "./dist/index.cjs"
+		}
+	},
+	"peerDependencies": {
+		"expo": "*",
+		"expo-gl": "*",
+		"react": ">=16.8",
+		"react-dom": ">=16.8",
+		"solid-js": "*",
+		"vue": "*"
+	},
+	"peerDependenciesMeta": {
+		"expo": {
+			"optional": true
+		},
+		"expo-gl": {
+			"optional": true
+		},
+		"react": {
+			"optional": true
+		},
+		"react-dom": {
+			"optional": true
+		},
+		"solid-js": {
+			"optional": true
+		},
+		"vue": {
+			"optional": true
+		}
+	}
 }
