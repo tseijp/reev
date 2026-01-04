@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from 'react'
-import { clipboardEvent } from '.'
+import { clipboardEvent } from './index'
 import type { EventState } from '../../index'
 import type { ClipboardState } from './types'
 

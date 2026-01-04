@@ -1,5 +1,5 @@
 import { useOnce, useMutable } from '../../react'
-import { hoverEvent } from '.'
+import { hoverEvent } from './index'
 import { isF } from '../utils'
 import type { ReactNode } from 'react'
 import type { HoverArg, HoverState } from './types'

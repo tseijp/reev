@@ -51,13 +51,7 @@ const MODULE_ENTRIES_KEYS = Object.keys(MODULE_ENTRIES) as ModuleEntriesKey[]
  */
 const isEntryPoint = (kind: string) => kind === 'entry-point'
 
-// const isModuleEntry = (path: string) =>
-//         MODULE_ENTRIES_KEYS.some((key) => {
-//                 const n = key.replace('/index', '').replace('/react', '')
-//                 return path.includes(`/${n}/`) || path.includes(`/${n}.`)
-//         })
-
-const isModuleEntry = (path: string) => MODULE_ENTRIES_KEYS.some((p) => path.includes(p))
+const isTypeExport = (path: string) => path.includes('types')
 
 /**
  * Create esbuild plugin to externalize internal modules
@@ -69,10 +63,9 @@ const createPlugin = (entry: string, ext: string): Plugin => {
                 setup(build) {
                         build.onResolve({ filter: /.*/ }, ({ kind, path }) => {
                                 if (isEntryPoint(kind)) return
-                                if (!isModuleEntry(path)) return
-                                path = path.replace(/^\.\.\//, './')
+                                if (isTypeExport(path)) return
                                 path += ext
-                                return { path, external: true }
+                                return { path, external: true } // All files are bundled as separate endpoints, so don't split into non-endpoint files
                         })
                 },
         }
@@ -83,16 +76,15 @@ const createPlugin = (entry: string, ext: string): Plugin => {
  */
 const createConfig = (options: Options, entry: ModuleEntriesKey): Options[] => {
         return BUILD_TARGETS.map((target) => {
-                const ext = target.format === 'cjs' ? '.cjs' : '.js'
+                const ext = target.format === 'cjs' ? '.js' : '.mjs'
                 return {
                         ...options,
                         ...target,
                         ...BASE_CONFIG,
                         entry: { [entry]: MODULE_ENTRIES[entry] },
                         esbuildPlugins: [createPlugin(entry, ext)],
-                        sourcemap: !options.watch,
                         clean: !options.watch,
-                        minify: !options.watch,
+                        minify: false, //!options.watch,
                 }
         })
 }

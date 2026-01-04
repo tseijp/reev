@@ -1,4 +1,4 @@
-import { resizeEvent } from '.'
+import { resizeEvent } from './index'
 import { useMutable, useOnce } from '../../react'
 import { isF } from '../utils'
 import type { ReactNode } from 'react'

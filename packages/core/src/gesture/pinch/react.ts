@@ -1,5 +1,5 @@
 import { useOnce, useMutable } from '../../react'
-import { pinchEvent } from '.'
+import { pinchEvent } from './index'
 import { isF } from '../utils'
 import type { ReactNode } from 'react'
 import type { PinchArg, PinchState } from './types'

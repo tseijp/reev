@@ -1,4 +1,4 @@
-import { batteryEvent } from '.'
+import { batteryEvent } from './index'
 import { useSyncExternalStore } from 'react'
 import type { BatteryState } from './types'
 import type { EventState } from '../../index'

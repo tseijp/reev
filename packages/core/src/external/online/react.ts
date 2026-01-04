@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from 'react'
-import { onlineEvent } from '.'
+import { onlineEvent } from './index'
 import type { EventState } from '../../index'
 import type { OnlineState } from './types'
 

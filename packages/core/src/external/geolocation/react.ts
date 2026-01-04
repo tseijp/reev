@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from 'react'
-import { geolocationEvent } from '.'
+import { geolocationEvent } from './index'
 import type { EventState } from '../../index'
 import type { GeolocationState } from './types'
 

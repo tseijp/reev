@@ -1,5 +1,5 @@
 import { useMutable, useOnce } from '../../react'
-import { keyEvent } from '.'
+import { keyEvent } from './index'
 import { isF } from '../utils'
 import type { ReactNode } from 'react'
 import type { KeyArg, KeyState } from './types'

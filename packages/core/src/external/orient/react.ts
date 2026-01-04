@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from 'react'
-import { orientEvent } from '.'
+import { orientEvent } from './index'
 import type { EventState } from '../../index'
 import type { OrientState } from './types'
 
