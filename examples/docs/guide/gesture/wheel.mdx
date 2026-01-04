@@ -4,7 +4,7 @@
 
 ```js
 import { gsap } from 'gsap'
-import { useWheel } from 'reev/src/gesture/wheel/react'
+import { useWheel } from 'reev/gesture/wheel/react'
 
 export const App = () => {
         const { ref } = useWheel(({ event, target, movement: [x, y] }) => {
@@ -38,7 +38,7 @@ export const App = () => {
 You can use shorthands Wheel component
 
 ```jsx
-import { Wheel } from 'reev/src/react'
+import { Wheel } from 'reev/react'
 
 export const wheel = ({ event, target, movement: [x, y] }) => {
         event.preventDefault()

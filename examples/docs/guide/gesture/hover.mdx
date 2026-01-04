@@ -4,7 +4,7 @@
 
 ```js
 import { gsap } from 'gsap'
-import { useHover } from 'reev/src/gesture/hover/react'
+import { useHover } from 'reev/gesture/hover/react'
 
 export const App = () => {
         const { ref } = useHover(({ active, target, movement: [x, y] }) => {
@@ -31,7 +31,7 @@ export const App = () => {
 You can use shorthands Hover component
 
 ```jsx
-import { Hover } from 'reev/src/gesture/hover/react'
+import { Hover } from 'reev/gesture/hover/react'
 
 export const hover = ({ active, target, movement: [x, y] }) => {
         gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
