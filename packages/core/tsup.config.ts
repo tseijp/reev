@@ -169,7 +169,7 @@ const createConfig = (options: Options, entry: ModuleEntriesKey): Options[] => {
                         entry: { [entry]: MODULE_ENTRIES[entry] },
                         esbuildPlugins: [createPlugin(entry, ext)],
                         clean: !options.watch,
-                        minify: false, //!options.watch,
+                        minify: !options.watch,
                 }
         })
 }
