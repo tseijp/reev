@@ -112,9 +112,7 @@ const generateExports = (): Record<string, any> => {
 
         // Generate source exports (./src/*)
         for (const entry of MODULE_ENTRIES_KEYS) {
-                const exportKey = `./src/${entry === 'index' ? '' : entry}`
-                        .replace(/\/index$/, '')
-                        .replace(/\/$/, '')
+                const exportKey = `./src/${entry === 'index' ? '' : entry}`.replace(/\/index$/, '').replace(/\/$/, '')
                 exports[exportKey] = generateSourceExport(entry)
         }
 
@@ -130,7 +128,7 @@ const generateExports = (): Record<string, any> => {
 /**
  * Generate package.json from package.base.json with auto-generated exports
  */
-const generatePackageJson = (): void => {
+const generatePackageJson = async () => {
         try {
                 // Read base package.json
                 const basePath = join(__dirname, 'package.base.json')
@@ -180,9 +178,7 @@ export default defineConfig((options) => {
         // Add onSuccess hook to the last config to generate package.json after all builds
         if (configs.length > 0 && !options.watch) {
                 const lastConfig = configs[configs.length - 1]
-                lastConfig.onSuccess = () => {
-                        generatePackageJson()
-                }
+                lastConfig.onSuccess = generatePackageJson
         }
 
         return configs
