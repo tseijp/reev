@@ -1,6 +1,8 @@
 import { defineConfig } from 'tsup'
 import type { Options } from 'tsup'
 import type { Plugin } from 'esbuild'
+import { writeFileSync, readFileSync } from 'fs'
+import { join } from 'path'
 
 const GESTURE = ['drag', 'hover', 'key', 'pinch', 'resize', 'scroll', 'wheel'] as const
 const EXTERNAL = ['battery', 'clipboard', 'geolocation', 'mediaQuery', 'online', 'orient', 'windowSize'] as const
@@ -72,6 +74,95 @@ const createPlugin = (entry: string, ext: string): Plugin => {
 }
 
 /**
+ * Generate source exports (./src/*)
+ * Points directly to TypeScript source files
+ */
+const generateSourceExport = (entry: string): Record<string, any> => {
+        const srcPath = MODULE_ENTRIES[entry as keyof typeof MODULE_ENTRIES]
+        return {
+                types: `./${srcPath}`,
+                import: `./${srcPath}`,
+                default: `./${srcPath}`,
+        }
+}
+
+/**
+ * Generate dist exports (./* - built files)
+ * Points to compiled JavaScript with CJS/ESM support
+ */
+const generateDistExport = (entry: string): Record<string, any> => {
+        const distPath = entry === 'index' ? 'dist/index' : `dist/${entry}`
+        return {
+                types: `./${distPath}.d.ts`,
+                import: {
+                        types: `./${distPath}.d.ts`,
+                        default: `./${distPath}.mjs`,
+                },
+                module: {
+                        types: `./${distPath}.d.ts`,
+                        default: `./${distPath}.mjs`,
+                },
+                require: `./${distPath}.cjs`,
+                default: `./${distPath}.cjs`,
+        }
+}
+
+/**
+ * Generate the complete exports field for package.json
+ */
+const generateExports = (): Record<string, any> => {
+        const exports: Record<string, any> = {
+                // Fixed export for packages.json
+                './packages.json': './packages.json',
+        }
+
+        // Generate source exports (./src/*)
+        for (const entry of MODULE_ENTRIES_KEYS) {
+                const exportKey = `./src/${entry === 'index' ? '' : entry}`
+                        .replace(/\/index$/, '')
+                        .replace(/\/$/, '')
+                exports[exportKey] = generateSourceExport(entry)
+        }
+
+        // Generate dist exports (./* - built files)
+        for (const entry of MODULE_ENTRIES_KEYS) {
+                const exportKey = entry === 'index' ? '.' : `./${entry.replace(/\/index$/, '')}`
+                exports[exportKey] = generateDistExport(entry)
+        }
+
+        return exports
+}
+
+/**
+ * Generate package.json from package.base.json with auto-generated exports
+ */
+const generatePackageJson = (): void => {
+        try {
+                // Read base package.json
+                const basePath = join(__dirname, 'package.base.json')
+                const basePackage = JSON.parse(readFileSync(basePath, 'utf-8'))
+
+                // Generate exports
+                const exports = generateExports()
+
+                // Merge and create final package.json
+                const finalPackage = {
+                        ...basePackage,
+                        exports,
+                }
+
+                // Write to package.json
+                const packagePath = join(__dirname, 'package.json')
+                writeFileSync(packagePath, JSON.stringify(finalPackage, null, 8).replace(/ {8}/g, '\t') + '\n')
+
+                console.log('✅ Successfully generated package.json with', Object.keys(exports).length, 'exports')
+        } catch (error) {
+                console.error('❌ Failed to generate package.json:', error)
+                throw error
+        }
+}
+
+/**
  * Create build configuration for each entry point
  */
 const createConfig = (options: Options, entry: ModuleEntriesKey): Options[] => {
@@ -90,5 +181,15 @@ const createConfig = (options: Options, entry: ModuleEntriesKey): Options[] => {
 }
 
 export default defineConfig((options) => {
-        return MODULE_ENTRIES_KEYS.map(createConfig.bind(null, options)).flat()
+        const configs = MODULE_ENTRIES_KEYS.map(createConfig.bind(null, options)).flat()
+
+        // Add onSuccess hook to the last config to generate package.json after all builds
+        if (configs.length > 0 && !options.watch) {
+                const lastConfig = configs[configs.length - 1]
+                lastConfig.onSuccess = () => {
+                        generatePackageJson()
+                }
+        }
+
+        return configs
 })
