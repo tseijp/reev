@@ -1,4 +1,4 @@
-import { useOnce, useMutable } from 'reev/react'
+import { useOnce, useMutable } from '../../react'
 import { dragEvent } from './index'
 import { isF } from '../utils'
 import type { ReactNode } from 'react'

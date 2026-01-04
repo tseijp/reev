@@ -1,6 +1,6 @@
-import { event } from 'reev'
+import { event } from '../..'
 import { vec2, addV, subV, cpV, getDevice, getClientVec2 } from '../utils'
-import type { EventState } from 'reev'
+import type { EventState } from '../..'
 import type { DragState } from './types'
 
 export * from './types'

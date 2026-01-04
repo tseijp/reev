@@ -1,4 +1,4 @@
-import { event } from 'reev'
+import { event } from '../..'
 
 export * from './types'
 

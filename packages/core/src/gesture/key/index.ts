@@ -1,4 +1,4 @@
-import { event } from 'reev'
+import { event } from '../..'
 import type { KeyState } from './types'
 
 export * from './types'

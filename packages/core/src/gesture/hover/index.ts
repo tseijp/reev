@@ -1,6 +1,6 @@
-import { event } from 'reev'
+import { event } from '../..'
 import { vec2, addV, subV, getDevice, getClientVec2, cpV } from '../utils'
-import type { EventState } from 'reev'
+import type { EventState } from '../..'
 import type { HoverState } from './types'
 
 export * from './types'

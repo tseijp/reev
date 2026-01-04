@@ -1,5 +1,5 @@
-import { event } from 'reev'
-import type { EventState } from 'reev'
+import { event } from '../..'
+import type { EventState } from '../..'
 import type { OnlineState } from './types'
 
 export * from './types'
