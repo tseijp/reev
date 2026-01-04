@@ -1,8 +1,0 @@
-{
-        "compilerOptions": {
-                "paths": {
-                        "reev": ["../core/src/index"],
-                        "reev/react": ["../core/src/react"]
-                }
-        }
-}

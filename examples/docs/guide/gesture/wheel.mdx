@@ -4,7 +4,7 @@
 
 ```js
 import { gsap } from 'gsap'
-import { useWheel } from 'rege/react'
+import { useWheel } from 'reev/gesture/wheel/react'
 
 export const App = () => {
         const { ref } = useWheel(({ event, target, movement: [x, y] }) => {
@@ -18,8 +18,8 @@ export const App = () => {
 ```
 
 import { gsap } from 'gsap'
-import { Wheel } from 'rege/src/react'
-import { useWheel } from 'rege/src/react'
+import { Wheel } from 'reev/src/gesture/wheel/react'
+import { useWheel } from 'reev/src/gesture/wheel/react'
 
 export const App = () => {
         const { ref } = useWheel(({ event, target, movement: [x, y] }) => {

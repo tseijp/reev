@@ -13,10 +13,7 @@
                 "watch": "cd packages/core && npx jest --watch --runInBand",
                 "cov": "cd packages/core && npx jest --coverage",
                 "ls": "cd packages/core && npm publish --dry-run",
-                "tsup:core": "cd packages/core && npx tsup",
-                "tsup:gesture": "cd packages/gesture && npx tsup",
-                "tsup:external": "cd packages/external && npx tsup",
-                "tsup": "npm run tsup:core && npm run tsup:gesture && npm run tsup:external",
+                "tsup": "cd packages/core && npx tsup",
                 "vers": "npm run changeset version",
                 "pub": "npm run tsup && npx changeset publish"
         },
