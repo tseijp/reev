@@ -4,7 +4,7 @@
 
 ```js
 import { gsap } from 'gsap'
-import { usePinch } from 'reev/gesture/pinch/react'
+import { usePinch } from 'reev/src/gesture/pinch/react'
 
 export const App = () => {
         const { ref } = usePinch(({ active, event, target, movement: [x, y] }) => {
@@ -38,7 +38,7 @@ export const App = () => {
 You can use shorthands Pinch component
 
 ```jsx
-import { Pinch } from 'reev/gesture/pinch/react'
+import { Pinch } from 'reev/src/gesture/pinch/react'
 
 export const pinch = ({ event, target, movement: [x, y] }) => {
         event.preventDefault()

@@ -4,7 +4,7 @@
 
 ```tsx
 import { gsap } from 'gsap'
-import { useResize } from 'reev/gesture/resize/react'
+import { useResize } from 'reev/src/gesture/resize/react'
 
 export const App = () => {
         const { ref } = useResize(console.log)
@@ -27,7 +27,7 @@ export const App = () => {
 You can use shorthands Resize component
 
 ```jsx
-import { Resize } from 'reev/gesture/resize/react'
+import { Resize } from 'reev/src/gesture/resize/react'
 
 export const App2 = () => {
         return <Resize key={console.log}>{({ ref }) => <span ref={ref} style={style} />}</Resize>
