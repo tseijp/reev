@@ -6,6 +6,7 @@ tmp
 events
 solid.ts
 vue3.ts
+*.tgz
 
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
