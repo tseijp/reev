@@ -1,119 +1,376 @@
 {
-        "name": "rexr",
-        "author": "tseijp",
-        "license": "MIT",
-        "version": "0.7.0",
-        "private": false,
-        "sideEffect": false,
-        "publishConfig": {
-                "access": "public"
-        },
-        "bugs": {
-                "url": "https://github.com/tseijp/reev/issues"
-        },
-        "repository": "tseijp/reev",
-        "homepage": "https://reev.tsei.jp",
-        "keywords": [
-                "react",
-                "reactjs",
-                "reactive",
-                "event",
-                "global",
-                "state",
-                "store",
-                "hooks",
-                "solid",
-                "solidjs",
-                "tiny",
-                "typescript"
-        ],
-        "files": [
-                "dist/**/*.{js,ts,mjs,mts,map}",
-                "src/**/*.{js,ts,mjs,mts,map}",
-                "packages.json",
-                "README.md"
-        ],
-        "exports": {
-                "./packages.json": "./packages.json",
-                "./src": {
-                        "types": "./src/index.ts",
-                        "import": "./src/index.ts",
-                        "default": "./src/index.ts"
-                },
-                "./src/react": {
-                        "types": "./src/react.ts",
-                        "import": "./src/react.ts",
-                        "default": "./src/react.ts"
-                },
-                "./react": {
-                        "types": "./dist/react.d.ts",
-                        "import": {
-                                "types": "./dist/react.d.ts",
-                                "default": "./dist/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/react.d.ts",
-                                "default": "./dist/react.mjs"
-                        },
-                        "require": "./dist/react.js",
-                        "default": "./dist/react.js"
-                },
-                ".": {
-                        "types": "./dist/index.d.ts",
-                        "import": {
-                                "types": "./dist/index.d.ts",
-                                "default": "./dist/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/index.d.ts",
-                                "default": "./dist/index.mjs"
-                        },
-                        "require": "./dist/index.js",
-                        "default": "./dist/index.js"
-                },
-                "./*": {
-                        "types": "./dist/index.d.ts",
-                        "import": {
-                                "types": "./dist/index.d.ts",
-                                "default": "./dist/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/index.d.ts",
-                                "default": "./dist/index.mjs"
-                        },
-                        "require": "./dist/index.js",
-                        "default": "./dist/index.js"
-                }
-        },
-        "dependencies": {
-                "reev": "0.13.0"
-        },
-        "peerDependencies": {
-                "expo": "*",
-                "expo-gl": "*",
-                "react": ">=16.8",
-                "react-dom": ">=16.8",
-                "solid-js": "*",
-                "vue": "*"
-        },
-        "peerDependenciesMeta": {
-                "expo": {
-                        "optional": true
-                },
-                "expo-gl": {
-                        "optional": true
-                },
-                "react": {
-                        "optional": true
-                },
-                "react-dom": {
-                        "optional": true
-                },
-                "solid-js": {
-                        "optional": true
-                },
-                "vue": {
-                        "optional": true
-                }
-        }
+	"name": "rexr",
+	"author": "tseijp",
+	"license": "MIT",
+	"version": "0.7.0",
+	"private": false,
+	"sideEffect": false,
+	"publishConfig": {
+		"access": "public"
+	},
+	"bugs": {
+		"url": "https://github.com/tseijp/reev/issues"
+	},
+	"repository": "tseijp/reev",
+	"homepage": "https://reev.tsei.jp",
+	"keywords": [
+		"react",
+		"reactjs",
+		"reactive",
+		"event",
+		"global",
+		"state",
+		"store",
+		"hooks",
+		"solid",
+		"solidjs",
+		"tiny",
+		"typescript"
+	],
+	"files": [
+		"dist/**/*.{js,ts,mjs,mts,map,cjs,cts}",
+		"src/**/*.{js,ts,mjs,mts,map}",
+		"packages.json",
+		"README.md"
+	],
+	"exports": {
+		"./packages.json": "./packages.json",
+		"./src": {
+			"types": "./src/index.ts",
+			"import": "./src/index.ts",
+			"default": "./src/index.ts"
+		},
+		"./src/react": {
+			"types": "./src/react.ts",
+			"import": "./src/react.ts",
+			"default": "./src/react.ts"
+		},
+		"./src/utils": {
+			"types": "./src/utils.ts",
+			"import": "./src/utils.ts",
+			"default": "./src/utils.ts"
+		},
+		"./src/battery": {
+			"types": "./src/battery/index.ts",
+			"import": "./src/battery/index.ts",
+			"default": "./src/battery/index.ts"
+		},
+		"./src/battery/react": {
+			"types": "./src/battery/react.ts",
+			"import": "./src/battery/react.ts",
+			"default": "./src/battery/react.ts"
+		},
+		"./src/clipboard": {
+			"types": "./src/clipboard/index.ts",
+			"import": "./src/clipboard/index.ts",
+			"default": "./src/clipboard/index.ts"
+		},
+		"./src/clipboard/react": {
+			"types": "./src/clipboard/react.ts",
+			"import": "./src/clipboard/react.ts",
+			"default": "./src/clipboard/react.ts"
+		},
+		"./src/geolocation": {
+			"types": "./src/geolocation/index.ts",
+			"import": "./src/geolocation/index.ts",
+			"default": "./src/geolocation/index.ts"
+		},
+		"./src/geolocation/react": {
+			"types": "./src/geolocation/react.ts",
+			"import": "./src/geolocation/react.ts",
+			"default": "./src/geolocation/react.ts"
+		},
+		"./src/mediaQuery": {
+			"types": "./src/mediaQuery/index.ts",
+			"import": "./src/mediaQuery/index.ts",
+			"default": "./src/mediaQuery/index.ts"
+		},
+		"./src/mediaQuery/react": {
+			"types": "./src/mediaQuery/react.ts",
+			"import": "./src/mediaQuery/react.ts",
+			"default": "./src/mediaQuery/react.ts"
+		},
+		"./src/online": {
+			"types": "./src/online/index.ts",
+			"import": "./src/online/index.ts",
+			"default": "./src/online/index.ts"
+		},
+		"./src/online/react": {
+			"types": "./src/online/react.ts",
+			"import": "./src/online/react.ts",
+			"default": "./src/online/react.ts"
+		},
+		"./src/orient": {
+			"types": "./src/orient/index.ts",
+			"import": "./src/orient/index.ts",
+			"default": "./src/orient/index.ts"
+		},
+		"./src/orient/react": {
+			"types": "./src/orient/react.ts",
+			"import": "./src/orient/react.ts",
+			"default": "./src/orient/react.ts"
+		},
+		"./src/windowSize": {
+			"types": "./src/windowSize/index.ts",
+			"import": "./src/windowSize/index.ts",
+			"default": "./src/windowSize/index.ts"
+		},
+		"./src/windowSize/react": {
+			"types": "./src/windowSize/react.ts",
+			"import": "./src/windowSize/react.ts",
+			"default": "./src/windowSize/react.ts"
+		},
+		"./react": {
+			"types": "./dist/react.d.ts",
+			"import": {
+				"types": "./dist/react.d.ts",
+				"default": "./dist/react.mjs"
+			},
+			"module": {
+				"types": "./dist/react.d.ts",
+				"default": "./dist/react.mjs"
+			},
+			"require": "./dist/react.cjs",
+			"default": "./dist/react.cjs"
+		},
+		"./utils": {
+			"types": "./dist/utils.d.ts",
+			"import": {
+				"types": "./dist/utils.d.ts",
+				"default": "./dist/utils.mjs"
+			},
+			"module": {
+				"types": "./dist/utils.d.ts",
+				"default": "./dist/utils.mjs"
+			},
+			"require": "./dist/utils.cjs",
+			"default": "./dist/utils.cjs"
+		},
+		"./battery": {
+			"types": "./dist/battery/index.d.ts",
+			"import": {
+				"types": "./dist/battery/index.d.ts",
+				"default": "./dist/battery/index.mjs"
+			},
+			"module": {
+				"types": "./dist/battery/index.d.ts",
+				"default": "./dist/battery/index.mjs"
+			},
+			"require": "./dist/battery/index.cjs",
+			"default": "./dist/battery/index.cjs"
+		},
+		"./battery/react": {
+			"types": "./dist/battery/react.d.ts",
+			"import": {
+				"types": "./dist/battery/react.d.ts",
+				"default": "./dist/battery/react.mjs"
+			},
+			"module": {
+				"types": "./dist/battery/react.d.ts",
+				"default": "./dist/battery/react.mjs"
+			},
+			"require": "./dist/battery/react.cjs",
+			"default": "./dist/battery/react.cjs"
+		},
+		"./clipboard": {
+			"types": "./dist/clipboard/index.d.ts",
+			"import": {
+				"types": "./dist/clipboard/index.d.ts",
+				"default": "./dist/clipboard/index.mjs"
+			},
+			"module": {
+				"types": "./dist/clipboard/index.d.ts",
+				"default": "./dist/clipboard/index.mjs"
+			},
+			"require": "./dist/clipboard/index.cjs",
+			"default": "./dist/clipboard/index.cjs"
+		},
+		"./clipboard/react": {
+			"types": "./dist/clipboard/react.d.ts",
+			"import": {
+				"types": "./dist/clipboard/react.d.ts",
+				"default": "./dist/clipboard/react.mjs"
+			},
+			"module": {
+				"types": "./dist/clipboard/react.d.ts",
+				"default": "./dist/clipboard/react.mjs"
+			},
+			"require": "./dist/clipboard/react.cjs",
+			"default": "./dist/clipboard/react.cjs"
+		},
+		"./geolocation": {
+			"types": "./dist/geolocation/index.d.ts",
+			"import": {
+				"types": "./dist/geolocation/index.d.ts",
+				"default": "./dist/geolocation/index.mjs"
+			},
+			"module": {
+				"types": "./dist/geolocation/index.d.ts",
+				"default": "./dist/geolocation/index.mjs"
+			},
+			"require": "./dist/geolocation/index.cjs",
+			"default": "./dist/geolocation/index.cjs"
+		},
+		"./geolocation/react": {
+			"types": "./dist/geolocation/react.d.ts",
+			"import": {
+				"types": "./dist/geolocation/react.d.ts",
+				"default": "./dist/geolocation/react.mjs"
+			},
+			"module": {
+				"types": "./dist/geolocation/react.d.ts",
+				"default": "./dist/geolocation/react.mjs"
+			},
+			"require": "./dist/geolocation/react.cjs",
+			"default": "./dist/geolocation/react.cjs"
+		},
+		"./mediaQuery": {
+			"types": "./dist/mediaQuery/index.d.ts",
+			"import": {
+				"types": "./dist/mediaQuery/index.d.ts",
+				"default": "./dist/mediaQuery/index.mjs"
+			},
+			"module": {
+				"types": "./dist/mediaQuery/index.d.ts",
+				"default": "./dist/mediaQuery/index.mjs"
+			},
+			"require": "./dist/mediaQuery/index.cjs",
+			"default": "./dist/mediaQuery/index.cjs"
+		},
+		"./mediaQuery/react": {
+			"types": "./dist/mediaQuery/react.d.ts",
+			"import": {
+				"types": "./dist/mediaQuery/react.d.ts",
+				"default": "./dist/mediaQuery/react.mjs"
+			},
+			"module": {
+				"types": "./dist/mediaQuery/react.d.ts",
+				"default": "./dist/mediaQuery/react.mjs"
+			},
+			"require": "./dist/mediaQuery/react.cjs",
+			"default": "./dist/mediaQuery/react.cjs"
+		},
+		"./online": {
+			"types": "./dist/online/index.d.ts",
+			"import": {
+				"types": "./dist/online/index.d.ts",
+				"default": "./dist/online/index.mjs"
+			},
+			"module": {
+				"types": "./dist/online/index.d.ts",
+				"default": "./dist/online/index.mjs"
+			},
+			"require": "./dist/online/index.cjs",
+			"default": "./dist/online/index.cjs"
+		},
+		"./online/react": {
+			"types": "./dist/online/react.d.ts",
+			"import": {
+				"types": "./dist/online/react.d.ts",
+				"default": "./dist/online/react.mjs"
+			},
+			"module": {
+				"types": "./dist/online/react.d.ts",
+				"default": "./dist/online/react.mjs"
+			},
+			"require": "./dist/online/react.cjs",
+			"default": "./dist/online/react.cjs"
+		},
+		"./orient": {
+			"types": "./dist/orient/index.d.ts",
+			"import": {
+				"types": "./dist/orient/index.d.ts",
+				"default": "./dist/orient/index.mjs"
+			},
+			"module": {
+				"types": "./dist/orient/index.d.ts",
+				"default": "./dist/orient/index.mjs"
+			},
+			"require": "./dist/orient/index.cjs",
+			"default": "./dist/orient/index.cjs"
+		},
+		"./orient/react": {
+			"types": "./dist/orient/react.d.ts",
+			"import": {
+				"types": "./dist/orient/react.d.ts",
+				"default": "./dist/orient/react.mjs"
+			},
+			"module": {
+				"types": "./dist/orient/react.d.ts",
+				"default": "./dist/orient/react.mjs"
+			},
+			"require": "./dist/orient/react.cjs",
+			"default": "./dist/orient/react.cjs"
+		},
+		"./windowSize": {
+			"types": "./dist/windowSize/index.d.ts",
+			"import": {
+				"types": "./dist/windowSize/index.d.ts",
+				"default": "./dist/windowSize/index.mjs"
+			},
+			"module": {
+				"types": "./dist/windowSize/index.d.ts",
+				"default": "./dist/windowSize/index.mjs"
+			},
+			"require": "./dist/windowSize/index.cjs",
+			"default": "./dist/windowSize/index.cjs"
+		},
+		"./windowSize/react": {
+			"types": "./dist/windowSize/react.d.ts",
+			"import": {
+				"types": "./dist/windowSize/react.d.ts",
+				"default": "./dist/windowSize/react.mjs"
+			},
+			"module": {
+				"types": "./dist/windowSize/react.d.ts",
+				"default": "./dist/windowSize/react.mjs"
+			},
+			"require": "./dist/windowSize/react.cjs",
+			"default": "./dist/windowSize/react.cjs"
+		},
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.mjs"
+			},
+			"module": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.mjs"
+			},
+			"require": "./dist/index.cjs",
+			"default": "./dist/index.cjs"
+		}
+	},
+	"dependencies": {
+		"reev": "0.13.0"
+	},
+	"peerDependencies": {
+		"expo": "*",
+		"expo-gl": "*",
+		"react": ">=16.8",
+		"react-dom": ">=16.8",
+		"solid-js": "*",
+		"vue": "*"
+	},
+	"peerDependenciesMeta": {
+		"expo": {
+			"optional": true
+		},
+		"expo-gl": {
+			"optional": true
+		},
+		"react": {
+			"optional": true
+		},
+		"react-dom": {
+			"optional": true
+		},
+		"solid-js": {
+			"optional": true
+		},
+		"vue": {
+			"optional": true
+		}
+	}
 }
