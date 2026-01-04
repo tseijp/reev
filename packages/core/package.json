@@ -251,469 +251,217 @@
                 },
                 ".": {
                         "types": "./dist/index.d.ts",
-                        "import": {
-                                "types": "./dist/index.d.ts",
-                                "default": "./dist/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/index.d.ts",
-                                "default": "./dist/index.mjs"
-                        },
+                        "import": "./dist/index.mjs",
                         "require": "./dist/index.js",
                         "default": "./dist/index.js"
                 },
                 "./react": {
                         "types": "./dist/react.d.ts",
-                        "import": {
-                                "types": "./dist/react.d.ts",
-                                "default": "./dist/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/react.d.ts",
-                                "default": "./dist/react.mjs"
-                        },
+                        "import": "./dist/react.mjs",
                         "require": "./dist/react.js",
                         "default": "./dist/react.js"
                 },
                 "./gesture": {
                         "types": "./dist/gesture/index.d.ts",
-                        "import": {
-                                "types": "./dist/gesture/index.d.ts",
-                                "default": "./dist/gesture/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/gesture/index.d.ts",
-                                "default": "./dist/gesture/index.mjs"
-                        },
+                        "import": "./dist/gesture/index.mjs",
                         "require": "./dist/gesture/index.js",
                         "default": "./dist/gesture/index.js"
                 },
                 "./gesture/react": {
                         "types": "./dist/gesture/react.d.ts",
-                        "import": {
-                                "types": "./dist/gesture/react.d.ts",
-                                "default": "./dist/gesture/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/gesture/react.d.ts",
-                                "default": "./dist/gesture/react.mjs"
-                        },
+                        "import": "./dist/gesture/react.mjs",
                         "require": "./dist/gesture/react.js",
                         "default": "./dist/gesture/react.js"
                 },
                 "./gesture/utils": {
                         "types": "./dist/gesture/utils.d.ts",
-                        "import": {
-                                "types": "./dist/gesture/utils.d.ts",
-                                "default": "./dist/gesture/utils.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/gesture/utils.d.ts",
-                                "default": "./dist/gesture/utils.mjs"
-                        },
+                        "import": "./dist/gesture/utils.mjs",
                         "require": "./dist/gesture/utils.js",
                         "default": "./dist/gesture/utils.js"
                 },
                 "./external": {
                         "types": "./dist/external/index.d.ts",
-                        "import": {
-                                "types": "./dist/external/index.d.ts",
-                                "default": "./dist/external/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/external/index.d.ts",
-                                "default": "./dist/external/index.mjs"
-                        },
+                        "import": "./dist/external/index.mjs",
                         "require": "./dist/external/index.js",
                         "default": "./dist/external/index.js"
                 },
                 "./external/react": {
                         "types": "./dist/external/react.d.ts",
-                        "import": {
-                                "types": "./dist/external/react.d.ts",
-                                "default": "./dist/external/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/external/react.d.ts",
-                                "default": "./dist/external/react.mjs"
-                        },
+                        "import": "./dist/external/react.mjs",
                         "require": "./dist/external/react.js",
                         "default": "./dist/external/react.js"
                 },
                 "./external/utils": {
                         "types": "./dist/external/utils.d.ts",
-                        "import": {
-                                "types": "./dist/external/utils.d.ts",
-                                "default": "./dist/external/utils.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/external/utils.d.ts",
-                                "default": "./dist/external/utils.mjs"
-                        },
+                        "import": "./dist/external/utils.mjs",
                         "require": "./dist/external/utils.js",
                         "default": "./dist/external/utils.js"
                 },
                 "./gesture/drag": {
                         "types": "./dist/gesture/drag/index.d.ts",
-                        "import": {
-                                "types": "./dist/gesture/drag/index.d.ts",
-                                "default": "./dist/gesture/drag/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/gesture/drag/index.d.ts",
-                                "default": "./dist/gesture/drag/index.mjs"
-                        },
+                        "import": "./dist/gesture/drag/index.mjs",
                         "require": "./dist/gesture/drag/index.js",
                         "default": "./dist/gesture/drag/index.js"
                 },
                 "./gesture/hover": {
                         "types": "./dist/gesture/hover/index.d.ts",
-                        "import": {
-                                "types": "./dist/gesture/hover/index.d.ts",
-                                "default": "./dist/gesture/hover/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/gesture/hover/index.d.ts",
-                                "default": "./dist/gesture/hover/index.mjs"
-                        },
+                        "import": "./dist/gesture/hover/index.mjs",
                         "require": "./dist/gesture/hover/index.js",
                         "default": "./dist/gesture/hover/index.js"
                 },
                 "./gesture/key": {
                         "types": "./dist/gesture/key/index.d.ts",
-                        "import": {
-                                "types": "./dist/gesture/key/index.d.ts",
-                                "default": "./dist/gesture/key/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/gesture/key/index.d.ts",
-                                "default": "./dist/gesture/key/index.mjs"
-                        },
+                        "import": "./dist/gesture/key/index.mjs",
                         "require": "./dist/gesture/key/index.js",
                         "default": "./dist/gesture/key/index.js"
                 },
                 "./gesture/pinch": {
                         "types": "./dist/gesture/pinch/index.d.ts",
-                        "import": {
-                                "types": "./dist/gesture/pinch/index.d.ts",
-                                "default": "./dist/gesture/pinch/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/gesture/pinch/index.d.ts",
-                                "default": "./dist/gesture/pinch/index.mjs"
-                        },
+                        "import": "./dist/gesture/pinch/index.mjs",
                         "require": "./dist/gesture/pinch/index.js",
                         "default": "./dist/gesture/pinch/index.js"
                 },
                 "./gesture/resize": {
                         "types": "./dist/gesture/resize/index.d.ts",
-                        "import": {
-                                "types": "./dist/gesture/resize/index.d.ts",
-                                "default": "./dist/gesture/resize/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/gesture/resize/index.d.ts",
-                                "default": "./dist/gesture/resize/index.mjs"
-                        },
+                        "import": "./dist/gesture/resize/index.mjs",
                         "require": "./dist/gesture/resize/index.js",
                         "default": "./dist/gesture/resize/index.js"
                 },
                 "./gesture/scroll": {
                         "types": "./dist/gesture/scroll/index.d.ts",
-                        "import": {
-                                "types": "./dist/gesture/scroll/index.d.ts",
-                                "default": "./dist/gesture/scroll/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/gesture/scroll/index.d.ts",
-                                "default": "./dist/gesture/scroll/index.mjs"
-                        },
+                        "import": "./dist/gesture/scroll/index.mjs",
                         "require": "./dist/gesture/scroll/index.js",
                         "default": "./dist/gesture/scroll/index.js"
                 },
                 "./gesture/wheel": {
                         "types": "./dist/gesture/wheel/index.d.ts",
-                        "import": {
-                                "types": "./dist/gesture/wheel/index.d.ts",
-                                "default": "./dist/gesture/wheel/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/gesture/wheel/index.d.ts",
-                                "default": "./dist/gesture/wheel/index.mjs"
-                        },
+                        "import": "./dist/gesture/wheel/index.mjs",
                         "require": "./dist/gesture/wheel/index.js",
                         "default": "./dist/gesture/wheel/index.js"
                 },
                 "./gesture/drag/react": {
                         "types": "./dist/gesture/drag/react.d.ts",
-                        "import": {
-                                "types": "./dist/gesture/drag/react.d.ts",
-                                "default": "./dist/gesture/drag/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/gesture/drag/react.d.ts",
-                                "default": "./dist/gesture/drag/react.mjs"
-                        },
+                        "import": "./dist/gesture/drag/react.mjs",
                         "require": "./dist/gesture/drag/react.js",
                         "default": "./dist/gesture/drag/react.js"
                 },
                 "./gesture/hover/react": {
                         "types": "./dist/gesture/hover/react.d.ts",
-                        "import": {
-                                "types": "./dist/gesture/hover/react.d.ts",
-                                "default": "./dist/gesture/hover/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/gesture/hover/react.d.ts",
-                                "default": "./dist/gesture/hover/react.mjs"
-                        },
+                        "import": "./dist/gesture/hover/react.mjs",
                         "require": "./dist/gesture/hover/react.js",
                         "default": "./dist/gesture/hover/react.js"
                 },
                 "./gesture/key/react": {
                         "types": "./dist/gesture/key/react.d.ts",
-                        "import": {
-                                "types": "./dist/gesture/key/react.d.ts",
-                                "default": "./dist/gesture/key/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/gesture/key/react.d.ts",
-                                "default": "./dist/gesture/key/react.mjs"
-                        },
+                        "import": "./dist/gesture/key/react.mjs",
                         "require": "./dist/gesture/key/react.js",
                         "default": "./dist/gesture/key/react.js"
                 },
                 "./gesture/pinch/react": {
                         "types": "./dist/gesture/pinch/react.d.ts",
-                        "import": {
-                                "types": "./dist/gesture/pinch/react.d.ts",
-                                "default": "./dist/gesture/pinch/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/gesture/pinch/react.d.ts",
-                                "default": "./dist/gesture/pinch/react.mjs"
-                        },
+                        "import": "./dist/gesture/pinch/react.mjs",
                         "require": "./dist/gesture/pinch/react.js",
                         "default": "./dist/gesture/pinch/react.js"
                 },
                 "./gesture/resize/react": {
                         "types": "./dist/gesture/resize/react.d.ts",
-                        "import": {
-                                "types": "./dist/gesture/resize/react.d.ts",
-                                "default": "./dist/gesture/resize/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/gesture/resize/react.d.ts",
-                                "default": "./dist/gesture/resize/react.mjs"
-                        },
+                        "import": "./dist/gesture/resize/react.mjs",
                         "require": "./dist/gesture/resize/react.js",
                         "default": "./dist/gesture/resize/react.js"
                 },
                 "./gesture/scroll/react": {
                         "types": "./dist/gesture/scroll/react.d.ts",
-                        "import": {
-                                "types": "./dist/gesture/scroll/react.d.ts",
-                                "default": "./dist/gesture/scroll/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/gesture/scroll/react.d.ts",
-                                "default": "./dist/gesture/scroll/react.mjs"
-                        },
+                        "import": "./dist/gesture/scroll/react.mjs",
                         "require": "./dist/gesture/scroll/react.js",
                         "default": "./dist/gesture/scroll/react.js"
                 },
                 "./gesture/wheel/react": {
                         "types": "./dist/gesture/wheel/react.d.ts",
-                        "import": {
-                                "types": "./dist/gesture/wheel/react.d.ts",
-                                "default": "./dist/gesture/wheel/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/gesture/wheel/react.d.ts",
-                                "default": "./dist/gesture/wheel/react.mjs"
-                        },
+                        "import": "./dist/gesture/wheel/react.mjs",
                         "require": "./dist/gesture/wheel/react.js",
                         "default": "./dist/gesture/wheel/react.js"
                 },
                 "./external/battery": {
                         "types": "./dist/external/battery/index.d.ts",
-                        "import": {
-                                "types": "./dist/external/battery/index.d.ts",
-                                "default": "./dist/external/battery/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/external/battery/index.d.ts",
-                                "default": "./dist/external/battery/index.mjs"
-                        },
+                        "import": "./dist/external/battery/index.mjs",
                         "require": "./dist/external/battery/index.js",
                         "default": "./dist/external/battery/index.js"
                 },
                 "./external/clipboard": {
                         "types": "./dist/external/clipboard/index.d.ts",
-                        "import": {
-                                "types": "./dist/external/clipboard/index.d.ts",
-                                "default": "./dist/external/clipboard/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/external/clipboard/index.d.ts",
-                                "default": "./dist/external/clipboard/index.mjs"
-                        },
+                        "import": "./dist/external/clipboard/index.mjs",
                         "require": "./dist/external/clipboard/index.js",
                         "default": "./dist/external/clipboard/index.js"
                 },
                 "./external/geolocation": {
                         "types": "./dist/external/geolocation/index.d.ts",
-                        "import": {
-                                "types": "./dist/external/geolocation/index.d.ts",
-                                "default": "./dist/external/geolocation/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/external/geolocation/index.d.ts",
-                                "default": "./dist/external/geolocation/index.mjs"
-                        },
+                        "import": "./dist/external/geolocation/index.mjs",
                         "require": "./dist/external/geolocation/index.js",
                         "default": "./dist/external/geolocation/index.js"
                 },
                 "./external/mediaQuery": {
                         "types": "./dist/external/mediaQuery/index.d.ts",
-                        "import": {
-                                "types": "./dist/external/mediaQuery/index.d.ts",
-                                "default": "./dist/external/mediaQuery/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/external/mediaQuery/index.d.ts",
-                                "default": "./dist/external/mediaQuery/index.mjs"
-                        },
+                        "import": "./dist/external/mediaQuery/index.mjs",
                         "require": "./dist/external/mediaQuery/index.js",
                         "default": "./dist/external/mediaQuery/index.js"
                 },
                 "./external/online": {
                         "types": "./dist/external/online/index.d.ts",
-                        "import": {
-                                "types": "./dist/external/online/index.d.ts",
-                                "default": "./dist/external/online/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/external/online/index.d.ts",
-                                "default": "./dist/external/online/index.mjs"
-                        },
+                        "import": "./dist/external/online/index.mjs",
                         "require": "./dist/external/online/index.js",
                         "default": "./dist/external/online/index.js"
                 },
                 "./external/orient": {
                         "types": "./dist/external/orient/index.d.ts",
-                        "import": {
-                                "types": "./dist/external/orient/index.d.ts",
-                                "default": "./dist/external/orient/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/external/orient/index.d.ts",
-                                "default": "./dist/external/orient/index.mjs"
-                        },
+                        "import": "./dist/external/orient/index.mjs",
                         "require": "./dist/external/orient/index.js",
                         "default": "./dist/external/orient/index.js"
                 },
                 "./external/windowSize": {
                         "types": "./dist/external/windowSize/index.d.ts",
-                        "import": {
-                                "types": "./dist/external/windowSize/index.d.ts",
-                                "default": "./dist/external/windowSize/index.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/external/windowSize/index.d.ts",
-                                "default": "./dist/external/windowSize/index.mjs"
-                        },
+                        "import": "./dist/external/windowSize/index.mjs",
                         "require": "./dist/external/windowSize/index.js",
                         "default": "./dist/external/windowSize/index.js"
                 },
                 "./external/battery/react": {
                         "types": "./dist/external/battery/react.d.ts",
-                        "import": {
-                                "types": "./dist/external/battery/react.d.ts",
-                                "default": "./dist/external/battery/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/external/battery/react.d.ts",
-                                "default": "./dist/external/battery/react.mjs"
-                        },
+                        "import": "./dist/external/battery/react.mjs",
                         "require": "./dist/external/battery/react.js",
                         "default": "./dist/external/battery/react.js"
                 },
                 "./external/clipboard/react": {
                         "types": "./dist/external/clipboard/react.d.ts",
-                        "import": {
-                                "types": "./dist/external/clipboard/react.d.ts",
-                                "default": "./dist/external/clipboard/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/external/clipboard/react.d.ts",
-                                "default": "./dist/external/clipboard/react.mjs"
-                        },
+                        "import": "./dist/external/clipboard/react.mjs",
                         "require": "./dist/external/clipboard/react.js",
                         "default": "./dist/external/clipboard/react.js"
                 },
                 "./external/geolocation/react": {
                         "types": "./dist/external/geolocation/react.d.ts",
-                        "import": {
-                                "types": "./dist/external/geolocation/react.d.ts",
-                                "default": "./dist/external/geolocation/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/external/geolocation/react.d.ts",
-                                "default": "./dist/external/geolocation/react.mjs"
-                        },
+                        "import": "./dist/external/geolocation/react.mjs",
                         "require": "./dist/external/geolocation/react.js",
                         "default": "./dist/external/geolocation/react.js"
                 },
                 "./external/mediaQuery/react": {
                         "types": "./dist/external/mediaQuery/react.d.ts",
-                        "import": {
-                                "types": "./dist/external/mediaQuery/react.d.ts",
-                                "default": "./dist/external/mediaQuery/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/external/mediaQuery/react.d.ts",
-                                "default": "./dist/external/mediaQuery/react.mjs"
-                        },
+                        "import": "./dist/external/mediaQuery/react.mjs",
                         "require": "./dist/external/mediaQuery/react.js",
                         "default": "./dist/external/mediaQuery/react.js"
                 },
                 "./external/online/react": {
                         "types": "./dist/external/online/react.d.ts",
-                        "import": {
-                                "types": "./dist/external/online/react.d.ts",
-                                "default": "./dist/external/online/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/external/online/react.d.ts",
-                                "default": "./dist/external/online/react.mjs"
-                        },
+                        "import": "./dist/external/online/react.mjs",
                         "require": "./dist/external/online/react.js",
                         "default": "./dist/external/online/react.js"
                 },
                 "./external/orient/react": {
                         "types": "./dist/external/orient/react.d.ts",
-                        "import": {
-                                "types": "./dist/external/orient/react.d.ts",
-                                "default": "./dist/external/orient/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/external/orient/react.d.ts",
-                                "default": "./dist/external/orient/react.mjs"
-                        },
+                        "import": "./dist/external/orient/react.mjs",
                         "require": "./dist/external/orient/react.js",
                         "default": "./dist/external/orient/react.js"
                 },
                 "./external/windowSize/react": {
                         "types": "./dist/external/windowSize/react.d.ts",
-                        "import": {
-                                "types": "./dist/external/windowSize/react.d.ts",
-                                "default": "./dist/external/windowSize/react.mjs"
-                        },
-                        "module": {
-                                "types": "./dist/external/windowSize/react.d.ts",
-                                "default": "./dist/external/windowSize/react.mjs"
-                        },
+                        "import": "./dist/external/windowSize/react.mjs",
                         "require": "./dist/external/windowSize/react.js",
                         "default": "./dist/external/windowSize/react.js"
                 }

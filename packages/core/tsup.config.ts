@@ -89,19 +89,13 @@ const generateSourceExport = (entry: string): Record<string, any> => {
 /**
  * Generate dist exports (./* - built files)
  * Points to compiled JavaScript with CJS/ESM support
+ * Uses TypeScript official recommended simple structure
  */
 const generateDistExport = (entry: string): Record<string, any> => {
         const distPath = entry === 'index' ? 'dist/index' : `dist/${entry}`
         return {
                 types: `./${distPath}.d.ts`,
-                import: {
-                        types: `./${distPath}.d.ts`,
-                        default: `./${distPath}.mjs`,
-                },
-                module: {
-                        types: `./${distPath}.d.ts`,
-                        default: `./${distPath}.mjs`,
-                },
+                import: `./${distPath}.mjs`,
                 require: `./${distPath}.js`,
                 default: `./${distPath}.js`,
         }
