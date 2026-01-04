@@ -102,8 +102,8 @@ const generateDistExport = (entry: string): Record<string, any> => {
                         types: `./${distPath}.d.ts`,
                         default: `./${distPath}.mjs`,
                 },
-                require: `./${distPath}.cjs`,
-                default: `./${distPath}.cjs`,
+                require: `./${distPath}.js`,
+                default: `./${distPath}.js`,
         }
 }
 

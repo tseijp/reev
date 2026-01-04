@@ -36,7 +36,7 @@
                 "packages.json",
                 "README.md"
         ],
-        "main": "./dist/index.cjs",
+        "main": "./dist/index.js",
         "types": "./dist/index.d.ts",
         "module": "./dist/index.mjs",
         "peerDependencies": {
@@ -259,8 +259,8 @@
                                 "types": "./dist/index.d.ts",
                                 "default": "./dist/index.mjs"
                         },
-                        "require": "./dist/index.cjs",
-                        "default": "./dist/index.cjs"
+                        "require": "./dist/index.js",
+                        "default": "./dist/index.js"
                 },
                 "./react": {
                         "types": "./dist/react.d.ts",
@@ -272,8 +272,8 @@
                                 "types": "./dist/react.d.ts",
                                 "default": "./dist/react.mjs"
                         },
-                        "require": "./dist/react.cjs",
-                        "default": "./dist/react.cjs"
+                        "require": "./dist/react.js",
+                        "default": "./dist/react.js"
                 },
                 "./gesture": {
                         "types": "./dist/gesture/index.d.ts",
@@ -285,8 +285,8 @@
                                 "types": "./dist/gesture/index.d.ts",
                                 "default": "./dist/gesture/index.mjs"
                         },
-                        "require": "./dist/gesture/index.cjs",
-                        "default": "./dist/gesture/index.cjs"
+                        "require": "./dist/gesture/index.js",
+                        "default": "./dist/gesture/index.js"
                 },
                 "./gesture/react": {
                         "types": "./dist/gesture/react.d.ts",
@@ -298,8 +298,8 @@
                                 "types": "./dist/gesture/react.d.ts",
                                 "default": "./dist/gesture/react.mjs"
                         },
-                        "require": "./dist/gesture/react.cjs",
-                        "default": "./dist/gesture/react.cjs"
+                        "require": "./dist/gesture/react.js",
+                        "default": "./dist/gesture/react.js"
                 },
                 "./gesture/utils": {
                         "types": "./dist/gesture/utils.d.ts",
@@ -311,8 +311,8 @@
                                 "types": "./dist/gesture/utils.d.ts",
                                 "default": "./dist/gesture/utils.mjs"
                         },
-                        "require": "./dist/gesture/utils.cjs",
-                        "default": "./dist/gesture/utils.cjs"
+                        "require": "./dist/gesture/utils.js",
+                        "default": "./dist/gesture/utils.js"
                 },
                 "./external": {
                         "types": "./dist/external/index.d.ts",
@@ -324,8 +324,8 @@
                                 "types": "./dist/external/index.d.ts",
                                 "default": "./dist/external/index.mjs"
                         },
-                        "require": "./dist/external/index.cjs",
-                        "default": "./dist/external/index.cjs"
+                        "require": "./dist/external/index.js",
+                        "default": "./dist/external/index.js"
                 },
                 "./external/react": {
                         "types": "./dist/external/react.d.ts",
@@ -337,8 +337,8 @@
                                 "types": "./dist/external/react.d.ts",
                                 "default": "./dist/external/react.mjs"
                         },
-                        "require": "./dist/external/react.cjs",
-                        "default": "./dist/external/react.cjs"
+                        "require": "./dist/external/react.js",
+                        "default": "./dist/external/react.js"
                 },
                 "./external/utils": {
                         "types": "./dist/external/utils.d.ts",
@@ -350,8 +350,8 @@
                                 "types": "./dist/external/utils.d.ts",
                                 "default": "./dist/external/utils.mjs"
                         },
-                        "require": "./dist/external/utils.cjs",
-                        "default": "./dist/external/utils.cjs"
+                        "require": "./dist/external/utils.js",
+                        "default": "./dist/external/utils.js"
                 },
                 "./gesture/drag": {
                         "types": "./dist/gesture/drag/index.d.ts",
@@ -363,8 +363,8 @@
                                 "types": "./dist/gesture/drag/index.d.ts",
                                 "default": "./dist/gesture/drag/index.mjs"
                         },
-                        "require": "./dist/gesture/drag/index.cjs",
-                        "default": "./dist/gesture/drag/index.cjs"
+                        "require": "./dist/gesture/drag/index.js",
+                        "default": "./dist/gesture/drag/index.js"
                 },
                 "./gesture/hover": {
                         "types": "./dist/gesture/hover/index.d.ts",
@@ -376,8 +376,8 @@
                                 "types": "./dist/gesture/hover/index.d.ts",
                                 "default": "./dist/gesture/hover/index.mjs"
                         },
-                        "require": "./dist/gesture/hover/index.cjs",
-                        "default": "./dist/gesture/hover/index.cjs"
+                        "require": "./dist/gesture/hover/index.js",
+                        "default": "./dist/gesture/hover/index.js"
                 },
                 "./gesture/key": {
                         "types": "./dist/gesture/key/index.d.ts",
@@ -389,8 +389,8 @@
                                 "types": "./dist/gesture/key/index.d.ts",
                                 "default": "./dist/gesture/key/index.mjs"
                         },
-                        "require": "./dist/gesture/key/index.cjs",
-                        "default": "./dist/gesture/key/index.cjs"
+                        "require": "./dist/gesture/key/index.js",
+                        "default": "./dist/gesture/key/index.js"
                 },
                 "./gesture/pinch": {
                         "types": "./dist/gesture/pinch/index.d.ts",
@@ -402,8 +402,8 @@
                                 "types": "./dist/gesture/pinch/index.d.ts",
                                 "default": "./dist/gesture/pinch/index.mjs"
                         },
-                        "require": "./dist/gesture/pinch/index.cjs",
-                        "default": "./dist/gesture/pinch/index.cjs"
+                        "require": "./dist/gesture/pinch/index.js",
+                        "default": "./dist/gesture/pinch/index.js"
                 },
                 "./gesture/resize": {
                         "types": "./dist/gesture/resize/index.d.ts",
@@ -415,8 +415,8 @@
                                 "types": "./dist/gesture/resize/index.d.ts",
                                 "default": "./dist/gesture/resize/index.mjs"
                         },
-                        "require": "./dist/gesture/resize/index.cjs",
-                        "default": "./dist/gesture/resize/index.cjs"
+                        "require": "./dist/gesture/resize/index.js",
+                        "default": "./dist/gesture/resize/index.js"
                 },
                 "./gesture/scroll": {
                         "types": "./dist/gesture/scroll/index.d.ts",
@@ -428,8 +428,8 @@
                                 "types": "./dist/gesture/scroll/index.d.ts",
                                 "default": "./dist/gesture/scroll/index.mjs"
                         },
-                        "require": "./dist/gesture/scroll/index.cjs",
-                        "default": "./dist/gesture/scroll/index.cjs"
+                        "require": "./dist/gesture/scroll/index.js",
+                        "default": "./dist/gesture/scroll/index.js"
                 },
                 "./gesture/wheel": {
                         "types": "./dist/gesture/wheel/index.d.ts",
@@ -441,8 +441,8 @@
                                 "types": "./dist/gesture/wheel/index.d.ts",
                                 "default": "./dist/gesture/wheel/index.mjs"
                         },
-                        "require": "./dist/gesture/wheel/index.cjs",
-                        "default": "./dist/gesture/wheel/index.cjs"
+                        "require": "./dist/gesture/wheel/index.js",
+                        "default": "./dist/gesture/wheel/index.js"
                 },
                 "./gesture/drag/react": {
                         "types": "./dist/gesture/drag/react.d.ts",
@@ -454,8 +454,8 @@
                                 "types": "./dist/gesture/drag/react.d.ts",
                                 "default": "./dist/gesture/drag/react.mjs"
                         },
-                        "require": "./dist/gesture/drag/react.cjs",
-                        "default": "./dist/gesture/drag/react.cjs"
+                        "require": "./dist/gesture/drag/react.js",
+                        "default": "./dist/gesture/drag/react.js"
                 },
                 "./gesture/hover/react": {
                         "types": "./dist/gesture/hover/react.d.ts",
@@ -467,8 +467,8 @@
                                 "types": "./dist/gesture/hover/react.d.ts",
                                 "default": "./dist/gesture/hover/react.mjs"
                         },
-                        "require": "./dist/gesture/hover/react.cjs",
-                        "default": "./dist/gesture/hover/react.cjs"
+                        "require": "./dist/gesture/hover/react.js",
+                        "default": "./dist/gesture/hover/react.js"
                 },
                 "./gesture/key/react": {
                         "types": "./dist/gesture/key/react.d.ts",
@@ -480,8 +480,8 @@
                                 "types": "./dist/gesture/key/react.d.ts",
                                 "default": "./dist/gesture/key/react.mjs"
                         },
-                        "require": "./dist/gesture/key/react.cjs",
-                        "default": "./dist/gesture/key/react.cjs"
+                        "require": "./dist/gesture/key/react.js",
+                        "default": "./dist/gesture/key/react.js"
                 },
                 "./gesture/pinch/react": {
                         "types": "./dist/gesture/pinch/react.d.ts",
@@ -493,8 +493,8 @@
                                 "types": "./dist/gesture/pinch/react.d.ts",
                                 "default": "./dist/gesture/pinch/react.mjs"
                         },
-                        "require": "./dist/gesture/pinch/react.cjs",
-                        "default": "./dist/gesture/pinch/react.cjs"
+                        "require": "./dist/gesture/pinch/react.js",
+                        "default": "./dist/gesture/pinch/react.js"
                 },
                 "./gesture/resize/react": {
                         "types": "./dist/gesture/resize/react.d.ts",
@@ -506,8 +506,8 @@
                                 "types": "./dist/gesture/resize/react.d.ts",
                                 "default": "./dist/gesture/resize/react.mjs"
                         },
-                        "require": "./dist/gesture/resize/react.cjs",
-                        "default": "./dist/gesture/resize/react.cjs"
+                        "require": "./dist/gesture/resize/react.js",
+                        "default": "./dist/gesture/resize/react.js"
                 },
                 "./gesture/scroll/react": {
                         "types": "./dist/gesture/scroll/react.d.ts",
@@ -519,8 +519,8 @@
                                 "types": "./dist/gesture/scroll/react.d.ts",
                                 "default": "./dist/gesture/scroll/react.mjs"
                         },
-                        "require": "./dist/gesture/scroll/react.cjs",
-                        "default": "./dist/gesture/scroll/react.cjs"
+                        "require": "./dist/gesture/scroll/react.js",
+                        "default": "./dist/gesture/scroll/react.js"
                 },
                 "./gesture/wheel/react": {
                         "types": "./dist/gesture/wheel/react.d.ts",
@@ -532,8 +532,8 @@
                                 "types": "./dist/gesture/wheel/react.d.ts",
                                 "default": "./dist/gesture/wheel/react.mjs"
                         },
-                        "require": "./dist/gesture/wheel/react.cjs",
-                        "default": "./dist/gesture/wheel/react.cjs"
+                        "require": "./dist/gesture/wheel/react.js",
+                        "default": "./dist/gesture/wheel/react.js"
                 },
                 "./external/battery": {
                         "types": "./dist/external/battery/index.d.ts",
@@ -545,8 +545,8 @@
                                 "types": "./dist/external/battery/index.d.ts",
                                 "default": "./dist/external/battery/index.mjs"
                         },
-                        "require": "./dist/external/battery/index.cjs",
-                        "default": "./dist/external/battery/index.cjs"
+                        "require": "./dist/external/battery/index.js",
+                        "default": "./dist/external/battery/index.js"
                 },
                 "./external/clipboard": {
                         "types": "./dist/external/clipboard/index.d.ts",
@@ -558,8 +558,8 @@
                                 "types": "./dist/external/clipboard/index.d.ts",
                                 "default": "./dist/external/clipboard/index.mjs"
                         },
-                        "require": "./dist/external/clipboard/index.cjs",
-                        "default": "./dist/external/clipboard/index.cjs"
+                        "require": "./dist/external/clipboard/index.js",
+                        "default": "./dist/external/clipboard/index.js"
                 },
                 "./external/geolocation": {
                         "types": "./dist/external/geolocation/index.d.ts",
@@ -571,8 +571,8 @@
                                 "types": "./dist/external/geolocation/index.d.ts",
                                 "default": "./dist/external/geolocation/index.mjs"
                         },
-                        "require": "./dist/external/geolocation/index.cjs",
-                        "default": "./dist/external/geolocation/index.cjs"
+                        "require": "./dist/external/geolocation/index.js",
+                        "default": "./dist/external/geolocation/index.js"
                 },
                 "./external/mediaQuery": {
                         "types": "./dist/external/mediaQuery/index.d.ts",
@@ -584,8 +584,8 @@
                                 "types": "./dist/external/mediaQuery/index.d.ts",
                                 "default": "./dist/external/mediaQuery/index.mjs"
                         },
-                        "require": "./dist/external/mediaQuery/index.cjs",
-                        "default": "./dist/external/mediaQuery/index.cjs"
+                        "require": "./dist/external/mediaQuery/index.js",
+                        "default": "./dist/external/mediaQuery/index.js"
                 },
                 "./external/online": {
                         "types": "./dist/external/online/index.d.ts",
@@ -597,8 +597,8 @@
                                 "types": "./dist/external/online/index.d.ts",
                                 "default": "./dist/external/online/index.mjs"
                         },
-                        "require": "./dist/external/online/index.cjs",
-                        "default": "./dist/external/online/index.cjs"
+                        "require": "./dist/external/online/index.js",
+                        "default": "./dist/external/online/index.js"
                 },
                 "./external/orient": {
                         "types": "./dist/external/orient/index.d.ts",
@@ -610,8 +610,8 @@
                                 "types": "./dist/external/orient/index.d.ts",
                                 "default": "./dist/external/orient/index.mjs"
                         },
-                        "require": "./dist/external/orient/index.cjs",
-                        "default": "./dist/external/orient/index.cjs"
+                        "require": "./dist/external/orient/index.js",
+                        "default": "./dist/external/orient/index.js"
                 },
                 "./external/windowSize": {
                         "types": "./dist/external/windowSize/index.d.ts",
@@ -623,8 +623,8 @@
                                 "types": "./dist/external/windowSize/index.d.ts",
                                 "default": "./dist/external/windowSize/index.mjs"
                         },
-                        "require": "./dist/external/windowSize/index.cjs",
-                        "default": "./dist/external/windowSize/index.cjs"
+                        "require": "./dist/external/windowSize/index.js",
+                        "default": "./dist/external/windowSize/index.js"
                 },
                 "./external/battery/react": {
                         "types": "./dist/external/battery/react.d.ts",
@@ -636,8 +636,8 @@
                                 "types": "./dist/external/battery/react.d.ts",
                                 "default": "./dist/external/battery/react.mjs"
                         },
-                        "require": "./dist/external/battery/react.cjs",
-                        "default": "./dist/external/battery/react.cjs"
+                        "require": "./dist/external/battery/react.js",
+                        "default": "./dist/external/battery/react.js"
                 },
                 "./external/clipboard/react": {
                         "types": "./dist/external/clipboard/react.d.ts",
@@ -649,8 +649,8 @@
                                 "types": "./dist/external/clipboard/react.d.ts",
                                 "default": "./dist/external/clipboard/react.mjs"
                         },
-                        "require": "./dist/external/clipboard/react.cjs",
-                        "default": "./dist/external/clipboard/react.cjs"
+                        "require": "./dist/external/clipboard/react.js",
+                        "default": "./dist/external/clipboard/react.js"
                 },
                 "./external/geolocation/react": {
                         "types": "./dist/external/geolocation/react.d.ts",
@@ -662,8 +662,8 @@
                                 "types": "./dist/external/geolocation/react.d.ts",
                                 "default": "./dist/external/geolocation/react.mjs"
                         },
-                        "require": "./dist/external/geolocation/react.cjs",
-                        "default": "./dist/external/geolocation/react.cjs"
+                        "require": "./dist/external/geolocation/react.js",
+                        "default": "./dist/external/geolocation/react.js"
                 },
                 "./external/mediaQuery/react": {
                         "types": "./dist/external/mediaQuery/react.d.ts",
@@ -675,8 +675,8 @@
                                 "types": "./dist/external/mediaQuery/react.d.ts",
                                 "default": "./dist/external/mediaQuery/react.mjs"
                         },
-                        "require": "./dist/external/mediaQuery/react.cjs",
-                        "default": "./dist/external/mediaQuery/react.cjs"
+                        "require": "./dist/external/mediaQuery/react.js",
+                        "default": "./dist/external/mediaQuery/react.js"
                 },
                 "./external/online/react": {
                         "types": "./dist/external/online/react.d.ts",
@@ -688,8 +688,8 @@
                                 "types": "./dist/external/online/react.d.ts",
                                 "default": "./dist/external/online/react.mjs"
                         },
-                        "require": "./dist/external/online/react.cjs",
-                        "default": "./dist/external/online/react.cjs"
+                        "require": "./dist/external/online/react.js",
+                        "default": "./dist/external/online/react.js"
                 },
                 "./external/orient/react": {
                         "types": "./dist/external/orient/react.d.ts",
@@ -701,8 +701,8 @@
                                 "types": "./dist/external/orient/react.d.ts",
                                 "default": "./dist/external/orient/react.mjs"
                         },
-                        "require": "./dist/external/orient/react.cjs",
-                        "default": "./dist/external/orient/react.cjs"
+                        "require": "./dist/external/orient/react.js",
+                        "default": "./dist/external/orient/react.js"
                 },
                 "./external/windowSize/react": {
                         "types": "./dist/external/windowSize/react.d.ts",
@@ -714,8 +714,8 @@
                                 "types": "./dist/external/windowSize/react.d.ts",
                                 "default": "./dist/external/windowSize/react.mjs"
                         },
-                        "require": "./dist/external/windowSize/react.cjs",
-                        "default": "./dist/external/windowSize/react.cjs"
+                        "require": "./dist/external/windowSize/react.js",
+                        "default": "./dist/external/windowSize/react.js"
                 }
         }
 }
