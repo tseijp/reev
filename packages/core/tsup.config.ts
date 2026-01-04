@@ -153,7 +153,7 @@ const generatePackageJson = (): void => {
 
                 // Write to package.json
                 const packagePath = join(__dirname, 'package.json')
-                writeFileSync(packagePath, JSON.stringify(finalPackage, null, 8).replace(/ {8}/g, '\t') + '\n')
+                writeFileSync(packagePath, JSON.stringify(finalPackage, null, 8) + '\n')
 
                 console.log('✅ Successfully generated package.json with', Object.keys(exports).length, 'exports')
         } catch (error) {
