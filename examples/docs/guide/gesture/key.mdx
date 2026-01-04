@@ -3,7 +3,7 @@
 ## create your app
 
 ```tsx
-import { useKey } from 'rege/react'
+import { useKey } from 'reev/gesture/key/react'
 
 export const App = () => {
         const { ref } = useKey(console.log)
@@ -11,7 +11,7 @@ export const App = () => {
 }
 ```
 
-import { useKey } from 'rege/src/react'
+import { useKey } from 'reev/src/gesture/key/react'
 
 export const App = () => {
         const { ref } = useKey(console.log)
@@ -25,14 +25,14 @@ export const App = () => {
 You can use shorthands Key component
 
 ```jsx
-import { Key } from 'rege/react'
+import { Key } from 'reev/gesture/key/react'
 
 export const App2 = () => {
         return <Key key={console.log}>{({ ref }) => <span ref={ref} style={style} />}</Key>
 }
 ```
 
-import { Key } from 'rege/src/react'
+import { Key } from 'reev/src/gesture/key/react'
 
 export const App2 = () => {
         return <Key key={console.log}>{({ ref }) => <span ref={ref} style={style} />}</Key>

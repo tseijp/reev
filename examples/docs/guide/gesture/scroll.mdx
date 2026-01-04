@@ -4,7 +4,7 @@
 
 ```js
 import { gsap } from 'gsap'
-import { useScroll } from 'rege/react'
+import { useScroll } from 'reev/gesture/scroll/react'
 
 export const App = () => {
         const { ref } = useScroll(({ active, target, offset: [x, y] }) => {
@@ -15,8 +15,8 @@ export const App = () => {
 ```
 
 import { gsap } from 'gsap'
-import { Scroll } from 'rege/src/react'
-import { useScroll } from 'rege/src/react'
+import { Scroll } from 'reev/src/gesture/scroll/react'
+import { useScroll } from 'reev/src/gesture/scroll/react'
 
 export const App = () => {
         const { ref } = useScroll(({ active, target, offset: [x, y] }) => {
@@ -32,7 +32,7 @@ export const App = () => {
 You can use shorthands Scroll component
 
 ```jsx
-import { Scroll } from 'rege/react'
+import { Scroll } from 'reev/gesture/scroll/react'
 
 export const scroll = ({ active, target, movement: [x, y] }) => {
         gsap.to(target, { x, y, scale: active ? 1.2 : 1 })
