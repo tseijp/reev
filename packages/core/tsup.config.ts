@@ -105,18 +105,11 @@ const generateDistExport = (entry: string): Record<string, any> => {
  * Generate the complete exports field for package.json
  */
 const generateExports = (): Record<string, any> => {
-        const exports: Record<string, any> = {
-                // Fixed export for packages.json
-                './packages.json': './packages.json',
-        }
-
-        // Generate source exports (./src/*)
+        const exports: Record<string, any> = { './packages.json': './packages.json' }
         for (const entry of MODULE_ENTRIES_KEYS) {
                 const exportKey = `./src/${entry === 'index' ? '' : entry}`.replace(/\/index$/, '').replace(/\/$/, '')
                 exports[exportKey] = generateSourceExport(entry)
         }
-
-        // Generate dist exports (./* - built files)
         for (const entry of MODULE_ENTRIES_KEYS) {
                 const exportKey = entry === 'index' ? '.' : `./${entry.replace(/\/index$/, '')}`
                 exports[exportKey] = generateDistExport(entry)
@@ -130,23 +123,12 @@ const generateExports = (): Record<string, any> => {
  */
 const generatePackageJson = async () => {
         try {
-                // Read base package.json
                 const basePath = join(__dirname, 'package.base.json')
                 const basePackage = JSON.parse(readFileSync(basePath, 'utf-8'))
-
-                // Generate exports
                 const exports = generateExports()
-
-                // Merge and create final package.json
-                const finalPackage = {
-                        ...basePackage,
-                        exports,
-                }
-
-                // Write to package.json
+                const finalPackage = { ...basePackage, exports }
                 const packagePath = join(__dirname, 'package.json')
                 writeFileSync(packagePath, JSON.stringify(finalPackage, null, 8) + '\n')
-
                 console.log('✅ Successfully generated package.json with', Object.keys(exports).length, 'exports')
         } catch (error) {
                 console.error('❌ Failed to generate package.json:', error)
@@ -174,12 +156,9 @@ const createConfig = (options: Options, entry: ModuleEntriesKey): Options[] => {
 
 export default defineConfig((options) => {
         const configs = MODULE_ENTRIES_KEYS.map(createConfig.bind(null, options)).flat()
-
-        // Add onSuccess hook to the last config to generate package.json after all builds
         if (configs.length > 0 && !options.watch) {
                 const lastConfig = configs[configs.length - 1]
                 lastConfig.onSuccess = generatePackageJson
         }
-
         return configs
 })
